@@ -1,0 +1,28 @@
+// This template requires dish object to be set in $scope
+//
+
+extends layout
+
+block content
+    div(ng-controller='$.editDishController()', class='container')
+        input(type='text', name='name', ng-model='dish.name', class='form-control')
+        textarea(name='description', id='id-description', ng-model='dish.description', class='form-control')
+        input(type='text', name='where', id='id-where', ng-model='dish.where', class='form-control')
+        input(type='text', name='from', id='id-from', ng-model='dish.from', class='form-control')
+        input(type='text', name='to', id='id-to', ng-model='dish.to', class='form-control')
+        select(name='nportions', id='id-nportions', ng-model='dish.nportions', class='form-control')
+            each i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                option(value=i)= i
+
+        select(name='donation', id='id-donation', ng-model='dish.donation', class='form-control')
+            option(value='open')= {{lang.open}}
+            option(value='nothing')= {{lang.nothing}}
+            each i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+                option(value=i)= i
+
+        //select(name='currency', id='id-currency, ng-model='dish.currency', class='form-control')
+            //option(value='aud')= {{lang.aud}}
+        input(type='hidden', name='currency', id='id-currency',  value='aud', ng-model='dish.currency')
+        button(type='button, value='{{lang.savechanges}}', ng-click='save()', class='btn btn-primary')
+
+include ../footer

@@ -1,0 +1,22 @@
+// This template requires dish object to be set in $scope
+//
+
+extends layout
+
+block content
+    div(ng-controller='$.viewDishController()', class='container')
+        p= {{dish.name}}
+        p= {{dish.description}}
+        p= {{dish.where}}
+        p= {{dish.from}}
+        p= {{dish.to}}
+        p= {{dish.nportions}}
+        p= {{dish.donation} {{dish.currency}}
+    div(id='id-add-meal-form')
+        input(type='text', name='user', ng-model=’meal.user’, id='id-user', class='form-control')
+        select(name='portions', ng-model=’meal.portions’, id='id-portions', class='form-control')
+            each i in dish.nportions
+                option(value=i)= i
+        button(type='button', name='meal', ng-click='addMeal', class='btn btn-primary')
+
+include ../footer
