@@ -1,0 +1,13 @@
+# Dependencies.
+node_modules/
+public/bower_components/
+
+# Vim files.
+*.swp
+*.swx
+
+# Config-dependant files.
+config.json
+
+# Compiled packages.
+dist/
