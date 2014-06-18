@@ -4,7 +4,7 @@
 extends layout
 
 block content
-    div(ng-controller='$.viewDishController()', class='container')
+    div(ng-controller='$.dishesViewController()', class='container')
         p= {{dish.name}}
         p= {{dish.description}}
         p= {{dish.where}}
