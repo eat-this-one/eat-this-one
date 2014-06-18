@@ -1,0 +1,15 @@
+{
+    "name": "eat-it",
+    "version": "0.0.1",
+    "homepage": "http://about.me/DavidMonllao",
+    "authors": [
+      "David Monllao <david.monllao@gmail.com>"
+    ],
+    "private": true,
+    "dependencies": {
+        "jquery": "~2.1.0",
+        "angular": "~1.2.12",
+        "angular-bootstrap": "~0.10.0",
+        "bootstrap": "~3.1.0"
+    }
+}
