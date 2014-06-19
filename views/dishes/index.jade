@@ -1,14 +1,14 @@
 // This template requires dishes array to be set in $scope
 //
 
-extends layout
+extends ../layout
 
 block content
-    div(ng-controller='$.dishesController()', class='container')
+    div(ng-controller='dishesController', class='container')
         ul(id='id-dishes-list')
             li(ng-repeat='dish in dishes', class='dish')
-                a(href='/dishes/view.html?id={{dish.id}}')= {{dish.name}}
-                p= {{dish.description}}
+                a(href='/dishes/view.html?id={{dish.id}}') {{dish.name}}
+                p {{dish.description}}
 
 include ../footer
 

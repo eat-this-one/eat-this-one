@@ -1,24 +1,19 @@
-doctype html5
+doctype html
 html
     head
 
         // Javascript
-        //script(src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
-        script(src='/bower_components/jquery/dist/jquery.min.js')
-        script(src='/bower_components/angular/angular.min.js')
-        script(src='/bower_components/angular-bootstrap/ui-bootstrap.min.js')
-        script(src='/build/client.js')
+        script(src='/client.js')
 
         // Styles
-        link(rel='stylesheet', href='/build/styles.css')
-        link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/styles.css')
 
         // TODO include cordova only when apps.
 
         // Metas.
         meta(name='viewport', content='width=device-width, initial-scale=1')
 
-    body(ng-app)
+    body(ng-app='eat-it')
 
         // TODO Only for web.
         div(id='id-mask')
