@@ -66,7 +66,7 @@ module.exports = function(grunt) {
             compile : {
                 files : [
                     {
-                        cwd : 'views',
+                        cwd : 'public/views',
                         src : '**/*.jade',
                         ext : '.html',
                         dest : 'public/shared-build',
@@ -95,7 +95,7 @@ module.exports = function(grunt) {
 
             },
             dev_html : {
-                files : [ "views/**/*.jade" ],
+                files : [ "public/views/**/*.jade" ],
                 tasks : [ "jade", "copy:build" ],
                 options : {
                     nospawn : true
@@ -162,8 +162,9 @@ module.exports = function(grunt) {
     });
 
     // Executable tasks.
+    // TODO Generate non compressed version in build:dev.
     grunt.registerTask("build:prod", [ "clean:build", "uglify", "less", "cssmin", "jade:compile", "copy:build" ]);
-    grunt.registerTask("build:dev", [ "uglify", "less", "cssmin", "jade:compile", "copy:build" ]);
+    grunt.registerTask("build:dev", [ "clean:build", "uglify", "less", "cssmin", "jade:compile", "copy:build" ]);
 
     // While developing monitor the changes. 
     grunt.registerTask("run:dev", [ "build:dev", "concurrent" ]);
@@ -178,5 +179,4 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-jade");
     grunt.loadNpmTasks("grunt-contrib-cssmin");
-
 };
