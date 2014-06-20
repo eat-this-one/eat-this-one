@@ -2,9 +2,17 @@ extends layout
 
 block content
     div(ng-controller='indexController', class='container')
-        input(type='text', name='where', id='id-where', class='form-control', placeholder='{{lang.where}}')
-        input(type='text', name='when', id='id-when', class='form-control', placeholder='{{lang.when}}')
-        button(type='button', name='search', ng-click='searchDish()') {{lang.searchdish}}
-        button(type='button', name='add', ng-click='addDish()', class='btn btn-primary') {{lang.adddish}}
+
+        include top
+
+        form(role='form')
+            div(class='form-group')
+                label(for='id-where') {{lang.where}}
+                input(type='text', name='where', id='id-where', class='form-control', placeholder='{{lang.where}}')
+            div(class='form-group')
+                label(for='id-when') {{lang.when}}
+                input(type='text', name='when', id='id-when', class='form-control', placeholder='{{lang.when}}')
+            button(type='button', name='search', ng-click='searchDish()', class='btn btn-primary') {{lang.searchdish}}
+            button(type='button', name='add', ng-click='addDish()', class='btn btn-primary') {{lang.adddish}}
 
 include footer
