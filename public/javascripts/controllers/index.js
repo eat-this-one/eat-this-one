@@ -11,16 +11,16 @@ angular.module('eat-it')
     $scope.lang.adddish = 'Add dish';
 
     var params = '';
-    var wherevalue = $('#id-where').value;
-    var whenvalue = $('#id-when').value;
+    var wherevalue = $('#id-where').val();
+    var whenvalue = $('#id-when').val();
 
     // TODO Fix this.
-    if (wherevalue != undefined) {
+    if (wherevalue != "") {
         params = '?where=' + wherevalue;
     }
-    if (whenvalue != undefined) {
+    if (whenvalue != "") {
         if (params != '') {
-            params = params + '&when=' + whenvalue;
+            params += '&when=' + whenvalue;
         } else {
             params = '?when=' + whenvalue;
         }
