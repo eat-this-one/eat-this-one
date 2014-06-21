@@ -1,0 +1,6 @@
+{
+    "DB_HOST": "localhost",
+    "DB_PORT": "27017",
+    "DB_NAME": "eat-it",
+    "APP_PORT": "3000"
+}
