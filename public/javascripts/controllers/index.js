@@ -2,19 +2,12 @@ angular.module('eat-it')
     .controller('indexController', ['$scope', function($scope) {
 
     $scope.pageTitle = 'Eat-it';
-
-    $scope.lang = {};
-    $scope.lang.title ='Index Page';
-    $scope.lang.where = 'Where';
-    $scope.lang.when = 'When';
-    $scope.lang.searchdish = 'Search dish';
-    $scope.lang.adddish = 'Add dish';
+    $scope.lang = $.eatLang[$.eatConfig.lang];
 
     var params = '';
     var wherevalue = $('#id-where').val();
     var whenvalue = $('#id-when').val();
 
-    // TODO Fix this.
     if (wherevalue != "") {
         params = '?where=' + wherevalue;
     }

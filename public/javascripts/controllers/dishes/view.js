@@ -1,14 +1,10 @@
 angular.module('eat-it')
     .controller('dishesViewController', ['$scope', function($scope) {
 
-    var id = $.urlParser.getParam('id');
-
     $scope.pageTitle = 'Dish';
+    $scope.lang = $.eatLang[$.eatConfig.lang];
 
-    $scope.lang = {};
-    $scope.lang.user = 'Your name';
-    $scope.lang.portions = 'Number of portions you want';
-    $scope.lang.addmeal = 'Add meal';
+    var id = $.urlParser.getParam('id');
 
     // We fill it later.
     $scope.meal = {};
