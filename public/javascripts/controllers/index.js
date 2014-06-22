@@ -1,5 +1,5 @@
 angular.module('eat-it')
-    .controller('indexController', ['$scope', function($scope) {
+    .controller('indexController', ['$scope', '$window', function($scope, $window) {
 
     $scope.pageTitle = 'Eat-it';
     $scope.lang = $.eatLang[$.eatConfig.lang];
@@ -20,10 +20,10 @@ angular.module('eat-it')
     }
 
     $scope.searchDish = function() {
-        location.href = '/dishes/index.html' + params;
+        $window.location.href = '/dishes/index.html' + params;
     };
 
     $scope.addDish = function() {
-        location.href = '/dishes/edit.html' + params;
+        $window.location.href = '/dishes/edit.html' + params;
     };
 }]);
