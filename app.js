@@ -10,6 +10,14 @@ var mongoose = require('mongoose');
 // Load config file.
 nconf.argv().env().file({file: path.join(__dirname, '/config.json')});
 
+// Check that the required configuration is present.
+var requiredConfig = ['DB_HOST', 'DB_PORT', 'DB_NAME'];
+requiredConfig.forEach(function(key) {
+    if (nconf.get(key) == null) {
+        throw new Error(key + ' is not defined. Ensure that you set it in config.json');
+    }
+});
+
 // Persistence layer connection.
 mongoose.connect(
     'mongodb://' +
