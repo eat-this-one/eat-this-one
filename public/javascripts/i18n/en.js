@@ -1,0 +1,20 @@
+$.eatLang.en = {
+
+    adddish : 'Add dish',
+    addmeal : 'Add meal',
+    aud : 'Australian Dolars',
+    dishdescription : 'Description',
+    dishname : 'Dish name',
+    expecteddonation : 'Expected donation',
+    from : 'From',
+    nportions : 'Number of portions',
+    nothing : 'Nothing',
+    open : 'Open',
+    portions : 'Number of portions you want',
+    savechanges : 'Save changes',
+    searchdish : 'Search dish',
+    to : 'To',
+    username : 'Your name',
+    when : 'When',
+    where : 'Where',
+};
