@@ -1,5 +1,5 @@
 angular.module('eat-it')
-    .controller('dishesController', ['$scope', 'appStatus', 'urlParser', function($scope, appStatus, urlParser) {
+    .controller('dishesController', ['$scope', 'appStatus', 'urlParser', 'dishesRequest', function($scope, appStatus, urlParser, dishesRequest) {
 
     $scope.pageTitle = 'Dishes';
     $scope.lang = $.eatLang[$.eatConfig.lang];
@@ -10,5 +10,5 @@ angular.module('eat-it')
     };
 
     appStatus.waiting();
-    $.dishesRequest($scope, params);
+    dishesRequest($scope, params);
 }]);

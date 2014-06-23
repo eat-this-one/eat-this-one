@@ -1,5 +1,5 @@
 angular.module('eat-it')
-    .controller('dishesViewController', ['$scope', 'appStatus', 'urlParser', function($scope, appStatus, urlParser) {
+    .controller('dishesViewController', ['$scope', 'appStatus', 'urlParser', 'dishRequest', 'newMealRequest', function($scope, appStatus, urlParser, dishRequest, newMealRequest) {
 
     $scope.pageTitle = 'Dish';
     $scope.lang = $.eatLang[$.eatConfig.lang];
@@ -11,7 +11,7 @@ angular.module('eat-it')
 
     // Load the dish info into the fields.
     appStatus.waiting();
-    $.dishRequest($scope, id);
+    dishRequest($scope, id);
 
     // TODO Get the dish meals to count the remaining portions.
 
@@ -19,6 +19,6 @@ angular.module('eat-it')
         // TODO Probably some meal cleaning will be required.
         $scope.meal.dish = $scope.dish;
         appStatus.waiting();
-        $.newMealRequest($scope, meal);
+        newMealRequest($scope, meal);
     };
 }]);

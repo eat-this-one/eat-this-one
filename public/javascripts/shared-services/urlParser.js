@@ -1,4 +1,5 @@
-angular.module('eat-it').factory('urlParser', function($window) {
+angular.module('eat-it')
+    .factory('urlParser', ['$window', function($window) {
     return {
 
         getParam : function(variable) {
@@ -14,4 +15,4 @@ angular.module('eat-it').factory('urlParser', function($window) {
         }
 
     }
-});
+}]);

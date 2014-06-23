@@ -1,4 +1,5 @@
-angular.module('eat-it').factory('appStatus', function() {
+angular.module('eat-it')
+    .factory('appStatus', function() {
     return {
 
         waiting : function() {
