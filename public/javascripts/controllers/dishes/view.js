@@ -14,7 +14,8 @@ angular.module('eat-this-one')
     dishRequest($scope, id);
 
     $scope.addMeal = function() {
-        $scope.meal.dish = $scope.dish._id;
+        var meal = $scope.meal;
+        meal.dish = $scope.dish._id;
         appStatus.waiting();
         newMealRequest($scope, meal);
     };
