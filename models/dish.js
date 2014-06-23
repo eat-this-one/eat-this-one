@@ -10,7 +10,7 @@ var DishSchema = new Schema({
     from: { type: Date, required: true},
     to: { type: Date, required: true},
     nportions: { type: Number, required: true},
-    expecteddonation: { type: String, required: true},
+    donation: { type: String, required: true},
     created: { type: Date, default: Date.now},
     modified: { type: Date, default: null, required: false}
 });

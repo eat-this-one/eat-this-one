@@ -37,10 +37,10 @@ router.get('/:id', function(req, res) {
 
 // POST - Create a dish.
 router.post('/', function(req, res) {
-
     var dishProps = {
         'name' : 'required',
         'description' : 'no',
+        'user' : 'required',
         'where' : 'required',
         'from' : 'required',
         'to' : 'required', 
