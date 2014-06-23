@@ -4,6 +4,8 @@ angular.module('eat-this-one')
     $scope.pageTitle = 'Edit dish';
     $scope.lang = $.eatLang[$.eatConfig.lang];
 
+    $scope.dish = {};
+
     var id = urlParser.getParam('id');
 
     // Load the dish info.

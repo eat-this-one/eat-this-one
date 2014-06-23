@@ -1,7 +1,7 @@
 angular.module('eat-this-one')
     .controller('indexController', ['$scope', '$window', function($scope, $window) {
 
-    $scope.pageTitle = 'Eat-it';
+    $scope.pageTitle = 'Eat-this-one';
     $scope.lang = $.eatLang[$.eatConfig.lang];
 
     var params = '';

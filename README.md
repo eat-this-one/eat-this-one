@@ -1,4 +1,4 @@
-Eat-it source code includes both backend, frontend and development tools.
+Eat-this-one source code includes both backend, frontend and development tools.
 
 * Backend
 ** NodeJS (server)

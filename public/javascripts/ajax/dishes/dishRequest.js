@@ -8,7 +8,8 @@ angular.module('eat-this-one')
             url : $.eatConfig.backendUrl + '/dishes/' + id,
             datatype : 'json',
             success : function(dishData) {
-                $scope.dish = $.parseJSON(dishData);
+                $scope.dish = dishData;
+                $scope.$apply();
                 appStatus.completed();
             },
             error : function(data, errorStatus, errorMsg) {

@@ -4,6 +4,8 @@ angular.module('eat-this-one')
     $scope.pageTitle = 'Dishes';
     $scope.lang = $.eatLang[$.eatConfig.lang];
 
+    $scope.dishes = [];
+
     var params = {
         'where' : urlParser.getParam('where'),
         'when' : urlParser.getParam('when')

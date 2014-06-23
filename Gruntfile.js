@@ -5,41 +5,35 @@ module.exports = function(grunt) {
 
         pkg: grunt.file.readJSON("package.json"),
 
-        clean: {
-            build: [ "public/web-build", "public/app-build", "public/shared-build", "dist" ]
-        },
-
-        // Minifies all JS into a single JS file.
+        // List of JS files to include.
+        //
         // The order is important:
         // * jQuery is the first requirement as it defines $
         // * local funcions will fill $. namespace and will be
         //   required by angular
         // * The last requirements will be angular and angular-ui
+        js_files : [
+            "public/bower_components/jquery/dist/jquery.min.js",
+            "public/bower_components/angular/angular.min.js",
+            "public/bower_components/angular-bootstrap/ui-bootstrap.min.js",
+            "public/javascripts/bootstrap.js",
+            "public/javascripts/i18n/**/*.js",
+            "public/javascripts/controllers/**/*.js" ,
+            "public/javascripts/ajax/**/*.js" ,
+            "public/javascripts/shared-services/**/*.js"
+        ],
+
+        clean: {
+            build: [ "public/web-build", "public/app-build", "public/shared-build", "dist" ]
+        },
+
+        // Minifies all JS into a single JS file.
+        // Behavious changes during development as we don't want to compress, just merge into a single JS file.
         uglify: {
             build: {
                 files: {
-                    "public/web-build/client.js": [
-                        "public/bower_components/jquery/dist/jquery.min.js",
-                        "public/bower_components/angular/angular.min.js",
-                        "public/bower_components/angular-bootstrap/ui-bootstrap.min.js",
-                        "public/javascripts/bootstrap.js",
-                        "public/javascripts/i18n/**/*.js",
-                        "public/javascripts/controllers/**/*.js" ,
-                        "public/javascripts/ajax/**/*.js" ,
-                        "public/javascripts/shared-services/**/*.js" ,
-                        "public/javascripts/web-services/**/*.js",
-                    ],
-                    "public/app-build/client.js": [
-                        "public/bower_components/jquery/dist/jquery.min.js",
-                        "public/bower_components/angular/angular.min.js",
-                        "public/bower_components/angular-bootstrap/ui-bootstrap.min.js",
-                        "public/javascripts/bootstrap.js",
-                        "public/javascripts/i18n/**/*.js",
-                        "public/javascripts/controllers/**/*.js" ,
-                        "public/javascripts/ajax/**/*.js" ,
-                        "public/javascripts/shared-services/**/*.js" ,
-                        "public/javascripts/app-services/**/*.js",
-                    ],
+                    "public/web-build/client.js": this.js_files.push("public/javascripts/web-services/**/*.js"),
+                    "public/app-build/client.js": this.js_files.push("public/javascripts/app-services/**/*.js")
                 }
             }
         },

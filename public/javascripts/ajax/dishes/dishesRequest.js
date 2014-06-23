@@ -13,7 +13,8 @@ angular.module('eat-this-one')
             data : params,
             datatype : 'json',
             success : function(dishesData) {
-                $scope.dishes = $.parseJSON(dishesData);
+                $scope.dishes = dishesData;
+                $scope.$apply();
                 appStatus.completed();
             },
             error : function(data, errorStatus, errorMsg) {

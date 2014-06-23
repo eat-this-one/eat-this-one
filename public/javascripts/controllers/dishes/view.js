@@ -4,10 +4,10 @@ angular.module('eat-this-one')
     $scope.pageTitle = 'Dish';
     $scope.lang = $.eatLang[$.eatConfig.lang];
 
-    var id = urlParser.getParam('id');
-
-    // We fill it later.
     $scope.meal = {};
+    $scope.dish = {};
+
+    var id = urlParser.getParam('id');
 
     // Load the dish info into the fields.
     appStatus.waiting();

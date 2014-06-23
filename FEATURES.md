@@ -1,4 +1,4 @@
-= {TMP Eat-it} =
+= {TMP Eat-this-one} =
 
 TODO Update it and split it into versions!!!
 
