@@ -6,7 +6,6 @@ var router = express.Router();
 // Required models.
 var DishModel = require('../models/dish.js').model;
 
-// TODO: Refine returned HTTP exit codes
 // TODO: Refine error messages
 
 // GET - Dishes list.
@@ -17,6 +16,7 @@ router.get('/', function(req, res) {
             console.log(error);
             res.send("No dishes." + error);
         }
+        res.statusCode = 200;
         res.send(dishes);
     });
 });
@@ -31,6 +31,7 @@ router.get('/:id', function(req, res) {
             console.log(error);
             res.send("Dish '" + id + "' not found. " + error);
         }
+        res.statusCode = 200;
         res.send(dish);
     });
 });
@@ -69,15 +70,16 @@ router.post('/', function(req, res) {
         if (error) {
             console.log(error);
             res.statusCode = 400;
-            res.send("Can not save user " + req.param('name'));
+            res.send("Can not save dish " + req.param('name'));
         }
     });
 
     // Same output for all output formats.
-    res.send(user);
+    res.statusCode = 201;
+    res.send(dish);
 });
 
-// PUT - Update a user.
+// PUT - Update a dish.
 router.put('/:id', function(req, res) {
     var id = req.param('id');
     DishModel.findById(id, function(error, dish) {
@@ -100,7 +102,8 @@ router.put('/:id', function(req, res) {
     });
 
     // Same output for all output formats.
-    res.send(200);
+    res.statusCode = 200;
+    res.send(dish);
 });
 
 router.post('/:id', function(req, req) {
