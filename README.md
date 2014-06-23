@@ -33,7 +33,7 @@ Eat-it source code includes both backend, frontend and development tools.
 
 * Install project dependencies
 **npm install**
-
+**bower install**
 
 =Setup=
 
