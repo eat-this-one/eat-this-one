@@ -32,6 +32,7 @@ var app = express();
 // Routes to components.
 var index = require('./routes/index');
 var dishes = require('./routes/dishes');
+var meals = require('./routes/meals');
 
 app.use(favicon());
 app.use(logger('dev'));
@@ -53,6 +54,7 @@ app.use('/', index);
 
 app.use('/api', index);
 app.use('/api/dishes', dishes);
+app.use('/api/meals', meals);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
