@@ -16,6 +16,9 @@ block content
                 label(for='id-description') {{lang.dishdescription}}
                 textarea(name='description', id='id-description', ng-model='dish.description', class='form-control')
             div(class='form-group')
+                label(for='id-user') {{lang.username}}
+                input(type='text', name='user', id='id-user', ng-model='dish.user', class='form-control')
+            div(class='form-group')
                 label(for='id-where') {{lang.where}}
                 input(type='text', name='where', id='id-where', ng-model='dish.where', class='form-control')
             div(class='form-group')
