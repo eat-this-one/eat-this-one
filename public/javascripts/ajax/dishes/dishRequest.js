@@ -1,4 +1,4 @@
-angular.module('eat-it')
+angular.module('eat-this-one')
     .factory('dishRequest', ['appStatus', 'notifier', function(appStatus, notifier) {
 
     return function($scope, id) {

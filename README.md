@@ -28,8 +28,8 @@ Eat-it source code includes both backend, frontend and development tools.
 ** git user.email '$PROJECT_AUTHOR_EMAIL'**
 
 * Download source code
-**git clone git://bitbucket.org/eat-it.git eat-it**
-**cd eat-it
+**git clone git://bitbucket.org/eat-this-one.git eat-this-one**
+**cd eat-this-one
 
 * Install project dependencies
 **npm install**
@@ -45,9 +45,9 @@ Eat-it source code includes both backend, frontend and development tools.
 
 * Create a virtual host to point to your dist/web dir.
 <VirtualHost YOURHOSTNAME:80>
-    DocumentRoot "/your/path/to/eat-it/dist/web"
+    DocumentRoot "/your/path/to/eat-this-one/dist/web"
     ServerName YOURHOSTNAME
-    <Directory "/your/path/to/eat-it/dist/web">
+    <Directory "/your/path/to/eat-this-one/dist/web">
         AllowOverride All
         Order Allow,Deny
     </Directory>

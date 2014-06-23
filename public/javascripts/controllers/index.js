@@ -1,4 +1,4 @@
-angular.module('eat-it')
+angular.module('eat-this-one')
     .controller('indexController', ['$scope', '$window', function($scope, $window) {
 
     $scope.pageTitle = 'Eat-it';

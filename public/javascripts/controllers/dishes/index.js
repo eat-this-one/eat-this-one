@@ -1,4 +1,4 @@
-angular.module('eat-it')
+angular.module('eat-this-one')
     .controller('dishesController', ['$scope', 'appStatus', 'urlParser', 'dishesRequest', function($scope, appStatus, urlParser, dishesRequest) {
 
     $scope.pageTitle = 'Dishes';

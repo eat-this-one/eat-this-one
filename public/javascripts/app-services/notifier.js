@@ -1,4 +1,4 @@
-angular.module('eat-it').factory('notifier', function() {
+angular.module('eat-this-one').factory('notifier', function() {
     return {
 
         show : function() {
