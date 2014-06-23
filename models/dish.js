@@ -12,7 +12,7 @@ var DishSchema = new Schema({
     nportions: { type: Number, required: true},
     expecteddonation: { type: String, required: true},
     created: { type: Date, default: Date.now},
-    modified: { type: Date, default: null}
+    modified: { type: Date, default: null, required: false}
 });
 
 // Export the model and the entity structure.
