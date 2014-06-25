@@ -5,24 +5,6 @@ module.exports = function(grunt) {
 
         pkg: grunt.file.readJSON("package.json"),
 
-        // List of JS files to include.
-        //
-        // The order is important:
-        // * jQuery is the first requirement as it defines $
-        // * local funcions will fill $. namespace and will be
-        //   required by angular
-        // * The last requirements will be angular and angular-ui
-        js_files : [
-            "public/bower_components/jquery/dist/jquery.min.js",
-            "public/bower_components/angular/angular.min.js",
-            "public/bower_components/angular-bootstrap/ui-bootstrap.min.js",
-            "public/javascripts/bootstrap.js",
-            "public/javascripts/i18n/**/*.js",
-            "public/javascripts/controllers/**/*.js" ,
-            "public/javascripts/ajax/**/*.js" ,
-            "public/javascripts/shared-services/**/*.js"
-        ],
-
         clean: {
             build: [ "public/web-build", "public/app-build", "public/shared-build", "dist" ]
         },
@@ -32,8 +14,36 @@ module.exports = function(grunt) {
         uglify: {
             build: {
                 files: {
-                    "public/web-build/client.js": this.js_files.push("public/javascripts/web-services/**/*.js"),
-                    "public/app-build/client.js": this.js_files.push("public/javascripts/app-services/**/*.js")
+                    // List of JS files to include.
+                    //
+                    // The order is important:
+                    // * jQuery is the first requirement as it defines $
+                    // * local funcions will fill $. namespace and will be
+                    //   required by angular
+                    // * The last requirements will be angular and angular-ui
+                    "public/web-build/client.js": [
+                        "public/bower_components/jquery/dist/jquery.min.js",
+                        "public/bower_components/angular/angular.min.js",
+                        "public/bower_components/angular-bootstrap/ui-bootstrap.min.js",
+                        "public/javascripts/bootstrap.js",
+                        "public/javascripts/i18n/**/*.js",
+                        "public/javascripts/controllers/**/*.js" ,
+                        "public/javascripts/ajax/**/*.js" ,
+                        "public/javascripts/shared-services/**/*.js",
+                        "public/javascripts/web-services/**/*.js"
+                    ],
+                    "public/app-build/client.js": [
+                        "public/bower_components/jquery/dist/jquery.min.js",
+                        "public/bower_components/angular/angular.min.js",
+                        "public/bower_components/angular-bootstrap/ui-bootstrap.min.js",
+                        "public/javascripts/bootstrap.js",
+                        "public/javascripts/i18n/**/*.js",
+                        "public/javascripts/controllers/**/*.js" ,
+                        "public/javascripts/ajax/**/*.js" ,
+                        "public/javascripts/shared-services/**/*.js",
+                        "public/javascripts/web-services/**/*.js",
+                        "public/javascripts/app-services/**/*.js"
+                    ]
                 }
             }
         },
@@ -72,27 +82,38 @@ module.exports = function(grunt) {
             }
         },
 
-        // Run less if there are changes in .less files.
-        // Run uglify if there are changes in .js files.
         watch: {
+
+            // Less changes compiles CSS.
             dev_css : {
                 files : [ "public/stylesheets/**/*.less" ],
-                tasks : [ "less", "copy:build" ],
+                tasks : [ "less", "cssmin", "copy:build" ],
                 options : {
                     nospawn : true
                 }
             },
+            // JS Changes triggers karma unit tests and behaviour tests.
+            // TODO Add behaviour tests
             dev_js : {
                 files : [ "public/javascripts/**/*.js" ],
-                tasks : [ "uglify", "copy:build" ],
+                tasks : [ "uglify", "copy:build", "karma:unit:run" ],
                 options : {
                     nospawn : true
                 }
 
             },
+            // Jade changes compiles HTML and only triggers behaviour tests.
             dev_html : {
                 files : [ "public/views/**/*.jade" ],
                 tasks : [ "jade", "copy:build" ],
+                options : {
+                    nospawn : true
+                }
+            },
+            // test/ changes only triggers tests.
+            test_js : {
+                files : [ "test/**/*.js" ],
+                tasks : [ "karma:unit:run" ],
                 options : {
                     nospawn : true
                 }
@@ -106,6 +127,14 @@ module.exports = function(grunt) {
                 options: {
                     file: "./bin/www"
                 }
+            }
+        },
+
+
+        karma : {
+            unit : {
+                configFile : 'karma.config.js',
+                background : true
             }
         },
 
@@ -163,7 +192,7 @@ module.exports = function(grunt) {
     grunt.registerTask("build:dev", [ "clean:build", "uglify", "less", "cssmin", "jade:compile", "copy:build" ]);
 
     // While developing monitor the changes. 
-    grunt.registerTask("run:dev", [ "build:dev", "concurrent" ]);
+    grunt.registerTask("run:dev", [ "build:dev", "karma", "concurrent" ]);
 
     // Dependencies.
     grunt.loadNpmTasks("grunt-contrib-uglify");
@@ -175,4 +204,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-jade");
     grunt.loadNpmTasks("grunt-contrib-cssmin");
+    grunt.loadNpmTasks("grunt-karma");
 };
