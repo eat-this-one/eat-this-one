@@ -28,6 +28,7 @@ module.exports = function(grunt) {
                         "public/javascripts/bootstrap.js",
                         "public/javascripts/i18n/**/*.js",
                         "public/javascripts/controllers/**/*.js" ,
+                        "public/javascripts/directives/**/*.js" ,
                         "public/javascripts/ajax/**/*.js" ,
                         "public/javascripts/shared-services/**/*.js",
                         "public/javascripts/web-services/**/*.js"
@@ -39,6 +40,7 @@ module.exports = function(grunt) {
                         "public/javascripts/bootstrap.js",
                         "public/javascripts/i18n/**/*.js",
                         "public/javascripts/controllers/**/*.js" ,
+                        "public/javascripts/directives/**/*.js" ,
                         "public/javascripts/ajax/**/*.js" ,
                         "public/javascripts/shared-services/**/*.js",
                         "public/javascripts/web-services/**/*.js",
@@ -94,9 +96,10 @@ module.exports = function(grunt) {
             },
             // JS Changes triggers karma unit tests and behaviour tests.
             // TODO Add behaviour tests
+            // TODO Run JS tests!!
             dev_js : {
                 files : [ "public/javascripts/**/*.js" ],
-                tasks : [ "uglify", "copy:build", "karma:unit:run" ],
+                tasks : [ "uglify", "copy:build" ],
                 options : {
                     nospawn : true
                 }
