@@ -22,7 +22,7 @@ Eat-this-one source code includes both backend, frontend and development tools.
 ** sudo npm install express -g**
 ** sudo npm install bower -g**
 ** sudo npm install express-generator -g**
-** sudo npm install cordova -g****
+** sudo npm install cordova -g**
 
 ** git user.name '$PROJECT_AUTHOR_NAME'**
 ** git user.email '$PROJECT_AUTHOR_EMAIL'**
