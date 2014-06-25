@@ -1,0 +1,18 @@
+# IDE stuff.
+*.swp
+*.swx
+
+# Tests.
+test/*
+
+# Readme's.
+*.md
+
+# Client stuff.
+public/*
+
+# Config.
+karma.config.js
+
+# Dist versions.
+dist/*
