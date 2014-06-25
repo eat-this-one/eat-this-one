@@ -1,9 +1,20 @@
-angular.module('eat-this-one')
-    .controller('indexController', ['$scope', '$window', function($scope, $window) {
+angular.module('eat-this-one').controller('indexController', ['$scope', '$window', function($scope, $window) {
 
     $scope.pageTitle = 'Eat-this-one';
     $scope.lang = $.eatLang[$.eatConfig.lang];
 
+    $scope.where = {
+        name: 'where',
+        label: $scope.lang.where,
+        placeholder: $scope.lang.where,
+    };
+    $scope.when = {
+        name: 'when',
+        label: $scope.lang.when,
+        placeholder: $scope.lang.when,
+    };
+
+    $scope.wheremodel = '';
     var params = '';
     var wherevalue = $('#id-where').val();
     var whenvalue = $('#id-when').val();

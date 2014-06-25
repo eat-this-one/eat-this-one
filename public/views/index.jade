@@ -6,12 +6,10 @@ block content
         include top
 
         form(role='form')
-            div(class='form-group')
-                label(for='id-where') {{lang.where}}
-                input(type='text', name='where', id='id-where', class='form-control', placeholder='{{lang.where}}')
-            div(class='form-group')
-                label(for='id-when') {{lang.when}}
-                input(type='text', name='when', id='id-when', class='form-control', placeholder='{{lang.when}}')
+            eat-field(element='where')
+                input(type='text', name='{{where.name}}', id='id-{{where.name}}', placeholder='{{where.placeholder}}', class='form-control', ng-model='where.value')
+            eat-field(element='when')
+                input(type='text', name='{{when.name}}', id='id-{{when.name}}', placeholder='{{when.placeholder}}', class='form-control', ng-model='when.value')
             button(type='button', name='search', ng-click='searchDish()', class='btn btn-primary') {{lang.searchdish}}
             button(type='button', name='add', ng-click='addDish()', class='btn btn-primary') {{lang.adddish}}
 
