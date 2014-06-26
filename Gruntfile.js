@@ -25,6 +25,7 @@ module.exports = function(grunt) {
                         "public/bower_components/jquery/dist/jquery.min.js",
                         "public/bower_components/angular/angular.min.js",
                         "public/bower_components/angular-bootstrap/ui-bootstrap.min.js",
+                        "public/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js",
                         "public/javascripts/bootstrap.js",
                         "public/javascripts/i18n/**/*.js",
                         "public/javascripts/controllers/**/*.js" ,
@@ -37,6 +38,7 @@ module.exports = function(grunt) {
                         "public/bower_components/jquery/dist/jquery.min.js",
                         "public/bower_components/angular/angular.min.js",
                         "public/bower_components/angular-bootstrap/ui-bootstrap.min.js",
+                        "public/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js",
                         "public/javascripts/bootstrap.js",
                         "public/javascripts/i18n/**/*.js",
                         "public/javascripts/controllers/**/*.js" ,
@@ -184,6 +186,22 @@ module.exports = function(grunt) {
                         dest : "dist/app/"
                     }
                 ]
+            },
+            // Copies the static resources, they will not change during dev.
+            resources : {
+                files : [
+                    {
+                        expand : true,
+                        cwd : 'public/bower_components/bootstrap',
+                        src : [ 'fonts/**/*' ],
+                        dest : 'dist/web'
+                    }, {
+                        expand : true,
+                        cwd : 'public/bower_components/bootstrap',
+                        src : [ 'fonts/**/*' ],
+                        dest : 'dist/app'
+                    }
+                ]
             }
         }
 
@@ -191,8 +209,8 @@ module.exports = function(grunt) {
 
     // Executable tasks.
     // TODO Generate non compressed version in build:dev.
-    grunt.registerTask("build:prod", [ "clean:build", "uglify", "less", "cssmin", "jade:compile", "copy:build" ]);
-    grunt.registerTask("build:dev", [ "clean:build", "uglify", "less", "cssmin", "jade:compile", "copy:build" ]);
+    grunt.registerTask("build:prod", [ "clean:build", "copy:resources", "uglify", "less", "cssmin", "jade:compile", "copy:build" ]);
+    grunt.registerTask("build:dev", [ "clean:build", "copy:resources", "uglify", "less", "cssmin", "jade:compile", "copy:build" ]);
 
     // While developing monitor the changes. 
     grunt.registerTask("run:dev", [ "build:dev", "karma", "concurrent" ]);
