@@ -3,38 +3,62 @@ angular.module('eat-this-one').controller('indexController', ['$scope', '$window
     $scope.pageTitle = 'Eat-this-one';
     $scope.lang = $.eatLang[$.eatConfig.lang];
 
+    // Defines elements.
     $scope.where = {
         name: 'where',
         label: $scope.lang.where,
         placeholder: $scope.lang.where,
+        value: ''
     };
     $scope.when = {
         name: 'when',
         label: $scope.lang.when,
-        placeholder: $scope.lang.when,
+        placeholder: $scope.lang.selectdatetime,
+        value: ''
     };
 
-    $scope.wheremodel = '';
-    var params = '';
-    var wherevalue = $('#id-where').val();
-    var whenvalue = $('#id-when').val();
+    // date/time pickers hidden by default.
+    $scope.showDatepicker = false;
+    $scope.showTimepicker = false;
 
-    if (wherevalue != "") {
-        params = '?where=' + wherevalue;
-    }
-    if (whenvalue != "") {
-        if (params != '') {
-            params += '&when=' + whenvalue;
-        } else {
-            params = '?when=' + whenvalue;
-        }
-    }
+    // Toggles the datepicker.
+    $scope.toggleDatepicker = function($event) {
+        $scope.showTimepicker = false;
+        $scope.showDatepicker = $scope.showDatepicker == false ? true : false;
+    };
 
+    // Toggles the timepicker
+    $scope.toggleTimepicker = function($event) {
+        $scope.showDatepicker = false;
+        $scope.showTimepicker = $scope.showTimepicker == false ? true : false;
+    };
+
+    // Redirects to search dish page.
     $scope.searchDish = function() {
-        $window.location.href = '/dishes/index.html' + params;
+        $window.location.href = '/dishes/index.html' + $scope.getParams();
     };
 
+    // Redirects to add dish page.
     $scope.addDish = function() {
-        $window.location.href = '/dishes/edit.html' + params;
+        $window.location.href = '/dishes/edit.html' + $scope.getParams();
     };
+
+    // Gets the URL params.
+    $scope.getParams = function() {
+
+        var params = '';
+        if ($scope.where.value != "") {
+            params = '?where=' + $scope.where.value;
+        }
+        if ($scope.when.value != "") {
+            if (params != '') {
+                params += '&when=' + $scope.when.value.getTime();
+            } else {
+                params = '?when=' + $scope.when.value.getTime();
+            }
+        }
+
+        return params;
+    };
+
 }]);
