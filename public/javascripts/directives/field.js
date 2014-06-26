@@ -1,12 +1,11 @@
-angular.module('eat-this-one').directive('eatField', function() {
+angular.module('eat-this-one').directive('eatField', ['$rootScope', function($rootScope) {
 
     return {
         restrict: 'E',
-        transclude: true,
         scope: {
             element: '=',
         },
         templateUrl: "templates/field.html"
     };
 
-});
+}]);
