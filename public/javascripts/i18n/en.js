@@ -13,6 +13,7 @@ $.eatLang.en = {
     portions : 'Number of portions you want',
     savechanges : 'Save changes',
     searchdish : 'Search dish',
+    selectdatetime : 'Select date and time',
     to : 'To',
     username : 'Your name',
     when : 'When',

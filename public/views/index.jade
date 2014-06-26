@@ -8,8 +8,19 @@ block content
         form(role='form')
             eat-field(element='where')
                 input(type='text', name='{{where.name}}', id='id-{{where.name}}', placeholder='{{where.placeholder}}', class='form-control', ng-model='where.value')
-            eat-field(element='when')
-                input(type='text', name='{{when.name}}', id='id-{{when.name}}', placeholder='{{when.placeholder}}', class='form-control', ng-model='when.value')
+
+            p(class='input-group')
+                // To open the datepicker.
+                span(class='input-group-btn')
+                    button(type='button', class='btn btn-default', ng-click='toggleDatepicker($event)')
+                        i(class='glyphicon glyphicon-calendar')
+                input(type='text', class='form-control', ng-model='when.value', placeholder='{{when.placeholder}}', ng-click='toggleTimepicker($event)')
+                // To open the timepicker.
+                span(class='input-group-btn')
+                    button(type='button', class='btn btn-default', ng-click='toggleTimepicker($event)')
+                        i(class='glyphicon glyphicon-time')
+            timepicker(ng-model='when.value', ng-show='showTimepicker', show-meridian='false')
+            datepicker(ng-model='when.value', ng-show='showDatepicker', class='well well-sm')
             button(type='button', name='search', ng-click='searchDish()', class='btn btn-primary') {{lang.searchdish}}
             button(type='button', name='add', ng-click='addDish()', class='btn btn-primary') {{lang.adddish}}
 
