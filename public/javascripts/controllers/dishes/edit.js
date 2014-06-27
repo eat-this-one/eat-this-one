@@ -58,6 +58,9 @@ angular.module('eat-this-one')
         value: ''
     };
 
+    $scope.donationValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20];
+    $scope.nportionsValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
     // Load the dish info.
     if (id) {
         // TODO: Check that the user is the owner
