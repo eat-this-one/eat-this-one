@@ -1,4 +1,4 @@
-angular.module('eat-this-one').directive('eatField', ['$rootScope', function($rootScope) {
+angular.module('eat-this-one').directive('eatField', function() {
 
     return {
         restrict: 'E',
@@ -8,4 +8,4 @@ angular.module('eat-this-one').directive('eatField', ['$rootScope', function($ro
         templateUrl: "templates/field.html"
     };
 
-}]);
+});
