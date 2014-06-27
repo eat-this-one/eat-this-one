@@ -6,21 +6,7 @@ angular.module('eat-this-one')
 
     $scope.dish = {};
 
-    // Arguments.
-    var id = urlParser.getParam('id');
-
-    var where = urlParser.getParam('where');
-    if (where) {
-        $scope.dish.where = where;
-    }
-
-    // We push the value as from.
-    var when = urlParser.getParam('when');
-    if (when) {
-        $scope.dish.from = when;
-    }
-
-    // Form fields.
+    // Declare form fields.
     $scope.name = {
         name: 'name',
         label: $scope.lang.dishname,
@@ -49,7 +35,7 @@ angular.module('eat-this-one')
         name: 'from',
         label: $scope.lang.from,
         placeholder: $scope.lang.from,
-        value: ''
+        value: new Date()
     };
     $scope.to = {
         name: 'to',
@@ -57,6 +43,23 @@ angular.module('eat-this-one')
         placeholder: $scope.lang.to,
         value: ''
     };
+
+    // Arguments.
+    var id = urlParser.getParam('id');
+
+    var where = urlParser.getParam('where');
+    if (where) {
+        $scope.where.value = where;
+    }
+
+    // We push the value as from.
+    var when = urlParser.getParam('when');
+    if (when) {
+        $scope.from.value = new Date(parseInt(when));
+    }
+
+    // Setting 'to' to 'from' + 1h.
+    $scope.to.value = new Date($scope.from.value.getTime() + (3600 * 1000));
 
     $scope.donationValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20];
     $scope.nportionsValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

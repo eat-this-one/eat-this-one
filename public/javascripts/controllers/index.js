@@ -14,7 +14,7 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', '$window
         name: 'when',
         label: $scope.lang.when,
         placeholder: $scope.lang.selectdatetime,
-        value: ''
+        value: new Date()
     };
 
     // Redirects to search dish page.
