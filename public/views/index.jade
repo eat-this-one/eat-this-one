@@ -8,9 +8,7 @@ block content
         form(role='form')
             eat-field(element='where')
 
-            eat-datetime(element='when', toggle-date='toggleDatepicker($event)', toggle-time='toggleTimepicker($event)')
-            timepicker(ng-model='when.value', ng-show='showTimepicker', show-meridian='false')
-            datepicker(ng-model='when.value', ng-show='showDatepicker', class='well well-sm')
+            eat-datetime(element='when')
             button(type='button', name='search', ng-click='searchDish()', class='btn btn-primary') {{lang.searchdish}}
             button(type='button', name='add', ng-click='addDish()', class='btn btn-primary') {{lang.adddish}}
 
