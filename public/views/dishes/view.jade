@@ -16,9 +16,7 @@ block content
             p {{dish.donation | currency}}
         div(id='id-add-meal-form')
             form(role='form')
-                div(class='form-group')
-                    label(for='id-user') {{lang.username}}
-                    input(type='text', name='user', ng-model='meal.user', id='id-user', class='form-control', placeholder='{{lang.username}}')
+                eat-input-text(element='user')
                 button(type='button', name='meal', ng-click='addMeal()', class='btn btn-primary') {{lang.addmeal}}
 
 include ../footer

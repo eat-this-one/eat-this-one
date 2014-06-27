@@ -7,6 +7,14 @@ angular.module('eat-this-one')
     $scope.meal = {};
     $scope.dish = {};
 
+    // Form fields.
+    $scope.user = {
+        name: 'user',
+        label: $scope.lang.username,
+        placeholder: $scope.lang.username,
+        value: ''
+    };
+
     var id = urlParser.getParam('id');
 
     // Load the dish info into the fields.
