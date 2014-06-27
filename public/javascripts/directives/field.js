@@ -5,7 +5,7 @@ angular.module('eat-this-one').directive('eatField', function() {
         scope: {
             element: '=',
         },
-        templateUrl: "templates/field.html"
+        templateUrl: "/templates/field.html"
     };
 
 });
