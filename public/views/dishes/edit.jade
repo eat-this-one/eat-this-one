@@ -9,24 +9,12 @@ block content
         include ../top
 
         form(role='form')
-            div(class='form-group')
-                label(for='id-name') {{lang.dishname}}
-                input(type='text', name='name', ng-model='dish.name', id='id-name', class='form-control')
-            div(class='form-group')
-                label(for='id-description') {{lang.dishdescription}}
-                textarea(name='description', id='id-description', ng-model='dish.description', class='form-control')
-            div(class='form-group')
-                label(for='id-user') {{lang.username}}
-                input(type='text', name='user', id='id-user', ng-model='dish.user', class='form-control')
-            div(class='form-group')
-                label(for='id-where') {{lang.where}}
-                input(type='text', name='where', id='id-where', ng-model='dish.where', class='form-control')
-            div(class='form-group')
-                label(for='id-from') {{lang.from}}
-                input(type='text', name='from', id='id-from', ng-model='dish.from', class='form-control')
-            div(class='form-group')
-                label(for='id-to') {{lang.to}}
-                input(type='text', name='to', id='id-to', ng-model='dish.to', class='form-control')
+            eat-field(element='name')
+            eat-field(element='description')
+            eat-field(element='user')
+            eat-field(element='where')
+            eat-datetime(element='from')
+            eat-datetime(element='to')
             div(class='form-group')
                 label(for='id-nportions') {{lang.nportions}}
                 select(name='nportions', id='id-nportions', ng-model='dish.nportions', class='form-control')
