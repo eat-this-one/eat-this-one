@@ -1,4 +1,4 @@
-angular.module('eat-this-one').controller('indexController', ['$scope', '$window', function($scope, $window) {
+angular.module('eat-this-one').controller('IndexController', ['$scope', '$window', function($scope, $window) {
 
     $scope.pageTitle = 'Eat-this-one';
     $scope.lang = $.eatLang[$.eatConfig.lang];

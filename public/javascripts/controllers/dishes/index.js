@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('dishesController', ['$scope', 'appStatus', 'urlParser', 'dishesRequest', function($scope, appStatus, urlParser, dishesRequest) {
+    .controller('DishesController', ['$scope', 'appStatus', 'urlParser', 'dishesRequest', function($scope, appStatus, urlParser, dishesRequest) {
 
     $scope.pageTitle = 'Dishes';
     $scope.lang = $.eatLang[$.eatConfig.lang];
