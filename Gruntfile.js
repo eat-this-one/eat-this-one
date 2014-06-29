@@ -6,7 +6,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON("package.json"),
 
         clean: {
-            build: [ "public/web-build", "public/app-build", "public/shared-build", "dist" ]
+            build: [ "public/web-build", "public/app-build", "public/shared-build", "dist/web", "dist/app/www" ]
         },
 
         // Minifies all JS into a single JS file.
@@ -69,6 +69,7 @@ module.exports = function(grunt) {
         // Compiles Jade files to .html.
         jade : {
             options : {
+                pretty: true,
                 data : {
                     debug : false
                 }
@@ -173,7 +174,7 @@ module.exports = function(grunt) {
                         expand : true,
                         cwd : 'public/app-build/',
                         src : [ "**/*" ],
-                        dest : "dist/app/"
+                        dest : "dist/app/www"
                     }, {
                         cwd : 'public/shared-build/',
                         expand : true,
@@ -183,7 +184,7 @@ module.exports = function(grunt) {
                         cwd : 'public/shared-build/',
                         expand : true,
                         src : [ "**/*" ],
-                        dest : "dist/app/"
+                        dest : "dist/app/www"
                     }
                 ]
             },
@@ -199,7 +200,7 @@ module.exports = function(grunt) {
                         expand : true,
                         cwd : 'public/bower_components/bootstrap',
                         src : [ 'fonts/**/*' ],
-                        dest : 'dist/app'
+                        dest : 'dist/app/www'
                     }
                 ]
             }

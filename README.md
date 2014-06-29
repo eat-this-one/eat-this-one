@@ -34,6 +34,13 @@ Eat-this-one source code includes both backend, frontend and development tools.
 * Install project dependencies
 **npm install**
 **bower install**
+**cordova create dist/app $PROJECT_NAME YOUR.REVERSE.DOMAIN YOUR_PROJECT_DISPLAY_NAME --save-copy=public/shared-build**
+**cordoba platform add android**
+
+==Android SDK (if you want to generate the app).
+
+* Download SDK: http://developer.android.com/sdk/index.html
+
 
 =Setup=
 
@@ -60,8 +67,8 @@ Eat-this-one source code includes both backend, frontend and development tools.
 ** **grunt run:dev**
 * Frontend URL
 ** http://YOURHOSTNAME
-* Backend server URL
-** http://localhost:3000
+* Backend server URL (IP better than localhost to deploy app in mobile)
+** http://YOURIP:3000
 
 ==Info==
 
@@ -76,3 +83,16 @@ Eat-this-one source code includes both backend, frontend and development tools.
 ** Models in public/javascripts/models/**/*.js
 ** All other shared code between web and mobile apps should go in public/javscripts/shared/**/*.js
 ** When a class differs between web and mobile apps two different classes should be created (A parent prototype in public/javascripts/shared can be used to extend common parts) one inside public/javascripts/web and another one inside public/javascripts/app sharing the same interface.
+
+=Generate apps=
+
+* Using emulator
+** /path/to/sdk/tool/android avd to create an emulator if you don't have a real device
+** Run cordova to build and deploy the app in an emulator
+*** cordova emulate
+* Using a real device
+** Configure the http://developer.android.com/tools/device.html
+** Run cordoba to build the app in the real device
+*** cordova run
+* Consider that you will need to access the backend through the app; you can use the IP rather than localhost
+** http://developer.android.com/tools/devices/emulator.html#networkaddresses
