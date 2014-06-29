@@ -19,12 +19,12 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', '$window
 
     // Redirects to search dish page.
     $scope.searchDish = function() {
-        $window.location.href = '/dishes/index.html' + $scope.getParams();
+        $window.location.href = 'dishes/index.html' + $scope.getParams();
     };
 
     // Redirects to add dish page.
     $scope.addDish = function() {
-        $window.location.href = '/dishes/edit.html' + $scope.getParams();
+        $window.location.href = 'dishes/edit.html' + $scope.getParams();
     };
 
     // Gets the URL params.

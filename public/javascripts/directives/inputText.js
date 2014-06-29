@@ -5,7 +5,7 @@ angular.module('eat-this-one').directive('eatInputText', function() {
         scope: {
             element: '=',
         },
-        templateUrl: "/templates/input-text.html"
+        templateUrl: "templates/input-text.html"
     };
 
 });

@@ -23,7 +23,7 @@ angular.module('eat-this-one').directive('eatDatetime', function() {
                 scope.showTimepicker = scope.showTimepicker == false ? true : false;
             };
         },
-        templateUrl: "/templates/datetime.html"
+        templateUrl: "templates/datetime.html"
     };
 
 });
