@@ -200,7 +200,7 @@ module.exports = function(grunt) {
                         expand : true,
                         cwd : 'public/bower_components/bootstrap',
                         src : [ 'fonts/**/*' ],
-                        dest : 'dist/app/www'
+                        dest : 'dist/app'
                     }
                 ]
             }
