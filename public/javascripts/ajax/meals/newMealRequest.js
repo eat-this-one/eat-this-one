@@ -5,7 +5,7 @@ angular.module('eat-this-one')
         $.ajax({
             type : 'POST',
             url : $.eatConfig.backendUrl + '/meals',
-            data : $scope.meal,
+            data : meal,
             datatype : 'json',
             success : function(data) {
                 var msg = 'Meal booked';
