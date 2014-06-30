@@ -43,6 +43,16 @@ angular.module('eat-this-one')
         placeholder: $scope.lang.to,
         value: ''
     };
+    $scope.nportions = {
+        name: 'nportions',
+        label: $scope.lang.nportions,
+        value: 1
+    };
+    $scope.donation = {
+        name: 'donation',
+        label: $scope.lang.expecteddonation,
+        value: ''
+    };
 
     // Arguments.
     var id = urlParser.getParam('id');
@@ -74,7 +84,13 @@ angular.module('eat-this-one')
     $scope.save = function() {
 
         // TODO Probably some dish cleaning will be required.
-        var dish = $scope.dish;
+        var fields = [
+            'name', 'description', 'user', 'where',
+            'from', 'to', 'nportions', 'donation'];
+        var dish = {};
+        fields.forEach(function(field) {
+            dish[field] = $scope[field].value;
+        });
 
         appStatus.waiting();
         editDishRequest($scope, dish);
