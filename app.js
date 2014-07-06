@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 var nconf = require('nconf');
 var mongoose = require('mongoose');
 
+var passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy;
+
 // Load config file.
 nconf.argv().env().file({file: path.join(__dirname, '/config.json')});
 
@@ -33,6 +36,7 @@ var app = express();
 var index = require('./routes/index');
 var dishes = require('./routes/dishes');
 var meals = require('./routes/meals');
+var login = require('./routes/login');
 
 app.use(favicon());
 app.use(logger('dev'));
@@ -55,6 +59,7 @@ app.use('/', index);
 app.use('/api', index);
 app.use('/api/dishes', dishes);
 app.use('/api/meals', meals);
+app.use('/api/login', login);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

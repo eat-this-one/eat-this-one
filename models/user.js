@@ -3,8 +3,9 @@ var Schema = mongoose.Schema;
 
 // TODO Add users to the app logic.
 var UserSchema = new Schema({
-    name: { type: String, required: true},
     email: { type: String, required: true},
+    password: { type: String, required: false},
+    name: { type: String, required: false},
     created: { type: Date, default: Date.now},
 });
 

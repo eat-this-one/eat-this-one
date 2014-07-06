@@ -34,8 +34,13 @@ Eat-this-one source code includes both backend, frontend and development tools.
 * Install project dependencies
 **npm install**
 **bower install**
+
+* App development setup
 **cordova create dist/app $PROJECT_NAME YOUR.REVERSE.DOMAIN YOUR_PROJECT_DISPLAY_NAME --save-copy=public/shared-build**
+** **cd dist/app**
 **cordoba platform add android**
+** Edit dist/app/config.xml
+** Edit dist/app/platforms/AndroidManifest.xml if necessary
 
 ==Android SDK (if you want to generate the app).
 

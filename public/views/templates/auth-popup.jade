@@ -1,0 +1,9 @@
+// Uses public/javascript/directives/auth-popup.js
+
+div(class='modal-header')
+    h3(class='modal-title') {{lang.login}}
+div(class='modal-body')
+    eat-input-text(element='email')
+    eat-input-text(element='password')
+    button(type='button', class='btn btn-primary', ng-click='login()') {{lang.login}}
+    button(type='button', class='btn btn-warning', ng-click='cancel()') {{lang.cancel}}

@@ -28,6 +28,10 @@ block content
                     option(ng-repeat='i in donationValues', value='{{i}}') {{i | currency}}
         
             input(type='hidden', name='currency', id='id-currency',  value='aud', ng-model='dish.currency')
-            button(type='button', ng-click='save()', class='btn btn-primary') {{lang.savechanges}}
+            div(ng-if='auth.isAuthenticated()')
+                button(type='button', ng-click='save()', class='btn btn-primary') {{lang.savechanges}}
+            div(id='id-authenticate', ng-if='!auth.isAuthenticated()')
+                button(type='button', ng-click='auth.openLoginPopup()', class='btn btn-primary') {{lang.logintoadd}}
+                button(type='button', ng-click='auth.openAddUserPopup()', class='btn btn-success') {{lang.signup}}
 
     include ../footer

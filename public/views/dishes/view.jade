@@ -14,9 +14,12 @@ block content
             p {{dish.where}}
             p {{lang.from}} {{dish.from}} {{lang.to}} {{dish.to}}
             p {{dish.donation | currency}}
-        div(id='id-add-meal-form')
+        div(id='id-add-meal-form', ng-if='auth.isAuthenticated()')
             form(role='form')
                 eat-input-text(element='user')
                 button(type='button', name='meal', ng-click='addMeal()', class='btn btn-primary') {{lang.addmeal}}
+        div(id='id-authenticate', ng-if='!auth.isAuthenticated()')
+            button(type='button', name='login', ng-click='auth.openLoginPopup()', class='btn btn-primary') {{lang.logintoorder}}
+            button(type='button', ng-click='auth.openAddUserPopup()', class='btn btn-success') {{lang.signup}}
 
 include ../footer
