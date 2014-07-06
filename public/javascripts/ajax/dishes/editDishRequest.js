@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('editDishRequest', ['appStatus', 'notifier', function(appStatus, notifier) {
+    .factory('editDishRequest', ['appStatus', 'notifier', 'eatConfig', function(appStatus, notifier, eatConfig) {
 
     return function($scope, dish) {
         if (typeof dish.id != 'undefined' && dish.id != null) {
@@ -11,7 +11,7 @@ angular.module('eat-this-one')
 
         $.ajax({
             type : method,
-            url : $.eatConfig.backendUrl + '/dishes',
+            url : eatConfig.backendUrl + '/dishes',
             data : dish,
             datatype : 'json',
             success : function(data) {

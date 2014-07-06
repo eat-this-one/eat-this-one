@@ -1,10 +1,10 @@
 angular.module('eat-this-one')
-    .factory('newMealRequest', ['appStatus', 'notifier', function(appStatus, notifier) {
+    .factory('newMealRequest', ['appStatus', 'notifier', 'eatConfig', function(appStatus, notifier, eatConfig) {
 
     return function($scope, meal) {
         $.ajax({
             type : 'POST',
-            url : $.eatConfig.backendUrl + '/meals',
+            url : eatConfig.backendUrl + '/meals',
             data : meal,
             datatype : 'json',
             success : function(data) {

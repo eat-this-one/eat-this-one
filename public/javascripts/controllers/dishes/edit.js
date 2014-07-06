@@ -1,8 +1,8 @@
 angular.module('eat-this-one')
-    .controller('DishesEditController', ['$scope', 'appStatus', 'urlParser', 'dishRequest', 'editDishRequest', function($scope, appStatus, urlParser, dishRequest, editDishRequest) {
+    .controller('DishesEditController', ['$scope', 'appStatus', 'urlParser', 'dishRequest', 'editDishRequest', 'eatConfig', function($scope, appStatus, urlParser, dishRequest, editDishRequest, eatConfig) {
 
     $scope.pageTitle = 'Edit dish';
-    $scope.lang = $.eatLang[$.eatConfig.lang];
+    $scope.lang = $.eatLang[eatConfig.lang];
 
     $scope.dish = {};
 

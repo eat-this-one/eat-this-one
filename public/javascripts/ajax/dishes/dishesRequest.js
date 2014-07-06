@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('dishesRequest', ['appStatus', 'notifier', function(appStatus, notifier) {
+    .factory('dishesRequest', ['appStatus', 'notifier', 'eatConfig', function(appStatus, notifier, eatConfig) {
 
     return function($scope, params) {
 
@@ -9,7 +9,7 @@ angular.module('eat-this-one')
 
         $.ajax({
             type : 'GET',
-            url : $.eatConfig.backendUrl + '/dishes',
+            url : eatConfig.backendUrl + '/dishes',
             data : params,
             datatype : 'json',
             success : function(dishesData) {

@@ -1,7 +1,7 @@
-angular.module('eat-this-one').controller('IndexController', ['$scope', '$window', function($scope, $window) {
+angular.module('eat-this-one').controller('IndexController', ['$scope', '$window', 'eatConfig', function($scope, $window, eatConfig) {
 
     $scope.pageTitle = 'Eat-this-one';
-    $scope.lang = $.eatLang[$.eatConfig.lang];
+    $scope.lang = $.eatLang[eatConfig.lang];
 
     // Defines elements.
     $scope.where = {
