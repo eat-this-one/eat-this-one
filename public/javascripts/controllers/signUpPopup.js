@@ -1,6 +1,13 @@
-angular.module('eat-this-one').controller('loginPopupController', ['$scope', '$modalInstance', 'eatConfig', function($scope, $modalInstance, eatConfig) {
+angular.module('eat-this-one').controller('signUpPopupController', ['$scope', '$modalInstance', 'eatConfig', function($scope, $modalInstance, eatConfig) {
 
     $scope.lang = $.eatLang[eatConfig.lang];
+
+    $scope.name = {
+        name: 'name',
+        label: $scope.lang.name,
+        placeholder: $scope.lang.name,
+        value: ''
+    };
 
     $scope.email = {
         name: 'email',
@@ -16,7 +23,8 @@ angular.module('eat-this-one').controller('loginPopupController', ['$scope', '$m
         value: ''
     };
 
-    $scope.login = function() {
+    // TODO: Request to create user.
+    $scope.signup = function() {
         $modalInstance.close(true);
     };
 
