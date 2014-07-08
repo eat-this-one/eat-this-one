@@ -1,4 +1,4 @@
-angular.module('eat-this-one').controller('signInPopupController', ['$scope', '$modalInstance', 'eatConfig', function($scope, $modalInstance, eatConfig) {
+angular.module('eat-this-one').controller('signInPopupController', ['$scope', '$modalInstance', 'eatConfig', 'appStatus', 'loginRequest', function($scope, $modalInstance, eatConfig, appStatus, loginRequest) {
 
     $scope.lang = $.eatLang[eatConfig.lang];
 
@@ -16,8 +16,9 @@ angular.module('eat-this-one').controller('signInPopupController', ['$scope', '$
         value: ''
     };
 
-    $scope.login = function() {
-        $modalInstance.close(true);
+    $scope.signin = function() {
+        appStatus.waiting();
+        loginRequest($scope, $modalInstance, $scope.email.value, $scope.password.value);
     };
 
     $scope.cancel = function() {

@@ -1,4 +1,4 @@
-angular.module('eat-this-one').controller('signUpPopupController', ['$scope', '$modalInstance', 'eatConfig', function($scope, $modalInstance, eatConfig) {
+angular.module('eat-this-one').controller('signUpPopupController', ['$scope', '$modalInstance', 'eatConfig', 'appStatus', 'newUserRequest', function($scope, $modalInstance, eatConfig, appStatus, newUserRequest) {
 
     $scope.lang = $.eatLang[eatConfig.lang];
 
@@ -23,9 +23,9 @@ angular.module('eat-this-one').controller('signUpPopupController', ['$scope', '$
         value: ''
     };
 
-    // TODO: Request to create user.
     $scope.signup = function() {
-        $modalInstance.close(true);
+        appStatus.waiting();
+        newUserRequest($scope, $modalInstance, $scope.name.value, $scope.email.value, $scope.password.value);
     };
 
     $scope.cancel = function() {
