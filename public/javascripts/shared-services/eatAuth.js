@@ -6,13 +6,12 @@ angular.module('eat-this-one').factory('eatAuth', ['$modal', function($modal) {
 
         // Returns whether the user is authenticated or not.
         isAuthenticated : function() {
-            return (authenticated);        
+            return (authenticated);
         },
 
         // Marks the current user as authenticated
-        authenticate : function(authenticationToken) {
+        authenticate : function() {
             authenticated = true;
-            document.cookie = JSON.stringify({ token : authenticationToken });
         },
 
         // Opens the login pop up.
