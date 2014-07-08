@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('loginRequest', ['appStatus', 'notifier', 'eatConfig', function(appStatus, notifier, eatConfig) {
+    .factory('loginRequest', ['appStatus', 'notifier', 'eatConfig', 'eatAuth', function(appStatus, notifier, eatConfig, eatAuth) {
 
     return function($scope, $modalInstance, email, password) {
 
@@ -16,7 +16,10 @@ angular.module('eat-this-one')
                 var msg = 'Log in successfully';
                 notifier.show(msg, 'success');
                 appStatus.completed();
+
                 $modalInstance.close(true);
+
+                eatAuth.authenticate(data);
             },
             error : function(data, errorStatus, errorMsg) {
                 notifier.show(errorMsg, 'error');

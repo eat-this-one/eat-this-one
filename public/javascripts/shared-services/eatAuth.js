@@ -9,6 +9,12 @@ angular.module('eat-this-one').factory('eatAuth', ['$modal', function($modal) {
             return (authenticated);        
         },
 
+        // Marks the current user as authenticated
+        authenticate : function(authenticationToken) {
+            authenticated = true;
+            document.cookie = JSON.stringify({ token : authenticationToken });
+        },
+
         // Opens the login pop up.
         openSignInPopup : function() {
 
