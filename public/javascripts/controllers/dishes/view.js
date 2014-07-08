@@ -20,6 +20,18 @@ angular.module('eat-this-one')
         });
     };
 
+    $scope.openStaticMap = function() {
+        var modalInstance = $modal.open({
+            templateUrl: 'templates/static-map.html',
+            controller: 'staticMapController',
+            resolve: {
+                dish : function() {
+                    return $scope.dish;
+                }
+            }
+        });
+    };
+
     var id = urlParser.getParam('id');
 
     // Load the dish info into the fields.
