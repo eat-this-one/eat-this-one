@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('dishRequest', ['appStatus', 'notifier', 'eatConfig', function(appStatus, notifier, eatConfig) {
+    .factory('dishRequest', ['appStatus', 'notifier', 'eatConfig', 'mapsManager', function(appStatus, notifier, eatConfig, mapsManager) {
 
     return function($scope, id) {
 
@@ -9,6 +9,8 @@ angular.module('eat-this-one')
             datatype : 'json',
             success : function(dishData) {
                 $scope.dish = dishData;
+                $scope.dish.map = mapsManager.getStaticMap($scope.dish.where);
+
                 $scope.$apply();
                 appStatus.completed();
             },

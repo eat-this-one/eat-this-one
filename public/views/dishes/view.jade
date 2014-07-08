@@ -11,7 +11,10 @@ block content
         div(id='id-dish-info')
             p {{dish.name}}
             p {{dish.description}}
-            p {{dish.where}}
+            p
+                a(class='pointer', ng-click='openStaticMap()')
+                    i(class='glyphicon glyphicon-map-marker')
+                    {{dish.where}}
             p {{lang.from}} {{dish.from}} {{lang.to}} {{dish.to}}
             p {{dish.donation | currency}}
         div(id='id-add-meal-form', ng-if='auth.isAuthenticated()')

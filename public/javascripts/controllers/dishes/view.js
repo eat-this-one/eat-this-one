@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesViewController', ['$scope', 'appStatus', 'urlParser', 'dishRequest', 'newMealRequest', 'eatConfig', 'eatAuth', function($scope, appStatus, urlParser, dishRequest, newMealRequest, eatConfig, eatAuth) {
+    .controller('DishesViewController', ['$scope', 'appStatus', 'urlParser', 'dishRequest', 'newMealRequest', 'eatConfig', 'eatAuth', '$modal', function($scope, appStatus, urlParser, dishRequest, newMealRequest, eatConfig, eatAuth, $modal) {
 
     $scope.pageTitle = 'Dish';
     $scope.lang = $.eatLang[eatConfig.lang];
@@ -14,6 +14,18 @@ angular.module('eat-this-one')
         label: $scope.lang.username,
         placeholder: $scope.lang.username,
         value: ''
+    };
+
+    $scope.openStaticMap = function() {
+        var modalInstance = $modal.open({
+            templateUrl: 'templates/static-map.html',
+            controller: 'staticMapController',
+            resolve: {
+                dish : function() {
+                    return $scope.dish;
+                }
+            }
+        });
     };
 
     var id = urlParser.getParam('id');
