@@ -7,9 +7,6 @@ var bodyParser = require('body-parser');
 var nconf = require('nconf');
 var mongoose = require('mongoose');
 
-var passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy;
-
 // Load config file.
 nconf.argv().env().file({file: path.join(__dirname, '/config.json')});
 
@@ -34,6 +31,7 @@ var app = express();
 
 // Routes to components.
 var index = require('./routes/index');
+var users = require('./routes/users');
 var dishes = require('./routes/dishes');
 var meals = require('./routes/meals');
 var login = require('./routes/login');
@@ -57,6 +55,7 @@ app.use('/api', function(req, res, next) {
 app.use('/', index);
 
 app.use('/api', index);
+app.use('/api/users', users);
 app.use('/api/dishes', dishes);
 app.use('/api/meals', meals);
 app.use('/api/login', login);
