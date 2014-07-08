@@ -48,7 +48,7 @@ router.post('/', function(req, res) {
             }
         });
         res.statusCode = 200;
-        res.send(token);
+        res.send(token.token);
     });
 });
 
