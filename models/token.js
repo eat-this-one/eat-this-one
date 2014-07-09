@@ -2,9 +2,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var TokenSchema = new Schema({
-    token: { type: String, required: true},
     userid: { type: String, required: true},
-    expires: { type: Number, required: false},
+    token: { type: String, required: true},
+    expires: { type: Number, required: false}
 });
 
 // Export the model and the entity structure.

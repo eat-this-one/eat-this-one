@@ -1,9 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-// TODO: user will be a reference to user schema
 var DishSchema = new Schema({
-    user: { type: String, required: true},
+    userid: { type: String, required: true},
     name: { type: String, required: true},
     description: { type: String, required: false, default: ''},
     where: { type: String, required: true},
