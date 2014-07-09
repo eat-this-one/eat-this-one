@@ -12,7 +12,7 @@ var MealModel = require('../models/meal.js').model;
 // GET - Meals list.
 router.get('/', function(req, res) {
 
-    MealModel.find(function(error, mealss) {
+    MealModel.find(function(error, meals) {
         if (error) {
             console.log(error);
             res.send("No meals." + error);
@@ -40,26 +40,50 @@ router.get('/:id', function(req, res) {
 // POST - Create a meal.
 router.post('/', function(req, res) {
 
-    if (typeof req.param('dish') === 'undefined' || typeof req.param('dish') === 'undefined') {
+    if (typeof req.param('dishid') === 'undefined') {
         res.statusCode = 400;
         res.send("Missing params, can not add meal");
     }
 
-    // TODO Check that the dish exists.
+    if (typeof req.param('token') === 'undefined') {
+        // TODO Review statusCode
+        res.statusCode = 401;
+        res.send('Wrong credentials');
+    }
 
-    var meal = new MealModel({user : req.param('user'), 'dish' : req.param('dish')});
+    // Getting userid from the token.
+    TokenModel.findOne({token: req.param('token')}, function(error, token) {
 
-    meal.save(function(error) {
+        // TODO Review status codes here getting the token.
         if (error) {
-            console.log(error);
-            res.statusCode = 400;
-            res.send("Can not save meal");
+            res.statusCode = 401;
+            res.send('Wrong credentials');
         }
-    });
 
-    // Same output for all output formats.
-    res.statusCode = 200;
-    res.send(meal);
+        if (token === null) {
+            res.statusCode = 401;
+            res.send('Wrong credentials');
+        }
+
+        var meal = new MealModel({
+            dishid : req.param('dish'),
+            userid : token.userid
+        });
+
+        // TODO Check that the dish exists.
+
+        meal.save(function(error) {
+            if (error) {
+                console.log(error);
+                res.statusCode = 400;
+                res.send("Can not save meal");
+            }
+        });
+
+        // Same output for all output formats.
+        res.statusCode = 200;
+        res.send(meal);
+    });
 });
 
 router.put('/:id', function(req, res) {

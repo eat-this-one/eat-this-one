@@ -66,7 +66,7 @@ router.post('/', function(req, res) {
         dishObj[prop] = req.param(prop);
     }
 
-    // TODO Getting userid from the token.
+    // Getting userid from the token.
     TokenModel.findOne({token: req.param('token')}, function(error, token) {
 
         // TODO Review status codes here getting the token.
