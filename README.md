@@ -38,7 +38,7 @@ Eat-this-one source code includes both backend, frontend and development tools.
 * App development setup
 **cordova create dist/app $PROJECT_NAME YOUR.REVERSE.DOMAIN YOUR_PROJECT_DISPLAY_NAME --save-copy=public/shared-build**
 ** **cd dist/app**
-**cordoba platform add android**
+**cordova platform add android**
 ** Edit dist/app/config.xml
 ** Edit dist/app/platforms/AndroidManifest.xml if necessary
 
@@ -86,7 +86,8 @@ Eat-this-one source code includes both backend, frontend and development tools.
 * Javascript
 ** Controllers in public/javascripts/controllers/**/*.js
 ** Models in public/javascripts/models/**/*.js
-** All other shared code between web and mobile apps should go in public/javscripts/shared/**/*.js
+** AngularJS directives in public/javascripts/directives/**/*.js
+** All shared code between web and mobile apps should go in public/javscripts/shared/**/*.js
 ** When a class differs between web and mobile apps two different classes should be created (A parent prototype in public/javascripts/shared can be used to extend common parts) one inside public/javascripts/web and another one inside public/javascripts/app sharing the same interface.
 
 =Generate apps=
@@ -97,7 +98,7 @@ Eat-this-one source code includes both backend, frontend and development tools.
 *** cordova emulate
 * Using a real device
 ** Configure the http://developer.android.com/tools/device.html
-** Run cordoba to build the app in the real device
+** Run cordova to build the app in the real device
 *** cordova run
 * Consider that you will need to access the backend through the app; you can use the IP rather than localhost
 ** http://developer.android.com/tools/devices/emulator.html#networkaddresses
