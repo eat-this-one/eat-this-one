@@ -24,6 +24,8 @@ $.eatLang.en = {
     selectdatetime : 'Select date and time',
     signup : 'Sign up',
     to : 'To',
+    today : 'Today',
+    tomorrow : 'Tomorrow',
     username : 'Your user name',
     when : 'When',
     where : 'Where',

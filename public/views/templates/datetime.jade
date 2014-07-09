@@ -7,5 +7,9 @@ p(class='input-group')
     span(class='input-group-btn')
         button(type='button', id='id-time-btn-{{element.name}}', class='btn btn-default', ng-click='toggleTimepicker($event)')
             i(class='glyphicon glyphicon-time')
-timepicker(id='id-time-{{element.name}}', ng-model='element.value', ng-show='showTimepicker', show-meridian='false')
-datepicker(id='id-date-{{element.name}}', ng-model='element.value', ng-show='showDatepicker', class='well well-sm')
+div(ng-show='showTimepicker')
+    timepicker(id='id-time-{{element.name}}', ng-model='element.value', show-meridian='false')
+div(ng-show='showDatepicker')
+    button(type='button', class='btn btn-sm btn-info', ng-click='setToday()') {{lang.today}}
+    button(type='button', class='btn btn-sm btn-info', ng-click='setTomorrow()') {{lang.tomorrow}}
+    datepicker(id='id-date-{{element.name}}', ng-model='element.value', class='well well-sm')
