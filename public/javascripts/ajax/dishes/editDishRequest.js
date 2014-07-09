@@ -1,13 +1,15 @@
 angular.module('eat-this-one')
-    .factory('editDishRequest', ['appStatus', 'notifier', 'eatConfig', function(appStatus, notifier, eatConfig) {
+    .factory('editDishRequest', ['appStatus', 'notifier', 'eatConfig', 'sessionManager', function(appStatus, notifier, eatConfig, sessionManager) {
 
     return function($scope, dish) {
         if (typeof dish.id != 'undefined' && dish.id != null) {
             method = 'PUT';
         } else {
-            //  TODO Backend will check if the user is allowed to change that id.
             method = 'POST';
         }
+
+        // Adding the session token to the request.
+        dish['token'] = sessionManager.getToken();
 
         $.ajax({
             type : method,

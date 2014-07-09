@@ -20,12 +20,6 @@ angular.module('eat-this-one')
         placeholder: $scope.lang.dishdescription,
         value: ''
     };
-    $scope.user = {
-        name: 'user',
-        label: $scope.lang.username,
-        placeholder: $scope.lang.username,
-        value: ''
-    };
     $scope.where = {
         name: 'where',
         label: $scope.lang.where,
@@ -86,7 +80,7 @@ angular.module('eat-this-one')
 
         // TODO Probably some dish cleaning will be required.
         var fields = [
-            'name', 'description', 'user', 'where',
+            'name', 'description', 'where',
             'from', 'to', 'nportions', 'donation'];
         var dish = {};
         fields.forEach(function(field) {
