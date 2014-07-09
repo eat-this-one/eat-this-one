@@ -1,7 +1,11 @@
 angular.module('eat-this-one')
-    .factory('newMealRequest', ['appStatus', 'notifier', 'eatConfig', function(appStatus, notifier, eatConfig) {
+    .factory('newMealRequest', ['appStatus', 'notifier', 'eatConfig', 'sessionManager', function(appStatus, notifier, eatConfig, sessionManager) {
 
     return function($scope, meal) {
+
+        // Adding the session token to the request.
+        meal['token'] = sessionManager.getToken();
+
         $.ajax({
             type : 'POST',
             url : eatConfig.backendUrl + '/meals',

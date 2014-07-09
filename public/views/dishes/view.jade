@@ -17,10 +17,8 @@ block content
                     {{dish.where}}
             p {{lang.from}} {{dish.from}} {{lang.to}} {{dish.to}}
             p {{dish.donation | currency}}
-        div(id='id-add-meal-form', ng-if='auth.isAuthenticated()')
-            form(role='form')
-                eat-input-text(element='user')
-                button(type='button', name='meal', ng-click='addMeal()', class='btn btn-primary') {{lang.addmeal}}
+        div(ng-if='auth.isAuthenticated()')
+            button(type='button', name='meal', ng-click='addMeal()', class='btn btn-primary') {{lang.addmeal}}
         eat-login-buttons
 
 include ../footer

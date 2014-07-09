@@ -8,14 +8,6 @@ angular.module('eat-this-one')
     $scope.meal = {};
     $scope.dish = {};
 
-    // Form fields.
-    $scope.user = {
-        name: 'user',
-        label: $scope.lang.username,
-        placeholder: $scope.lang.username,
-        value: ''
-    };
-
     $scope.openStaticMap = function() {
         var modalInstance = $modal.open({
             templateUrl: 'templates/static-map.html',
@@ -37,8 +29,7 @@ angular.module('eat-this-one')
     $scope.addMeal = function() {
 
         var meal = {
-            user: $scope.user.value,
-            dish: id
+            dishid: id
         };
         appStatus.waiting();
         newMealRequest($scope, meal);
