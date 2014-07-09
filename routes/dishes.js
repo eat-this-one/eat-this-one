@@ -5,6 +5,7 @@ var router = express.Router();
 
 // Required models.
 var DishModel = require('../models/dish.js').model;
+var TokenModel = require('../models/token.js').model;
 
 // TODO: Refine error messages
 
@@ -41,13 +42,18 @@ router.post('/', function(req, res) {
     var dishProps = {
         'name' : 'required',
         'description' : 'no',
-        'user' : 'required',
         'where' : 'required',
         'from' : 'required',
         'to' : 'required', 
         'nportions' : 'required',
         'donation' : 'required'
     };
+
+    if (typeof req.param('token') === 'undefined') {
+        // TODO Review statusCode
+        res.statusCode = 401;
+        res.send('Wrong credentials');
+    }
 
     var dishObj = {};
     var missing = [];
@@ -60,50 +66,46 @@ router.post('/', function(req, res) {
         dishObj[prop] = req.param(prop);
     }
 
-    if (missing.length > 0) {
-        res.statusCode = 400;
-        res.send("Missing params, can not create dish");
-    }
-    var dish = new DishModel(dishObj);
+    // TODO Getting userid from the token.
+    TokenModel.findOne({token: req.param('token')}, function(error, token) {
 
-    dish.save(function(error) {
+        // TODO Review status codes here getting the token.
         if (error) {
-            console.log(error);
-            res.statusCode = 400;
-            res.send("Can not save dish " + req.param('name'));
-        }
-    });
-
-    // Same output for all output formats.
-    res.statusCode = 201;
-    res.send(dish);
-});
-
-// PUT - Update a dish.
-router.put('/:id', function(req, res) {
-    var id = req.param('id');
-    DishModel.findById(id, function(error, dish) {
-
-        if (error) {
-            console.log(error);
-            res.statusCode = 400;
-            req.send("Wrong dish id");
+            res.statusCode = 401;
+            res.send('Wrong credentials');
         }
 
-        // TODO Read req.params to update.
- 
+        if (token === null) {
+            res.statusCode = 401;
+            res.send('Wrong credentials');
+        }
+
+        // Setting the userid.
+        dishObj['userid'] = token.userid;
+
+        if (missing.length > 0) {
+            res.statusCode = 400;
+            res.send("Missing params, can not create dish");
+        }
+        var dish = new DishModel(dishObj);
+
         dish.save(function(error) {
             if (error) {
                 console.log(error);
                 res.statusCode = 400;
-                res.send("Can not update dish");
+                res.send("Can not save dish " + req.param('name'));
             }
         });
-    });
 
-    // Same output for all output formats.
-    res.statusCode = 200;
-    res.send(dish);
+        // Same output for all output formats.
+        res.statusCode = 201;
+        res.send(dish);
+    });
+});
+
+// PUT - Update a dish.
+router.put('/:id', function(req, res) {
+    res.send("Not supported");
 });
 
 router.post('/:id', function(req, req) {

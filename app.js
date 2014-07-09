@@ -31,10 +31,11 @@ var app = express();
 
 // Routes to components.
 var index = require('./routes/index');
+var login = require('./routes/login');
 var users = require('./routes/users');
 var dishes = require('./routes/dishes');
 var meals = require('./routes/meals');
-var login = require('./routes/login');
+var locations = require('./routes/locations');
 
 app.use(favicon());
 app.use(logger('dev'));
@@ -55,10 +56,11 @@ app.use('/api', function(req, res, next) {
 app.use('/', index);
 
 app.use('/api', index);
+app.use('/api/login', login);
 app.use('/api/users', users);
 app.use('/api/dishes', dishes);
 app.use('/api/meals', meals);
-app.use('/api/login', login);
+app.use('/api/locations', locations);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
