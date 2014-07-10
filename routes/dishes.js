@@ -6,6 +6,7 @@ var router = express.Router();
 // Required models.
 var DishModel = require('../models/dish.js').model;
 var TokenModel = require('../models/token.js').model;
+var LocationModel = require('../models/location.js').model;
 
 // TODO: Refine error messages
 
@@ -42,7 +43,6 @@ router.post('/', function(req, res) {
     var dishProps = {
         'name' : 'required',
         'description' : 'no',
-        'where' : 'required',
         'from' : 'required',
         'to' : 'required', 
         'nportions' : 'required',
@@ -66,6 +66,11 @@ router.post('/', function(req, res) {
         dishObj[prop] = req.param(prop);
     }
 
+    if (missing.length > 0 || req.param('loc') === null) {
+        res.statusCode = 400;
+        res.send("Missing params, can not create dish");
+    }
+
     // Getting userid from the token.
     TokenModel.findOne({token: req.param('token')}, function(error, token) {
 
@@ -80,26 +85,72 @@ router.post('/', function(req, res) {
             res.send('Wrong credentials');
         }
 
-        // Setting the userid.
+        // Setting the userid from the token.
         dishObj['userid'] = token.userid;
 
-        if (missing.length > 0) {
-            res.statusCode = 400;
-            res.send("Missing params, can not create dish");
-        }
+        // Setting the object to save.
         var dish = new DishModel(dishObj);
 
-        dish.save(function(error) {
-            if (error) {
-                console.log(error);
-                res.statusCode = 400;
-                res.send("Can not save dish " + req.param('name'));
-            }
-        });
+        // The location may exist or not, but if it does not exist
+        // an address must come along with the location.
+        LocationModel.findOne({name: req.param('loc')}, function(error, locationInstance) {
 
-        // Same output for all output formats.
-        res.statusCode = 201;
-        res.send(dish);
+            if (error) {
+                res.statusCode = 500;
+                res.send('Error getting location');
+            }
+
+            // TODO Just make it work and we will do it properly later.
+            if (locationInstance === null) {
+
+                // We need the address then.
+                if (req.param('address') === null) {
+                    res.statusCode = 400;
+                    res.send('Missing params, can not create location');
+                }
+
+                locationInstance = new LocationModel({
+                    userid: token.userid,
+                    name: req.param('loc'),
+                    address: req.param('address')
+                });
+                locationInstance.save(function(error) {
+                    if (error) {
+                        res.statusCode = 500;
+                        res.send('Can not save location ' + req.param('loc'));
+                    }
+                });
+
+                // KILL THIS COPY & PASTE.
+                dish.locationid = locationInstance.id;
+                dish.save(function(error) {
+                    if (error) {
+                        console.log(error);
+                        res.statusCode = 400;
+                        res.send("Can not save dish " + req.param('name'));
+                    }
+                });
+
+                // Same output for all output formats.
+                res.statusCode = 201;
+                res.send(dish);
+                // FINISH KILL THIS COPY & PASTE.
+            }
+
+            dish.locationid = locationInstance.id;
+            dish.save(function(error) {
+                if (error) {
+                    console.log(error);
+                    res.statusCode = 400;
+                    res.send("Can not save dish " + req.param('name'));
+                }
+            });
+
+            // Same output for all output formats.
+            res.statusCode = 201;
+            res.send(dish);
+
+        });
     });
 });
 
