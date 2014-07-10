@@ -29,7 +29,7 @@ block content
             input(type='hidden', name='currency', id='id-currency',  value='aud', ng-model='dish.currency')
 
             div(ng-if='auth.isAuthenticated()')
-                button(type='button', ng-click='save()', class='btn btn-primary') {{lang.savechanges}}
+                input(type='submit', ng-click='save()', class='btn btn-primary', value='{{lang.savechanges}}')
             eat-login-buttons
 
 
