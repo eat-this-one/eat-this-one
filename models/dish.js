@@ -3,9 +3,9 @@ var Schema = mongoose.Schema;
 
 var DishSchema = new Schema({
     userid: { type: String, required: true},
+    locationid: { type: String, required: true},
     name: { type: String, required: true},
     description: { type: String, required: false, default: ''},
-    where: { type: String, required: true},
     from: { type: Date, required: true},
     to: { type: Date, required: true},
     nportions: { type: Number, required: true},
