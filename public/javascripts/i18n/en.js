@@ -2,6 +2,7 @@ $.eatLang.en = {
 
     adddish : 'Add dish',
     addmeal : 'Add meal',
+    address : 'Address',
     aud : 'Australian Dolars',
     cancel : 'Cancel',
     createuser : 'Create user',
@@ -10,6 +11,9 @@ $.eatLang.en = {
     email : 'Email',
     expecteddonation : 'Expected donation',
     from : 'From',
+    introinfo : 'You can look for dishes or you can add a new one.',
+    location : 'Location',
+    locationname : 'Location name',
     login : 'Login',
     logintoadd : 'Login to add a dish',
     logintoorder : 'Login to order the meal',
