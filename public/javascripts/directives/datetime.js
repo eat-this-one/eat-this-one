@@ -3,7 +3,7 @@ angular.module('eat-this-one').directive('eatDatetime', ['eatConfig', function(e
     return {
         restrict: 'E',
         scope: {
-            element: '=',
+            element: '='
         },
         link : function(scope) {
 

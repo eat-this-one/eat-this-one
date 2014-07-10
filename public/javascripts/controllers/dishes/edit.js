@@ -20,10 +20,16 @@ angular.module('eat-this-one')
         placeholder: $scope.lang.dishdescription,
         value: ''
     };
-    $scope.where = {
-        name: 'where',
+    $scope.loc = {
+        name: 'loc',
         label: $scope.lang.where,
         placeholder: $scope.lang.where,
+        value: ''
+    };
+    $scope.address = {
+        name: 'address',
+        label: $scope.lang.address,
+        placeholder: $scope.lang.address,
         value: ''
     };
     $scope.from = {
@@ -71,7 +77,6 @@ angular.module('eat-this-one')
 
     // Load the dish info.
     if (id) {
-        // TODO: Check that the user is the owner
         appStatus.waiting();
         dishRequest($scope, id);
     }
@@ -80,7 +85,7 @@ angular.module('eat-this-one')
 
         // TODO Probably some dish cleaning will be required.
         var fields = [
-            'name', 'description', 'where',
+            'name', 'description', 'loc', 'address',
             'from', 'to', 'nportions', 'donation'];
         var dish = {};
         fields.forEach(function(field) {
@@ -90,4 +95,5 @@ angular.module('eat-this-one')
         appStatus.waiting();
         editDishRequest($scope, dish);
     };
+
 }]);
