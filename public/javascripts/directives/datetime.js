@@ -8,7 +8,7 @@ angular.module('eat-this-one').directive('eatDatetime', ['eatConfig', function(e
         link : function(scope) {
 
             // Import lang strings.
-            scope.lang = $.eatLang[eatConfig.lang];
+            scope.lang = $.eatLang.lang;
 
             scope.today = new Date();
 

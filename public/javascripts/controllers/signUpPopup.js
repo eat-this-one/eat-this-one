@@ -1,6 +1,6 @@
 angular.module('eat-this-one').controller('signUpPopupController', ['$scope', '$modalInstance', 'eatConfig', 'appStatus', 'newUserRequest', function($scope, $modalInstance, eatConfig, appStatus, newUserRequest) {
 
-    $scope.lang = $.eatLang[eatConfig.lang];
+    $scope.lang = $.eatLang.lang;
 
     $scope.name = {
         name: 'name',
