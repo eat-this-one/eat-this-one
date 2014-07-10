@@ -1,9 +1,9 @@
 angular.module('eat-this-one')
-    .controller('DishesViewController', ['$scope', 'appStatus', 'urlParser', 'dishRequest', 'newMealRequest', 'eatConfig', 'eatAuth', '$modal', function($scope, appStatus, urlParser, dishRequest, newMealRequest, eatConfig, eatAuth, $modal) {
+    .controller('DishesViewController', ['$scope', 'appStatus', 'urlParser', 'dishRequest', 'newMealRequest', 'eatConfig', 'authManager', '$modal', function($scope, appStatus, urlParser, dishRequest, newMealRequest, eatConfig, authManager, $modal) {
 
     $scope.pageTitle = 'Dish';
     $scope.lang = $.eatLang.lang;
-    $scope.auth = eatAuth;
+    $scope.auth = authManager;
 
     $scope.meal = {};
     $scope.dish = {};

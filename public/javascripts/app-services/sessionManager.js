@@ -1,12 +1,12 @@
 angular.module('eat-this-one')
-    .factory('sessionManager', ['eatAuth', function(eatAuth) {
+    .factory('sessionManager', ['authManager', function(authManager) {
 
     return {
 
         initSession : function() {
             var token = localStorage.getItem('token');
             if (token !== null) {
-                eatAuth.authenticate();
+                authManager.authenticate();
             }
         },
 

@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('loginRequest', ['appStatus', 'notifier', 'eatConfig', 'eatAuth', 'sessionManager', function(appStatus, notifier, eatConfig, eatAuth, sessionManager) {
+    .factory('loginRequest', ['appStatus', 'notifier', 'eatConfig', 'authManager', 'sessionManager', function(appStatus, notifier, eatConfig, authManager, sessionManager) {
 
     return function($scope, $modalInstance, email, password) {
 
@@ -19,7 +19,7 @@ angular.module('eat-this-one')
 
                 $modalInstance.close(true);
 
-                eatAuth.authenticate();
+                authManager.authenticate();
                 sessionManager.setToken(data);
             },
             error : function(data, errorStatus, errorMsg) {
