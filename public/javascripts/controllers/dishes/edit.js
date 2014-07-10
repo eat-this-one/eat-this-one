@@ -72,8 +72,8 @@ angular.module('eat-this-one')
     // Setting 'to' to 'from' + 1h.
     $scope.to.value = new Date($scope.from.value.getTime() + (3600 * 1000));
 
-    $scope.donationValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20];
-    $scope.nportionsValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    $scope.donationValues = [1, 2, 3, 4, 5];
+    $scope.nportionsValues = [1, 2, 3, 4, 5, 6, 7, 8];
 
     // Load the dish info.
     if (id) {
