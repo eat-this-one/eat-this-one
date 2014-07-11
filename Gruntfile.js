@@ -218,7 +218,7 @@ module.exports = function(grunt) {
     // Executable tasks.
     // TODO Generate non compressed version in build:dev.
     grunt.registerTask("build:prod", [ "clean:build", "copy:resources", "uglify", "less", "cssmin", "jade:compile", "copy:build" ]);
-    grunt.registerTask("build:dev", [ "clean:build", "copy:resources", "uglify", "less", "cssmin", "jade:compile", "copy:build", "shell:deploy_app" ]);
+    grunt.registerTask("build:dev", [ "clean:build", "copy:resources", "uglify", "less", "cssmin", "jade:compile", "copy:build" ]);
 
     // While developing monitor the changes. 
     grunt.registerTask("run:dev", [ "build:dev", "karma", "concurrent" ]);
