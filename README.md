@@ -38,9 +38,12 @@ Eat-this-one source code includes both backend, frontend and development tools.
 * App development setup
 **cordova create dist/app $PROJECT_NAME YOUR.REVERSE.DOMAIN YOUR_PROJECT_DISPLAY_NAME --save-copy=public/shared-build**
 ** **cd dist/app**
-**cordova platform add android**
+** **cordova platform add android**
+** Install required plugins
+*** **cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-globalization.git**
 ** Edit dist/app/config.xml
-** Edit dist/app/platforms/AndroidManifest.xml if necessary
+** Edit dist/app/platforms/AndroidManifest.xml
+*** Set android:debuggable="true" in <application> node
 
 ==Android SDK (if you want to generate the app).
 
@@ -94,11 +97,14 @@ Eat-this-one source code includes both backend, frontend and development tools.
 
 * Using emulator
 ** /path/to/sdk/tool/android avd to create an emulator if you don't have a real device
-** Run cordova to build and deploy the app in an emulator
-*** cordova emulate
+** The app is autodeployed when saving
+
+* Using an emulator (not sure if it will be all ok, I use a real device)
+** Set an AVD http://developer.android.com/tools/devices/emulator.html
+** **cd dist/app ; cordova emulate**
 * Using a real device
-** Configure the http://developer.android.com/tools/device.html
-** Run cordova to build the app in the real device
-*** cordova run
+** Configure the device http://developer.android.com/tools/device.html
+** **cd /your/adt-path/sdk/platform-tools ; sudo ./adb devices**
+** **cd dist/app ; cordova run**
 * Consider that you will need to access the backend through the app; you can use the IP rather than localhost
 ** http://developer.android.com/tools/devices/emulator.html#networkaddresses

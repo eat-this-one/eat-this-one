@@ -16,7 +16,7 @@ to avoid possible problems with concurrency, positioning...
 ---------------------------------------------------------------
 
 
-ENTITIES AND RELATIONS
+ENTITIES & RELATIONS
 ----------------------
 
 user (may change)
