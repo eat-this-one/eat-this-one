@@ -9,6 +9,14 @@ var TokenModel = require('../models/token.js').model;
 var LocationModel = require('../models/location.js').model;
 
 // TODO: Refine error messages
+var dishProps = {
+    'name' : 'required',
+    'description' : 'no',
+    'from' : 'required',
+    'to' : 'required',
+    'nportions' : 'required',
+    'donation' : 'required'
+};
 
 // GET - Dishes list.
 router.get('/', function(req, res) {
@@ -33,21 +41,27 @@ router.get('/:id', function(req, res) {
             console.log(error);
             res.send("Dish '" + id + "' not found. " + error);
         }
-        res.statusCode = 200;
-        res.send(dish);
+
+        LocationModel.findById(dish.locationid, function(error, locationInstance) {
+            if (error) {
+                console.log(error);
+                res.send("Dish '" + id + '" location not found. ' + error);
+            }
+
+            var returnDish = {};
+            for (var prop in dishProps) {
+                returnDish[prop] = dish[prop];
+            }
+            returnDish.loc = locationInstance.name;
+            returnDish.address = locationInstance.address;
+            res.statusCode = 200;
+            res.send(returnDish);
+        });
     });
 });
 
 // POST - Create a dish.
 router.post('/', function(req, res) {
-    var dishProps = {
-        'name' : 'required',
-        'description' : 'no',
-        'from' : 'required',
-        'to' : 'required', 
-        'nportions' : 'required',
-        'donation' : 'required'
-    };
 
     if (typeof req.param('token') === 'undefined') {
         // TODO Review statusCode
