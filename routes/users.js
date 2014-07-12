@@ -97,6 +97,7 @@ router.put('/:id', function(req, res) {
             }
         }
 
+        user.modified = new Date();
         user.save(function(error) {
             if (error) {
                 console.log(error);
