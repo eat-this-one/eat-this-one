@@ -65,7 +65,7 @@ router.post('/', function(req, res) {
     var missing = [];
     for (var prop in locationProps) {
 
-        if (locationProps[prop] === 'required' && typeof req.param(prop) === 'undefined') {
+        if (locationProps[prop] === 'required' && req.param(prop) === null) {
             missing[prop] = prop;
             continue;
         }

@@ -10,8 +10,8 @@ var TokenModel = require('../models/token.js').model;
 // POST - Login an user.
 router.post('/', function(req, res) {
 
-    if (typeof req.param('email') === 'undefined' ||
-            typeof req.param('password') === 'undefined') {
+    if (req.param('email') === null ||
+            req.param('password') === null) {
         res.statusCode = 400;
         res.send('Missing parameters');
     }

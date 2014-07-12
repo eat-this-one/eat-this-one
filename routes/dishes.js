@@ -64,7 +64,7 @@ router.get('/:id', function(req, res) {
 // POST - Create a dish.
 router.post('/', function(req, res) {
 
-    if (typeof req.param('token') === 'undefined') {
+    if (req.param('token') === null) {
         res.statusCode = 401;
         res.send('Wrong credentials');
     }
@@ -73,7 +73,7 @@ router.post('/', function(req, res) {
     var missing = [];
     for (var prop in dishProps) {
 
-        if (dishProps[prop] === 'required' && typeof req.param(prop) === 'undefined') {
+        if (dishProps[prop] === 'required' && req.param(prop) === null) {
             missing[prop] = prop;
             continue;
         }

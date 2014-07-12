@@ -37,12 +37,12 @@ router.get('/:id', function(req, res) {
 // POST - Create a meal.
 router.post('/', function(req, res) {
 
-    if (typeof req.param('dishid') === 'undefined') {
+    if (req.param('dishid') === null) {
         res.statusCode = 400;
         res.send("Missing params, can not add meal");
     }
 
-    if (typeof req.param('token') === 'undefined') {
+    if (req.param('token') === null) {
         res.statusCode = 401;
         res.send('Wrong credentials');
     }
