@@ -8,7 +8,6 @@ var DishModel = require('../models/dish.js').model;
 var TokenModel = require('../models/token.js').model;
 var LocationModel = require('../models/location.js').model;
 
-// TODO: Refine error messages
 var dishProps = {
     'name' : 'required',
     'description' : 'no',
@@ -23,8 +22,8 @@ router.get('/', function(req, res) {
 
     DishModel.find(function(error, dishes) {
         if (error) {
-            console.log(error);
-            res.send("No dishes." + error);
+            res.statusCode = 500;
+            res.send("Error getting dishes: " + error);
         }
         res.statusCode = 200;
         res.send(dishes);
@@ -38,14 +37,15 @@ router.get('/:id', function(req, res) {
 
     DishModel.findById(id, function(error, dish) {
         if (error) {
-            console.log(error);
-            res.send("Dish '" + id + "' not found. " + error);
+            res.statusCode = 500;
+            res.send("Error getting '" + id + "' dish: " + error);
         }
 
+        // We attach location data.
         LocationModel.findById(dish.locationid, function(error, locationInstance) {
             if (error) {
                 console.log(error);
-                res.send("Dish '" + id + '" location not found. ' + error);
+                res.send("Error getting '" + id + "' dish location: " + error);
             }
 
             var returnDish = {};
@@ -54,6 +54,7 @@ router.get('/:id', function(req, res) {
             }
             returnDish.loc = locationInstance.name;
             returnDish.address = locationInstance.address;
+
             res.statusCode = 200;
             res.send(returnDish);
         });
@@ -64,7 +65,6 @@ router.get('/:id', function(req, res) {
 router.post('/', function(req, res) {
 
     if (typeof req.param('token') === 'undefined') {
-        // TODO Review statusCode
         res.statusCode = 401;
         res.send('Wrong credentials');
     }
@@ -88,10 +88,9 @@ router.post('/', function(req, res) {
     // Getting userid from the token.
     TokenModel.findOne({token: req.param('token')}, function(error, token) {
 
-        // TODO Review status codes here getting the token.
         if (error) {
-            res.statusCode = 401;
-            res.send('Wrong credentials');
+            res.statusCode = 500;
+            res.send('Error getting the token: ' + error);
         }
 
         if (token === null) {
@@ -111,10 +110,10 @@ router.post('/', function(req, res) {
 
             if (error) {
                 res.statusCode = 500;
-                res.send('Error getting location');
+                res.send('Error getting location: ' + error);
             }
 
-            // TODO Just make it work and we will do it properly later.
+            // Create the location if it does not exist.
             if (locationInstance === null) {
 
                 // We need the address then.
@@ -128,47 +127,44 @@ router.post('/', function(req, res) {
                     name: req.param('loc'),
                     address: req.param('address')
                 });
+
+                // Save location.
                 locationInstance.save(function(error) {
                     if (error) {
                         res.statusCode = 500;
-                        res.send('Can not save location ' + req.param('loc'));
+                        res.send('Error saving location: ' + error);
                     }
-                });
 
-                // KILL THIS COPY & PASTE.
-                dish.locationid = locationInstance.id;
-                dish.save(function(error) {
-                    if (error) {
-                        console.log(error);
-                        res.statusCode = 400;
-                        res.send("Can not save dish " + req.param('name'));
-                    }
-                });
+                    // Save dish.
+                    dish.locationid = locationInstance.id;
+                    dish.save(function(error) {
+                        if (error) {
+                            console.log(error);
+                            res.statusCode = 500;
+                            res.send("Error saving dish: " + error);
+                        }
+                    });
 
-                // Same output for all output formats.
-                res.statusCode = 201;
-                res.send(dish);
-                // FINISH KILL THIS COPY & PASTE.
+                    // Same output for all output formats.
+                    res.statusCode = 201;
+                    res.send(dish);
+                });
             }
 
             dish.locationid = locationInstance.id;
             dish.save(function(error) {
                 if (error) {
-                    console.log(error);
-                    res.statusCode = 400;
-                    res.send("Can not save dish " + req.param('name'));
+                    res.statusCode = 500;
+                    res.send("Error saving dish: " + error);
                 }
             });
 
-            // Same output for all output formats.
             res.statusCode = 201;
             res.send(dish);
-
         });
     });
 });
 
-// PUT - Update a dish.
 router.put('/:id', function(req, res) {
     res.send("Not supported");
 });

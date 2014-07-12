@@ -9,7 +9,7 @@ var LocationModel = require('../models/location.js').model;
 // GET - Locations list.
 router.get('/', function(req, res) {
 
-    // Here we accept filters
+    // Here we accept filters.
     var filter = {};
     if (req.param('name') || req.param('address')) {
         if (req.param('name')) {
@@ -30,8 +30,8 @@ router.get('/', function(req, res) {
 
     LocationModel.find(filter, function(error, locations) {
         if (error) {
-            console.log(error);
-            res.send("No locations." + error);
+            res.statusCode = 500;
+            res.send("Error getting location: " + error);
         }
         res.statusCode = 200;
         res.send(locations);
@@ -45,8 +45,8 @@ router.get('/:id', function(req, res) {
 
     LocationModel.findById(id, function(error, loc) {
         if (error) {
-            console.log(error);
-            res.send("Location '" + id + "' not found. " + error);
+            res.statusCode = 500;
+            res.send("Error getting '" + id + "' location: " + error);
         }
         res.statusCode = 200;
         res.send(loc);
@@ -80,8 +80,8 @@ router.post('/', function(req, res) {
     TokenModel.findOne({token: req.param('token')}, function(error, token) {
 
         if (error) {
-            res.statusCode = 401;
-            res.send('Wrong credentials');
+            res.statusCode = 500;
+            res.send('Error getting token: ' + error);
         }
 
         if (token === null) {
@@ -95,21 +95,27 @@ router.post('/', function(req, res) {
         var locationInstance = new LocationModel(locationObj);
         locationInstance.save(function(error) {
             if (error) {
-                console.log(error);
-                res.statusCode = 400;
-                res.send("Can not save location " + req.param('name'));
+                res.statusCode = 500;
+                res.send("Error saving location: " + error);
             }
-        });
 
-        // Now we auto-subscribe the user to that location.
-        var locationSubscriptionInstance = new LocationSubscriptionModel({
-            userid: token.userid,
-            locationid: locationInstance.id
-        });
+            // Now we auto-subscribe the user to that location.
+            var locationSubscriptionInstance = new LocationSubscriptionModel({
+                userid: token.userid,
+                locationid: locationInstance.id
+            });
+            locationSubscriptionInstance.save(function(error) {
+                if (error) {
+                    res.statusCode = 500;
+                    res.send("Error saving location subscription: " + error);
+                }
 
-        // Same output for all output formats.
-        res.statusCode = 201;
-        res.send(locationInstance);
+                // Same output for all output formats.
+                res.statusCode = 201;
+                res.send(locationInstance);
+            });
+
+        });
     });
 });
 

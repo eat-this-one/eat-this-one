@@ -6,16 +6,13 @@ var router = express.Router();
 // Required models.
 var MealModel = require('../models/meal.js').model;
 
-// TODO: Refine returned HTTP exit codes
-// TODO: Refine error messages
-
 // GET - Meals list.
 router.get('/', function(req, res) {
 
     MealModel.find(function(error, meals) {
         if (error) {
-            console.log(error);
-            res.send("No meals." + error);
+            res.statusCode = 500;
+            res.send("Error getting meals: " + error);
         }
         res.statusCode = 200;
         res.send(meals);
@@ -29,8 +26,8 @@ router.get('/:id', function(req, res) {
 
     MealModel.findById(id, function(error, meal) {
         if (error) {
-            console.log(error);
-            res.send("Meal '" + id + "' not found. " + error);
+            res.statusCode = 500;
+            res.send("Error getting '" + id + "' meal: " + error);
         }
         res.statusCode = 200;
         res.send(meal);
@@ -46,7 +43,6 @@ router.post('/', function(req, res) {
     }
 
     if (typeof req.param('token') === 'undefined') {
-        // TODO Review statusCode
         res.statusCode = 401;
         res.send('Wrong credentials');
     }
@@ -54,10 +50,9 @@ router.post('/', function(req, res) {
     // Getting userid from the token.
     TokenModel.findOne({token: req.param('token')}, function(error, token) {
 
-        // TODO Review status codes here getting the token.
         if (error) {
-            res.statusCode = 401;
-            res.send('Wrong credentials');
+            res.statusCode = 500;
+            res.send('Error getting token: ' + error);
         }
 
         if (token === null) {
@@ -74,15 +69,14 @@ router.post('/', function(req, res) {
 
         meal.save(function(error) {
             if (error) {
-                console.log(error);
-                res.statusCode = 400;
-                res.send("Can not save meal");
+                res.statusCode = 500;
+                res.send("Error saving meal: " + error);
             }
-        });
 
-        // Same output for all output formats.
-        res.statusCode = 200;
-        res.send(meal);
+            // Same output for all output formats.
+            res.statusCode = 200;
+            res.send(meal);
+        });
     });
 });
 

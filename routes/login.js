@@ -24,8 +24,8 @@ router.post('/', function(req, res) {
 
     UserModel.findOne(userdata, function(error, user) {
         if (error) {
-            res.statusCode = 401;
-            res.send('Wrong credentials');
+            res.statusCode = 500;
+            res.send('Error getting token: ' + error);
         }
 
         if (user === null) {
@@ -42,13 +42,13 @@ router.post('/', function(req, res) {
         var token = TokenModel(tokendata);
         token.save(function(error) {
             if (error) {
-                console.log(error);
-                res.statusCode = 503;
-                res.send('Can not generate token');
+                res.statusCode = 500;
+                res.send('Error creating token: ' + error);
             }
+
+            res.statusCode = 200;
+            res.send(token.token);
         });
-        res.statusCode = 200;
-        res.send(token.token);
     });
 });
 

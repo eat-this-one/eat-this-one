@@ -6,13 +6,19 @@ var router = express.Router();
 // Required models.
 var UserModel = require('../models/user.js').model;
 
+var userProps = {
+    'name' : 'required',
+    'email' : 'required',
+    'password' : 'required',
+};
+
 // GET - Users list.
 router.get('/', function(req, res) {
 
     UserModel.find(function(error, users) {
         if (error) {
-            console.log(error);
-            res.send("No users." + error);
+            res.statusCode = 500;
+            res.send("Error getting users: " + error);
         }
         res.statusCode = 200;
         res.send(users);
@@ -26,8 +32,8 @@ router.get('/:id', function(req, res) {
 
     UserModel.findById(id, function(error, user) {
         if (error) {
-            console.log(error);
-            res.send("User '" + id + "' not found. " + error);
+            res.statusCode = 500;
+            res.send("Error getting '" + id + "' user: " + error);
         }
         res.statusCode = 200;
         res.send(user);
@@ -36,11 +42,6 @@ router.get('/:id', function(req, res) {
 
 // POST - Create an user.
 router.post('/', function(req, res) {
-    var userProps = {
-        'name' : 'required',
-        'email' : 'required',
-        'password' : 'required',
-    };
 
     var userObj = {};
     var missing = [];
@@ -61,35 +62,46 @@ router.post('/', function(req, res) {
 
     user.save(function(error) {
         if (error) {
-            console.log(error);
-            res.statusCode = 400;
-            res.send("Can not save user " + req.param('name'));
+            res.statusCode = 500;
+            res.send("Error saving user: " + error);
         }
+
+        // Same output for all output formats.
+        res.statusCode = 201;
+        res.send(user);
     });
 
-    // Same output for all output formats.
-    res.statusCode = 201;
-    res.send(user);
 });
 
 // PUT - Update a user.
 router.put('/:id', function(req, res) {
+
     var id = req.param('id');
+
     UserModel.findById(id, function(error, user) {
 
         if (error) {
-            console.log(error);
-            res.statusCode = 400;
-            req.send("Wrong user id");
+            res.statusCode = 500;
+            req.send("Error getting user '" + id + "': " + error);
         }
 
-        // TODO Read req.params to update.
- 
+        // Updating with PUT data.
+        for (var prop in userProps) {
+            if (req.param(prop) !== null) {
+                user[prop] = req.param(prop);
+
+                // TODO Encrypt password.
+                if (prop === 'password') {
+                    user[prop] = user[prop];
+                }
+            }
+        }
+
         user.save(function(error) {
             if (error) {
                 console.log(error);
-                res.statusCode = 400;
-                res.send("Can not update user");
+                res.statusCode = 500;
+                res.send("Error saving user: " + error);
             }
         });
     });
