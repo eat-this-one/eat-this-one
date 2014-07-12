@@ -8,6 +8,7 @@ public/bower_components/
 
 # Config-dependant files.
 config.json
+development.properties
 
 # Compiled packages.
 public/shared-build/

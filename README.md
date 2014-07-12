@@ -45,7 +45,7 @@ Eat-this-one source code includes both backend, frontend and development tools.
 ** Edit dist/app/platforms/AndroidManifest.xml
 *** Set android:debuggable="true" in <application> node
 
-==Android SDK (if you want to generate the app).
+==Android SDK (if you want to generate the app)==
 
 * Download SDK: http://developer.android.com/sdk/index.html
 
@@ -55,7 +55,11 @@ Eat-this-one source code includes both backend, frontend and development tools.
 * Configure your MondoDB database (Backend).
 ** **cp config.json.dist config.json**
 
-* Configure your frontend pointing to the backend URL (Frontend).
+* Configure your Android development tools path
+** **cp development.properties.dist development.properties**
+** Edit development.properties with your own values
+
+* Configure your frontend pointing to the backend URL if it is different from the default one.
 ** **public/javascripts/shared/eatConfig.js**
 
 * Create a virtual host to point to your dist/web dir.
@@ -72,7 +76,7 @@ Eat-this-one source code includes both backend, frontend and development tools.
 =Development=
 
 * Start development monitor
-** **grunt run:dev**
+** ./init_development.sh
 * Frontend URL
 ** http://YOURHOSTNAME
 * Backend server URL (IP better than localhost to deploy app in mobile)
@@ -104,7 +108,7 @@ Eat-this-one source code includes both backend, frontend and development tools.
 ** **cd dist/app ; cordova emulate**
 * Using a real device
 ** Configure the device http://developer.android.com/tools/device.html
-** **cd /your/adt-path/sdk/platform-tools ; sudo ./adb devices**
+** **sudo ./adb devices**
 ** **cd dist/app ; cordova run**
 * Consider that you will need to access the backend through the app; you can use the IP rather than localhost
 ** http://developer.android.com/tools/devices/emulator.html#networkaddresses
