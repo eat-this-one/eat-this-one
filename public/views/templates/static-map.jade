@@ -3,6 +3,6 @@ div(class='modal-header')
         span(aria-hidden='true') &times;
         span(class='sr-only')
         {{lang.close}}
-    h3(class='modal-title') {{dish.name}} - {{dish.where}}
+    h3(class='modal-title') {{dish.loc}} - {{dish.address}}
 div(class='modal-body text-center')
     img(ng-src='{{dish.map}}')
