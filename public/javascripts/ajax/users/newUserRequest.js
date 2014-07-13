@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('newUserRequest', ['appStatus', 'notifier', 'eatConfig', function(appStatus, notifier, eatConfig) {
+    .factory('newUserRequest', ['appStatus', 'notifier', 'eatConfig', 'authManager', 'sessionManager', function(appStatus, notifier, eatConfig, authManager, sessionManager) {
 
     return function($scope, $modalInstance, name, email, password) {
 
@@ -17,7 +17,11 @@ angular.module('eat-this-one')
                 var msg = 'Account successfully created';
                 notifier.show(msg, 'success');
                 appStatus.completed();
+
                 $modalInstance.close(true);
+
+                authManager.authenticate();
+                sessionManager.setToken(data.token);
             },
             error : function(data, errorStatus, errorMsg) {
                 notifier.show(errorMsg, 'error');
