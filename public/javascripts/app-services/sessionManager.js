@@ -34,8 +34,12 @@ angular.module('eat-this-one')
             });
         },
 
-        setToken : function(authToken) {
-            localStorage.setItem('token', authToken);
+        setUser : function(userData) {
+
+            // Separating sensitive data from non-sensitive.
+            localStorage.setItem('token', userData.token);
+            delete userData.token;
+            localStorage.setItem('user', JSON.stringify(userData));
         },
 
         getToken : function() {

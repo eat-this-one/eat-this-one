@@ -22,8 +22,11 @@ angular.module('eat-this-one')
 
         },
 
-        setToken : function(authToken) {
-            sessionStorage.setItem('token', authToken);
+        setUser : function(userData) {
+            // Separating sensitive data from non-sensitive.
+            sessionStorage.setItem('token', userData.token);
+            delete userData.token;
+            sessionStorage.setItem('user', JSON.stringify(userData));
         },
 
         getToken : function() {

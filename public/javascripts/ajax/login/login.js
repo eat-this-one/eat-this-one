@@ -20,7 +20,7 @@ angular.module('eat-this-one')
                 $modalInstance.close(true);
 
                 authManager.authenticate();
-                sessionManager.setToken(data);
+                sessionManager.setUser(data);
             },
             error : function(data, errorStatus, errorMsg) {
                 notifier.show(errorMsg, 'error');
