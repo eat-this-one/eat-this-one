@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-var debug = require('debug')('wedding-manager');
+var debug = require('debug');
 var nconf = require('nconf');
 var app = require('../app');
 

@@ -2,8 +2,7 @@
 
 set -e
 
-# Load config
-. ./development.properties
+# ADT should already be in $PATH.
+sudo adb devices
 
-sudo $ADT_PATH/sdk/platform-tools/adb devices
 grunt run:dev
