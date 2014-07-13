@@ -5,15 +5,22 @@ block content
 
         include top
 
-        blockquote
-            p
-                {{lang.introinfo}}
+        div(ng-if='!auth.isAuthenticated()')
+            blockquote
+                p
+                    {{lang.infowelcome}}
+            eat-login-buttons(lang='loginButtonsLangStrings')
 
-        form(role='form')
-            eat-input-text(element='where')
+        div(ng-if='auth.isAuthenticated()')
+            blockquote
+                p
+                    {{lang.infoindex}}
 
-            eat-datetime(element='when')
-            button(type='button', name='search', ng-click='searchDish()', class='btn btn-primary') {{lang.searchdish}}
-            button(type='button', name='add', ng-click='addDish()', class='btn btn-primary') {{lang.adddish}}
+            form(role='form')
+                eat-input-text(element='where')
+
+                eat-datetime(element='when')
+                button(type='button', name='search', ng-click='searchDish()', class='btn btn-primary') {{lang.searchdish}}
+                button(type='button', name='add', ng-click='addDish()', class='btn btn-primary') {{lang.adddish}}
 
 include footer

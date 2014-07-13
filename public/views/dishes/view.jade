@@ -19,6 +19,6 @@ block content
             p {{dish.donation | currency}}
         div(ng-if='auth.isAuthenticated()')
             button(type='button', name='meal', ng-click='addMeal()', class='btn btn-primary') {{lang.addmeal}}
-        eat-login-buttons
+        eat-login-buttons(lang='loginButtonsLangStrings')
 
 include ../footer

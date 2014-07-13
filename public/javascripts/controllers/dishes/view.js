@@ -5,6 +5,11 @@ angular.module('eat-this-one')
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
 
+    $scope.loginButtonsLangStrings = {
+        signin : $scope.lang.signintoorder,
+        signup : $scope.lang.signuptoorder
+    };
+
     $scope.meal = {};
     $scope.dish = {};
 

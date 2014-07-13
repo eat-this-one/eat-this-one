@@ -30,7 +30,7 @@ block content
 
             div(ng-if='auth.isAuthenticated()')
                 input(type='submit', ng-click='save()', class='btn btn-primary', value='{{lang.savechanges}}')
-            eat-login-buttons
+            eat-login-buttons(lang='loginButtonsLangStrings')
 
 
     include ../footer

@@ -5,6 +5,11 @@ angular.module('eat-this-one')
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
 
+    $scope.loginButtonsLangStrings = {
+        signin : $scope.lang.signintoadd,
+        signup : $scope.lang.signuptoadd
+    };
+
     $scope.dish = {};
 
     // Declare form fields.
@@ -83,7 +88,7 @@ angular.module('eat-this-one')
 
     $scope.save = function() {
 
-        // TODO Probably some dish cleaning will be required.
+        // Dish obj cleaning delegated to backend.
         var fields = [
             'name', 'description', 'loc', 'address',
             'from', 'to', 'nportions', 'donation'];

@@ -1,7 +1,13 @@
-angular.module('eat-this-one').controller('IndexController', ['$scope', '$window', 'eatConfig', function($scope, $window, eatConfig) {
+angular.module('eat-this-one').controller('IndexController', ['$scope', '$window', 'eatConfig', 'authManager', function($scope, $window, eatConfig, authManager) {
 
     $scope.pageTitle = 'Eat-this-one';
     $scope.lang = $.eatLang.lang;
+    $scope.auth = authManager;
+
+    $scope.loginButtonsLangStrings = {
+        signin : $scope.lang.signin,
+        signup : $scope.lang.signup
+    };
 
     // Defines elements.
     $scope.where = {
