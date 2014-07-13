@@ -11,7 +11,7 @@ var mongoose = require('mongoose');
 nconf.argv().env().file({file: path.join(__dirname, '/config.json')});
 
 // Check that the required configuration is present.
-var requiredConfig = ['DB_HOST', 'DB_PORT', 'DB_NAME'];
+var requiredConfig = ['DB_URI'];
 requiredConfig.forEach(function(key) {
     if (nconf.get(key) == null) {
         throw new Error(key + ' is not defined. Ensure that you set it in config.json');
@@ -19,12 +19,7 @@ requiredConfig.forEach(function(key) {
 });
 
 // Persistence layer connection.
-mongoose.connect(
-    'mongodb://' +
-    nconf.get('DB_HOST') + ':' +
-    nconf.get('DB_PORT') + '/' +
-    nconf.get('DB_NAME')
-);
+mongoose.connect(nconf.get('DB_URI'));
 
 // Init the app.
 var app = express();

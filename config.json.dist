@@ -1,7 +1,5 @@
 {
-    "DB_HOST": "localhost",
-    "DB_PORT": "27017",
-    "DB_NAME": "eat-this-one",
+    "DB_URI": "mongodb://localhost:27017/eat-this-one",
     "APP_PORT": "3000",
     "PWD_SALT": "asd"
 }
