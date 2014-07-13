@@ -32,6 +32,7 @@ router.get('/', function(req, res) {
         if (error) {
             res.statusCode = 500;
             res.send("Error getting location: " + error);
+            return;
         }
         res.statusCode = 200;
         res.send(locations);
@@ -47,6 +48,7 @@ router.get('/:id', function(req, res) {
         if (error) {
             res.statusCode = 500;
             res.send("Error getting '" + id + "' location: " + error);
+            return;
         }
         res.statusCode = 200;
         res.send(loc);
@@ -75,6 +77,7 @@ router.post('/', function(req, res) {
     if (missing.length > 0) {
         res.statusCode = 400;
         res.send("Missing params, can not create location");
+        return;
     }
 
     TokenModel.findOne({token: req.param('token')}, function(error, token) {
@@ -82,11 +85,13 @@ router.post('/', function(req, res) {
         if (error) {
             res.statusCode = 500;
             res.send('Error getting token: ' + error);
+            return;
         }
 
-        if (token === null) {
+        if (!token) {
             res.statuscode = 401;
             res.send('Wrong credentials');
+            return;
         }
 
         // Setting the userid from the token.
@@ -97,6 +102,7 @@ router.post('/', function(req, res) {
             if (error) {
                 res.statusCode = 500;
                 res.send("Error saving location: " + error);
+                return;
             }
 
             // Now we auto-subscribe the user to that location.
@@ -108,6 +114,7 @@ router.post('/', function(req, res) {
                 if (error) {
                     res.statusCode = 500;
                     res.send("Error saving location subscription: " + error);
+                    return;
                 }
 
                 // Same output for all output formats.

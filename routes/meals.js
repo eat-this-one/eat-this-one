@@ -13,6 +13,7 @@ router.get('/', function(req, res) {
         if (error) {
             res.statusCode = 500;
             res.send("Error getting meals: " + error);
+            return;
         }
         res.statusCode = 200;
         res.send(meals);
@@ -28,6 +29,7 @@ router.get('/:id', function(req, res) {
         if (error) {
             res.statusCode = 500;
             res.send("Error getting '" + id + "' meal: " + error);
+            return;
         }
         res.statusCode = 200;
         res.send(meal);
@@ -40,11 +42,13 @@ router.post('/', function(req, res) {
     if (req.param('dishid') === null) {
         res.statusCode = 400;
         res.send("Missing params, can not add meal");
+        return;
     }
 
     if (req.param('token') === null) {
         res.statusCode = 401;
         res.send('Wrong credentials');
+        return;
     }
 
     // Getting userid from the token.
@@ -53,11 +57,13 @@ router.post('/', function(req, res) {
         if (error) {
             res.statusCode = 500;
             res.send('Error getting token: ' + error);
+            return;
         }
 
-        if (token === null) {
+        if (!token) {
             res.statusCode = 401;
             res.send('Wrong credentials');
+            return;
         }
 
         var meal = new MealModel({
@@ -71,6 +77,7 @@ router.post('/', function(req, res) {
             if (error) {
                 res.statusCode = 500;
                 res.send("Error saving meal: " + error);
+                return;
             }
 
             // Same output for all output formats.

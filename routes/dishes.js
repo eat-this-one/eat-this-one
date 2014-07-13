@@ -24,6 +24,7 @@ router.get('/', function(req, res) {
         if (error) {
             res.statusCode = 500;
             res.send("Error getting dishes: " + error);
+            return;
         }
         res.statusCode = 200;
         res.send(dishes);
@@ -39,13 +40,21 @@ router.get('/:id', function(req, res) {
         if (error) {
             res.statusCode = 500;
             res.send("Error getting '" + id + "' dish: " + error);
+            return;
+        }
+
+        if (!dish) {
+            res.statusCode = 400;
+            res.send("This dish does not exist");
+            return;
         }
 
         // We attach location data.
         LocationModel.findById(dish.locationid, function(error, locationInstance) {
             if (error) {
-                console.log(error);
+                res.statusCode = 500;
                 res.send("Error getting '" + id + "' dish location: " + error);
+                return;
             }
 
             var returnDish = {};
@@ -67,6 +76,7 @@ router.post('/', function(req, res) {
     if (req.param('token') === null) {
         res.statusCode = 401;
         res.send('Wrong credentials');
+        return;
     }
 
     var dishObj = {};
@@ -83,6 +93,7 @@ router.post('/', function(req, res) {
     if (missing.length > 0 || req.param('loc') === null) {
         res.statusCode = 400;
         res.send("Missing params, can not create dish");
+        return;
     }
 
     // Getting userid from the token.
@@ -91,11 +102,13 @@ router.post('/', function(req, res) {
         if (error) {
             res.statusCode = 500;
             res.send('Error getting the token: ' + error);
+            return;
         }
 
-        if (token === null) {
+        if (!token) {
             res.statusCode = 401;
             res.send('Wrong credentials');
+            return;
         }
 
         // Setting the userid from the token.
@@ -111,15 +124,18 @@ router.post('/', function(req, res) {
             if (error) {
                 res.statusCode = 500;
                 res.send('Error getting location: ' + error);
+                return;
             }
 
-            // Create the location if it does not exist.
-            if (locationInstance === null) {
+            if (!locationInstance) {
+
+                // Create the location if it does not exist.
 
                 // We need the address then.
                 if (req.param('address') === null) {
                     res.statusCode = 400;
                     res.send('Missing params, can not create location');
+                    return;
                 }
 
                 locationInstance = new LocationModel({
@@ -133,6 +149,7 @@ router.post('/', function(req, res) {
                     if (error) {
                         res.statusCode = 500;
                         res.send('Error saving location: ' + error);
+                        return;
                     }
 
                     // Save dish.
@@ -142,6 +159,7 @@ router.post('/', function(req, res) {
                             console.log(error);
                             res.statusCode = 500;
                             res.send("Error saving dish: " + error);
+                            return;
                         }
                     });
 
@@ -149,18 +167,23 @@ router.post('/', function(req, res) {
                     res.statusCode = 201;
                     res.send(dish);
                 });
+
+            } else {
+
+                // Using the existing location.
+
+                dish.locationid = locationInstance.id;
+                dish.save(function(error) {
+                    if (error) {
+                        res.statusCode = 500;
+                        res.send("Error saving dish: " + error);
+                        return;
+                    }
+                });
+
+                res.statusCode = 201;
+                res.send(dish);
             }
-
-            dish.locationid = locationInstance.id;
-            dish.save(function(error) {
-                if (error) {
-                    res.statusCode = 500;
-                    res.send("Error saving dish: " + error);
-                }
-            });
-
-            res.statusCode = 201;
-            res.send(dish);
         });
     });
 });

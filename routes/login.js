@@ -14,6 +14,7 @@ router.post('/', function(req, res) {
             req.param('password') === null) {
         res.statusCode = 400;
         res.send('Missing parameters');
+        return;
     }
 
     // TODO Encrypt password and save encrypted too
@@ -26,11 +27,13 @@ router.post('/', function(req, res) {
         if (error) {
             res.statusCode = 500;
             res.send('Error getting token: ' + error);
+            return;
         }
 
-        if (user === null) {
+        if (!user) {
             res.statusCode = 401;
             res.send('Wrong credentials');
+            return;
         }
 
         // TODO algorithm to generate token.
@@ -44,6 +47,7 @@ router.post('/', function(req, res) {
             if (error) {
                 res.statusCode = 500;
                 res.send('Error creating token: ' + error);
+                return;
             }
 
             res.statusCode = 200;

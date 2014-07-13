@@ -19,6 +19,7 @@ router.get('/', function(req, res) {
         if (error) {
             res.statusCode = 500;
             res.send("Error getting users: " + error);
+            return;
         }
         res.statusCode = 200;
         res.send(users);
@@ -30,10 +31,13 @@ router.get('/:id', function(req, res) {
 
     var id = req.param('id');
 
+    // TODO We should require a valid token here.
+
     UserModel.findById(id, function(error, user) {
         if (error) {
             res.statusCode = 500;
             res.send("Error getting '" + id + "' user: " + error);
+            return;
         }
         res.statusCode = 200;
         res.send(user);
@@ -57,6 +61,7 @@ router.post('/', function(req, res) {
     if (missing.length > 0) {
         res.statusCode = 400;
         res.send("Missing params, can not create user");
+        return;
     }
     var user = new UserModel(userObj);
 
@@ -64,6 +69,7 @@ router.post('/', function(req, res) {
         if (error) {
             res.statusCode = 500;
             res.send("Error saving user: " + error);
+            return;
         }
 
         // Same output for all output formats.
@@ -83,6 +89,7 @@ router.put('/:id', function(req, res) {
         if (error) {
             res.statusCode = 500;
             req.send("Error getting user '" + id + "': " + error);
+            return;
         }
 
         // Updating with PUT data.
@@ -103,6 +110,7 @@ router.put('/:id', function(req, res) {
                 console.log(error);
                 res.statusCode = 500;
                 res.send("Error saving user: " + error);
+                return;
             }
         });
     });
