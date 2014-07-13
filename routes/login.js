@@ -1,6 +1,8 @@
 var express = require('express');
 var mongoose = require('mongoose');
 
+var encrypt = require('../lib/encrypt.js');
+
 var router = express.Router();
 
 // Required models.
@@ -17,10 +19,12 @@ router.post('/', function(req, res) {
         return;
     }
 
-    // TODO Encrypt password and save encrypted too
+    // Encrypt password and save encrypted too.
+    var password = encrypt.APassword(req.param('password'));
+
     var userdata = {
         email : req.param('email'),
-        password : req.param('password')
+        password : password
     };
 
     UserModel.findOne(userdata, function(error, user) {
@@ -36,9 +40,11 @@ router.post('/', function(req, res) {
             return;
         }
 
-        // TODO algorithm to generate token.
+        // Generate random token.
+        var generatedToken = encrypt.AString();
+
         var tokendata = {
-            token : 'asdasd',
+            token : generatedToken,
             userid : user.id,
             expires : 0
         };

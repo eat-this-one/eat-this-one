@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-// TODO Add users to the app logic.
 var UserSchema = new Schema({
     email: { type: String, required: true},
     password: { type: String, required: true},

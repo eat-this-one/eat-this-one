@@ -1,6 +1,8 @@
 var express = require('express');
 var mongoose = require('mongoose');
 
+var encrypt = require('../lib/encrypt.js');
+
 var router = express.Router();
 
 // Required models.
@@ -63,6 +65,10 @@ router.post('/', function(req, res) {
         res.send("Missing params, can not create user");
         return;
     }
+
+    // Encrypt the provided password.
+    userObj.password = encrypt.APassword(userObj.password);
+
     var user = new UserModel(userObj);
 
     user.save(function(error) {
@@ -97,9 +103,8 @@ router.put('/:id', function(req, res) {
             if (req.param(prop) !== null) {
                 user[prop] = req.param(prop);
 
-                // TODO Encrypt password.
                 if (prop === 'password') {
-                    user[prop] = user[prop];
+                    user[prop] = encrypt.APassword(user[prop]);
                 }
             }
         }
