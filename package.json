@@ -2,6 +2,9 @@
   "name": "eat-this-one",
   "description": "Helping people who don't have time to cook to find people who cooks more than they should. This package includes the backend + both web and app (phonegap) clients generators.",
   "version": "0.0.1",
+  "engines": {
+      "node": "0.10.x"
+  },
   "main": "./app.js",
   "private": true,
   "scripts": {
