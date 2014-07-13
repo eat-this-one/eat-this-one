@@ -2,7 +2,8 @@ angular.module('eat-this-one').directive('eatLoginButtons', ['authManager', func
     return {
         restrict: 'E',
         scope: {
-            lang: '='
+            lang: '=',
+            auth: '='
         },
         templateUrl: 'templates/login-buttons.html'
     }

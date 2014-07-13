@@ -9,7 +9,7 @@ block content
             blockquote
                 p
                     {{lang.infowelcome}}
-            eat-login-buttons(lang='loginButtonsLangStrings')
+            eat-login-buttons(auth='auth', lang='loginButtonsLangStrings')
 
         div(ng-if='auth.isAuthenticated()')
             blockquote
