@@ -92,6 +92,7 @@ router.post('/', function(req, res) {
 
             // Add the token to the user object.
             var returnUser = {
+                id: user.id,
                 email: user.email,
                 name: user.name,
                 token: token.token

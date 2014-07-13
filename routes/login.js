@@ -51,8 +51,15 @@ router.post('/', function(req, res) {
                 return;
             }
 
+            var returnUser = {
+                id: user.id,
+                email: user.email,
+                name: user.name,
+                token: token.token
+            };
+
             res.statusCode = 200;
-            res.send(token.token);
+            res.send(returnUser);
         });
     });
 });
