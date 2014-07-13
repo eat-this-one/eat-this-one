@@ -5,6 +5,7 @@ var router = express.Router();
 
 // Required models.
 var MealModel = require('../models/meal.js').model;
+var TokenModel = require('../models/token.js').model;
 
 // GET - Meals list.
 router.get('/', function(req, res) {
@@ -67,7 +68,7 @@ router.post('/', function(req, res) {
         }
 
         var meal = new MealModel({
-            dishid : req.param('dish'),
+            dishid : req.param('dishid'),
             userid : token.userid
         });
 
