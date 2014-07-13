@@ -2,6 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 
 var encrypt = require('../lib/encrypt.js');
+var tokenManager = require('../lib/tokenManager.js');
 
 var router = express.Router();
 
@@ -41,14 +42,8 @@ router.post('/', function(req, res) {
         }
 
         // Generate random token.
-        var generatedToken = encrypt.AString();
-
-        var tokendata = {
-            token : generatedToken,
-            userid : user.id,
-            expires : 0
-        };
-        var token = TokenModel(tokendata);
+        var tokenData = tokenManager.new(user.id);
+        var token = TokenModel(tokenData);
         token.save(function(error) {
             if (error) {
                 res.statusCode = 500;

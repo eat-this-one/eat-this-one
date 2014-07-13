@@ -2,11 +2,13 @@ var express = require('express');
 var mongoose = require('mongoose');
 
 var encrypt = require('../lib/encrypt.js');
+var tokenManager = require('../lib/tokenManager.js');
 
 var router = express.Router();
 
 // Required models.
 var UserModel = require('../models/user.js').model;
+var TokenModel = require('../models/token.js').model;
 
 var userProps = {
     'name' : 'required',
@@ -78,9 +80,26 @@ router.post('/', function(req, res) {
             return;
         }
 
-        // Same output for all output formats.
-        res.statusCode = 201;
-        res.send(user);
+        // We auto-login the user.
+        var tokenData = tokenManager.new(user.id);
+        var token = TokenModel(tokenData);
+        token.save(function(error) {
+            if (error) {
+                res.statusCode = 500;
+                res.send('Error creating token: ' + error);
+                return;
+            }
+
+            // Add the token to the user object.
+            var returnUser = {
+                email: user.email,
+                name: user.name,
+                token: token.token
+            };
+
+            res.statusCode = 201;
+            res.send(returnUser);
+        });
     });
 
 });
