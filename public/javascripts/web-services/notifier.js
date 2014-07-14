@@ -19,11 +19,11 @@ angular.module('eat-this-one').factory('notifier', function() {
             $('#id-notification').html(msg);
             $('#id-notification').addClass(className);
 
-            $('#id-notification').fadeIn(2000);
+            $('#id-notification').fadeIn(1000);
 
             // We hide it in a few secs.
             setTimeout(function() {
-                $('#id-notification').fadeOut(2000);
+                $('#id-notification').fadeOut(1000);
 
                 // We need to wait until it completely fades out.
                 setTimeout(function() {
