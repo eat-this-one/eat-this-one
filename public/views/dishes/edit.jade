@@ -14,18 +14,9 @@ block content
             eat-location(loc='loc', address='address')
             eat-datetime(element='from')
             eat-datetime(element='to')
-            div(class='form-group')
-                label(for='id-nportions') {{nportions.label}}
-                select(name='nportions.name', id='id-nportions', ng-model='nportions.value', class='form-control')
-                    option(ng-repeat='i in nportionsValues', value='{{i}}') {{i}}
+            eat-select(element='nportions')
+            eat-select(element='donation')
 
-            div(class='form-group')
-                label(for='id-donation') {{donation.label}}
-                select(name='donation.name', id='id-donation', ng-model='donation.value', class='form-control')
-                    option(value='open') {{lang.open}}
-                    option(value='nothing') {{lang.nothing}}
-                    option(ng-repeat='i in donationValues', value='{{i}}') {{i | currency}}
-        
             input(type='hidden', name='currency', id='id-currency',  value='aud', ng-model='dish.currency')
 
             div(ng-if='auth.isAuthenticated()')

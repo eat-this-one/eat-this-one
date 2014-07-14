@@ -1,0 +1,5 @@
+// Uses public/javascript/directives/select.js
+div(class='form-group')
+    label(for='id-{{element.name}}') {{element.label}}
+    select(name='{{element.name}}', id='id-{{element.name}}', placeholder='{{element.placeholder}}', class='form-control', ng-model='element.value')
+        option(ng-repeat='option in element.options', value='{{option.value}}') {{option.text}}

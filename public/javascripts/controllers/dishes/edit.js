@@ -52,12 +52,32 @@ angular.module('eat-this-one')
     $scope.nportions = {
         name: 'nportions',
         label: $scope.lang.nportions,
-        value: 1
+        value: 1,
+        options: [
+            {text : 1, value : 1},
+            {text : 2, value : 2},
+            {text : 3, value : 3},
+            {text : 4, value : 4},
+            {text : 5, value : 5},
+            {text : 6, value : 6},
+            {text : 7, value : 7},
+            {text : 8, value : 8},
+        ]
     };
+
     $scope.donation = {
         name: 'donation',
         label: $scope.lang.expecteddonation,
-        value: ''
+        value: '',
+        options: [
+            {text : $scope.lang.open, value : 'open'},
+            {text : $scope.lang.nothing, value : 'nothing'},
+            {text : 1, value : 1},
+            {text : 2, value : 2},
+            {text : 3, value : 3},
+            {text : 4, value : 4},
+            {text : 5, value : 5}
+        ]
     };
 
     // Arguments.
@@ -76,9 +96,6 @@ angular.module('eat-this-one')
 
     // Setting 'to' to 'from' + 1h.
     $scope.to.value = new Date($scope.from.value.getTime() + (3600 * 1000));
-
-    $scope.donationValues = [1, 2, 3, 4, 5];
-    $scope.nportionsValues = [1, 2, 3, 4, 5, 6, 7, 8];
 
     // Load the dish info.
     if (id) {
