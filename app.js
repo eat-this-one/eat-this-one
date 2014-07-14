@@ -29,6 +29,7 @@ var index = require('./routes/index');
 var login = require('./routes/login');
 var users = require('./routes/users');
 var locations = require('./routes/locations');
+var locationSubscriptions = require('./routes/locationSubscriptions');
 var dishes = require('./routes/dishes');
 var meals = require('./routes/meals');
 
@@ -54,6 +55,7 @@ app.use('/api', index);
 app.use('/api/login', login);
 app.use('/api/users', users);
 app.use('/api/locations', locations);
+app.use('/api/location-subscriptions', locationSubscriptions);
 app.use('/api/dishes', dishes);
 app.use('/api/meals', meals);
 

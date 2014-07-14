@@ -4,7 +4,9 @@ var mongoose = require('mongoose');
 var router = express.Router();
 
 // Required models.
+var TokenModel = require('../models/token.js').model;
 var LocationModel = require('../models/location.js').model;
+var LocationSubscriptionModel = require('../models/locationSubscription.js').model;
 
 // GET - Locations list.
 router.get('/', function(req, res) {
