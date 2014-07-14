@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('newLocationSubscription', ['appStatus', 'notifier', 'eatConfig', 'sessionManager', function(appStatus, notifier, eatConfig, sessionManager) {
+    .factory('newLocationSubscriptionRequest', ['appStatus', 'notifier', 'eatConfig', 'sessionManager', function(appStatus, notifier, eatConfig, sessionManager) {
 
         return function($modalInstance, locationid) {
             $.ajax({

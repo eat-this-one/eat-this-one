@@ -1,4 +1,4 @@
-angular.module('eat-this-one').controller('locationSubscriptionPopupController', ['$scope', '$modalInstance', 'eatConfig', 'appStatus', 'newLocation', 'newLocationSubscription', function($scope, $modalInstance, eatConfig, appStatus, newLocation, newLocationSubscription) {
+angular.module('eat-this-one').controller('locationSubscriptionPopupController', ['$scope', '$modalInstance', 'eatConfig', 'appStatus', 'newLocationRequest', 'newLocationSubscriptionRequest', function($scope, $modalInstance, eatConfig, appStatus, newLocationRequest, newLocationSubscriptionRequest) {
 
     $scope.lang = $.eatLang.lang;
 
@@ -25,10 +25,10 @@ angular.module('eat-this-one').controller('locationSubscriptionPopupController',
 
         if ($scope.loc.locationid !== null) {
             // Only a subscription as the location already exists.
-            newLocationSubscription($modalInstance, $scope.loc.locationid);
+            newLocationSubscriptionRequest($modalInstance, $scope.loc.locationid);
         } else {
             // A new location including subscription.
-            newLocation($modalInstance, $scope.loc.value, $scope.address.value);
+            newLocationRequest($modalInstance, $scope.loc.value, $scope.address.value);
         }
     };
 
