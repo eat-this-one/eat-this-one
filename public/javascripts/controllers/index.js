@@ -33,6 +33,11 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', '$window
         $window.location.href = 'dishes/edit.html' + $scope.getParams();
     };
 
+    // Redirects to subscribe to a location.
+    $scope.subscribeLocation = function() {
+        $window.location.href = 'locations/index.html';
+    };
+
     // Gets the URL params.
     $scope.getParams = function() {
 

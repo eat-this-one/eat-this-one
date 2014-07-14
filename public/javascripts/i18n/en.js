@@ -1,6 +1,7 @@
 $.eatLang.en = {
 
     adddish : 'Add dish',
+    addlocation : 'Add location',
     addmeal : 'Add meal',
     address : 'Address',
     aud : 'Australian Dolars',
@@ -31,6 +32,7 @@ $.eatLang.en = {
     signup : 'Sign up',
     signuptoadd : 'Sign up to add a dish',
     signuptoorder : 'Sign up to order the meal',
+    subscribelocation : 'Add location',
     to : 'To',
     today : 'Today',
     tomorrow : 'Tomorrow',

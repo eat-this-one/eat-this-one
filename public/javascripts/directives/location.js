@@ -37,7 +37,7 @@ angular.module('eat-this-one').directive('eatLocation', ['$http', 'eatConfig', f
                     }
                 }).then(function(res) {
                     angular.forEach(res.data, function(item) {
-                        locations.push(item.name);
+                        locations.push(item);
                     });
                     return locations;
                 });
@@ -61,10 +61,12 @@ angular.module('eat-this-one').directive('eatLocation', ['$http', 'eatConfig', f
             // Runs when an existing location is selected.
             // Fills the address with the location address.
             scope.fillAddress = function($item, $model, $label) {
-                // TODO: Here we should assign location.address.
-                // We can try setting a key in locations[].
-                scope.address.value = $item;
+
+                scope.address.value = $item.address;
                 scope.disableAddress = true;
+
+                // We save the locationid.
+                scope.loc.locationid = $item._id;
             };
         },
         templateUrl: 'templates/location.html'

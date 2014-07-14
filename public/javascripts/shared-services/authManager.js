@@ -17,12 +17,12 @@ angular.module('eat-this-one').factory('authManager', ['$modal', function($modal
         // Opens the login pop up.
         openSignInPopup : function() {
 
-            var modalInstance = $modal.open({
+            var signInModal = $modal.open({
                 templateUrl : 'templates/sign-in-popup.html',
                 controller : 'signInPopupController'
             });
 
-            modalInstance.result.then(function (success) {
+            signInModal.result.then(function(success) {
                 authenticated = success;
             });
         },
@@ -30,12 +30,12 @@ angular.module('eat-this-one').factory('authManager', ['$modal', function($modal
         // Opens the pop up to sign up.
         openSignUpPopup : function() {
 
-            var modalInstance = $modal.open({
+            var signUpModal = $modal.open({
                 templateUrl : 'templates/sign-up-popup.html',
                 controller : 'signUpPopupController'
             });
 
-            modalInstance.result.then(function (success) {
+            signUpModal.result.then(function(success) {
                 authenticated = success;
             });
         }

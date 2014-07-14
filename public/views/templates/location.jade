@@ -1,6 +1,6 @@
 div(class='form-group')
     label(for='id-{{loc.name}}') {{loc.label}}
-    input(type='text', id='id-{{loc.name}}', name='{{loc.name}}', ng-model='loc.value', placeholder='{{loc.placeholder}}', typeahead='loc for loc in getLocations($viewValue)', typeahead-loading='loadingLocationNames', typeahead-on-select='fillAddress()', typeahead-min-length='2', class='form-control')
+    input(type='text', id='id-{{loc.name}}', name='{{loc.name}}', ng-model='loc.value', placeholder='{{loc.placeholder}}', typeahead='loc as loc.name for loc in getLocations($viewValue)', typeahead-loading='loadingLocationNames', typeahead-on-select='fillAddress($item, $model, $label)', typeahead-min-length='2', class='form-control')
     i(ng-show='loadingLocationNames', class='glyphicon glyphicon-refresh')
 
 div(class='form-group', ng-if='showAddress')

@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('newUserRequest', ['appStatus', 'notifier', 'eatConfig', 'authManager', 'sessionManager', function(appStatus, notifier, eatConfig, authManager, sessionManager) {
+    .factory('newUserRequest', ['appStatus', 'notifier', 'eatConfig', 'authManager', 'sessionManager', '$modal', function(appStatus, notifier, eatConfig, authManager, sessionManager, $modal) {
 
     return function($scope, $modalInstance, name, email, password) {
 
@@ -22,6 +22,12 @@ angular.module('eat-this-one')
 
                 authManager.authenticate();
                 sessionManager.setUser(data);
+
+                var locationSubscriptionModal = $modal.open({
+                    templateUrl : 'templates/location-subscription-popup.html',
+                    controller : 'locationSubscriptionPopupController'
+                });
+
             },
             error : function(data, errorStatus, errorMsg) {
                 notifier.show(errorMsg, 'error');

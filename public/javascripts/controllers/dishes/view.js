@@ -14,19 +14,7 @@ angular.module('eat-this-one')
     $scope.dish = {};
 
     $scope.openStaticMap = function() {
-        var modalInstance = $modal.open({
-            templateUrl: 'templates/static-map.html',
-            controller: 'staticMapController',
-            resolve: {
-                dish : function() {
-                    return $scope.dish;
-                }
-            }
-        });
-    };
-
-    $scope.openStaticMap = function() {
-        var modalInstance = $modal.open({
+        var staticMapModal = $modal.open({
             templateUrl: 'templates/static-map.html',
             controller: 'staticMapController',
             resolve: {
