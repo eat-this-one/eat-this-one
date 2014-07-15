@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesEditController', ['$scope', 'appStatus', 'urlParser', 'dishRequest', 'editDishRequest', 'eatConfig', 'authManager', function($scope, appStatus, urlParser, dishRequest, editDishRequest, eatConfig, authManager) {
+    .controller('DishesEditController', ['$scope', 'appStatus', 'urlParser', 'dishRequest', 'editDishRequest', 'locationSubscriptionsRequest', 'eatConfig', 'authManager', function($scope, appStatus, urlParser, dishRequest, editDishRequest, locationSubscriptionsRequest, eatConfig, authManager) {
 
     $scope.pageTitle = 'Edit dish';
     $scope.lang = $.eatLang.lang;
@@ -9,6 +9,8 @@ angular.module('eat-this-one')
         signin : $scope.lang.signintoadd,
         signup : $scope.lang.signuptoadd
     };
+
+    $scope.showAddLocation = false;
 
     $scope.dish = {};
 
@@ -25,18 +27,29 @@ angular.module('eat-this-one')
         placeholder: $scope.lang.dishdescription,
         value: ''
     };
+    // Will be shown when user has location subscriptions.
     $scope.loc = {
         name: 'loc',
         label: $scope.lang.where,
         placeholder: $scope.lang.where,
+        value: '',
+        options: []
+    };
+    // Will be shown to insert a new location.
+    $scope.locationname = {
+        name: 'locationname',
+        label: $scope.lang.where,
+        placeholder: $scope.lang.where,
         value: ''
     };
+    // Will be shown to insert a new location.
     $scope.address = {
         name: 'address',
         label: $scope.lang.address,
         placeholder: $scope.lang.address,
         value: ''
     };
+
     $scope.from = {
         name: 'from',
         label: $scope.lang.from,
@@ -97,6 +110,10 @@ angular.module('eat-this-one')
     // Setting 'to' to 'from' + 1h.
     $scope.to.value = new Date($scope.from.value.getTime() + (3600 * 1000));
 
+    // Load the user subscriptions.
+    appStatus.waiting();
+    locationSubscriptionsRequest($scope);
+
     // Load the dish info.
     if (id) {
         appStatus.waiting();
@@ -107,8 +124,17 @@ angular.module('eat-this-one')
 
         // Dish obj cleaning delegated to backend.
         var fields = [
-            'name', 'description', 'loc', 'address',
+            'name', 'description',
             'from', 'to', 'nportions', 'donation'];
+
+        // It could have been filled through the loc select
+        // element or by selecting an existing location.
+        if ($scope.loc.value != '') {
+            fields.push('loc');
+        } else {
+            fields.push('locationname');
+            fields.push('address');
+        }
         var dish = {};
         fields.forEach(function(field) {
             dish[field] = $scope[field].value;

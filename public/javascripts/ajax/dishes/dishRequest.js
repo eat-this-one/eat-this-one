@@ -9,7 +9,7 @@ angular.module('eat-this-one')
             datatype : 'json',
             success : function(dishData) {
                 $scope.dish = dishData;
-                $scope.dish.map = mapsManager.getStaticMap($scope.dish.address);
+                $scope.dish.map = mapsManager.getStaticMap($scope.dish.loc.address);
 
                 $scope.$apply();
                 appStatus.completed();

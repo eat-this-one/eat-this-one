@@ -2,14 +2,16 @@ angular.module('eat-this-one').controller('locationSubscriptionPopupController',
 
     $scope.lang = $.eatLang.lang;
 
-    // Here we add locationid to fill it in case
-    // the user selects an existing location.
+    // To store the id.
+    // TODO We really need to change all this shit.
     $scope.loc = {
+        value: ''
+    };
+    $scope.locationname = {
         name: 'loc',
         label: $scope.lang.where,
         placeholder: $scope.lang.where,
-        value: '',
-        locationid : null
+        value: ''
     };
 
     $scope.address = {
@@ -23,12 +25,12 @@ angular.module('eat-this-one').controller('locationSubscriptionPopupController',
 
         appStatus.waiting();
 
-        if ($scope.loc.locationid !== null) {
+        if ($scope.loc.value != '') {
             // Only a subscription as the location already exists.
-            newLocationSubscriptionRequest($modalInstance, $scope.loc.locationid);
+            newLocationSubscriptionRequest($modalInstance, $scope.loc.value);
         } else {
             // A new location including subscription.
-            newLocationRequest($modalInstance, $scope.loc.value, $scope.address.value);
+            newLocationRequest($modalInstance, $scope.locationname.value, $scope.address.value);
         }
     };
 

@@ -5,6 +5,7 @@ angular.module('eat-this-one').directive('eatLocation', ['$http', 'eatConfig', f
         restrict: 'E',
         scope: {
             loc: '=',
+            locationname: '=',
             address: '='
         },
         link : function(scope) {
@@ -66,7 +67,7 @@ angular.module('eat-this-one').directive('eatLocation', ['$http', 'eatConfig', f
                 scope.disableAddress = true;
 
                 // We save the locationid.
-                scope.loc.locationid = $item._id;
+                scope.loc.value = $item._id;
             };
         },
         templateUrl: 'templates/location.html'
