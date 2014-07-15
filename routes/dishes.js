@@ -7,6 +7,7 @@ var router = express.Router();
 var DishModel = require('../models/dish.js').model;
 var TokenModel = require('../models/token.js').model;
 var LocationModel = require('../models/location.js').model;
+var LocationSubscriptionModel = require('../models/locationSubscription.js').model;
 
 var dishProps = {
     'name' : 'required',
@@ -61,8 +62,7 @@ router.get('/:id', function(req, res) {
             for (var prop in dishProps) {
                 returnDish[prop] = dish[prop];
             }
-            returnDish.loc = locationInstance.name;
-            returnDish.address = locationInstance.address;
+            returnDish.loc = locationInstance;
 
             res.statusCode = 200;
             res.send(returnDish);
@@ -117,9 +117,23 @@ router.post('/', function(req, res) {
         // Setting the object to save.
         var dish = new DishModel(dishObj);
 
+        // We can receive an id or data for a new location.
+        var filter = {};
+        if (req.param('loc')) {
+            filter.id = req.param('loc');
+        } else if (req.param('locationname') && req.param('address')) {
+            // Extra checking to avoid duplicates.
+            filter.name = req.param('locationname');
+        } else {
+            // We need something!
+            res.statusCode = 400;
+            res.send("Missing params, can not create dish");
+            return;
+        }
+
         // The location may exist or not, but if it does not exist
         // an address must come along with the location.
-        LocationModel.findOne({name: req.param('loc')}, function(error, locationInstance) {
+        LocationModel.findOne(filter, function(error, locationInstance) {
 
             if (error) {
                 res.statusCode = 500;
@@ -130,17 +144,9 @@ router.post('/', function(req, res) {
             if (!locationInstance) {
 
                 // Create the location if it does not exist.
-
-                // We need the address then.
-                if (req.param('address') === null) {
-                    res.statusCode = 400;
-                    res.send('Missing params, can not create location');
-                    return;
-                }
-
                 locationInstance = new LocationModel({
                     userid: token.userid,
-                    name: req.param('loc'),
+                    name: req.param('locationname'),
                     address: req.param('address')
                 });
 
@@ -179,10 +185,46 @@ router.post('/', function(req, res) {
                         res.send("Error saving dish: " + error);
                         return;
                     }
-                });
 
-                res.statusCode = 201;
-                res.send(dish);
+                    // New location subscription
+                    // if it is a subscription.
+                    if (!filter.id) {
+                        var locationSubscriptionObj = {
+                            userid : token.userid,
+                            locationid : locationInstance.id
+                        };
+
+                        // Checking that it does not exist, UI should avoid it anyway.
+                        LocationSubscriptionModel.findOne(locationSubscriptionObj, function(error, locationSubscription) {
+
+                            if (error) {
+                                res.statusCode = 500;
+                                res.send("Error getting user location subscriptions: " + error);
+                                return;
+                            }
+
+                            if (!locationSubscription) {
+
+                                var locationSubscriptionInstance = new LocationSubscriptionModel(locationSubscriptionObject);
+                                locationSubscriptionInstance.save(function(error) {
+                                    if (error) {
+                                        res.statusCode = 500;
+                                        res.send('Error creating location subscription: ' + error);
+                                        return;
+                                    }
+
+                                    res.statusCode = 201;
+                                    res.send(dish);
+                                    return;
+                                });
+                            }
+                        });
+                    }
+
+                    res.statusCode = 201;
+                    res.send(dish);
+                    return;
+                });
             }
         });
     });
