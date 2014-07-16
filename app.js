@@ -11,7 +11,7 @@ var mongoose = require('mongoose');
 nconf.argv().env().file({file: path.join(__dirname, '/config.json')});
 
 // Check that the required configuration is present.
-var requiredConfig = ['DB_URI'];
+var requiredConfig = ['EAT_DB_URI'];
 requiredConfig.forEach(function(key) {
     if (nconf.get(key) == null && process.env[key] == null) {
         throw new Error(key + ' is not defined. Ensure that you set it in an ENV var or in config.json');
@@ -19,7 +19,7 @@ requiredConfig.forEach(function(key) {
 });
 
 // Persistence layer connection.
-mongoose.connect(process.env.DB_URI || nconf.get('DB_URI'));
+mongoose.connect(process.env.EAT_DB_URI || nconf.get('EAT_DB_URI'));
 
 // Init the app.
 var app = express();
