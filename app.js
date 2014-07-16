@@ -13,13 +13,13 @@ nconf.argv().env().file({file: path.join(__dirname, '/config.json')});
 // Check that the required configuration is present.
 var requiredConfig = ['DB_URI'];
 requiredConfig.forEach(function(key) {
-    if (nconf.get(key) == null) {
-        throw new Error(key + ' is not defined. Ensure that you set it in config.json');
+    if (nconf.get(key) == null && process.env[key] == null) {
+        throw new Error(key + ' is not defined. Ensure that you set it in an ENV var or in config.json');
     }
 });
 
 // Persistence layer connection.
-mongoose.connect(nconf.get('DB_URI'));
+mongoose.connect(process.env.DB_URI || nconf.get('DB_URI'));
 
 // Init the app.
 var app = express();

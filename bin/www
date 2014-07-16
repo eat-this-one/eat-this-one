@@ -3,11 +3,7 @@ var debug = require('debug');
 var nconf = require('nconf');
 var app = require('../app');
 
-if (nconf.get('APP_PORT') == null) {
-    throw new Error('APP_PORT is not defined. Ensure that you set it in config.json');
-}
-
-app.set('port', process.env.PORT || nconf.get('APP_PORT'));
+app.set('port', process.env.APP_PORT || nconf.get('APP_PORT'));
 
 var server = app.listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
