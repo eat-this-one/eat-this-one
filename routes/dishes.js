@@ -120,7 +120,7 @@ router.post('/', function(req, res) {
         // We can receive an id or data for a new location.
         var filter = {};
         if (req.param('loc')) {
-            filter.id = req.param('loc');
+            filter._id = req.param('loc');
         } else if (req.param('locationname') && req.param('address')) {
             // Extra checking to avoid duplicates.
             filter.name = req.param('locationname');
