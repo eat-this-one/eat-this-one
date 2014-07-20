@@ -6,18 +6,72 @@ var router = express.Router();
 // Required models.
 var MealModel = require('../models/meal.js').model;
 var TokenModel = require('../models/token.js').model;
+var DishModel = require('../models/dish.js').model;
+
+// This routes requires the user to be authenticated as they are all
+// user dependant.
 
 // GET - Meals list.
 router.get('/', function(req, res) {
 
-    MealModel.find(function(error, meals) {
+    if (req.param('token') === null) {
+        res.statusCode = 401;
+        res.send('Wrong credentials');
+    }
+
+    TokenModel.findOne({token: req.param('token')}, function(error, token) {
+        
         if (error) {
             res.statusCode = 500;
-            res.send("Error getting meals: " + error);
+            res.send('Error getting token: ' + error);
             return;
         }
-        res.statusCode = 200;
-        res.send(meals);
+
+        if (!token) {
+            res.statuscode = 401;
+            res.send('Wrong credentials');
+            return;
+        }
+
+        MealModel.find({userid: token.userid}, function(error, meals) {
+
+            if (error) {
+                res.statusCode = 500;
+                res.send("Error getting meals: " + error);
+                return;
+            }
+
+            // If no meals we return an empty array.
+            if (!meals) {
+                res.statusCode = 200;
+                res.send([]);
+                return;
+            }
+
+            var dishes = [];
+            meals.forEach(function(meal) {
+                dishes.push(meal.dishid);
+            });
+
+            DishModel.find({_id : { $in : dishes }}, function(error, dishes) {
+
+                if (error) {
+                    res.statusCode = 500;
+                    res.send("Error getting dishes: " + error);
+                    return;
+                }
+
+                if (!dishes) {
+                    res.statusCode = 500;
+                    res.send('Error, no dishes found for the provided ids: ' + error);
+                    return;
+                }
+
+                res.statusCode = 200;
+                res.send(dishes);
+            });
+        });
+
     });
 });
 
