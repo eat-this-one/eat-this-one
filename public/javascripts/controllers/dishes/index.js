@@ -6,11 +6,15 @@ angular.module('eat-this-one')
 
     $scope.dishes = [];
 
-    var params = {
-        'where' : urlParser.getParam('where'),
-        'when' : urlParser.getParam('when')
-    };
+    var dishesFilters = {};
+    var possibleFilters = ['where', 'when', 'locationid'];
+    for (var i = 0 ; i < possibleFilters.length ; i++) {
+        var param = urlParser.getParam(possibleFilters[i]);
+        if (param !== null) {
+            dishesFilters[possibleFilters[i]] = param;
+        }
+    }
 
     appStatus.waiting();
-    dishesRequest($scope, params);
+    dishesRequest($scope, dishesFilters);
 }]);

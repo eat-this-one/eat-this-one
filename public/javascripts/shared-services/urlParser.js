@@ -11,7 +11,7 @@ angular.module('eat-this-one')
                    return decodeURIComponent(pair[1]);
                }
            }
-           return(false);
+           return null;
         }
 
     }
