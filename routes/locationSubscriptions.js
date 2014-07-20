@@ -8,7 +8,10 @@ var TokenModel = require('../models/token.js').model;
 var LocationModel = require('../models/location.js').model;
 var LocationSubscriptionModel = require('../models/locationSubscription.js').model;
 
-// GET - Locations list.
+// This routes requires the user to be authenticated as they are all
+// user dependant.
+
+// GET - Location subscriptions list.
 router.get('/', function(req, res) {
 
     if (req.param('token') === null) {
@@ -45,11 +48,11 @@ router.get('/', function(req, res) {
             }
 
             var subscriptions = [];
-            for (var subscription in locationSubscriptions) {
+            locationSubscriptions.forEach(function(subscription) {
                 subscriptions.push(subscription.locationid);
-            }
+            });
 
-            LocationModel.find({locationid: { $in: subscriptions}}, function(error, locations) {
+            LocationModel.find({_id: { $in: subscriptions}}, function(error, locations) {
 
                 if (error) {
                     res.statusCode = 500;
@@ -68,10 +71,6 @@ router.get('/', function(req, res) {
             });
         });
     });
-});
-
-// GET - Obtain a specific location.
-router.get('/:id', function(req, res) {
 });
 
 // POST - Create a location subscription.
@@ -126,6 +125,10 @@ router.post('/', function(req, res) {
         });
     });
 
+});
+
+router.get('/:id', function(req, res) {
+    res.send('Not supported');
 });
 
 router.put('/:id', function(req, res) {
