@@ -38,6 +38,11 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', '$window
         $window.location.href = 'locations/index.html';
     };
 
+    // Redirects to the user meals list.
+    $scope.indexMeals = function() {
+        $window.location.href = 'meals/index.html';
+    };
+
     // Gets the URL params.
     $scope.getParams = function() {
 

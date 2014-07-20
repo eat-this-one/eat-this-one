@@ -17,6 +17,7 @@ $.eatLang.en = {
     location : 'Location',
     locationname : 'Location name',
     login : 'Login',
+    mymeals : 'My meals',
     name: 'Name',
     nportions : 'Number of portions',
     nothing : 'Nothing',

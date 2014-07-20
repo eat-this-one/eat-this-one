@@ -1,5 +1,6 @@
 angular.module('eat-this-one').constant('eatConfig', {
-    backendUrl : 'http://192.168.0.5:3000/api',
+    //backendUrl : 'http://eat-this-one.herokuapp.com/api',
+    backendUrl : 'http://localhost:3000/api',
     defaultLang : 'en',
     mapsBaseUrl : 'http://maps.googleapis.com/maps/api/staticmap'
 });
