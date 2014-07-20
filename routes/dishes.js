@@ -21,7 +21,13 @@ var dishProps = {
 // GET - Dishes list.
 router.get('/', function(req, res) {
 
-    DishModel.find(function(error, dishes) {
+    // Multiple filters accepted.
+    var filter = {};
+    if (req.param('locationid')) {
+        filter.locationid = req.param('locationid');
+    }
+
+    DishModel.find(filter, function(error, dishes) {
         if (error) {
             res.statusCode = 500;
             res.send("Error getting dishes: " + error);
