@@ -36,11 +36,7 @@ Eat-this-one source code includes both backend, frontend and development tools.
 **bower install**
 
 * App development setup
-**cordova create dist/app $PROJECT_NAME YOUR.REVERSE.DOMAIN YOUR_PROJECT_DISPLAY_NAME --save-copy=public/shared-build**
-** **cd dist/app**
-** **cordova platform add android**
-** Install required plugins
-*** **cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-globalization.git**
+** **./setup_app_dev.sh**
 ** Edit dist/app/config.xml
 ** Edit dist/app/platforms/AndroidManifest.xml
 *** Set android:debuggable="true" in <application> node
