@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('sessionManager', ['authManager', 'eatConfig', function(authManager, eatConfig) {
+    .factory('sessionManager', ['authManager', 'pushManager', 'eatConfig', function(authManager, pushManager, eatConfig) {
 
     return {
 
@@ -11,6 +11,7 @@ angular.module('eat-this-one')
 
             $.eatLang.lang = $.eatLang[eatConfig.defaultLang];
 
+            // All cordova calls should be inside a deviceready listener.
             document.addEventListener('deviceready', function() {
 
                 navigator.globalization.getPreferredLanguage(
@@ -31,6 +32,8 @@ angular.module('eat-this-one')
                     }
                 );
 
+                // Register the app to receive and send notifications.
+                pushManager.register();
             });
         },
 
