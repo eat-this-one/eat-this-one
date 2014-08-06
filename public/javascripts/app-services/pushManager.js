@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('pushManager', ['eatConfig', function(eatConfig) {
+    .factory('pushManager', ['notifier', 'eatConfig', function(notifier, eatConfig) {
 
     return {
 
@@ -45,59 +45,46 @@ angular.module('eat-this-one')
             console.log('Error, not able to get the registration ID: ' + error);
         }
     }
+
 }]);
 
 
+// TODO Move this inside pushManager!!
 function onNotification(e) {
 
-    switch( e.event )
-    {
-    case 'registered':
-        if ( e.regid.length > 0 )
-        {
-            // Your GCM push server needs to know the regID before it can push to this device
-            // here is where you might want to send it the regID for later use.
-            console.log("regID = " + e.regid);
-        }
-    break;
+    switch(e.event) {
 
-    case 'message':
-        // if this flag is set, this notification happened while we were in the foreground.
-        // you might want to play a sound to get the user's attention, throw up a dialog, etc.
-        if ( e.foreground )
-        {
-            console.log('FOREGROUDN NOTIFICATION RECEIVED');
-            // on Android soundname is outside the payload. 
-            // On Amazon FireOS all custom attributes are contained within payload
-            //var soundfile = e.soundname || e.payload.sound;
-            // if the notification contains a soundname, play it.
-            //var my_media = new Media("/android_asset/www/"+ soundfile);
-            //my_media.play();
-        }
-        else
-        {  // otherwise we were launched because the user touched a notification in the notification tray.
-            if ( e.coldstart )
-            {
-                console.log('COLDSTART NOTIFICATION: ' + e.payload.message);
+        case 'registered':
+            if (e.regid.length > 0) {
+                console.log("Got a registration ID: " + e.regid);
+            } else {
+                console.log('Error getting the registration id');
             }
-            else
-            {
-                console.log('BACKGROUDN NOTIFICATION: ' + e.payload.message);
+            break;
+
+        case 'message':
+            if (e.foreground) {
+                console.log('Notifying message while in foreground');
+                notifier.statusBar('Eat this one', e.payload.message);
+            } else if ( e.coldstart ) {
+                console.log('Notifying message, app was not started');
+                notifier.statusBar('Eat this one', e.payload.message);
+            } else {
+                console.log('Notifying message while in background');
+                notifier.statusBar('Eat this one', e.payload.message);
             }
-        }
+            break;
 
-           //Only works for GCM
-       //$("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
-       ////Only works on Amazon Fire OS
-       //$status.append('<li>MESSAGE -> TIME: ' + e.payload.timeStamp + '</li>');
-    break;
+        case 'error':
+            console.log('OH ERROR RECEIVING MESSAGE: ' + e.msg);
+            break;
 
-    case 'error':
-        console.log('OH ERROR RECEIVING MESSAGE: ' + e.msg);
-    break;
+        default:
+            console.log('Error, unknown event received' + e);
+            break;
+    }
+}
 
-    default:
-        console.log('Error, unknown event received')
-    break;
-  }
+// TODO Once this is not a crappy prototype.
+function onNotificationAPN(e) {
 }

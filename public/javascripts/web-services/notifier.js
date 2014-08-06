@@ -30,6 +30,10 @@ angular.module('eat-this-one').factory('notifier', function() {
                     $('#id-notification').removeClass(className);
                 }, 2000);
             }, 3000);
+        },
+
+        statusBar : function(title, message) {
+            // Not supported by the web interface.
         }
 
     }
