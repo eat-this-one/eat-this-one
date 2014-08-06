@@ -35,16 +35,12 @@ Eat-this-one source code includes both backend, frontend and development tools.
 **npm install**
 **bower install**
 
-* App development setup
-** **./setup_app_dev.sh**
-** Edit dist/app/config.xml
-** Edit dist/app/platforms/AndroidManifest.xml
-*** Set android:debuggable="true" in <application> node
-
 ==Android SDK (if you want to generate the app)==
 
 * Download SDK: http://developer.android.com/sdk/index.html
-
+* Add adt-bundle-linux/sdk/platform-tools and adt-bundle-linux/sdk/tools to $PATH
+* Run **android sdk** and install "Google Play services" and "Google Repository"
+* http://developer.android.com/google/gcm/gs.html for messaging
 
 =Setup=
 
@@ -67,6 +63,12 @@ Eat-this-one source code includes both backend, frontend and development tools.
         Order Allow,Deny
     </Directory>
 </VirtualHost>
+
+* App development setup
+** **./setup_app_dev.sh**
+** Edit dist/app/config.xml
+** Edit dist/app/platforms/AndroidManifest.xml
+*** Set android:debuggable="true" in <application> node
 
 
 =Development=
