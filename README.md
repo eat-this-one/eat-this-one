@@ -15,8 +15,7 @@ Eat-this-one source code includes both backend, frontend and development tools.
 
 * System dependencies
 
-**sudo apt-get install git-core**
-** sudo apt-get install mongodb**
+**sudo apt-get install git-core mongodb ant**
 
 ** sudo npm install grunt-cli -g**
 ** sudo npm install express -g**
@@ -30,10 +29,6 @@ Eat-this-one source code includes both backend, frontend and development tools.
 * Download source code
 **git clone git://bitbucket.org/eat-this-one.git eat-this-one**
 **cd eat-this-one
-
-* Install project dependencies
-**npm install**
-**bower install**
 
 ==Android SDK (if you want to generate the app)==
 
@@ -64,8 +59,9 @@ Eat-this-one source code includes both backend, frontend and development tools.
     </Directory>
 </VirtualHost>
 
-* App development setup
-** **./setup_app_dev.sh**
+* Development setup
+** **./setup_dev.sh**
+*** You may need to install previous android sdk APIs as cordova is not always using the latest version, if it is the case, run **android sdk** and select the required versions
 ** Edit dist/app/config.xml
 ** Edit dist/app/platforms/AndroidManifest.xml
 *** Set android:debuggable="true" in <application> node
