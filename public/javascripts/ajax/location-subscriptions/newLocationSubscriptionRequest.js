@@ -14,7 +14,7 @@ angular.module('eat-this-one')
                     //var msg = 'Subscribed!';
                     //notifier.show(msg, 'success');
                     //appStatus.completed();
-                    $window.location.href = '/';
+                    $window.location.href = 'index.html';
                 },
                 error : function(data, errorStatus, errorMsg) {
                     notifier.show(errorMsg, 'error');
