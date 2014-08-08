@@ -13,7 +13,6 @@ var dishProps = {
     'name' : 'required',
     'description' : 'no',
     'from' : 'required',
-    'to' : 'required',
     'nportions' : 'required',
     'donation' : 'required'
 };
