@@ -1,9 +1,0 @@
-div(class='form-group')
-    label(for='id-{{locationname.name}}') {{locationname.label}}
-    input(type='text', id='id-{{locationname.name}}', name='{{locationname.name}}', ng-model='locationname.value', placeholder='{{locationname.placeholder}}', typeahead='locationname.name as locationname.name for locationname in getLocations($viewValue)', typeahead-loading='loadingLocationNames', typeahead-on-select='fillAddress($item, $model, $label)', typeahead-min-length='2', class='form-control')
-    i(ng-show='loadingLocationNames', class='glyphicon glyphicon-refresh')
-
-div(class='form-group', ng-if='showAddress')
-    label(for='id-{{address.name}}') {{address.label}}
-    input(type='text', id='id-{{address.name}}', name='{{address.name}}', ng-model='address.value', placeholder='{{address.placeholder}}', typeahead='address for address in getAddresses($viewValue) | limitTo:10', typeahead-loading='loadingAddresses', ng-disabled='disableAddress', class='form-control')
-    i(ng-show='loadingAddresses', class='glyphicon glyphicon-refresh')
