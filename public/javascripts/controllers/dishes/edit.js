@@ -6,8 +6,8 @@ angular.module('eat-this-one')
     $scope.auth = authManager;
 
     $scope.loginButtonsLangStrings = {
-        signin : $scope.lang.signintoadd,
-        signup : $scope.lang.signuptoadd
+        signin : $scope.lang.signintoadddish,
+        signup : $scope.lang.signuptoadddish
     };
 
     $scope.showAddLocation = false;
@@ -56,12 +56,6 @@ angular.module('eat-this-one')
         placeholder: $scope.lang.from,
         value: new Date()
     };
-    $scope.to = {
-        name: 'to',
-        label: $scope.lang.to,
-        placeholder: $scope.lang.to,
-        value: ''
-    };
     $scope.nportions = {
         name: 'nportions',
         label: $scope.lang.nportions,
@@ -107,9 +101,6 @@ angular.module('eat-this-one')
         $scope.from.value = new Date(parseInt(when));
     }
 
-    // Setting 'to' to 'from' + 1h.
-    $scope.to.value = new Date($scope.from.value.getTime() + (3600 * 1000));
-
     // Load the user subscriptions.
     appStatus.waiting();
     locationSubscriptionsRequest($scope);
@@ -125,7 +116,7 @@ angular.module('eat-this-one')
         // Dish obj cleaning delegated to backend.
         var fields = [
             'name', 'description',
-            'from', 'to', 'nportions', 'donation'];
+            'from', 'nportions', 'donation'];
 
         // It could have been filled through the loc select
         // element or by selecting an existing location.

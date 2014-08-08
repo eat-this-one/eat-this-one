@@ -5,6 +5,11 @@ angular.module('eat-this-one')
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
 
+    $scope.loginButtonsLangStrings = {
+        signin : $scope.lang.signintoaddlocation,
+        signup : $scope.lang.signuptoaddlocation
+    };
+
     // To store the id.
     // TODO We really need to change all this shit.
     $scope.loc = {
