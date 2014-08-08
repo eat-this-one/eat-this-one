@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('newUserRequest', ['appStatus', 'notifier', 'eatConfig', 'authManager', 'sessionManager', '$modal', function(appStatus, notifier, eatConfig, authManager, sessionManager, $modal) {
+    .factory('newUserRequest', ['appStatus', 'notifier', 'eatConfig', 'authManager', 'sessionManager', '$window', function(appStatus, notifier, eatConfig, authManager, sessionManager, $window) {
 
     return function($scope, $modalInstance, name, email, password) {
 
@@ -14,20 +14,17 @@ angular.module('eat-this-one')
             data : requestData,
             datatype : 'json',
             success : function(data) {
+
                 var msg = 'Account successfully created';
                 notifier.show(msg, 'success');
-                appStatus.completed();
-
-                $modalInstance.close(true);
 
                 authManager.authenticate();
                 sessionManager.setUser(data);
 
-                var locationSubscriptionModal = $modal.open({
-                    templateUrl : 'templates/location-subscription-popup.html',
-                    controller : 'locationSubscriptionPopupController'
-                });
+                appStatus.completed();
+                $modalInstance.close(true);
 
+                $window.location.href = 'location-subscriptions/edit.html';
             },
             error : function(data, errorStatus, errorMsg) {
                 notifier.show(errorMsg, 'error');

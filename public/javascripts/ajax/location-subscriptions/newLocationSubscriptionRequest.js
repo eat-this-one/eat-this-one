@@ -1,7 +1,7 @@
 angular.module('eat-this-one')
-    .factory('newLocationSubscriptionRequest', ['appStatus', 'notifier', 'eatConfig', 'sessionManager', function(appStatus, notifier, eatConfig, sessionManager) {
+    .factory('newLocationSubscriptionRequest', ['$window', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', function($window, appStatus, notifier, eatConfig, sessionManager) {
 
-        return function($modalInstance, locationid) {
+        return function(locationid) {
             $.ajax({
                 type : 'POST',
                 url : eatConfig.backendUrl + '/location-subscriptions',
@@ -11,11 +11,10 @@ angular.module('eat-this-one')
                 },
                 datatype : 'json',
                 success : function(data) {
-                    var msg = 'Subscribed!';
-                    notifier.show(msg, 'success');
-                    appStatus.completed();
-
-                    $modalInstance.close(true);
+                    //var msg = 'Subscribed!';
+                    //notifier.show(msg, 'success');
+                    //appStatus.completed();
+                    $window.location.href = '/';
                 },
                 error : function(data, errorStatus, errorMsg) {
                     notifier.show(errorMsg, 'error');
