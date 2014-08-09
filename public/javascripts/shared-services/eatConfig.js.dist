@@ -1,0 +1,6 @@
+angular.module('eat-this-one').constant('eatConfig', {
+    backendUrl : 'http://eat-this-one.herokuapp.com/api',
+    defaultLang : 'en',
+    mapsBaseUrl : 'http://maps.googleapis.com/maps/api/staticmap',
+    gcmSenderId : 'YOURSENDERID'
+});

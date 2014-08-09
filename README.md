@@ -47,7 +47,8 @@ Eat-this-one source code includes both backend, frontend and development tools.
 ** Edit development.properties with your own values
 
 * Configure your frontend pointing to the backend URL if it is different from the default one.
-** **public/javascripts/shared/eatConfig.js**
+** **cp public/javascripts/shared-services/eatConfig.js.dist public/javascripts/shared-services/eatConfig.js**
+** **public/javascripts/shared-services/eatConfig.js**
 
 * Create a virtual host to point to your dist/web dir.
 <VirtualHost YOURHOSTNAME:80>

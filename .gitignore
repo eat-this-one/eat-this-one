@@ -7,6 +7,7 @@ public/bower_components/
 *.swx
 
 # Config-dependant files.
+public/javascripts/shared-services/eatConfig.js
 config.json
 development.properties
 
