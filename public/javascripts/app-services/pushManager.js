@@ -1,44 +1,52 @@
 angular.module('eat-this-one')
-    .factory('pushManager', ['notifier', 'eatConfig', function(notifier, eatConfig) {
+    .factory('pushManager', ['$window', 'messagesHandler', 'eatConfig', function(notifier, eatConfig) {
 
     return {
 
+        // Here we register which functions will handle the notifications.
         register : function() {
+
+            // Check if the device is already registered.
+            // TODO We will need a new registration id once the app is updated.
+            if (localStorage.getItem('gcmRegistrationId')) {
+                return;
+            }
 
             if (device.platform == 'android' ||
                     device.platform == 'Android' ||
                     device.platform == "amazon-fireos" ) {
 
-                window.plugins.pushNotification.register(
+                $window.plugins.pushNotification.register(
                     this.registered,
                     this.errorHandler,
                     {
                         "senderID": eatConfig.gcmSenderId,
-                        "ecb":"onNotification"
+                        "ecb": "notificationsHandler"
                     }
                 );
 
             } else {
 
-                window.plugins.pushNotification.register(
+                // TODO Test properly as it is just a copy & paste.
+                $window.plugins.pushNotification.register(
                     this.registeredAPN,
                     this.errorHandler,
                     {
                         "badge":"true",
                         "sound":"true",
                         "alert":"true",
-                        "ecb":"onNotificationAPN"
+                        "ecb":"apnNotificationsHandler"
                     }
                 );
             }
         },
 
         registered : function(result) {
-            console.log('REGISTERED METHOD: ' + result);
+            console.log('Registered in Google Cloud Messaging: ' + result);
         },
 
         registeredAPN : function(result) {
-            console.log('REGISTERED APN: ' + result);
+            console.log('Registered in Google Cloud Messaging: ' + result);
         },
 
         error : function(error) {
@@ -49,42 +57,37 @@ angular.module('eat-this-one')
 }]);
 
 
-// TODO Move this inside pushManager!!
-function onNotification(e) {
+function notificationsHandler(e) {
 
     switch(e.event) {
 
+        // Storing the registration id.
         case 'registered':
+
+            // Storing the registration id.
             if (e.regid.length > 0) {
-                console.log("Got a registration ID: " + e.regid);
+                localStorage.setItem('gcmRegistrationId', e.regid);
             } else {
-                console.log('Error getting the registration id');
+                console.log('Error: We can not get the registration id');
             }
             break;
 
         case 'message':
-            if (e.foreground) {
-                console.log('Notifying message while in foreground');
-                notifier.statusBar('Eat this one', e.payload.message);
-            } else if ( e.coldstart ) {
-                console.log('Notifying message, app was not started');
-                notifier.statusBar('Eat this one', e.payload.message);
-            } else {
-                console.log('Notifying message while in background');
-                notifier.statusBar('Eat this one', e.payload.message);
-            }
+
+            // Delegated to the messages handler.
+            messagesHandler.message(e.payload);
             break;
 
         case 'error':
-            console.log('OH ERROR RECEIVING MESSAGE: ' + e.msg);
+            console.log('Error: Message can not be received. ' + e.msg);
             break;
 
         default:
-            console.log('Error, unknown event received' + e);
+            console.log('Error: Unknown event received');
             break;
     }
 }
 
 // TODO Once this is not a crappy prototype.
-function onNotificationAPN(e) {
+function apnNotificationsHandler(e) {
 }
