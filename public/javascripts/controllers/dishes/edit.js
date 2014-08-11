@@ -10,8 +10,6 @@ angular.module('eat-this-one')
         signup : $scope.lang.signuptoadddish
     };
 
-    $scope.showAddLocation = false;
-
     $scope.dish = {};
 
     // Declare form fields.
@@ -27,29 +25,13 @@ angular.module('eat-this-one')
         placeholder: $scope.lang.dishdescription,
         value: ''
     };
-    // Will be shown when user has location subscriptions.
-    $scope.loc = {
-        name: 'loc',
+    $scope.locationid = {
+        name: 'locationid',
         label: $scope.lang.where,
         placeholder: $scope.lang.where,
         value: '',
         options: []
     };
-    // Will be shown to insert a new location.
-    $scope.locationname = {
-        name: 'locationname',
-        label: $scope.lang.where,
-        placeholder: $scope.lang.where,
-        value: ''
-    };
-    // Will be shown to insert a new location.
-    $scope.address = {
-        name: 'address',
-        label: $scope.lang.address,
-        placeholder: $scope.lang.address,
-        value: ''
-    };
-
     $scope.from = {
         name: 'from',
         label: $scope.lang.from,
@@ -71,7 +53,6 @@ angular.module('eat-this-one')
             {text : 8, value : 8},
         ]
     };
-
     $scope.donation = {
         name: 'donation',
         label: $scope.lang.expecteddonation,
@@ -87,19 +68,9 @@ angular.module('eat-this-one')
         ]
     };
 
+    // TODO This will be used for update.
     // Arguments.
     var id = urlParser.getParam('id');
-
-    var where = urlParser.getParam('where');
-    if (where) {
-        $scope.where.value = where;
-    }
-
-    // We push the value as from.
-    var when = urlParser.getParam('when');
-    if (when) {
-        $scope.from.value = new Date(parseInt(when));
-    }
 
     // Load the user subscriptions.
     appStatus.waiting();
@@ -115,17 +86,9 @@ angular.module('eat-this-one')
 
         // Dish obj cleaning delegated to backend.
         var fields = [
-            'name', 'description',
+            'name', 'description', 'locationid',
             'from', 'nportions', 'donation'];
 
-        // It could have been filled through the loc select
-        // element or by selecting an existing location.
-        if ($scope.loc.value != '') {
-            fields.push('loc');
-        } else {
-            fields.push('locationname');
-            fields.push('address');
-        }
         var dish = {};
         fields.forEach(function(field) {
             dish[field] = $scope[field].value;

@@ -11,10 +11,8 @@ block content
         form(role='form')
             eat-input-text(element='name')
             eat-input-text(element='description')
-            eat-location(ng-if='showAddLocation', loc='loc', locationname='locationname', address='address')
-            eat-select(ng-if='!showAddLocation', element='loc')
+            eat-select(element='locationid')
             eat-datetime(element='from')
-            eat-datetime(element='to')
             eat-select(element='nportions')
             eat-select(element='donation')
 

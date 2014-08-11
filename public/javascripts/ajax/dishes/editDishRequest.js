@@ -22,7 +22,7 @@ angular.module('eat-this-one')
                 appStatus.completed();
             },
             error : function(data, errorStatus, errorMsg) {
-                var msg = 'Dishes can not be added/edited. "' + errorStatus + '": ' + errorMsg;
+                var msg = 'Dish can not be added/edited. "' + errorStatus + '": ' + errorMsg;
                 notifier.show(msg, 'error');
                 appStatus.completed();
             }
