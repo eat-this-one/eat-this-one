@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
+    gcmregids: { type: Array, default: [] },
     email: { type: String, required: true},
     password: { type: String, required: true},
     name: { type: String, required: true},

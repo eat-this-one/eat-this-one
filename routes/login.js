@@ -58,8 +58,38 @@ router.post('/', function(req, res) {
                 token: token.token
             };
 
-            res.statusCode = 200;
-            res.send(returnUser);
+            // Add the new potential reg id.
+            if (req.param('gcmregid')) {
+
+                // Add the registration id to the user registration ids if not present.
+                var found = false;
+                for (var regindex in user.gcmregids) {
+                    if (req.param('gcmregid') == user.gcmregids[regindex]) {
+                        found = true;
+                    }
+                }
+                if (found === false) {
+                    user.gcmregids.push(req.param('gcmregid'));
+                    user.save(function(error) {
+                        if (error) {
+                            res.statusCode = 500;
+                            res.send('Error updating GCM registration ids: ' + error);
+                            return;
+                        }
+
+                        res.statusCode = 200;
+                        res.send(returnUser);
+                    });
+                } else {
+                    res.statusCode = 200;
+                    res.send(returnUser);
+                }
+
+            } else {
+                // We finish if there is no new reg id.
+                res.statusCode = 200;
+                res.send(returnUser);
+            }
         });
     });
 });

@@ -71,6 +71,11 @@ router.post('/', function(req, res) {
     // Encrypt the provided password.
     userObj.password = encrypt.APassword(userObj.password);
 
+    // Add the GCM registration id if present (not present in web interface).
+    if (req.param('gcmregid')) {
+        userObj.gcmregids = [req.param('gcmregid')];
+    }
+
     var user = new UserModel(userObj);
 
     user.save(function(error) {
