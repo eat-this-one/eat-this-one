@@ -147,9 +147,58 @@ router.post('/', function(req, res) {
                     return;
                 }
 
-                res.statusCode = 201;
-                res.send(dish);
-                return;
+                // Informing subscribers that there is a new dish.
+                LocationSubscriptionModel.find({ locationid : dish.locationid}, function(error, subscriptions) {
+
+                    if (error) {
+                        res.statusCode = 500;
+                        res.send('Error getting location subscriptions: ' + error);
+                        return;
+                    }
+
+                    // Pity that nobody is subscribed here.
+                    if (!subscriptions) {
+                        res.statusCode = 201;
+                        res.send(dish);
+                        return;
+                    }
+
+                    var subscriptionsIds = [];
+                    for (var i in subscriptions) {
+                        subscriptionsIds.push(subscriptions[i].userid);
+                    }
+
+                    UserModel.find({_id : { $in : subscriptionsIds }}, function(error, subscribers) {
+
+                        var gcmregids = [];
+                        for (var i in subscribers) {
+
+                            // Getting user GCM reg ids.
+                            if (subscribers[i].gcmregids) {
+                                for (var ii in subscribers[i].gcmregids) {
+                                    gcmregids.push(subscribers[i].gcmregids[ii]);
+                                }
+                            }
+                        }
+
+                        var msgdata = {
+                            "message": "New dish available!",
+                            "type": "dish"
+                        };
+
+                        // GCM notifications.
+                        if (gcmregids.length > 0) {
+                            pusher.pushToGCM(gcmregids, msgdata);
+                        }
+
+                        // TODO Email fallback for users without any GCM reg id nor iPhone.
+ 
+                        // All good, so we notify and finish.
+                        res.statusCode = 201;
+                        res.send(dish);
+                        return;
+                    });
+                });
             });
         });
     });

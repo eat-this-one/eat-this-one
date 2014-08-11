@@ -1,5 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var pusher = require('../lib/pusher.js');
 
 var router = express.Router();
 
@@ -7,6 +8,7 @@ var router = express.Router();
 var MealModel = require('../models/meal.js').model;
 var TokenModel = require('../models/token.js').model;
 var DishModel = require('../models/dish.js').model;
+var UserModel = require('../models/user.js').model;
 
 // This routes requires the user to be authenticated as they are all
 // user dependant.
@@ -126,18 +128,59 @@ router.post('/', function(req, res) {
             userid : token.userid
         });
 
-        // TODO Check that the dish exists.
+        // Check that the dish exists.
+        DishModel.findById(meal.dishid, function(error, dish) {
 
-        meal.save(function(error) {
             if (error) {
                 res.statusCode = 500;
-                res.send("Error saving meal: " + error);
+                res.send('Error getting dish: ' + error);
                 return;
             }
 
-            // Same output for all output formats.
-            res.statusCode = 200;
-            res.send(meal);
+            if (!dish) {
+                res.statuscode = 400;
+                res.send('Error, there is no such dish');
+                return;
+            }
+
+            // Storing the meal.
+            meal.save(function(error) {
+
+                if (error) {
+                    res.statusCode = 500;
+                    res.send("Error saving meal: " + error);
+                    return;
+                }
+
+                // Inform the chef about the new meal.
+                UserModel.findById(dish.userid, function(error, chef) {
+                    if (error) {
+                        res.statusCode = 500;
+                        res.send('Error getting chef: ' + error);
+                        return;
+                    }
+
+                    if (!chef) {
+                        res.statuscode = 500;
+                        res.send('Error, the user that cooked the dish does not exist anymore');
+                        return;
+                    }
+
+                    var msgdata = {
+                        "message": "New meal booked by user " + meal.userid + "!",
+                        "type": "meal"
+                    };
+
+                    // TODO Email fallback.
+                    if (chef.gcmregids) {
+                        pusher.pushToGCM(chef.gcmregids, msgdata);
+                    }
+
+                    // Same output for all output formats.
+                    res.statusCode = 200;
+                    res.send(meal);
+                });
+            });
         });
     });
 });
