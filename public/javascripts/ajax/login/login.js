@@ -3,9 +3,12 @@ angular.module('eat-this-one')
 
     return function($scope, $modalInstance, email, password) {
 
+        // Using the website nothing will be send.
+        var gcmregid = localStorage.getItem('gcmRegId');
         var requestData = {
             email : email,
-            password : password
+            password : password,
+            gcmregid : gcmregid
         };
         $.ajax({
             type : 'POST',

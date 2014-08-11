@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('pushManager', ['$window', 'messagesHandler', 'eatConfig', function(notifier, eatConfig) {
+    .factory('pushManager', ['$window', 'messagesHandler', 'eatConfig', function($window, notifier, eatConfig) {
 
     return {
 
@@ -8,7 +8,9 @@ angular.module('eat-this-one')
 
             // Check if the device is already registered.
             // TODO We will need a new registration id once the app is updated.
-            if (localStorage.getItem('gcmRegistrationId')) {
+            var registrationId = localStorage.getItem('gcmRegId');
+            if (registrationId) {
+                console.log('Application already registered in GCM with id: ' + registrationId);
                 return;
             }
 
@@ -66,7 +68,7 @@ function notificationsHandler(e) {
 
             // Storing the registration id.
             if (e.regid.length > 0) {
-                localStorage.setItem('gcmRegistrationId', e.regid);
+                localStorage.setItem('gcmRegId', e.regid);
             } else {
                 console.log('Error: We can not get the registration id');
             }

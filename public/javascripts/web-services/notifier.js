@@ -16,8 +16,8 @@ angular.module('eat-this-one').factory('notifier', function() {
             }
 
             // Smashes the current value.
-            $('#id-notification').html(msg);
             $('#id-notification').addClass(className);
+            $('#id-notification').html(msg);
 
             $('#id-notification').fadeIn(1000);
 
