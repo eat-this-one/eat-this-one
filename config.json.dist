@@ -1,5 +1,9 @@
 {
     "EAT_DB_URI": "mongodb://localhost:27017/eat-this-one",
     "APP_PORT": "3000",
-    "PWD_SALT": "asd"
+    "PWD_SALT": "asd",
+    "GCM_SEND_HOST": "android.googleapis.com",
+    "GCM_SEND_PATH": "/gcm/send",
+    "GCM_SEND_PORT": "443",
+    "GCM_API_KEY": "YOURAPIEY"
 }
