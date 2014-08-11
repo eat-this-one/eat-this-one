@@ -34,7 +34,7 @@ Eat-this-one source code includes both backend, frontend and development tools.
 
 * Download SDK: http://developer.android.com/sdk/index.html
 * Add adt-bundle-linux/sdk/platform-tools and adt-bundle-linux/sdk/tools to $PATH
-* Run **android sdk** and install "Google Play services" and "Google Repository"
+* Run **android sdk** and install "Google Play services", "Google Play APK Expansion Library" and "Google Repository"
 * http://developer.android.com/google/gcm/gs.html for messaging
 
 =Setup=
