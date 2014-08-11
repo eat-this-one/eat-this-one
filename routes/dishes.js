@@ -5,6 +5,7 @@ var router = express.Router();
 
 // Required models.
 var DishModel = require('../models/dish.js').model;
+var UserModel = require('../models/user.js').model;
 var TokenModel = require('../models/token.js').model;
 var LocationModel = require('../models/location.js').model;
 var LocationSubscriptionModel = require('../models/locationSubscription.js').model;
@@ -12,6 +13,7 @@ var LocationSubscriptionModel = require('../models/locationSubscription.js').mod
 var dishProps = {
     'name' : 'required',
     'description' : 'no',
+    'locationid' : 'required',
     'from' : 'required',
     'nportions' : 'required',
     'donation' : 'required'
@@ -95,7 +97,7 @@ router.post('/', function(req, res) {
         dishObj[prop] = req.param(prop);
     }
 
-    if (missing.length > 0 || req.param('loc') === null) {
+    if (missing.length > 0) {
         res.statusCode = 400;
         res.send("Missing params, can not create dish");
         return;
@@ -122,23 +124,8 @@ router.post('/', function(req, res) {
         // Setting the object to save.
         var dish = new DishModel(dishObj);
 
-        // We can receive an id or data for a new location.
-        var filter = {};
-        if (req.param('loc')) {
-            filter._id = req.param('loc');
-        } else if (req.param('locationname') && req.param('address')) {
-            // Extra checking to avoid duplicates.
-            filter.name = req.param('locationname');
-        } else {
-            // We need something!
-            res.statusCode = 400;
-            res.send("Missing params, can not create dish");
-            return;
-        }
-
-        // The location may exist or not, but if it does not exist
-        // an address must come along with the location.
-        LocationModel.findOne(filter, function(error, locationInstance) {
+        // Checking that the location exists.
+        LocationModel.findOne(req.param('locationid'), function(error, locationInstance) {
 
             if (error) {
                 res.statusCode = 500;
@@ -147,90 +134,23 @@ router.post('/', function(req, res) {
             }
 
             if (!locationInstance) {
-
-                // Create the location if it does not exist.
-                locationInstance = new LocationModel({
-                    userid: token.userid,
-                    name: req.param('locationname'),
-                    address: req.param('address')
-                });
-
-                // Save location.
-                locationInstance.save(function(error) {
-                    if (error) {
-                        res.statusCode = 500;
-                        res.send('Error saving location: ' + error);
-                        return;
-                    }
-
-                    // Save dish.
-                    dish.locationid = locationInstance.id;
-                    dish.save(function(error) {
-                        if (error) {
-                            console.log(error);
-                            res.statusCode = 500;
-                            res.send("Error saving dish: " + error);
-                            return;
-                        }
-                    });
-
-                    // Same output for all output formats.
-                    res.statusCode = 201;
-                    res.send(dish);
-                });
-
-            } else {
-
-                // Using the existing location.
-
-                dish.locationid = locationInstance.id;
-                dish.save(function(error) {
-                    if (error) {
-                        res.statusCode = 500;
-                        res.send("Error saving dish: " + error);
-                        return;
-                    }
-
-                    // New location subscription
-                    // if it is a subscription.
-                    if (!filter.id) {
-                        var locationSubscriptionObj = {
-                            userid : token.userid,
-                            locationid : locationInstance.id
-                        };
-
-                        // Checking that it does not exist, UI should avoid it anyway.
-                        LocationSubscriptionModel.findOne(locationSubscriptionObj, function(error, locationSubscription) {
-
-                            if (error) {
-                                res.statusCode = 500;
-                                res.send("Error getting user location subscriptions: " + error);
-                                return;
-                            }
-
-                            if (!locationSubscription) {
-
-                                var locationSubscriptionInstance = new LocationSubscriptionModel(locationSubscriptionObject);
-                                locationSubscriptionInstance.save(function(error) {
-                                    if (error) {
-                                        res.statusCode = 500;
-                                        res.send('Error creating location subscription: ' + error);
-                                        return;
-                                    }
-
-                                    res.statusCode = 201;
-                                    res.send(dish);
-                                    return;
-                                });
-                            }
-                        });
-                    }
-
-                    res.statusCode = 201;
-                    res.send(dish);
-                    return;
-                });
+                req.statusCode = 400;
+                req.send('Error, ' + req.param('locationid') + ' does not exist');
+                return;
             }
+
+            dish.save(function(error) {
+
+                if (error) {
+                    res.statusCode = 500;
+                    res.send("Error saving dish: " + error);
+                    return;
+                }
+
+                res.statusCode = 201;
+                res.send(dish);
+                return;
+            });
         });
     });
 });
