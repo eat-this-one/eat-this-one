@@ -1,5 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var pusher = require('../lib/pusher.js');
 
 var router = express.Router();
 
@@ -170,17 +171,26 @@ router.post('/', function(req, res) {
 
                     UserModel.find({_id : { $in : subscriptionsIds }}, function(error, subscribers) {
 
-                        var gcmregids = [];
-                        for (var i in subscribers) {
-
-                            // Getting user GCM reg ids.
-                            if (subscribers[i].gcmregids) {
-                                for (var ii in subscribers[i].gcmregids) {
-                                    gcmregids.push(subscribers[i].gcmregids[ii]);
-                                }
-                            }
+                        if (error) {
+                            res.statusCode = 500;
+                            res.send('Error getting subscribed users: ' + error);
+                            return;
                         }
 
+                        // All subscribed users are deleted?.
+                        if (!subscribers) {
+                            res.statusCode = 201;
+                            res.send(dish);
+                            return;
+                        }
+
+                        var gcmregids = [];
+                        for (var i in subscribers) {
+                            // Getting user GCM reg ids.
+                            if (subscribers[i].gcmregids.length > 0) {
+                                gcmregids = gcmregids.concat(subscribers[i].gcmregids);
+                            }
+                        }
                         var msgdata = {
                             "message": "New dish available!",
                             "type": "dish"

@@ -3,7 +3,7 @@
   "description": "Helping people who don't have time to cook to find people who cooks more than they should. This package includes the backend + both web and app (phonegap) clients generators.",
   "version": "0.0.1",
   "engines": {
-      "node": "0.10.x"
+    "node": "0.10.x"
   },
   "main": "./app.js",
   "private": true,
@@ -11,26 +11,28 @@
     "start": "grunt run:dev"
   },
   "dependencies": {
-    "express": "~4.2.0",
-    "static-favicon": "~1.0.0",
-    "morgan": "~1.0.0",
-    "cookie-parser": "~1.0.1",
     "body-parser": "~1.0.0",
+    "cookie-parser": "~1.0.1",
+    "crypto": "0.0.3",
     "debug": "~0.7.4",
+    "express": "~4.2.0",
+    "grunt": "~0.4.1",
+    "grunt-concurrent": "~0.3.1",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-cssmin": "~0.10.0",
+    "grunt-contrib-jade": "~0.12.0",
+    "grunt-contrib-less": "~0.11.0",
+    "grunt-contrib-uglify": "~0.2.4",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-nodemon": "~0.1.1",
     "jade": "~1.3.0",
     "less-middleware": "1.0.x",
-    "nconf": "*",
     "mongoose": "~3.8.1",
-    "grunt": "~0.4.1",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-uglify": "~0.2.4",
-    "grunt-contrib-less": "~0.11.0",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-jade": "~0.12.0",
-    "grunt-contrib-cssmin": "~0.10.0",
-    "grunt-nodemon": "~0.1.1",
-    "grunt-concurrent": "~0.3.1"
+    "morgan": "~1.0.0",
+    "nconf": "*",
+    "request": "^2.40.0",
+    "static-favicon": "~1.0.0"
   },
   "devDependencies": {
     "bower": "1.2.7",
@@ -38,7 +40,6 @@
     "karma-jasmine": "~0.1.5",
     "karma-phantomjs-launcher": "~0.1.4",
     "grunt-karma": "~0.8.3",
-    "grunt-shell": "~0.7.0",
-    "crypto": "0.0.3"
+    "grunt-shell": "~0.7.0"
   }
 }

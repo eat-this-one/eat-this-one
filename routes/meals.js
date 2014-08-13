@@ -172,7 +172,7 @@ router.post('/', function(req, res) {
                     };
 
                     // TODO Email fallback.
-                    if (chef.gcmregids) {
+                    if (chef.gcmregids.length > 0) {
                         pusher.pushToGCM(chef.gcmregids, msgdata);
                     }
 
