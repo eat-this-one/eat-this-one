@@ -6,7 +6,7 @@ var DishSchema = new Schema({
     locationid: { type: String, required: true},
     name: { type: String, required: true},
     description: { type: String, required: false, default: ''},
-    from: { type: Date, required: true},
+    when: { type: Date, required: true},
     nportions: { type: Number, required: true},
     donation: { type: String, required: true},
     created: { type: Date, default: Date.now},
