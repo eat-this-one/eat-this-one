@@ -32,11 +32,16 @@ angular.module('eat-this-one')
         value: '',
         options: []
     };
-    $scope.from = {
-        name: 'from',
-        label: $scope.lang.from,
-        placeholder: $scope.lang.from,
-        value: new Date()
+    $scope.when = {
+        name: 'when',
+        label: $scope.lang.when,
+        placeholder: $scope.lang.when,
+        value: '',
+        options: [
+            {text: $scope.lang.today, value: 'today'},
+            {text: $scope.lang.tomorrow, value: 'tomorrow'},
+            {text: $scope.lang.aftertomorrow, value: 'aftertomorrow'}
+        ]
     };
     $scope.nportions = {
         name: 'nportions',
@@ -46,11 +51,7 @@ angular.module('eat-this-one')
             {text : 1, value : 1},
             {text : 2, value : 2},
             {text : 3, value : 3},
-            {text : 4, value : 4},
-            {text : 5, value : 5},
-            {text : 6, value : 6},
-            {text : 7, value : 7},
-            {text : 8, value : 8},
+            {text : 4, value : 4}
         ]
     };
     $scope.donation = {
@@ -80,6 +81,8 @@ angular.module('eat-this-one')
     if (id) {
         appStatus.waiting();
         dishRequest($scope, id);
+
+        // TODO Transform when info today/tomorrow/aftertomorrow.
     }
 
     $scope.save = function() {
@@ -87,12 +90,37 @@ angular.module('eat-this-one')
         // Dish obj cleaning delegated to backend.
         var fields = [
             'name', 'description', 'locationid',
-            'from', 'nportions', 'donation'];
+            'nportions', 'donation'];
 
         var dish = {};
         fields.forEach(function(field) {
             dish[field] = $scope[field].value;
         });
+
+        // When.
+        var now = new Date();
+        // TODO Ensure that it is GMT 0 as we should always
+        // work without timezone dependencies.
+        var today = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate()
+        );
+
+        switch ($scope.when.value) {
+            case 'today':
+                dish.when = today;
+                break;
+            case 'tomorrow':
+                dish.when = today.getTime() + 24 * 60 * 60 * 1000;
+                break;
+            case 'aftertomorrow':
+                dish.when = today.getTime() + 2 * 24 * 60 * 60 * 1000;
+                break;
+            default:
+                dish.when = today;
+                break;
+        }
 
         appStatus.waiting();
         editDishRequest($scope, dish);

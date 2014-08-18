@@ -15,7 +15,7 @@ block content
                 a(class='pointer', ng-click='openStaticMap()')
                     i(class='glyphicon glyphicon-map-marker')
                     {{dish.loc.name}}
-            p {{lang.from}} {{dish.from}} {{lang.to}} {{dish.to}}
+            p {{lang.when}} {{dish.when}}
             p {{dish.donation | currency}}
         div(ng-if='auth.isAuthenticated()')
             button(type='button', name='meal', ng-click='addMeal()', class='btn btn-primary') {{lang.addmeal}}
