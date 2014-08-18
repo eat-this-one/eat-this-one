@@ -24,16 +24,16 @@ ENTITIES & RELATIONS
 user (may change)
  (no references)
 
-location (does not change)
+location (may change)
  |- userid (ref, having the location creator is only for log purposes)
 
 dish (may change)
  |- userid (ref)
- |- location (embed)
+ |- locationid (ref)
 
-locationSubscription
+locationSubscription (does not change)
  |- userid (ref)
- |- location (embed)
+ |- locationid (ref)
 
 meal (does not change)
  |- userid (ref)
