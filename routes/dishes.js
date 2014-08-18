@@ -15,7 +15,7 @@ var dishProps = {
     'name' : 'required',
     'description' : 'no',
     'locationid' : 'required',
-    'from' : 'required',
+    'when' : 'required',
     'nportions' : 'required',
     'donation' : 'required'
 };

@@ -82,14 +82,71 @@ router.get('/:id', function(req, res) {
 
     var id = req.param('id');
 
-    MealModel.findById(id, function(error, meal) {
+    if (req.param('token') === null) {
+        res.statusCode = 401;
+        res.send('Wrong credentials');
+        return;
+    }
+
+    // Only the meal user or the chef can see a meal.
+    TokenModel.findOne({token: req.param('token')}, function(error, token) {
+
         if (error) {
             res.statusCode = 500;
-            res.send("Error getting '" + id + "' meal: " + error);
+            res.send('Error getting the token: ' + error);
             return;
         }
-        res.statusCode = 200;
-        res.send(meal);
+
+        if (!token) {
+            res.statusCode = 401;
+            res.send('Wrong credentials');
+            return;
+        }
+
+        MealModel.findById(id, function(error, meal) {
+
+            if (error) {
+                res.statusCode = 500;
+                res.send("Error getting '" + id + "' meal: " + error);
+                return;
+            }
+
+            if (!meal) {
+                res.statusCode = 400;
+                res.send('The requested meal does not exist');
+                return;
+            }
+
+            // We attach the dish info to the meal.
+            DishModel.findById(meal.dishid, function(error, dish) {
+
+                if (error) {
+                    res.statusCode = 500;
+                    res.send("Error getting '" + id + "' meal's dish: " + error);
+                    return;
+                }
+
+                if (!dish) {
+                    res.statusCode = 400;
+                    res.send(id + " meal's dish does not exist");
+                    return;
+                }
+
+                // Only meal's user and the chef accepted as meal's viewers.
+                if (meal.userid === token.userid ||
+                        meal.userid === dish.userid) {
+                    res.statusCode = 401;
+                    res.send("You don't have access to this meal");
+                    return;
+                }
+
+                // Dish data.
+                meal.dish = dish;
+
+                res.statusCode = 200;
+                res.send(meal);
+            });
+        });
     });
 });
 
