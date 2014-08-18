@@ -8,7 +8,7 @@ var nconf = require('nconf');
 var mongoose = require('mongoose');
 
 // Load config file.
-nconf.argv().env().file({file: path.join(__dirname, '/config.json')});
+nconf.argv().env().file({file: path.join(__dirname, '/config_backend.json')});
 
 // Check that the required configuration is present.
 var requiredConfig = ['EAT_DB_URI'];

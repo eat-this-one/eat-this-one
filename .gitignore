@@ -7,8 +7,8 @@ public/bower_components/
 *.swx
 
 # Config-dependant files.
-public/javascripts/shared-services/eatConfig.js
-config.json
+config_backend.json
+config_frontend.js
 development.properties
 
 # Compiled packages.

@@ -39,16 +39,17 @@ Eat-this-one source code includes both backend, frontend and development tools.
 
 =Setup=
 
-* Configure your MondoDB database (Backend).
-** **cp config.json.dist config.json**
+* Configure your backend.
+** **cp config_backend.json.dist config_backend.json**
+** Edit config_backend.json with your own values
+
+* Configure your frontend pointing to the backend URL if it is different from the default one.
+** **cp config_frontend.js.dist config_frontend.js**
+** Edit config_frontend.js with your own values
 
 * Configure your Android development tools path
 ** **cp development.properties.dist development.properties**
 ** Edit development.properties with your own values
-
-* Configure your frontend pointing to the backend URL if it is different from the default one.
-** **cp public/javascripts/shared-services/eatConfig.js.dist public/javascripts/shared-services/eatConfig.js**
-** **public/javascripts/shared-services/eatConfig.js**
 
 * Create a virtual host to point to your dist/web dir.
 <VirtualHost YOURHOSTNAME:80>

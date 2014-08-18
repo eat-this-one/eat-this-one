@@ -27,6 +27,7 @@ module.exports = function(grunt) {
                         "public/bower_components/angular-bootstrap/ui-bootstrap.min.js",
                         "public/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js",
                         "public/javascripts/bootstrap.js",
+                        "config_frontend.js",
                         "public/javascripts/i18n/**/*.js",
                         "public/javascripts/controllers/**/*.js" ,
                         "public/javascripts/directives/**/*.js" ,
@@ -40,12 +41,12 @@ module.exports = function(grunt) {
                         "public/bower_components/angular-bootstrap/ui-bootstrap.min.js",
                         "public/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js",
                         "public/javascripts/bootstrap.js",
+                        "config_frontend.js",
                         "public/javascripts/i18n/**/*.js",
                         "public/javascripts/controllers/**/*.js" ,
                         "public/javascripts/directives/**/*.js" ,
                         "public/javascripts/ajax/**/*.js" ,
                         "public/javascripts/shared-services/**/*.js",
-                        "public/javascripts/web-services/**/*.js",
                         "public/javascripts/app-services/**/*.js"
                     ]
                 }
@@ -101,7 +102,7 @@ module.exports = function(grunt) {
             // TODO Add behaviour tests
             // TODO Run JS tests!!
             dev_js : {
-                files : [ "public/javascripts/**/*.js" ],
+                files : [ "public/javascripts/**/*.js", "config_frontend.js" ],
                 tasks : [ "uglify", "copy:build" ],
                 options : {
                     nospawn : true
