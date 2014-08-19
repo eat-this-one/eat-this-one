@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('newUserRequest', ['appStatus', 'notifier', 'eatConfig', 'authManager', 'sessionManager', '$window', function(appStatus, notifier, eatConfig, authManager, sessionManager, $window) {
+    .factory('newUserRequest', ['$window', '$http', 'appStatus', 'notifier', 'eatConfig', 'authManager', 'sessionManager', function($window, $http, appStatus, notifier, eatConfig, authManager, sessionManager) {
 
     return function($scope, $modalInstance, name, email, password) {
 
@@ -12,28 +12,27 @@ angular.module('eat-this-one')
             password : password,
             gcmregid : gcmregid
         };
-        $.ajax({
-            type : 'POST',
+
+        $http({
+            method : 'POST',
             url : eatConfig.backendUrl + '/users',
-            data : requestData,
-            datatype : 'json',
-            success : function(data) {
+            data : requestData
 
-                var msg = 'Account successfully created';
-                notifier.show(msg, 'success');
+        }).success(function(data) {
+            var msg = 'Account successfully created';
+            notifier.show(msg, 'success');
 
-                authManager.authenticate();
-                sessionManager.setUser(data);
+            authManager.authenticate();
+            sessionManager.setUser(data);
 
-                appStatus.completed();
-                $modalInstance.close(true);
+            appStatus.completed();
+            $modalInstance.close(true);
 
-                $window.location.href = 'location-subscriptions/edit.html';
-            },
-            error : function(data, errorStatus, errorMsg) {
+            $window.location.href = 'location-subscriptions/edit.html';
+
+        }).error(function(data, errorStatus, errorMsg) {
                 notifier.show(errorMsg, 'error');
                 appStatus.completed();
-            }
         });
     };
 

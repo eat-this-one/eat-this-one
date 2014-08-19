@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('pushManager', ['$window', 'messagesHandler', 'eatConfig', function($window, notifier, eatConfig) {
+    .factory('pushManager', ['$window', 'messagesHandler', 'eatConfig', function($window, messagesHandler, notifier, eatConfig) {
 
     return {
 

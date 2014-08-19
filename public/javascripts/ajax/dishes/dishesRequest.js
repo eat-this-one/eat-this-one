@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('dishesRequest', ['appStatus', 'notifier', 'eatConfig', function(appStatus, notifier, eatConfig) {
+    .factory('dishesRequest', ['$http', 'appStatus', 'notifier', 'eatConfig', function($http, appStatus, notifier, eatConfig) {
 
     return function($scope, params) {
 
@@ -7,21 +7,19 @@ angular.module('eat-this-one')
             params = {};
         }
 
-        $.ajax({
-            type : 'GET',
+        $http({
+            method : 'GET',
             url : eatConfig.backendUrl + '/dishes',
-            data : params,
-            datatype : 'json',
-            success : function(dishesData) {
-                $scope.dishes = dishesData;
-                $scope.$apply();
-                appStatus.completed();
-            },
-            error : function(data, errorStatus, errorMsg) {
-                var msg = 'Dishes data can not be obtained. "' + errorStatus + '": ' + errorMsg;
-                notifier.show(msg, 'error');
-                appStatus.completed();
-            }
+            params : params
+
+        }).success(function(dishesData) {
+            $scope.dishes = dishesData;
+            appStatus.completed();
+
+        }).error(function(data, errorStatus, errorMsg) {
+            var msg = 'Dishes data can not be obtained. "' + errorStatus + '": ' + errorMsg;
+            notifier.show(msg, 'error');
+            appStatus.completed();
         });
     };
 

@@ -1,29 +1,23 @@
 angular.module('eat-this-one')
-    .factory('mealsRequest', ['appStatus', 'notifier', 'eatConfig', 'sessionManager', function(appStatus, notifier, eatConfig, sessionManager) {
+    .factory('mealsRequest', ['$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', function($http, appStatus, notifier, eatConfig, sessionManager) {
 
-    return function($scope, params) {
+    return function($scope) {
 
-        if (params === null) {
-            params = {};
-        }
-
-        $.ajax({
-            type : 'GET',
+        $http({
+            method : 'GET',
             url : eatConfig.backendUrl + '/meals',
-            data : {
+            params : {
                 token : sessionManager.getToken()
-            },
-            datatype : 'json',
-            success : function(dishesData) {
-                $scope.meals = dishesData;
-                $scope.$apply();
-                appStatus.completed();
-            },
-            error : function(data, errorStatus, errorMsg) {
-                var msg = 'Meals data can not be obtained. "' + errorStatus + '": ' + errorMsg;
-                notifier.show(msg, 'error');
-                appStatus.completed();
             }
+
+        }).success(function(dishesData) {
+            $scope.meals = dishesData;
+            appStatus.completed();
+
+        }).error(function(data, errorStatus, errorMsg) {
+            var msg = 'Meals data can not be obtained. "' + errorStatus + '": ' + errorMsg;
+            notifier.show(msg, 'error');
+            appStatus.completed();
         });
     };
 

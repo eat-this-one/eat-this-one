@@ -1,5 +1,4 @@
-angular.module('eat-this-one')
-    .factory('messagesHandler', ['notifier', function(notifier) {
+angular.module('eat-this-one').factory('messagesHandler', ['notifier', function(notifier) {
 
     return {
         message : function(msgData) {
