@@ -38,9 +38,9 @@ angular.module('eat-this-one')
         placeholder: $scope.lang.when,
         value: '',
         options: [
-            {text: $scope.lang.today, value: 'today'},
-            {text: $scope.lang.tomorrow, value: 'tomorrow'},
-            {text: $scope.lang.aftertomorrow, value: 'aftertomorrow'}
+            {text: $scope.lang.today, value: 'today', btnstyle: 'btn-warning'},
+            {text: $scope.lang.tomorrow, value: 'tomorrow', btnstyle: 'btn-success'},
+            {text: $scope.lang.aftertomorrow, value: 'aftertomorrow', btnstyle: 'btn-info'}
         ]
     };
     $scope.nportions = {
@@ -48,10 +48,10 @@ angular.module('eat-this-one')
         label: $scope.lang.nportions,
         value: 1,
         options: [
-            {text : 1, value : 1},
-            {text : 2, value : 2},
-            {text : 3, value : 3},
-            {text : 4, value : 4}
+            {text : 1, value : 1, btnstyle: 'btn-info'},
+            {text : 2, value : 2, btnstyle: 'btn-info'},
+            {text : 3, value : 3, btnstyle: 'btn-info'},
+            {text : 4, value : 4, btnstyle: 'btn-info'}
         ]
     };
     $scope.donation = {
@@ -59,13 +59,13 @@ angular.module('eat-this-one')
         label: $scope.lang.expecteddonation,
         value: '',
         options: [
-            {text : $scope.lang.open, value : 'open'},
-            {text : $scope.lang.nothing, value : 'nothing'},
-            {text : 1, value : 1},
-            {text : 2, value : 2},
-            {text : 3, value : 3},
-            {text : 4, value : 4},
-            {text : 5, value : 5}
+            {text : $scope.lang.open, value : 'open', btnstyle: 'btn-success'},
+            {text : $scope.lang.nothing, value : 'nothing', btnstyle: 'btn-success'},
+            {text : 1, value : 1, btnstyle: 'btn-warning'},
+            {text : 2, value : 2, btnstyle: 'btn-warning'},
+            {text : 3, value : 3, btnstyle: 'btn-warning'},
+            {text : 4, value : 4, btnstyle: 'btn-warning'},
+            {text : 5, value : 5, btnstyle: 'btn-warning'}
         ]
     };
 
