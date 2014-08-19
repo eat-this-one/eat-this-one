@@ -39,12 +39,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
-// API calls returned in JSON.
+// Response headers.
 app.use('/api', function(req, res, next) {
 
     // Accept different origins than the same domain.
     var origin = (req.headers.origin || "*");
-    res.setHeader("access-control-allow-origin", origin);
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Content-Length, X-Requested-With');
     next();
 });
 
