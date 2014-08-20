@@ -36,10 +36,10 @@ angular.module('eat-this-one')
         name: 'when',
         label: $scope.lang.when,
         placeholder: $scope.lang.when,
-        value: '',
+        value: 'tomorrow',
         options: [
             {text: $scope.lang.today, value: 'today', btnstyle: 'btn-warning'},
-            {text: $scope.lang.tomorrow, value: 'tomorrow', btnstyle: 'btn-success'},
+            {text: $scope.lang.tomorrow, value: 'tomorrow', btnstyle: 'btn-success active'},
             {text: $scope.lang.aftertomorrow, value: 'aftertomorrow', btnstyle: 'btn-info'}
         ]
     };
@@ -48,7 +48,7 @@ angular.module('eat-this-one')
         label: $scope.lang.nportions,
         value: 1,
         options: [
-            {text : 1, value : 1, btnstyle: 'btn-info'},
+            {text : 1, value : 1, btnstyle: 'btn-info active'},
             {text : 2, value : 2, btnstyle: 'btn-info'},
             {text : 3, value : 3, btnstyle: 'btn-info'},
             {text : 4, value : 4, btnstyle: 'btn-info'}
@@ -57,9 +57,9 @@ angular.module('eat-this-one')
     $scope.donation = {
         name: 'donation',
         label: $scope.lang.expecteddonation,
-        value: '',
+        value: 'open',
         options: [
-            {text : $scope.lang.open, value : 'open', btnstyle: 'btn-success'},
+            {text : $scope.lang.open, value : 'open', btnstyle: 'btn-success active'},
             {text : $scope.lang.nothing, value : 'nothing', btnstyle: 'btn-success'},
             {text : 1, value : 1, btnstyle: 'btn-warning'},
             {text : 2, value : 2, btnstyle: 'btn-warning'},
