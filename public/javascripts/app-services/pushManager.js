@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('pushManager', ['$window', 'messagesHandler', 'eatConfig', function($window, messagesHandler, notifier, eatConfig) {
+    .factory('pushManager', ['$window', 'messagesHandler', 'notifier', 'eatConfig', function($window, messagesHandler, notifier, eatConfig) {
 
     return {
 
@@ -58,7 +58,6 @@ angular.module('eat-this-one')
 
 }]);
 
-
 function notificationsHandler(e) {
 
     switch(e.event) {
@@ -77,7 +76,7 @@ function notificationsHandler(e) {
         case 'message':
 
             // Delegated to the messages handler.
-            messagesHandler.message(e.payload);
+            angular.injector(['ng', 'eat-this-one']).get('messagesHandler').message(e.payload);
             break;
 
         case 'error':
@@ -90,6 +89,6 @@ function notificationsHandler(e) {
     }
 }
 
-// TODO Once this is not a crappy prototype.
 function apnNotificationsHandler(e) {
+    // TODO Once this is not a crappy prototype.
 }

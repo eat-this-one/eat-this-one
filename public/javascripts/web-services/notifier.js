@@ -32,7 +32,7 @@ angular.module('eat-this-one').factory('notifier', function() {
             }, 3000);
         },
 
-        statusBar : function(title, message) {
+        statusBar : function(title, message, type, dishid) {
             // Not supported by the web interface.
         }
 
