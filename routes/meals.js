@@ -225,7 +225,8 @@ router.post('/', function(req, res) {
 
                     var msgdata = {
                         "message": "New meal booked by user " + meal.userid + "!",
-                        "type": "meal"
+                        "type": "meal",
+                        "dishid": dish.id
                     };
 
                     // TODO Email fallback.

@@ -193,7 +193,8 @@ router.post('/', function(req, res) {
                         }
                         var msgdata = {
                             "message": "New dish available!",
-                            "type": "dish"
+                            "type": "dish",
+                            "dishid": dish.id
                         };
 
                         // GCM notifications.
