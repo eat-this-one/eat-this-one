@@ -10,9 +10,10 @@ angular.module('eat-this-one')
         signup : $scope.lang.signuptoadddish
     };
 
-    $scope.dish = {};
-
     // Declare form fields.
+    $scope.photo = {
+        value: '',
+    };
     $scope.name = {
         name: 'name',
         label: $scope.lang.dishname,
@@ -96,6 +97,9 @@ angular.module('eat-this-one')
         fields.forEach(function(field) {
             dish[field] = $scope[field].value;
         });
+
+        // Adding the base64 photo.
+        dish.photo = $scope.photo.value;
 
         // When.
         var now = new Date();

@@ -2,6 +2,9 @@ angular.module('eat-this-one').directive('eatPhoto', ['eatConfig', function(eatC
 
     return {
         restrict: 'E',
+        scope: {
+            element: '='
+        },
         link : function(scope) {
 
             // Import lang strings.
@@ -12,6 +15,9 @@ angular.module('eat-this-one').directive('eatPhoto', ['eatConfig', function(eatC
                 smallimg.css('display', 'block');
                 smallimg.prop('src', "data:image/jpeg;base64," + imageData);
                 $('#id-photobtn').css('display', 'none');
+
+                // And send data back to the controller scope.
+                scope.element.value = imageData;
             };
 
             scope.onPhotoFail = function(message) {
