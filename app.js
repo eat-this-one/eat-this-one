@@ -35,7 +35,12 @@ var meals = require('./routes/meals');
 
 app.use(favicon());
 app.use(logger('dev'));
-app.use(bodyParser.json());
+
+// Increasing request size as the image comes with the dish data.
+app.use(bodyParser.json({
+    limit : '3mb'
+}));
+
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
