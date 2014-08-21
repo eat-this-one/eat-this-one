@@ -7,7 +7,7 @@ angular.module('eat-this-one').factory('notifier', function() {
 
         statusBar : function(title, message, type, dishid) {
 
-            var msgid = Math.rand() * 1000;
+            var msgid = Math.random() * 1000;
 
             window.plugin.notification.local.add({
                 id : msgid,
