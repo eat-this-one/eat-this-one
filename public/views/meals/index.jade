@@ -10,8 +10,14 @@ block content
 
         div(ng-show='showNoMeals')
             p {{lang.nomeals}}
-        ul(id='id-dishes-list')
-            li(ng-repeat='dish in meals')
-                a(href='dishes/view.html?id={{dish._id}}') {{dish.name}}
-                p {{dish.description}}
+        table(class='table')
+            tr
+                td {{lang.dishname}}
+                td {{lang.dishdescription}}
+                td {{lang.when}}
+            tr(ng-repeat='dish in meals')
+                td
+                    a(href='dishes/view.html?id={{dish._id}}') {{dish.name}}
+                td {{dish.description}}
+                td {{dish.when}}
 include ../footer
