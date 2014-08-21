@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 var DishSchema = new Schema({
     userid: { type: String, required: true},
     locationid: { type: String, required: true},
+    photoid: { type: String, required: false, default: ''},
     name: { type: String, required: true},
     description: { type: String, required: false, default: ''},
     when: { type: Date, required: true},

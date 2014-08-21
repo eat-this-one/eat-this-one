@@ -6,6 +6,7 @@ var router = express.Router();
 
 // Required models.
 var DishModel = require('../models/dish.js').model;
+var PhotoModel = require('../models/photo.js').model;
 var UserModel = require('../models/user.js').model;
 var TokenModel = require('../models/token.js').model;
 var LocationModel = require('../models/location.js').model;
@@ -66,14 +67,46 @@ router.get('/:id', function(req, res) {
                 return;
             }
 
+            if (!locationInstance) {
+                res.statusCode = 500;
+                res.send("No location can be found for location id = " + dish.locationid);
+                return;
+            }
+
             var returnDish = {};
             for (var prop in dishProps) {
                 returnDish[prop] = dish[prop];
             }
             returnDish.loc = locationInstance;
 
-            res.statusCode = 200;
-            res.send(returnDish);
+            // Attach the image if there is an image.
+            if (dish.photoid !== '') {
+                PhotoModel.findById(dish.photoid, function(error, photo) {
+                    if (error) {
+                        res.statusCode = 500;
+                        res.send("Error getting '" + id + "' dish photo: " + error);
+                        return;
+                    }
+
+                    if (!locationInstance) {
+                        res.statusCode = 500;
+                        res.send("No photo can be found for photo id = " + dish.locationid);
+                        return;
+                    }
+
+                    returnDish.photo = "data:image/jpeg;base64," + photo.data;
+
+                    // Sending the dish back with the image.
+                    res.statusCode = 200;
+                    res.send(returnDish);
+                    return;
+                });
+            } else {
+                // If no picture that's all.
+                res.statusCode = 200;
+                res.send(returnDish);
+                return;
+            }
         });
     });
 });
@@ -148,6 +181,8 @@ router.post('/', function(req, res) {
                     return;
                 }
 
+                // Here we save the photo and inform subscribers in parallel.
+
                 // Informing subscribers that there is a new dish.
                 LocationSubscriptionModel.find({ locationid : dish.locationid}, function(error, subscriptions) {
 
@@ -210,6 +245,27 @@ router.post('/', function(req, res) {
                         return;
                     });
                 });
+
+                // We can save the image and notify the subscribers in parallel.
+                if (req.param('photo')) {
+
+                    var photo = new PhotoModel({ data : req.param('photo') });
+                    photo.save(function(error) {
+                        if (error) {
+                            console.log('Failed to save photo for dish id ' + dish._id + '. Error: ' + error);
+                        } else {
+
+                            // Update the dish with a reference to the photo.
+                            dish.photoid = photo._id;
+                            dish.save(function(error) {
+                                if (error) {
+                                    console.log('Failed to update the ' + dish._id + 'dish photo. Error: ' + error);
+                                }
+                            });
+                        }
+                    });
+                }
+
             });
         });
     });
