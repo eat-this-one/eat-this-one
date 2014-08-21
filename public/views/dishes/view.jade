@@ -9,14 +9,25 @@ block content
         include ../top
 
         div(id='id-dish-info')
-            p {{dish.name}}
-            p {{dish.description}}
-            p
+            div(class='dish-field')
+                b {{lang.dishname}}
+                {{dish.name}}
+            div(class='dish-field')
+                b {{lang.dishdescription}}
+                {{dish.description}}
+            div(class='dish-field')
+                img(class='dish-img', src='{{dish.photo}}')
+            div(class='dish-field')
+                b {{lang.location}}
                 a(class='pointer', ng-click='openStaticMap()')
                     i(class='glyphicon glyphicon-map-marker')
                     {{dish.loc.name}}
-            p {{lang.when}} {{dish.when}}
-            p {{dish.donation | currency}}
+            div(class='dish-field')
+                b {{lang.when}}
+                {{dish.when}}
+            div(class='dish-field')
+                b {{lang.expecteddonation}}
+                {{dish.donation}}
         div(ng-if='auth.isAuthenticated()')
             button(type='button', name='meal', ng-click='addMeal()', class='btn btn-primary') {{lang.addmeal}}
         eat-login-buttons(auth='auth', lang='loginButtonsLangStrings')
