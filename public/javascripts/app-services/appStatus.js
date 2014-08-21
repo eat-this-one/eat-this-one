@@ -9,6 +9,13 @@ angular.module('eat-this-one').factory('appStatus', function() {
             document.addEventListener('deviceready', function() {
                 if (!alreadyFinished) {
                     ActivityIndicator.show($.eatLang.lang.loading);
+
+                    // Sometimes it gets stucked even if the data is
+                    // already loaded. There is no problem in running
+                    // hide when it is already hidden.
+                    setTimeout(function() {
+                        ActivityIndicator.hide();
+                    }, 3000);
                 }
             }, true);
         },

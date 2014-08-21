@@ -16,7 +16,6 @@ angular.module('eat-this-one')
 
                 navigator.globalization.getPreferredLanguage(
                     function(language) {
-                        console.log(language);
                         var shortLang = language.value.substring(0, 2);
                         if (typeof $.eatLang[shortLang] !== 'undefined') {
                             $.eatLang.lang = $.eatLang[shortLang];
