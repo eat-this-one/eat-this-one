@@ -27,13 +27,11 @@ angular.module('eat-this-one')
                     });
                 }
 
-                // Set the dish value when editing.
-
-                // TODO This is dodgy as we don't know which request
-                // will finish faster this should be using listeners.
-                if ($scope.dish && $scope.dish.locationid) {
-                    // TODO Check jQuery method as I am not sure about this.
-                    $scope.locationid.options[$scope.dish.locationid].selected = 'selected';
+                // If there is just 1 result select it.
+                if ($scope.locationid.options.length === 1) {
+                    $('#id-locationid option[value="' + $scope.locationid.options[0].value + '"]').prop('selected', true);
+                    $scope.locationid.value = $scope.locationid.options[0].value;
+                    $('#id-locationid').prop('disabled', true);
                 }
             }
 
