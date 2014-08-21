@@ -13,16 +13,11 @@ angular.module('eat-this-one')
             }
 
         }).success(function(data) {
-
-            //var msg = 'Subscribed!';
-            //notifier.show(msg, 'success');
-            //appStatus.completed();
             $window.location.href = 'index.html';
 
         }).error(function(data, errorStatus, errorMsg) {
-
-            notifier.show(errorMsg, 'error');
             appStatus.completed();
+            notifier.show(errorMsg, 'error');
         });
     };
 }]);

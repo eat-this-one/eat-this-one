@@ -19,20 +19,20 @@ angular.module('eat-this-one')
             data : requestData
 
         }).success(function(data) {
-            var msg = 'Account successfully created';
-            notifier.show(msg, 'success');
 
             authManager.authenticate();
             sessionManager.setUser(data);
 
-            appStatus.completed();
             $modalInstance.close(true);
+            notifier.show($scope.lang.accountcreated, 'success');
+
+            appStatus.completed();
 
             $window.location.href = 'location-subscriptions/edit.html';
 
         }).error(function(data, errorStatus, errorMsg) {
-                notifier.show(errorMsg, 'error');
-                appStatus.completed();
+            appStatus.completed();
+            notifier.show(errorMsg, 'error');
         });
     };
 

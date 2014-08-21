@@ -18,19 +18,17 @@ angular.module('eat-this-one')
             data : requestData
 
         }).success(function(data) {
-            var msg = 'Log in successfully';
-            notifier.show(msg, 'success');
-            appStatus.completed();
-
-            $modalInstance.close(true);
 
             authManager.authenticate();
             sessionManager.setUser(data);
 
-        }).error(function(data, errorStatus, errorMsg) {
+            $modalInstance.close(true);
 
-            notifier.show(errorMsg, 'error');
             appStatus.completed();
+
+        }).error(function(data, errorStatus, errorMsg) {
+            appStatus.completed();
+            notifier.show(errorMsg, 'error');
         });
     };
 

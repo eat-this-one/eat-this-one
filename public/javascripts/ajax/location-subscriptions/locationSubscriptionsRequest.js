@@ -14,8 +14,7 @@ angular.module('eat-this-one')
 
             // If there are no subscriptions.
             if (data.length === 0) {
-                notifier.show('You can not add a dish unless you are subscribed to a location', 'error');
-                appStatus.completed();
+                notifier.show($scope.lang.nosubscriptions, 'error');
 
             } else {
                 
@@ -38,8 +37,8 @@ angular.module('eat-this-one')
             appStatus.completed();
 
         }).error(function(data, errorStatus, errorMsg) {
-            notifier.show(errorMsg, 'error');
             appStatus.completed();
+            notifier.show(errorMsg, 'error');
         });
     };
 }]);

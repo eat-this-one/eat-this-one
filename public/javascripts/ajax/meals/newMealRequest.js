@@ -13,15 +13,13 @@ angular.module('eat-this-one')
 
         }).success(function(data) {
 
-            var msg = 'Meal booked';
-            notifier.show(msg, 'success');
             appStatus.completed();
+            notifier.show($scope.lang.mealbooked, 'success');
 
         }).error(function(data, errorStatus, errorMsg) {
-
+            appStatus.completed();
             var msg = 'Meal can not be added. "' + errorStatus + '": ' + errorMsg;
             notifier.show(msg, 'error');
-            appStatus.completed();
         });
     };
 

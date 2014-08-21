@@ -1,9 +1,11 @@
 angular.module('eat-this-one')
     .controller('LocationSubscriptionsEditController', ['$scope', '$http', 'appStatus', 'eatConfig', 'authManager', 'newLocationRequest', 'newLocationSubscriptionRequest', function($scope, $http, appStatus, eatConfig, authManager, newLocationRequest, newLocationSubscriptionRequest) {
 
-    $scope.pageTitle = 'Location';
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
+
+    // Page title.
+    $scope.pageTitle = $scope.lang.location;
 
     $scope.loginButtonsLangStrings = {
         signin : $scope.lang.signintoaddlocation,
@@ -17,15 +19,15 @@ angular.module('eat-this-one')
     };
     $scope.locationname = {
         name: 'loc',
-        label: $scope.lang.where,
-        placeholder: $scope.lang.where,
+        label: $scope.lang.wherelunch,
+        placeholder: $scope.lang.whereexample,
         value: ''
     };
 
     $scope.address = {
         name: 'address',
         label: $scope.lang.address,
-        placeholder: $scope.lang.address,
+        placeholder: $scope.lang.addressexample,
         value: ''
     };
 

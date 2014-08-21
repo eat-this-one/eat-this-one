@@ -14,12 +14,17 @@ angular.module('eat-this-one')
 
         }).success(function(dishesData) {
             $scope.dishes = dishesData;
+
             appStatus.completed();
 
+            if ($scope.dishes.length === 0) {
+                $scope.showNoDishes = true;
+            }
+
         }).error(function(data, errorStatus, errorMsg) {
+            appStatus.completed();
             var msg = 'Dishes data can not be obtained. "' + errorStatus + '": ' + errorMsg;
             notifier.show(msg, 'error');
-            appStatus.completed();
         });
     };
 

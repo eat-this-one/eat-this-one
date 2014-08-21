@@ -19,14 +19,13 @@ angular.module('eat-this-one')
             data : dish
 
         }).success(function(data) {
-            var msg = 'Changes saved';
-            notifier.show(msg, 'success');
             appStatus.completed();
+            notifier.show($scope.lang.dishadded, 'success');
 
         }).error(function(data, errorStatus, errorMsg) {
+            appStatus.completed();
             var msg = 'Dish can not be added/edited. "' + errorStatus + '": ' + errorMsg;
             notifier.show(msg, 'error');
-            appStatus.completed();
         });
     };
 

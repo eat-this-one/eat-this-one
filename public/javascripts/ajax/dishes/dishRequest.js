@@ -14,9 +14,9 @@ angular.module('eat-this-one')
             appStatus.completed();
 
         }).error(function(data, errorStatus, errorMsg) {
+            appStatus.completed();
             var msg = 'Dish data can not be obtained. "' + errorStatus + '": ' + errorMsg;
             notifier.show(msg, 'error');
-            appStatus.completed();
         });
     };
 

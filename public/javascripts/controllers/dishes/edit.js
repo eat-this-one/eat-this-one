@@ -1,9 +1,11 @@
 angular.module('eat-this-one')
     .controller('DishesEditController', ['$scope', 'appStatus', 'urlParser', 'dishRequest', 'editDishRequest', 'locationSubscriptionsRequest', 'eatConfig', 'authManager', function($scope, appStatus, urlParser, dishRequest, editDishRequest, locationSubscriptionsRequest, eatConfig, authManager) {
 
-    $scope.pageTitle = 'Edit dish';
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
+
+    // Page title.
+    $scope.pageTitle = $scope.lang.dishdata;
 
     $scope.loginButtonsLangStrings = {
         signin : $scope.lang.signintoadddish,
@@ -17,13 +19,13 @@ angular.module('eat-this-one')
     $scope.name = {
         name: 'name',
         label: $scope.lang.dishname,
-        placeholder: $scope.lang.dishname,
+        placeholder: $scope.lang.dishnameexample,
         value: ''
     };
     $scope.description = {
         name: 'description',
         label: $scope.lang.dishdescription,
-        placeholder: $scope.lang.dishdescription,
+        placeholder: $scope.lang.dishdescriptionexample,
         value: ''
     };
     $scope.locationid = {

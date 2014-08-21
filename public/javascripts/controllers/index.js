@@ -1,8 +1,10 @@
 angular.module('eat-this-one').controller('IndexController', ['$scope', '$window', 'eatConfig', 'authManager', function($scope, $window, eatConfig, authManager) {
 
-    $scope.pageTitle = 'Eat this one';
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
+
+    // Page title.
+    $scope.pageTitle = $scope.lang.sitename;
 
     $scope.loginButtonsLangStrings = {
         signin : $scope.lang.signin,

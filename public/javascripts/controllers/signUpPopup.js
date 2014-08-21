@@ -4,22 +4,22 @@ angular.module('eat-this-one').controller('signUpPopupController', ['$scope', '$
 
     $scope.name = {
         name: 'name',
-        label: $scope.lang.name,
-        placeholder: $scope.lang.name,
+        label: $scope.lang.yourname,
+        placeholder: $scope.lang.nameexample,
         value: ''
     };
 
     $scope.email = {
         name: 'email',
-        label: $scope.lang.email,
-        placeholder: $scope.lang.email,
+        label: $scope.lang.youremail,
+        placeholder: $scope.lang.emailexample,
         value: ''
     };
 
     $scope.password = {
         name: 'password',
-        label: $scope.lang.password,
-        placeholder: $scope.lang.password,
+        label: $scope.lang.newpassword,
+        placeholder: $scope.lang.passwordexample,
         value: ''
     };
 
