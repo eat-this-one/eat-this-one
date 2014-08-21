@@ -22,7 +22,7 @@ angular.module('eat-this-one')
         }).error(function(data, errorStatus, errorMsg) {
             appStatus.completed();
             var msg = 'Meals data can not be obtained. "' + errorStatus + '": ' + errorMsg;
-            notifier.show(msg, 'error');
+            notifier.show($scope.lang.error, msg, 'error');
         });
     };
 

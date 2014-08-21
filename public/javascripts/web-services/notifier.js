@@ -1,7 +1,7 @@
 angular.module('eat-this-one').factory('notifier', function() {
     return {
 
-        show : function(msg, type) {
+        show : function(title, msg, type) {
 
             var className = '';
             if (type === 'success') {
@@ -19,7 +19,7 @@ angular.module('eat-this-one').factory('notifier', function() {
             var notification = $('#id-notification');
             notification.css('display', 'block');
             notification.addClass(className);
-            notification.html(msg);
+            notification.html(title + '<br/><br/>' + msg);
 
             notification.fadeIn(1000);
 

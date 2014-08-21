@@ -8,6 +8,7 @@ angular.module('eat-this-one')
             url : eatConfig.backendUrl + '/dishes/' + id
 
         }).success(function(dishData) {
+
             $scope.dish = dishData;
             $scope.dish.map = mapsManager.getStaticMap($scope.dish.loc.address);
 
@@ -16,7 +17,7 @@ angular.module('eat-this-one')
         }).error(function(data, errorStatus, errorMsg) {
             appStatus.completed();
             var msg = 'Dish data can not be obtained. "' + errorStatus + '": ' + errorMsg;
-            notifier.show(msg, 'error');
+            notifier.show($scope.lang.error, msg, 'error');
         });
     };
 

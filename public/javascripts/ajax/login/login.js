@@ -28,7 +28,7 @@ angular.module('eat-this-one')
 
         }).error(function(data, errorStatus, errorMsg) {
             appStatus.completed();
-            notifier.show(errorMsg, 'error');
+            notifier.show($scope.lang.error, errorMsg, 'error');
         });
     };
 

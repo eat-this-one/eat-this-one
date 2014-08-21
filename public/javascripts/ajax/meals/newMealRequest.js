@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('newMealRequest', ['$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', function($http, appStatus, notifier, eatConfig, sessionManager) {
+    .factory('newMealRequest', ['$window', '$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', function($window, $http, appStatus, notifier, eatConfig, sessionManager) {
 
     return function($scope, meal) {
 
@@ -14,12 +14,14 @@ angular.module('eat-this-one')
         }).success(function(data) {
 
             appStatus.completed();
-            notifier.show($scope.lang.mealbooked, 'success');
+            notifier.show($scope.lang.mealbooked, $scope.lang.mealbookedinfo, 'success');
+
+            $window.location.href = 'index.html';
 
         }).error(function(data, errorStatus, errorMsg) {
             appStatus.completed();
             var msg = 'Meal can not be added. "' + errorStatus + '": ' + errorMsg;
-            notifier.show(msg, 'error');
+            notifier.show($scope.lang.error, msg, 'error');
         });
     };
 

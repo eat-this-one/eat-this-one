@@ -14,7 +14,7 @@ angular.module('eat-this-one')
 
             // If there are no subscriptions.
             if (data.length === 0) {
-                notifier.show($scope.lang.nosubscriptions, 'error');
+                notifier.show($scope.lang.nosubscriptions, $scope.lang.nosubscriptionsinfo, 'error');
 
             } else {
                 
@@ -38,7 +38,7 @@ angular.module('eat-this-one')
 
         }).error(function(data, errorStatus, errorMsg) {
             appStatus.completed();
-            notifier.show(errorMsg, 'error');
+            notifier.show($scope.lang.error, errorMsg, 'error');
         });
     };
 }]);

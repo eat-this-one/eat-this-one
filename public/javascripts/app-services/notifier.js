@@ -1,8 +1,14 @@
 angular.module('eat-this-one').factory('notifier', function() {
     return {
 
-        show : function() {
-            // TODO apps uses native dialogues
+        show : function(title, msg, type) {
+
+            navigator.notification.alert(
+                msg,
+                function(){},
+                title,
+                $.eatLang.lang.alertcontinue
+            );
         },
 
         statusBar : function(title, message, type, dishid) {
@@ -16,10 +22,12 @@ angular.module('eat-this-one').factory('notifier', function() {
                 json : { dishid : dishid, type: type},
             });
 
-            // TODO Not working.
+            // TODO Not always working.
             // Move to the requested page.
             window.plugin.notification.local.onclick = function(id, state, json) {
-                window.location.href = 'dishes/view.html?id=' + json.dishid;
+                var href = 'dishes/view.html?id=' +JSON.parse(json).dishid;
+                console.log('Notification clicked, user redirected to ' + href);
+                window.location.href = href;
             };
         }
     }

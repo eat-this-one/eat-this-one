@@ -24,7 +24,7 @@ angular.module('eat-this-one')
             sessionManager.setUser(data);
 
             $modalInstance.close(true);
-            notifier.show($scope.lang.accountcreated, 'success');
+            notifier.show($scope.lang.accountcreated, $scope.lang.accountcreatedinfo, 'success');
 
             appStatus.completed();
 
@@ -32,7 +32,7 @@ angular.module('eat-this-one')
 
         }).error(function(data, errorStatus, errorMsg) {
             appStatus.completed();
-            notifier.show(errorMsg, 'error');
+            notifier.show($scope.lang.error, errorMsg, 'error');
         });
     };
 

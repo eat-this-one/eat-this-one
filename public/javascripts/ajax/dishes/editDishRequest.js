@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('editDishRequest', ['$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', function($http, appStatus, notifier, eatConfig, sessionManager) {
+    .factory('editDishRequest', ['$window', '$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', function($window, $http, appStatus, notifier, eatConfig, sessionManager) {
 
     return function($scope, dish) {
 
@@ -19,13 +19,16 @@ angular.module('eat-this-one')
             data : dish
 
         }).success(function(data) {
+
             appStatus.completed();
-            notifier.show($scope.lang.dishadded, 'success');
+            notifier.show($scope.lang.dishadded, $scope.lang.dishaddedinfo, 'success');
+
+            $window.location.href = 'index.html';
 
         }).error(function(data, errorStatus, errorMsg) {
             appStatus.completed();
             var msg = 'Dish can not be added/edited. "' + errorStatus + '": ' + errorMsg;
-            notifier.show(msg, 'error');
+            notifier.show($scope.lang.error, msg, 'error');
         });
     };
 
