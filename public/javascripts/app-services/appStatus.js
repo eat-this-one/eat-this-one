@@ -1,11 +1,26 @@
 angular.module('eat-this-one').factory('appStatus', function() {
+
+    var alreadyFinished = false;
+
     return {
 
         waiting : function() {
-            // TODO Something that blocks the app until it is ready.
+
+            document.addEventListener('deviceready', function() {
+                if (!alreadyFinished) {
+                    ActivityIndicator.show($.eatLang.lang.loading);
+                }
+            }, true);
         },
         completed : function() {
-            // TODO Unblocks the app.
+
+            // Marking that the action already finished because
+            // sometimes is even faster than deviceready.
+            alreadyFinished = true;
+
+            document.addEventListener('deviceready', function() {
+                ActivityIndicator.hide();
+            });
         }
     }
 });
