@@ -16,6 +16,10 @@ angular.module('eat-this-one')
             if (data.length === 0) {
                 notifier.show($scope.lang.nosubscriptions, $scope.lang.nosubscriptionsinfo, 'error');
 
+                // Wait 1 second.
+                setTimeout(function() {
+                    window.location.href = 'location-subscriptions/edit.html';
+                }, 1000);
             } else {
                 
                 // Populates the location field.

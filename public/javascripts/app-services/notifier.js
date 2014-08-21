@@ -3,12 +3,14 @@ angular.module('eat-this-one').factory('notifier', function() {
 
         show : function(title, msg, type) {
 
-            navigator.notification.alert(
-                msg,
-                function(){},
-                title,
-                $.eatLang.lang.alertcontinue
-            );
+            document.addEventListener('deviceready', function() {
+                navigator.notification.alert(
+                    msg,
+                    function(){},
+                    title,
+                    $.eatLang.lang.alertcontinue
+                );
+            }, true);
         },
 
         statusBar : function(title, message, type, dishid) {
