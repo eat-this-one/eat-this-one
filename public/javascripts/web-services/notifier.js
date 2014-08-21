@@ -16,19 +16,22 @@ angular.module('eat-this-one').factory('notifier', function() {
             }
 
             // Smashes the current value.
-            $('#id-notification').addClass(className);
-            $('#id-notification').html(msg);
+            var notification = $('#id-notification');
+            notification.css('display', 'block');
+            notification.addClass(className);
+            notification.html(msg);
 
-            $('#id-notification').fadeIn(1000);
+            notification.fadeIn(1000);
 
             // We hide it in a few secs.
             setTimeout(function() {
-                $('#id-notification').fadeOut(1000);
+                notification.fadeOut(1000);
 
                 // We need to wait until it completely fades out.
                 setTimeout(function() {
-                    $('#id-notification').removeClass(className);
+                    notification.removeClass(className);
                 }, 2000);
+                notification.css('display', 'none');
             }, 3000);
         },
 
