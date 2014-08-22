@@ -15,7 +15,7 @@ angular.module('eat-this-one').factory('appStatus', function() {
                     // hide when it is already hidden.
                     setTimeout(function() {
                         ActivityIndicator.hide();
-                    }, 3000);
+                    }, 4000);
                 }
             }, true);
         },
@@ -28,6 +28,11 @@ angular.module('eat-this-one').factory('appStatus', function() {
             document.addEventListener('deviceready', function() {
                 ActivityIndicator.hide();
             });
+        },
+
+        // TODO Fix this restartLoader and alreadyFinished mess.
+        restartLoader : function() {
+            alreadyFinished = false;
         }
     }
 });

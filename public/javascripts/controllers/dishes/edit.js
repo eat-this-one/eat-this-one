@@ -128,6 +128,7 @@ angular.module('eat-this-one')
                 break;
         }
 
+        appStatus.restartLoader();
         appStatus.waiting();
         editDishRequest($scope, dish);
     };

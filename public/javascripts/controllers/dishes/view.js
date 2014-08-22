@@ -38,6 +38,8 @@ angular.module('eat-this-one')
         var meal = {
             dishid: id
         };
+
+        appStatus.restartLoader();
         appStatus.waiting();
         newMealRequest($scope, meal);
     };
