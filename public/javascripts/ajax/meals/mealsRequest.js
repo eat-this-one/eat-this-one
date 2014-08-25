@@ -20,9 +20,15 @@ angular.module('eat-this-one')
             }
 
         }).error(function(data, errorStatus, errorMsg) {
-            appStatus.completed();
-            var msg = 'Meals data can not be obtained. "' + errorStatus + '": ' + errorMsg;
-            notifier.show($scope.lang.error, msg, 'error');
+
+            // On unauthorized access we redirect to the index.
+            if (errorStatus === 401) {
+                window.location.href = 'index.html';
+            } else {
+                appStatus.completed();
+                var msg = 'Meals data can not be obtained. "' + errorStatus + '": ' + errorMsg;
+                notifier.show($scope.lang.error, msg, 'error');
+            }
         });
     };
 

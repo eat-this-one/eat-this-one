@@ -1,11 +1,14 @@
 angular.module('eat-this-one')
-    .factory('dishesRequest', ['$http', 'appStatus', 'notifier', 'eatConfig', function($http, appStatus, notifier, eatConfig) {
+    .factory('dishesRequest', ['$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', function($http, appStatus, notifier, eatConfig, sessionManager) {
 
     return function($scope, params) {
 
         if (params === null) {
             params = {};
         }
+
+        // Adding the session token to the request.
+        params.token = sessionManager.getToken();
 
         $http({
             method : 'GET',
@@ -22,9 +25,15 @@ angular.module('eat-this-one')
             }
 
         }).error(function(data, errorStatus, errorMsg) {
-            appStatus.completed();
-            var msg = 'Dishes data can not be obtained. "' + errorStatus + '": ' + errorMsg;
-            notifier.show($scope.lang.error, msg, 'error');
+
+            // On unauthorized access we redirect to the index.
+            if (errorStatus === 401) {
+                window.location.href = 'index.html';
+            } else {
+                appStatus.completed();
+                var msg = 'Dishes data can not be obtained. "' + errorStatus + '": ' + errorMsg;
+                notifier.show($scope.lang.error, msg, 'error');
+            }
         });
     };
 

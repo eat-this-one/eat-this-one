@@ -28,6 +28,10 @@ angular.module('eat-this-one')
                 $('.btn').removeClass('btn-disabled');
 
             });
+        },
+
+        restartLoader : function() {
+            // Undefined, writen just to keeping the same interface.
         }
     }
 });
