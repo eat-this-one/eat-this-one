@@ -24,20 +24,53 @@ var dishProps = {
 // GET - Dishes list.
 router.get('/', function(req, res) {
 
-    // Multiple filters accepted.
-    var filter = {};
-    if (req.param('locationid')) {
-        filter.locationid = req.param('locationid');
-    }
+    // Getting userid from the token.
+    TokenModel.findOne({token: req.param('token')}, function(error, token) {
 
-    DishModel.find(filter, function(error, dishes) {
         if (error) {
             res.statusCode = 500;
-            res.send("Error getting dishes: " + error);
+            res.send('Error getting the token: ' + error);
             return;
         }
-        res.statusCode = 200;
-        res.send(dishes);
+
+        if (!token) {
+            res.statusCode = 401;
+            res.send('Wrong credentials');
+            return;
+        }
+
+        // Getting user location subscriptions.
+        LocationSubscriptionModel.find({userid: token.userid}, function(error, locationSubscriptions) {
+
+            if (error) {
+                res.statusCode = 500;
+                res.send('Error getting user location subscriptions');
+                return;
+            }
+
+            if (!locationSubscriptions) {
+                res.statusCode = 200;
+                res.send([]);
+                return;
+            }
+
+            var locationIds = [];
+            for (var i in locationSubscriptions) {
+                locationIds.push(locationSubscriptions[i].locationid);
+            }
+
+            DishModel.find({locationid : { $in : locationIds }}, function(error, dishes) {
+
+                if (error) {
+                    res.statusCode = 500;
+                    res.send("Error getting dishes: " + error);
+                    return;
+                }
+
+                res.statusCode = 200;
+                res.send(dishes);
+            });
+        });
     });
 });
 
