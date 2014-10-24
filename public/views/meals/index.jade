@@ -17,7 +17,7 @@ block content
                 td {{lang.when}}
             tr(ng-repeat='dish in meals')
                 td
-                    a(href='dishes/view.html?id={{dish._id}}') {{dish.name}}
+                    a(href='meals/view.html?id={{dish._id}}') {{dish.name}}
                 td {{dish.description}}
                 td {{dish.when}}
 include ../footer
