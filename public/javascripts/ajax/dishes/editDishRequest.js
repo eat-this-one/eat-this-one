@@ -27,7 +27,7 @@ angular.module('eat-this-one')
 
         }).error(function(data, errorStatus, errorMsg) {
             appStatus.completed();
-            var msg = 'Dish can not be added/edited. "' + errorStatus + '": ' + errorMsg;
+            var msg = $scope.lang.errordishedit + '. "' + errorStatus + '": ' + data;
             notifier.show($scope.lang.error, msg, 'error');
         });
     };

@@ -17,7 +17,8 @@ angular.module('eat-this-one')
 
         }).error(function(data, errorStatus, errorMsg) {
             appStatus.completed();
-            notifier.show($.eatLang.lang.error, errorMsg, 'error');
+            var msg = '"' + errorStatus + '": ' + data;
+            notifier.show($.eatLang.lang.error, msg, 'error');
         });
     };
 }]);

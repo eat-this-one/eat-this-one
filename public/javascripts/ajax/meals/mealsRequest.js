@@ -26,7 +26,7 @@ angular.module('eat-this-one')
                 window.location.href = 'index.html';
             } else {
                 appStatus.completed();
-                var msg = 'Meals data can not be obtained. "' + errorStatus + '": ' + errorMsg;
+                var msg = $scope.lang.errormealrequest + '. "' + errorStatus + '": ' + data;
                 notifier.show($scope.lang.error, msg, 'error');
             }
         });

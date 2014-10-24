@@ -20,7 +20,7 @@ angular.module('eat-this-one')
 
         }).error(function(data, errorStatus, errorMsg) {
             appStatus.completed();
-            var msg = 'Meal can not be added. "' + errorStatus + '": ' + errorMsg;
+            var msg = $scope.lang.errornewmeal + '. "' + errorStatus + '": ' + data;
             notifier.show($scope.lang.error, msg, 'error');
         });
     };

@@ -16,7 +16,7 @@ angular.module('eat-this-one')
 
         }).error(function(data, errorStatus, errorMsg) {
             appStatus.completed();
-            var msg = 'Dish data can not be obtained. "' + errorStatus + '": ' + errorMsg;
+            var msg = $scope.lang.errordishrequest + '. "' + errorStatus + '": ' + data;
             notifier.show($scope.lang.error, msg, 'error');
         });
     };

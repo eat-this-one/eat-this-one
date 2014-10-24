@@ -12,7 +12,6 @@ angular.module('eat-this-one')
         signup : $scope.lang.signuptoorder
     };
 
-    $scope.meal = {};
     $scope.dish = {};
 
     $scope.openStaticMap = function() {

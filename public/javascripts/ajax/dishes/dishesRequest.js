@@ -31,7 +31,7 @@ angular.module('eat-this-one')
                 window.location.href = 'index.html';
             } else {
                 appStatus.completed();
-                var msg = 'Dishes data can not be obtained. "' + errorStatus + '": ' + errorMsg;
+                var msg = $scope.lang.errordishesrequest + '. "' + errorStatus + '": ' + data;
                 notifier.show($scope.lang.error, msg, 'error');
             }
         });

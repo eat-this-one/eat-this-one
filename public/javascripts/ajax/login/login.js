@@ -28,7 +28,14 @@ angular.module('eat-this-one')
 
         }).error(function(data, errorStatus, errorMsg) {
             appStatus.completed();
-            notifier.show($scope.lang.error, errorMsg, 'error');
+
+            var msg = '';
+            if (errorStatus === 401) {
+                msg = $scope.lang.errorwrongcredentials;
+            } else {
+                msg = '"' + errorStatus + '": ' + data;
+            }
+            notifier.show($scope.lang.error, msg, 'error');
         });
     };
 
