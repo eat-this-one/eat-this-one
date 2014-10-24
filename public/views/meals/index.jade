@@ -10,7 +10,7 @@ block content
 
         div(ng-show='showNoMeals')
             p {{lang.nomeals}}
-        table(class='table')
+        table(ng-show='!showNoMeals', class='table')
             tr
                 td {{lang.dishname}}
                 td {{lang.dishdescription}}
