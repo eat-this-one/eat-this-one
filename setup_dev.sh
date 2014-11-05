@@ -9,6 +9,9 @@ bower install
 # Create cordova app and add dependencies.
 cordova create dist/app "com.monllao.david.eatthisone" "Eat this one" --save-copy=public/shared-build
 
+# App icon.
+ln -s icon.png dist/app/icon.png
+
 cd dist/app
 
 # TODO: Other platforms
