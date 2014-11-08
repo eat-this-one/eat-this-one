@@ -8,7 +8,7 @@ var DishSchema = new Schema({
     name: { type: String, required: true},
     description: { type: String, required: false, default: ''},
     when: { type: Date, required: true},
-    nportions: { type: Number, required: true},
+    nportions: { type: Number, required: true, default: 0},
     donation: { type: String, required: true},
     created: { type: Date, default: Date.now},
     modified: { type: Date, default: null, required: false}
