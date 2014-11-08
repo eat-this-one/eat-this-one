@@ -26,7 +26,8 @@ angular.module('eat-this-one').directive('eatPhoto', ['eatConfig', function(eatC
 
             scope.capturePhoto = function() {
                 navigator.camera.getPicture(scope.onPhotoDataSuccess, scope.onPhotoFail, {
-                    quality: 50,
+                    quality: 49,
+                    targetHeight: 100,
                     destinationType: navigator.camera.DestinationType.DATA_URL
                 });
             };
