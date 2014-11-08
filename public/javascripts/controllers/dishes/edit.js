@@ -49,9 +49,10 @@ angular.module('eat-this-one')
     $scope.nportions = {
         name: 'nportions',
         label: $scope.lang.nportions,
-        value: 1,
+        value: 0,
         options: [
-            {text : 1, value : 1, btnstyle: 'btn-info active'},
+            {text : $scope.lang.planningcooking, value : 0, btnstyle: 'btn-info active'},
+            {text : 1, value : 1, btnstyle: 'btn-info'},
             {text : 2, value : 2, btnstyle: 'btn-info'},
             {text : 3, value : 3, btnstyle: 'btn-info'},
             {text : 4, value : 4, btnstyle: 'btn-info'}

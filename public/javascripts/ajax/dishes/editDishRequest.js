@@ -21,7 +21,14 @@ angular.module('eat-this-one')
         }).success(function(data) {
 
             appStatus.completed();
-            notifier.show($scope.lang.dishadded, $scope.lang.dishaddedinfo, 'success');
+
+            var info = $scope.lang.dishaddedinfo;
+
+            // Adding more info if planning cooking was selected.
+            if (data.nportions === 0) {
+                info += "\n\n" + $scope.lang.planningcookingselected;
+            }
+            notifier.show($scope.lang.dishadded, info, 'success');
 
             $window.location.href = 'index.html';
 
