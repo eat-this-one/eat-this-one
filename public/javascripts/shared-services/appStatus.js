@@ -6,8 +6,9 @@ angular.module('eat-this-one')
 
             $(document).ready(function() {
 
-                if (!$('#id-mask').hasClass('modal')) {
-                    $('#id-mask').addClass('modal');
+                if (!$('#id-mask').hasClass('modal-backdrop')) {
+                    $('#id-mask').addClass('modal-backdrop');
+                    $('#id-mask').removeClass('hidden');
                 }
 
                 // Disables action buttons.
@@ -20,8 +21,9 @@ angular.module('eat-this-one')
 
             $(document).ready(function() {
 
-                if ($('#id-mask').hasClass('modal')) {
-                    $('#id-mask').removeClass('modal');
+                if ($('#id-mask').hasClass('modal-backdrop')) {
+                    $('#id-mask').removeClass('modal-backdrop');
+                    $('#id-mask').addClass('hidden');
                 }
 
                  // Enable buttons again.
