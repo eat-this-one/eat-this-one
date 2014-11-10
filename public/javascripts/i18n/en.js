@@ -45,7 +45,7 @@ $.eatLang.en = {
     name : 'Name',
     nameexample : 'e.g. John Cobra',
     newpassword : 'A new password',
-    nportions : 'Number of portions',
+    nportions : 'Available portions',
     nothing : 'Nothing',
     notificationerror : 'Error',
     notificationinfo : 'Info',
