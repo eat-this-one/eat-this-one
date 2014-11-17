@@ -110,6 +110,7 @@ router.get('/:id', function(req, res) {
             for (var prop in dishProps) {
                 returnDish[prop] = dish[prop];
             }
+            returnDish.userid = dish.userid;
             returnDish.loc = locationInstance;
 
             // Attach the image if there is an image.
