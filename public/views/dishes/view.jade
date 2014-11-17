@@ -31,7 +31,8 @@ block content
                 b {{lang.expecteddonation}}
                 {{dish.donation}}
         div(ng-if='auth.isAuthenticated()')
-            button(type='button', name='meal', ng-click='addMeal()', class='btn btn-primary') {{lang.addmeal}}
+            button(ng-if='!auth.isUser(dish.userid)', type='button', name='meal', ng-click='addMeal()', class='btn btn-primary') {{lang.addmeal}}
+            button(ng-if='auth.isUser(dish.userid)', type='button', name='edit', ng-click='editDish()', class='btn btn-primary') {{lang.editdish}}
         eat-login-buttons(auth='auth', lang='loginButtonsLangStrings')
 
 include ../footer

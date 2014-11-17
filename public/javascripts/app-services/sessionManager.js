@@ -6,7 +6,8 @@ angular.module('eat-this-one')
         initSession : function() {
             var token = localStorage.getItem('token');
             if (token !== null) {
-                authManager.authenticate();
+                var user = JSON.parse(localStorage.getItem('user'));
+                authManager.authenticate(user.id);
             }
 
             $.eatLang.lang = $.eatLang[eatConfig.defaultLang];
@@ -40,12 +41,17 @@ angular.module('eat-this-one')
 
             // Separating sensitive data from non-sensitive.
             localStorage.setItem('token', userData.token);
+            // The pwd should not come from the backend.
             delete userData.token;
             localStorage.setItem('user', JSON.stringify(userData));
         },
 
         getToken : function() {
             return localStorage.getItem('token');
+        },
+
+        getUser : function() {
+            return JSON.parse(localStorage.getItem('user'));
         }
     }
 }]);

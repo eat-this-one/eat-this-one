@@ -7,7 +7,8 @@ angular.module('eat-this-one')
 
             var token = sessionStorage.getItem('token');
             if (token !== null) {
-                authManager.authenticate();
+                var user = JSON.parse(sessionStorage.getItem('user'));
+                authManager.authenticate(user.id);
             }
 
             // TODO: Load here user data.
@@ -23,6 +24,7 @@ angular.module('eat-this-one')
         },
 
         setUser : function(userData) {
+            // TODO Move token to cookies.
             // Separating sensitive data from non-sensitive.
             sessionStorage.setItem('token', userData.token);
             delete userData.token;
@@ -31,6 +33,10 @@ angular.module('eat-this-one')
 
         getToken : function() {
             return sessionStorage.getItem('token');
+        },
+
+        getUser : function() {
+            return JSON.parse(sessionStorage.getItem('user'));
         }
     }
 }]);

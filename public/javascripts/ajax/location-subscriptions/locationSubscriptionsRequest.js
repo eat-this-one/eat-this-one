@@ -38,7 +38,7 @@ angular.module('eat-this-one')
                 }
             }
 
-            appStatus.completed();
+            appStatus.completed('locationSubscriptionsRequest');
 
         }).error(function(data, errorStatus, errorMsg) {
             appStatus.completed();

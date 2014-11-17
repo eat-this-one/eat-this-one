@@ -78,12 +78,12 @@ angular.module('eat-this-one')
     var id = urlParser.getParam('id');
 
     // Load the user subscriptions.
-    appStatus.waiting();
+    appStatus.waiting('locationSubscriptionsRequest');
     locationSubscriptionsRequest($scope);
 
     // Load the dish info.
     if (id) {
-        appStatus.waiting();
+        appStatus.waiting('dishRequest');
         dishRequest($scope, id);
 
         // TODO Transform when info today/tomorrow/aftertomorrow.
@@ -129,7 +129,6 @@ angular.module('eat-this-one')
                 break;
         }
 
-        appStatus.restartLoader();
         appStatus.waiting();
         editDishRequest($scope, dish);
     };
