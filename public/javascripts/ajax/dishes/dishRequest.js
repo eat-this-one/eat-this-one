@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('dishRequest', ['$http', 'appStatus', 'notifier', 'eatConfig', 'mapsManager', function($http, appStatus, notifier, eatConfig, mapsManager) {
+    .factory('dishRequest', ['$http', 'appStatus', 'notifier', 'eatConfig', 'mapsManager', 'datesConverter', function($http, appStatus, notifier, eatConfig, mapsManager, datesConverter) {
 
     return function($scope, id) {
 
@@ -22,25 +22,8 @@ angular.module('eat-this-one')
 
             // Only available when editing dishes.
             if ($scope.when) {
-                var now = new Date();
-                var today = Date.UTC(
-                    now.getFullYear(),
-                    now.getMonth(),
-                    now.getDate()
-                );
-                var dbtime = Date.parse($scope.dish.when);
-                if (dbtime == today) {
-                    $scope.when.value = 'today';
-                } else if (dbtime == today + (24 * 60 * 60 * 1000)) {
-                    $scope.when.value = 'tomorrow';
-                } else if (dbtime == today + (2 * 24 * 60 * 60 * 1000)) {
-                    $scope.when.value = 'aftertomorrow';
-                } else {
-                    // If it is a passed event we should not arrive here
-                    // but let's offer an option as this app is pretty buggy
-                    // at the moment and we never know.
-                    $scope.when.value = 'today';
-                }
+                // Passing a timestamp with miliseconds here as it is Date format in the db.
+                $scope.when.value = datesConverter.timeToDay(Date.parse($scope.dish.when));
             }
 
             // Only available when editing dishes.

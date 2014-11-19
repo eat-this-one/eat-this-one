@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesEditController', ['$scope', 'appStatus', 'urlParser', 'dishRequest', 'editDishRequest', 'locationSubscriptionsRequest', 'eatConfig', 'authManager', function($scope, appStatus, urlParser, dishRequest, editDishRequest, locationSubscriptionsRequest, eatConfig, authManager) {
+    .controller('DishesEditController', ['$scope', 'appStatus', 'urlParser', 'dishRequest', 'editDishRequest', 'locationSubscriptionsRequest', 'eatConfig', 'authManager', 'datesConverter', function($scope, appStatus, urlParser, dishRequest, editDishRequest, locationSubscriptionsRequest, eatConfig, authManager, datesConverter) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -115,26 +115,7 @@ angular.module('eat-this-one')
         dish.photo = $scope.photo.value;
 
         // When.
-        var now = new Date();
-        var today = Date.UTC(
-            now.getFullYear(),
-            now.getMonth(),
-            now.getDate()
-        );
-        switch ($scope.when.value) {
-            case 'today':
-                dish.when = today;
-                break;
-            case 'tomorrow':
-                dish.when = today + (24 * 60 * 60 * 1000);
-                break;
-            case 'aftertomorrow':
-                dish.when = today + (2 * 24 * 60 * 60 * 1000);
-                break;
-            default:
-                dish.when = today;
-                break;
-        }
+        dish.when = datesConverter.dayToTime($scope.when.value);
 
         appStatus.waiting();
         editDishRequest($scope, dish);
