@@ -24,9 +24,9 @@ angular.module('eat-this-one')
 
             var info = $scope.lang.dishaddedinfo;
 
-            // Adding more info if planning cooking was selected.
+            // Adding more info if unlimited was selected.
             if (data.nportions === 0) {
-                info += "\n\n" + $scope.lang.planningcookingselected;
+                info += "\n\n" + $scope.lang.unlimitedselected;
             }
             notifier.show($scope.lang.dishadded, info, 'success');
 
