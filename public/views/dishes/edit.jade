@@ -20,7 +20,8 @@ block content
             input(type='hidden', name='currency', id='id-currency',  value='aud', ng-model='dish.currency')
 
             div(ng-if='auth.isAuthenticated()')
-                input(type='submit', ng-click='save()', class='btn btn-primary', value='{{lang.sharedish}}')
+                input(ng-if='!isEditing()', type='submit', ng-click='save()', class='btn btn-primary', value='{{lang.sharedish}}')
+                input(ng-if='isEditing()', type='submit', ng-click='save()', class='btn btn-primary', value='{{lang.editdish}}')
             eat-login-buttons(auth='auth', lang='loginButtonsLangStrings')
 
     include ../footer

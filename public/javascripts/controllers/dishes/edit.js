@@ -51,11 +51,11 @@ angular.module('eat-this-one')
         label: $scope.lang.nportions,
         value: 0,
         options: [
-            {text : $scope.lang.planningcooking, value : 0, btnstyle: 'btn-info active'},
             {text : 1, value : 1, btnstyle: 'btn-info'},
             {text : 2, value : 2, btnstyle: 'btn-info'},
             {text : 3, value : 3, btnstyle: 'btn-info'},
-            {text : 4, value : 4, btnstyle: 'btn-info'}
+            {text : 4, value : 4, btnstyle: 'btn-info'},
+            {text : $scope.lang.unlimited, value : 0, btnstyle: 'btn-info active'}
         ]
     };
     $scope.donation = {
@@ -89,6 +89,10 @@ angular.module('eat-this-one')
         // TODO Transform when info today/tomorrow/aftertomorrow.
     }
 
+    $scope.isEditing = function() {
+        return (id);
+    };
+
     $scope.save = function() {
 
         // Dish obj cleaning delegated to backend.
@@ -97,6 +101,12 @@ angular.module('eat-this-one')
             'nportions', 'donation'];
 
         var dish = {};
+
+        // Edit mode.
+        if (id) {
+            dish.id = id;
+        }
+
         fields.forEach(function(field) {
             dish[field] = $scope[field].value;
         });
@@ -106,23 +116,20 @@ angular.module('eat-this-one')
 
         // When.
         var now = new Date();
-        // TODO Ensure that it is GMT 0 as we should always
-        // work without timezone dependencies.
-        var today = new Date(
+        var today = Date.UTC(
             now.getFullYear(),
             now.getMonth(),
             now.getDate()
         );
-
         switch ($scope.when.value) {
             case 'today':
                 dish.when = today;
                 break;
             case 'tomorrow':
-                dish.when = today.getTime() + 24 * 60 * 60 * 1000;
+                dish.when = today + (24 * 60 * 60 * 1000);
                 break;
             case 'aftertomorrow':
-                dish.when = today.getTime() + 2 * 24 * 60 * 60 * 1000;
+                dish.when = today + (2 * 24 * 60 * 60 * 1000);
                 break;
             default:
                 dish.when = today;
