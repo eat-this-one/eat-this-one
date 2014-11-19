@@ -59,7 +59,21 @@ router.get('/', function(req, res) {
                 locationIds.push(locationSubscriptions[i].locationid);
             }
 
-            DishModel.find({locationid : { $in : locationIds }}, function(error, dishes) {
+            // Only passed events when listing.
+            var now = new Date();
+            var yesterday = Date.UTC(
+                now.getFullYear(),
+                now.getMonth(),
+                now.getDate()
+            ) - (24 * 60 * 60);
+            var dishfilter = {
+                locationid : {
+                    $in : locationIds
+                }, when : {
+                    $gt : yesterday
+                }
+            };
+            DishModel.find(dishfilter, function(error, dishes) {
 
                 if (error) {
                     res.statusCode = 500;
