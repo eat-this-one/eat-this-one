@@ -28,8 +28,9 @@ block content
             div(class='dish-field')
                 b {{lang.expecteddonation}}
                 {{dish.donation}}
+            div(class='red') {{remainingportionstext}}
         div(ng-if='auth.isAuthenticated()')
-            button(ng-if='!auth.isUser(dish.userid)', type='button', name='meal', ng-click='addMeal()', class='btn btn-primary') {{lang.addmeal}}
+            button(ng-if='!auth.isUser(dish.userid) && dish.remainingportions > 0', type='button', name='meal', ng-click='addMeal()', class='btn btn-primary') {{lang.addmeal}}
             button(ng-if='auth.isUser(dish.userid)', type='button', name='edit', ng-click='editDish()', class='btn btn-primary') {{lang.editdish}}
         eat-login-buttons(auth='auth', lang='loginButtonsLangStrings')
 

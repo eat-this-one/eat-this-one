@@ -35,6 +35,23 @@ angular.module('eat-this-one')
                 smallimage.prop('src', $scope.dish.photo);
             }
 
+            // Number of remaining portions to book.
+            if ($scope.dish.nportions == 0) {
+                // No text as they are unlimited, rendundant info.
+                $scope.dish.remainingportions = -1;
+            } else {
+                $scope.dish.remainingportions = $scope.dish.nportions - dishData.bookedmeals;
+                if ($scope.dish.remainingportions == 1) {
+                    // Show last portion text.
+                    $scope.remainingportionstext = $scope.lang.onlyoneportion;
+                } else if ($scope.dish.remainingportions == 0) {
+                    // Show all booked text.
+                    $scope.remainingportionstext = $scope.lang.allportionsbooked;
+                } else {
+                    // No text if more than one portion.
+                }
+            }
+
             appStatus.completed('dishRequest');
 
         }).error(function(data, errorStatus, errorMsg) {

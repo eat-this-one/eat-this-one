@@ -13,6 +13,7 @@ angular.module('eat-this-one')
     };
 
     $scope.dish = {};
+    $scope.remainingportionstext = '';
 
     $scope.openStaticMap = function() {
         var staticMapModal = $modal.open({
