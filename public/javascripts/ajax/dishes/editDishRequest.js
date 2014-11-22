@@ -19,17 +19,27 @@ angular.module('eat-this-one')
             url : eatConfig.backendUrl + url,
             data : dish
 
-        }).success(function(data) {
+        }).success(function(data, statusCode) {
 
             appStatus.completed();
 
-            var info = $scope.lang.dishaddedinfo;
-
+            var title = '';
+            var info = '';
+            if (statusCode == 201) {
+                // POST.
+                title = $scope.lang.dishadded;
+                info = $scope.lang.dishaddedinfo;
+            } else {
+                // PUT.
+                title = $scope.lang.dishedited;
+            }
+            
             // Adding more info if unlimited was selected.
             if (data.nportions === 0) {
                 info += "\n\n" + $scope.lang.unlimitedselected;
             }
-            notifier.show($scope.lang.dishadded, info, 'success');
+
+            notifier.show(title, info, 'success');
 
             $window.location.href = 'index.html';
 

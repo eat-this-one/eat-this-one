@@ -18,6 +18,7 @@ $.eatLang.en = {
     dishdata : 'Dish data',
     dishdescription : 'Description',
     dishdescriptionexample : 'e.g. Seafood paella, not gluten free',
+    dishedited : 'Dish edited',
     dishname : 'Dish name',
     dishnameexample : 'e.g. Paella',
     editdish : 'Edit dish',

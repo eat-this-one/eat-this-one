@@ -65,11 +65,11 @@ angular.module('eat-this-one')
         options: [
             {text : $scope.lang.open, value : 'open', btnstyle: 'btn-success active'},
             {text : $scope.lang.nothing, value : 'nothing', btnstyle: 'btn-success'},
-            {text : 1, value : 1, btnstyle: 'btn-warning'},
-            {text : 2, value : 2, btnstyle: 'btn-warning'},
-            {text : 3, value : 3, btnstyle: 'btn-warning'},
-            {text : 4, value : 4, btnstyle: 'btn-warning'},
-            {text : 5, value : 5, btnstyle: 'btn-warning'}
+            {text : 1, value : '1', btnstyle: 'btn-warning'},
+            {text : 2, value : '2', btnstyle: 'btn-warning'},
+            {text : 3, value : '3', btnstyle: 'btn-warning'},
+            {text : 4, value : '4', btnstyle: 'btn-warning'},
+            {text : 5, value : '5', btnstyle: 'btn-warning'}
         ]
     };
 
