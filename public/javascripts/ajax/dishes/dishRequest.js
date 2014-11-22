@@ -29,7 +29,6 @@ angular.module('eat-this-one')
             // Only available when editing dishes.
             // The photo is not required so it may not be there, then we allow one to be added.
             if ($scope.dish.photo) {
-                $('#id-photobtn').css('display', 'none');
                 var smallimage = $('#id-smallimage');
                 smallimage.css('display', 'block');
                 // Image already returns prefixed with ...jpeg:base64;.

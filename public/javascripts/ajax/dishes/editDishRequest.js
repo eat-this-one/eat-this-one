@@ -3,11 +3,12 @@ angular.module('eat-this-one')
 
     return function($scope, dish) {
 
-        var method = '';
+        // Defaults to new dish values.
+        var method = 'POST';
+        var url = '/dishes';
         if (typeof dish.id != 'undefined' && dish.id != null) {
             method = 'PUT';
-        } else {
-            method = 'POST';
+            url = '/dishes/' + dish.id;
         }
 
         // Adding the session token to the request.
@@ -15,7 +16,7 @@ angular.module('eat-this-one')
 
         $http({
             method : method,
-            url : eatConfig.backendUrl + '/dishes',
+            url : eatConfig.backendUrl + url,
             data : dish
 
         }).success(function(data) {

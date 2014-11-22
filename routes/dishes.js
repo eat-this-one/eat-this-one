@@ -21,6 +21,25 @@ var dishProps = {
     'donation' : 'required'
 };
 
+function savePhoto(photoparam, dish) {
+
+    var photo = new PhotoModel({ data : photoparam });
+    photo.save(function(error) {
+        if (error) {
+            console.log('Failed to save photo for dish id ' + dish._id + '. Error: ' + error);
+        } else {
+
+            // Update the dish with a reference to the photo.
+            dish.photoid = photo._id;
+            dish.save(function(error) {
+                if (error) {
+                    console.log('Failed to update the ' + dish._id + 'dish photo. Error: ' + error);
+                }
+            });
+        }
+    });
+}
+
 // GET - Dishes list.
 router.get('/', function(req, res) {
 
@@ -296,31 +315,110 @@ router.post('/', function(req, res) {
 
                 // We can save the image and notify the subscribers in parallel.
                 if (req.param('photo')) {
-
-                    var photo = new PhotoModel({ data : req.param('photo') });
-                    photo.save(function(error) {
-                        if (error) {
-                            console.log('Failed to save photo for dish id ' + dish._id + '. Error: ' + error);
-                        } else {
-
-                            // Update the dish with a reference to the photo.
-                            dish.photoid = photo._id;
-                            dish.save(function(error) {
-                                if (error) {
-                                    console.log('Failed to update the ' + dish._id + 'dish photo. Error: ' + error);
-                                }
-                            });
-                        }
-                    });
+                    savePhoto(req.param('photo'), dish);
                 }
-
             });
         });
     });
 });
 
 router.put('/:id', function(req, res) {
-    res.send("Not supported");
+
+    if (req.param('token') === null) {
+        res.statusCode = 401;
+        res.send('Wrong credentials');
+        return;
+    }
+
+    var dishObj = {};
+    var missing = [];
+    for (var prop in dishProps) {
+
+        if (dishProps[prop] === 'required' && req.param(prop) === null) {
+            missing[prop] = prop;
+            continue;
+        }
+        dishObj[prop] = req.param(prop);
+    }
+
+    if (missing.length > 0) {
+        res.statusCode = 400;
+        res.send("Missing params, can not create dish");
+        return;
+    }
+
+    // Getting userid from the token.
+    TokenModel.findOne({token: req.param('token')}, function(error, token) {
+
+        if (error) {
+            res.statusCode = 500;
+            res.send('Error getting the token: ' + error);
+            return;
+        }
+
+        if (!token) {
+            res.statusCode = 401;
+            res.send('Wrong credentials');
+            return;
+        }
+
+        DishModel.findOne({_id : req.param('id')}, function(error, dish) {
+
+            if (error) {
+                res.statusCode = 500;
+                res.send('Error getting the dish' + error);
+                return;
+            }
+
+            if (!dish) {
+                res.statusCode = 400;
+                res.send('The dish id does not exist');
+                return;
+            }
+
+            if (dish.userid != token.userid) {
+                res.statusCode = 403;
+                res.send('You can not edit that dish');
+                return;
+            }
+
+            // Setting the new dish values.
+            for (var prop in dishObj) {
+                dish[prop] = dishObj[prop];
+            }
+
+            // TODO Here we skip checking that the location exists as
+            // users can initially only be subscribed to one location.
+
+            // Finally saving the dish.
+            dish.save(function(error) {
+
+                if (error) {
+                    res.statusCode = 500;
+                    res.send("Error saving dish: " + error);
+                    return;
+                }
+
+                // Here we save the photo and inform subscribers in parallel.
+
+                // TODO Notify the subscribed users about changes in the dish.
+
+                // This action can begin while the notifications
+                // are being sent as the needed info is not related.
+                if (req.param('photo')) {
+                    savePhoto(req.param('photo'), dish);
+                }
+
+                // In case the value exists (previous value or savePhoto()
+                // already finished), it is too big to be returned now.
+                delete dish.photoid;
+
+                res.statusCode = 200;
+                res.send(dish);
+                return;
+            });
+        });
+    });
 });
 
 router.post('/:id', function(req, req) {
