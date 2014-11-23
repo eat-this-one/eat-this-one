@@ -52,6 +52,9 @@ angular.module('eat-this-one')
                 }
             }
 
+            // Set the page title.
+            $scope.pageTitle = $scope.dish.name;
+
             appStatus.completed('dishRequest');
 
         }).error(function(data, errorStatus, errorMsg) {
