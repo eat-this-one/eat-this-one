@@ -12,18 +12,15 @@ angular.module('eat-this-one')
             $scope.dish = dishData;
             $scope.dish.map = mapsManager.getStaticMap($scope.dish.loc.address);
 
+            // Nice when format.
+            $scope.dish.when = datesConverter.timeToDay(Date.parse($scope.dish.when));
+
             // Fill form values if they exist.
-            var fields = ['userid', 'name', 'description', 'nportions', 'donation'];
+            var fields = ['userid', 'name', 'description', 'when', 'nportions', 'donation'];
             for (var fieldName in fields) {
                 if ($scope[fields[fieldName]]) {
                     $scope[fields[fieldName]].value = $scope.dish[fields[fieldName]];
                 }
-            }
-
-            // Only available when editing dishes.
-            if ($scope.when) {
-                // Passing a timestamp with miliseconds here as it is Date format in the db.
-                $scope.when.value = datesConverter.timeToDay(Date.parse($scope.dish.when));
             }
 
             // Only available when editing dishes.

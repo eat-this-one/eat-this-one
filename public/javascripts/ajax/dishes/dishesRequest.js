@@ -1,14 +1,10 @@
 angular.module('eat-this-one')
     .factory('dishesRequest', ['$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', 'datesConverter', function($http, appStatus, notifier, eatConfig, sessionManager, datesConverter) {
 
-    return function($scope, params) {
-
-        if (params === null) {
-            params = {};
-        }
+    return function($scope) {
 
         // Adding the session token to the request.
-        params.token = sessionManager.getToken();
+        var params = { token : sessionManager.getToken()};
 
         $http({
             method : 'GET',

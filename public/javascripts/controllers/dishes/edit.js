@@ -5,7 +5,7 @@ angular.module('eat-this-one')
     $scope.auth = authManager;
 
     // Page title.
-    $scope.pageTitle = $scope.lang.dishdata;
+    $scope.pageTitle = $scope.lang.adddish;
 
     $scope.loginButtonsLangStrings = {
         signin : $scope.lang.signintoadddish,
