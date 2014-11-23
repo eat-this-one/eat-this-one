@@ -10,7 +10,7 @@ block content
 
         div(ng-show='showNoDishes')
             p {{lang.nodishes}}
-        table(ng-show='!showNoDishes', class='table')
+        table(ng-show='!showNoDishes', class='table table-hover')
             tr
                 td {{lang.dishname}}
                 td {{lang.dishdescription}}
@@ -18,6 +18,8 @@ block content
             tr(ng-repeat='dish in dishes', class='dish')
                 td
                     a(href='dishes/view.html?id={{dish._id}}') {{dish.name}}
-                td {{dish.description}}
-                td {{dish.when}}
+                td
+                    a(href='dishes/view.html?id={{dish._id}}') {{dish.description}}
+                td
+                    a(href='dishes/view.html?id={{dish._id}}') {{dish.when}}
 include ../footer

@@ -26,10 +26,9 @@ angular.module('eat-this-one').factory('datesConverter', function() {
             } else if (timestamp == today + (2 * 24 * 60 * 60 * 1000)) {
                 day = 'aftertomorrow';
             } else {
-                // If it is a passed event we should not arrive here
-                // but let's offer an option as this app is pretty buggy
-                // at the moment and we never know.
-                day = 'today';
+                // Here we just return dd-mm-YYYY.
+                var date = new Date(timestamp);
+                day = date.getDate() + '-' + date.getMonth() + '-' + date.getFullYear();
             }
 
             return day;

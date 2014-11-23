@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('dishesRequest', ['$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', function($http, appStatus, notifier, eatConfig, sessionManager) {
+    .factory('dishesRequest', ['$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', 'datesConverter', function($http, appStatus, notifier, eatConfig, sessionManager, datesConverter) {
 
     return function($scope, params) {
 
@@ -22,6 +22,10 @@ angular.module('eat-this-one')
 
             if ($scope.dishes.length === 0) {
                 $scope.showNoDishes = true;
+            } else {
+                for (index in $scope.dishes) {
+                    $scope.dishes[index].when = datesConverter.timeToDay(Date.parse($scope.dishes[index].when));
+                }
             }
 
         }).error(function(data, errorStatus, errorMsg) {
