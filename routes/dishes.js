@@ -22,6 +22,7 @@ var dishProps = {
     'donation' : 'required'
 };
 
+// TODO Change this old way function format.
 function savePhoto(photoparam, dish) {
 
     var photo = new PhotoModel({ data : photoparam });
@@ -93,7 +94,8 @@ router.get('/', function(req, res) {
                     $gt : yesterday
                 }
             };
-            DishModel.find(dishfilter, function(error, dishes) {
+            var extra = {sort: {'created' : -1}};
+            DishModel.find(dishfilter, {}, extra, function(error, dishes) {
 
                 if (error) {
                     res.statusCode = 500;
