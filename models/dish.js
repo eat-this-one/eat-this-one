@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var DishSchema = new Schema({
-    userid: { type: String, required: true},
+    userid: { type: String, required: true, index: true},
     locationid: { type: String, required: true},
     photoid: { type: String, required: false, default: ''},
     name: { type: String, required: true},

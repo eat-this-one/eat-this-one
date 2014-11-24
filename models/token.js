@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var TokenSchema = new Schema({
     userid: { type: String, required: true},
-    token: { type: String, required: true},
+    token: { type: String, required: true, unique: true},
     expires: { type: Number, required: false}
 });
 

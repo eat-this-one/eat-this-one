@@ -6,6 +6,7 @@ var LocationSubscriptionSchema = new Schema({
     locationid: { type: String, required: true},
     created: { type: Date, default: Date.now}
 });
+LocationSubscriptionSchema.index( {userid: 1, locationid: 1}, {unique : true} );
 
 // Export the model and the entity structure.
 module.exports.schema = LocationSubscriptionSchema;
