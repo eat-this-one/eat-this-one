@@ -27,6 +27,17 @@ angular.module('eat-this-one')
         });
     };
 
+    // Returns whether the user can book this dish or not.
+    $scope.userCanBook = function() {
+        // - The chef can not book.
+        // - If there are no more portions it can not be booked.
+        // - If the user already book it can not be booked again.
+        return (
+            !$scope.auth.isUser($scope.dish.userid) &&
+            $scope.dish.remainingportions > 0 &&
+            $scope.dish.booked === false);
+    };
+
     var id = urlParser.getParam('id');
 
     // Load the dish info into the fields.

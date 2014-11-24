@@ -1,11 +1,12 @@
 angular.module('eat-this-one')
-    .factory('dishRequest', ['$http', 'appStatus', 'notifier', 'eatConfig', 'mapsManager', 'datesConverter', function($http, appStatus, notifier, eatConfig, mapsManager, datesConverter) {
+    .factory('dishRequest', ['$http', 'appStatus', 'notifier', 'eatConfig', 'mapsManager', 'datesConverter', 'sessionManager', function($http, appStatus, notifier, eatConfig, mapsManager, datesConverter, sessionManager) {
 
     return function($scope, id) {
 
         $http({
             method : 'GET',
-            url : eatConfig.backendUrl + '/dishes/' + id
+            url : eatConfig.backendUrl + '/dishes/' + id,
+            params : { token : sessionManager.getToken() }
 
         }).success(function(dishData) {
 

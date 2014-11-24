@@ -3,13 +3,10 @@ angular.module('eat-this-one')
 
     return function($scope) {
 
-        // Adding the session token to the request.
-        var params = { token : sessionManager.getToken()};
-
         $http({
             method : 'GET',
             url : eatConfig.backendUrl + '/dishes',
-            params : params
+            params : { token : sessionManager.getToken() }
 
         }).success(function(dishesData) {
             $scope.dishes = dishesData;
