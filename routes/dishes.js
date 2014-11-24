@@ -116,96 +116,124 @@ router.get('/:id', function(req, res) {
 
     var id = req.param('id');
 
-    DishModel.findById(id, function(error, dish) {
+    // Getting userid from the token.
+    TokenModel.findOne({token: req.param('token')}, function(error, token) {
+
         if (error) {
             res.statusCode = 500;
-            res.send("Error getting '" + id + "' dish: " + error);
+            res.send('Error getting the token: ' + error);
             return;
         }
 
-        if (!dish) {
-            res.statusCode = 400;
-            res.send("This dish does not exist");
+        if (!token) {
+            res.statusCode = 401;
+            res.send('Wrong credentials');
             return;
         }
 
-        // We attach location data.
-        LocationModel.findById(dish.locationid, function(error, locationInstance) {
+        DishModel.findById(id, function(error, dish) {
             if (error) {
                 res.statusCode = 500;
-                res.send("Error getting '" + id + "' dish location: " + error);
+                res.send("Error getting '" + id + "' dish: " + error);
                 return;
             }
 
-            if (!locationInstance) {
-                res.statusCode = 500;
-                res.send("No location can be found for location id = " + dish.locationid);
+            if (!dish) {
+                res.statusCode = 400;
+                res.send("This dish does not exist");
                 return;
             }
 
-            var returnDish = {};
-            for (var prop in dishProps) {
-                returnDish[prop] = dish[prop];
-            }
-            returnDish.userid = dish.userid;
-            returnDish.loc = locationInstance;
-
-            UserModel.findById(dish.userid, function(error, user) {
+            // We attach location data.
+            LocationModel.findById(dish.locationid, function(error, locationInstance) {
 
                 if (error) {
                     res.statusCode = 500;
-                    res.send("Error getting '" + dish.userid + "' user: " + error);
+                    res.send("Error getting '" + id + "' dish location: " + error);
                     return;
                 }
 
-                // This may happen, but we hope nobody never deletes the app
-                // and it he/she does delete the app, not after adding a dish.
-                if (!user) {
-                    returnDish.username = 'deleted';
-                } else {
-                    returnDish.username = user.name;
+                if (!locationInstance) {
+                    res.statusCode = 500;
+                    res.send("No location can be found for location id = " + dish.locationid);
+                    return;
                 }
 
-                // Remaining dishes.
-                MealModel.count({dishid : id}, function(error, bookedmeals) {
+                var returnDish = {};
+                for (var prop in dishProps) {
+                    returnDish[prop] = dish[prop];
+                }
+                returnDish.userid = dish.userid;
+                returnDish.loc = locationInstance;
+
+                UserModel.findById(dish.userid, function(error, user) {
 
                     if (error) {
                         res.statusCode = 500;
-                        res.send('Error getting the number of booked meals');
+                        res.send("Error getting '" + dish.userid + "' user: " + error);
                         return;
                     }
 
-                    // Frontend will manage to count the remaining portions.
-                    returnDish.bookedmeals = bookedmeals;
+                    // This may happen, but we hope nobody never deletes the app
+                    // and it he/she does delete the app, not after adding a dish.
+                    if (!user) {
+                        returnDish.username = 'deleted';
+                    } else {
+                        returnDish.username = user.name;
+                    }
 
-                    // Attach the image if there is an image.
-                    if (dish.photoid !== '') {
-                        PhotoModel.findById(dish.photoid, function(error, photo) {
-                            if (error) {
-                                res.statusCode = 500;
-                                res.send("Error getting '" + id + "' dish photo: " + error);
-                                return;
+                    // Remaining dishes.
+                    MealModel.find({dishid : id}, function(error, bookedmeals) {
+
+                        if (error) {
+                            res.statusCode = 500;
+                            res.send('Error getting booked meals');
+                            return;
+                        }
+
+                        // Has the current user booked this dish?
+                        // TODO Change this loop please...
+                        returnDish.booked = false;
+                        if (bookedmeals) {
+                            for (index in bookedmeals) {
+                                if (bookedmeals[index].userid === token.userid) {
+                                    returnDish.booked = true;
+                                }
                             }
+                        }
 
-                            if (!locationInstance) {
-                                res.statusCode = 500;
-                                res.send("No photo can be found for photo id = " + dish.locationid);
+                        // Frontend will manage to count the remaining portions.
+                        returnDish.bookedmeals = bookedmeals.length;
+
+                        // Attach the image if there is an image.
+                        if (dish.photoid !== '') {
+                            PhotoModel.findById(dish.photoid, function(error, photo) {
+                                if (error) {
+                                    res.statusCode = 500;
+                                    res.send("Error getting '" + id + "' dish photo: " + error);
+                                    return;
+                                }
+
+                                if (!locationInstance) {
+                                    res.statusCode = 500;
+                                    res.send("No photo can be found for photo id = " + dish.locationid);
+                                    return;
+                                }
+
+                                returnDish.photo = "data:image/jpeg;base64," + photo.data;
+
+                                // Sending the dish back with the image.
+                                res.statusCode = 200;
+                                res.send(returnDish);
                                 return;
-                            }
-
-                            returnDish.photo = "data:image/jpeg;base64," + photo.data;
-
-                            // Sending the dish back with the image.
+                            });
+                        } else {
+                            // If no picture that's all.
                             res.statusCode = 200;
                             res.send(returnDish);
                             return;
-                        });
-                    } else {
-                        // If no picture that's all.
-                        res.statusCode = 200;
-                        res.send(returnDish);
-                        return;
-                    }
+                        }
+                    });
                 });
             });
         });

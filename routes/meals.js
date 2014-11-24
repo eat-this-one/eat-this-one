@@ -200,43 +200,61 @@ router.post('/', function(req, res) {
                 return;
             }
 
-            // Storing the meal.
-            meal.save(function(error) {
+            // Check that this user has not already booked this dish.
+            var mealFilter = {userid : token.userid, dishid : dish.id};
+            console.log(mealFilter);
+            MealModel.findOne(mealFilter, function(error, userMeal) {
 
                 if (error) {
                     res.statusCode = 500;
-                    res.send("Error saving meal: " + error);
+                    res.send('Error getting meal' + error);
                     return;
                 }
 
-                // Inform the chef about the new meal.
-                UserModel.findById(dish.userid, function(error, chef) {
+                if (userMeal) {
+                    res.statusCode = 400;
+                    res.send('This user already booked this dish');
+                    return;
+                }
+
+                // Storing the meal.
+                meal.save(function(error) {
+
                     if (error) {
                         res.statusCode = 500;
-                        res.send('Error getting chef: ' + error);
+                        res.send("Error saving meal: " + error);
                         return;
                     }
 
-                    if (!chef) {
-                        res.statuscode = 500;
-                        res.send('Error, the user that cooked the dish does not exist anymore');
-                        return;
-                    }
+                    // Inform the chef about the new meal.
+                    UserModel.findById(dish.userid, function(error, chef) {
+                        if (error) {
+                            res.statusCode = 500;
+                            res.send('Error getting chef: ' + error);
+                            return;
+                        }
 
-                    var msgdata = {
-                        "message": "New meal booked by user " + meal.userid + "!",
-                        "type": "meal",
-                        "dishid": dish.id
-                    };
+                        if (!chef) {
+                            res.statuscode = 500;
+                            res.send('Error, the user that cooked the dish does not exist anymore');
+                            return;
+                        }
 
-                    // TODO Email fallback.
-                    if (chef.gcmregids.length > 0) {
-                        pusher.pushToGCM(chef.gcmregids, msgdata);
-                    }
+                        var msgdata = {
+                            "message": "New meal booked by user " + meal.userid + "!",
+                            "type": "meal",
+                            "dishid": dish.id
+                        };
 
-                    // Same output for all output formats.
-                    res.statusCode = 200;
-                    res.send(meal);
+                        // TODO Email fallback.
+                        if (chef.gcmregids.length > 0) {
+                            pusher.pushToGCM(chef.gcmregids, msgdata);
+                        }
+
+                        // Same output for all output formats.
+                        res.statusCode = 200;
+                        res.send(meal);
+                    });
                 });
             });
         });
