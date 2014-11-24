@@ -23,8 +23,12 @@ angular.module('eat-this-one')
                 }
             }
 
-            // Only available when editing dishes.
-            // The photo is not required so it may not be there, then we allow one to be added.
+            // Chef name requires special treatment.
+            if ($scope.dish.username === 'deleted') {
+                $scope.dish.username = $scope.lang.deleteduser;
+            }
+
+            // The photo is not required so it may not be there.
             if ($scope.dish.photo) {
                 var smallimage = $('#id-smallimage');
                 smallimage.css('display', 'block');

@@ -18,6 +18,9 @@ block content
             div(class='dish-field')
                 b {{lang.dishdescription}}
                 {{dish.description}}
+            div(class='dish-field')
+                b {{lang.chef}}
+                {{dish.username}}
             div(ng-if='dish.photo', class='dish-field')
                 img(class='dish-img', src='{{dish.photo}}')
             div(class='dish-field')
