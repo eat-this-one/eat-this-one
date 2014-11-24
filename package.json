@@ -32,7 +32,8 @@
     "morgan": "~1.0.0",
     "nconf": "*",
     "request": "^2.40.0",
-    "static-favicon": "~1.0.0"
+    "static-favicon": "~1.0.0",
+    "node-gcm": "~0.9.12"
   },
   "devDependencies": {
     "bower": "1.2.7",
