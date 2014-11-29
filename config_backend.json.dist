@@ -3,5 +3,7 @@
     "APP_PORT": "3000",
     "PWD_SALT": "asd",
     "GCM_SEND_URL": "https://android.googleapis.com/gcm/send",
-    "GCM_API_KEY": "YOURAPIEY"
+    "GCM_API_KEY": "YOURAPIEY",
+    "G_OAUTH_CLIENT_ID" : "YOUROAUTHCLIENTID",
+    "G_OAUTH_CLIENT_SECRET" : "YOUROAUTHCLIENTSECRET"
 }
