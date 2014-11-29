@@ -23,3 +23,4 @@ cordova plugin add https://github.com/phonegap-build/PushPlugin.git
 cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications.git
 cordova plugin add org.apache.cordova.camera
 cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git
+cordova plugin add https://github.com/apache/cordova-plugin-inappbrowser.git

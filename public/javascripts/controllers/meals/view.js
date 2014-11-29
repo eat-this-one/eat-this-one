@@ -7,11 +7,6 @@ angular.module('eat-this-one')
     // Page title.
     $scope.pageTitle = $scope.lang.dish;
 
-    $scope.loginButtonsLangStrings = {
-        signin : $scope.lang.signintoorder,
-        signup : $scope.lang.signuptoorder
-    };
-
     $scope.dish = {};
 
     $scope.openStaticMap = function() {

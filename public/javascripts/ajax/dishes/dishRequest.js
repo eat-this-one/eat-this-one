@@ -45,13 +45,19 @@ angular.module('eat-this-one')
                 $scope.dish.remainingportions = $scope.dish.nportions - dishData.bookedmeals;
                 if ($scope.dish.remainingportions == 1) {
                     // Show last portion text.
-                    $scope.remainingportionstext = $scope.lang.onlyoneportion;
+                    $scope.dishusefulinfotext = $scope.lang.lastportion;
+
                 } else if ($scope.dish.remainingportions == 0) {
                     // Show all booked text.
-                    $scope.remainingportionstext = $scope.lang.allportionsbooked;
+                    $scope.dishusefulinfotext = $scope.lang.allportionsbooked;
                 } else {
                     // No text if more than one portion.
                 }
+            }
+
+            // If the user already booked the dish this is more useful than any other info.
+            if ($scope.dish.booked) {
+                $scope.dishusefulinfotext = $scope.lang.alreadybookedtext;
             }
 
             // Set the page title.

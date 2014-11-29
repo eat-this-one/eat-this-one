@@ -7,11 +7,6 @@ angular.module('eat-this-one')
     // Page title.
     $scope.pageTitle = $scope.lang.location;
 
-    $scope.loginButtonsLangStrings = {
-        signin : $scope.lang.signintoaddlocation,
-        signup : $scope.lang.signuptoaddlocation
-    };
-
     // To store the id.
     // TODO We really need to change all this shit.
     $scope.loc = {

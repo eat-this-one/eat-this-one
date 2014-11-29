@@ -24,6 +24,5 @@ block content
             div(ng-if='auth.isAuthenticated()')
                 input(ng-if='!isEditing()', type='submit', ng-click='save()', class='btn btn-primary', value='{{lang.sharedish}}')
                 input(ng-if='isEditing()', type='submit', ng-click='save()', class='btn btn-primary', value='{{lang.editdish}}')
-            eat-login-buttons(auth='auth', lang='loginButtonsLangStrings')
 
     include ../footer

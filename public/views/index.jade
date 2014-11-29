@@ -9,7 +9,9 @@ block content
             blockquote
                 p
                     {{lang.infowelcome}}
-            eat-login-buttons(auth='auth', lang='loginButtonsLangStrings')
+
+            div(id='id-authenticate', ng-if='!auth.isAuthenticated()')
+                button(type='button', ng-click='authorizeGoogle()', class='btn btn-primary') {{lang.signingoogle}}
 
         div(ng-if='auth.isAuthenticated()')
             blockquote

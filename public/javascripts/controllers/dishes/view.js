@@ -7,13 +7,13 @@ angular.module('eat-this-one')
     // Page title.
     $scope.pageTitle = $scope.lang.dish;
 
-    $scope.loginButtonsLangStrings = {
-        signin : $scope.lang.signintoorder,
-        signup : $scope.lang.signuptoorder
-    };
-
     $scope.dish = {};
-    $scope.remainingportionstext = '';
+
+    // This string contains useful info for the user
+    // The preference is:
+    // # The user already booked the dish
+    // # Last portion available | All portions booked
+    $scope.dishusefulinfotext = '';
 
     $scope.openStaticMap = function() {
         var staticMapModal = $modal.open({

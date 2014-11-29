@@ -13,8 +13,6 @@ angular.module('eat-this-one')
         }).success(function(dishesData) {
             $scope.meals = dishesData;
 
-            appStatus.completed();
-
             if ($scope.meals.length === 0) {
                 $scope.showNoMeals = true;
             } else {
@@ -22,6 +20,8 @@ angular.module('eat-this-one')
                     $scope.meals[index].when = datesConverter.timeToDay(Date.parse($scope.meals[index].when));
                 }
             }
+
+            appStatus.completed();
 
         }).error(function(data, errorStatus, errorMsg) {
 

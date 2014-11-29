@@ -11,8 +11,7 @@ block content
         div(ng-if='auth.isAuthenticated()', class='centered-container')
             button(ng-if='userCanBook()', type='button', name='meal', ng-click='addMeal()', class='btn btn-primary') {{lang.addmeal}}
             button(ng-if='auth.isUser(dish.userid)', type='button', name='edit', ng-click='editDish()', class='btn btn-primary') {{lang.editdish}}
-        eat-login-buttons(auth='auth', lang='loginButtonsLangStrings')
-        div(class='remainingportionsinfo') {{remainingportionstext}}
+        div(class='dishusefulinfo') {{dishusefulinfotext}}
 
         div(id='id-dish-info')
             div(class='dish-field')

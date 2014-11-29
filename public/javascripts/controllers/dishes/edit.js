@@ -7,11 +7,6 @@ angular.module('eat-this-one')
     // Page title.
     $scope.pageTitle = $scope.lang.adddish;
 
-    $scope.loginButtonsLangStrings = {
-        signin : $scope.lang.signintoadddish,
-        signup : $scope.lang.signuptoadddish
-    };
-
     // Declare form fields.
     $scope.photo = {
         value: '',
