@@ -4,10 +4,12 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
     gcmregids: { type: Array, default: [] },
     email: { type: String, required: true, unique: true},
-    password: { type: String, required: true},
     name: { type: String, required: true},
-    created: { type: Date, default: Date.now},
-    modified: { type: Date, default: null, required: false}
+    pictureurl: { type: String, required: false, default: null},
+    locale: { type: String, required: false, default: null},
+    created: { type: Date, required: false, default: Date.now},
+    modified: { type: Date, required: false, default: null},
+    googletoken: {type: String, required: false, default: null}
 });
 
 // Export the model and the entity structure.
