@@ -22,7 +22,11 @@ block content
             input(type='hidden', name='currency', id='id-currency',  value='aud', ng-model='dish.currency')
 
             div(ng-if='auth.isAuthenticated()')
-                input(ng-if='!isEditing()', type='submit', ng-click='save()', class='btn btn-primary', value='{{lang.sharedish}}')
-                input(ng-if='isEditing()', type='submit', ng-click='save()', class='btn btn-primary', value='{{lang.editdish}}')
+                button(ng-if='!isEditing()', type='button', ng-click='save()', class='btn btn-primary')
+                    span(class='glyphicon glyphicon-ok button-icon')
+                    {{lang.sharedish}}
+                button(ng-if='isEditing()', type='button', ng-click='save()', class='btn btn-primary')
+                    span(class='glyphicon glyphicon-ok button-icon')
+                    {{lang.editdish}}
 
     include ../footer

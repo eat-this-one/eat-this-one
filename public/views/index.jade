@@ -11,7 +11,9 @@ block content
                     {{lang.infowelcome}}
 
             div(id='id-authenticate', ng-if='!auth.isAuthenticated()')
-                button(type='button', ng-click='authorizeGoogle()', class='btn btn-primary') {{lang.signingoogle}}
+                button(type='button', ng-click='authorizeGoogle()', class='btn btn-primary')
+                    span(class='glyphicon glyphicon-log-in button-icon')
+                    {{lang.signingoogle}}
 
         div(ng-if='auth.isAuthenticated()')
             blockquote
@@ -19,8 +21,12 @@ block content
                     {{lang.infoindex}}
 
             div(class='centered-container')
-                button(type='button', name='add', ng-click='addDish()', class='btn btn-primary') {{lang.adddish}}
-                button(type='button', name='meals', ng-click='indexMeals()', class='btn btn-primary') {{lang.mymeals}}
+                button(type='button', name='add', ng-click='addDish()', class='btn btn-primary')
+                    span(class='glyphicon glyphicon-share button-icon')
+                    {{lang.adddish}}
+                button(type='button', name='meals', ng-click='indexMeals()', class='btn btn-primary')
+                    span(class='glyphicon glyphicon-cutlery button-icon')
+                    {{lang.mymeals}}
 
             div(class='container dishes-list')
                 div(ng-show='showNoDishes')
