@@ -25,8 +25,8 @@ angular.module('eat-this-one')
             }
 
             // Chef name requires special treatment.
-            if ($scope.dish.username === 'deleted') {
-                $scope.dish.username = $scope.lang.deleteduser;
+            if ($scope.dish.user.name === 'deleted') {
+                $scope.dish.user.name = $scope.lang.deleteduser;
             }
 
             // The photo is not required so it may not be there.

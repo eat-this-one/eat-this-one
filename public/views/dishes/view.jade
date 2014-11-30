@@ -15,7 +15,7 @@ block content
             button(ng-if='auth.isUser(dish.userid)', type='button', name='edit', ng-click='editDish()', class='btn btn-primary')
                 span(class='glyphicon glyphicon-edit button-icon')
                 {{lang.editdish}}
-        div(class='dishusefulinfo') {{dishusefulinfotext}}
+        div(class='dish-useful-info') {{dishusefulinfotext}}
 
         div(id='id-dish-info')
             div(class='dish-field')
@@ -23,7 +23,8 @@ block content
                 {{dish.description}}
             div(class='dish-field')
                 b {{lang.chef}}
-                {{dish.username}}
+                img(ng-if='dish.user.pictureurl', class='user-picture', src='{{dish.user.pictureurl}}')
+                {{dish.user.name}}
             div(ng-if='dish.photo', class='dish-field')
                 img(class='dish-img', src='{{dish.photo}}')
             div(class='dish-field')
