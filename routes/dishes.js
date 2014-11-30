@@ -177,9 +177,14 @@ router.get('/:id', function(req, res) {
                     // This may happen, but we hope nobody never deletes the app
                     // and it he/she does delete the app, not after adding a dish.
                     if (!user) {
-                        returnDish.username = 'deleted';
+                        returnDish.user = {
+                            name: 'deleted',
+                        };
                     } else {
-                        returnDish.username = user.name;
+                        returnDish.user = {
+                            name: user.name,
+                            pictureurl: user.pictureurl
+                        };
                     }
 
                     // Remaining dishes.
