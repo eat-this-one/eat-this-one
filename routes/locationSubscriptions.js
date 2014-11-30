@@ -102,26 +102,47 @@ router.post('/', function(req, res) {
             return;
         }
 
-        // TODO Check that the location exists.
-        var locationid = req.param('locationid');
+        // Check that the location exists.
+        LocationModel.findById(req.param('locationid'), function(error, locationInstance) {
 
-        // Setting the userid from the token.
-        locationSubscriptionObj = {
-            userid : token.userid,
-            locationid : locationid
-        };
-
-        var locationSubscriptionInstance = new LocationSubscriptionModel(locationSubscriptionObj);
-        locationSubscriptionInstance.save(function(error) {
             if (error) {
                 res.statusCode = 500;
-                res.send("Error saving location subscription: " + error);
+                res.send('Error getting location: ' + error);
                 return;
             }
 
-            // Same output for all output formats.
-            res.statusCode = 201;
-            res.send(locationSubscriptionInstance);
+            if (!locationInstance) {
+                res.statuscode = 400;
+                res.send('The requested location does not exist.');
+                return;
+            }
+
+            // Setting the userid from the token.
+            locationSubscriptionObj = {
+                userid : token.userid,
+                locationid : locationid
+            };
+
+            var locationSubscriptionInstance = new LocationSubscriptionModel(locationSubscriptionObj);
+            locationSubscriptionInstance.save(function(error) {
+                if (error) {
+                    res.statusCode = 500;
+                    res.send("Error saving location subscription: " + error);
+                    return;
+                }
+
+                // Returned object.
+                var locationSubscriptionReturn = {
+                    userid : locationSubscriptionInstance.userid,
+                    locationid : locationSubscriptionInstance.locationid,
+                    created : locationSubscriptionInstance.created,
+                    loc : locationInstance
+                };
+
+                // Same output for all output formats.
+                res.statusCode = 201;
+                res.send(locationSubscriptionReturn);
+            });
         });
     });
 
