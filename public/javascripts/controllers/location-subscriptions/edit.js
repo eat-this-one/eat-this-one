@@ -92,10 +92,10 @@ angular.module('eat-this-one')
 
         if ($scope.loc.value != '') {
             // Only a subscription as the location already exists.
-            newLocationSubscriptionRequest($scope.loc.value);
+            newLocationSubscriptionRequest($scope, $scope.loc.value);
         } else {
             // A new location including subscription.
-            newLocationRequest($scope.locationname.value, $scope.address.value);
+            newLocationRequest($scope, $scope.locationname.value, $scope.address.value);
         }
     };
 

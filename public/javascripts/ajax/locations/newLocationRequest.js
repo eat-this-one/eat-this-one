@@ -1,7 +1,7 @@
 angular.module('eat-this-one')
     .factory('newLocationRequest', ['$window', '$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', function($window, $http, appStatus, notifier, eatConfig, sessionManager) {
 
-    return function(name, address) {
+    return function($scope, name, address) {
 
         $http({
             method : 'POST',
@@ -13,12 +13,18 @@ angular.module('eat-this-one')
             }
 
         }).success(function(data) {
+
+            var msg = $scope.lang.locationcreatedinfo + "\n\n" + $scope.lang.subscribedlocationinfo;
+            notifier.show($scope.lang.locationcreated, msg, 'success');
+
+            appStatus.completed();
+
             $window.location.href = 'index.html';
 
         }).error(function(data, errorStatus, errorMsg) {
             appStatus.completed();
             var msg = '"' + errorStatus + '": ' + data;
-            notifier.show($.eatLang.lang.error, msg, 'error');
+            notifier.show($scope.lang.error, msg, 'error');
         });
     };
 }]);

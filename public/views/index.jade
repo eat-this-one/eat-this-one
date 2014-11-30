@@ -16,10 +16,6 @@ block content
                     {{lang.signingoogle}}
 
         div(ng-if='auth.isAuthenticated()')
-            blockquote
-                p
-                    {{lang.infoindex}}
-
             div(class='centered-container')
                 button(type='button', name='add', ng-click='addDish()', class='btn btn-primary')
                     span(class='glyphicon glyphicon-share button-icon')
