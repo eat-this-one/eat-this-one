@@ -330,6 +330,17 @@ router.post('/', function(req, res) {
                         return;
                     }
 
+                    var returnDish = {};
+                    for (var prop in dishProps) {
+                        returnDish[prop] = dish[prop];
+                    }
+                    returnDish.userid = dish.userid;
+                    returnDish.loc = locationInstance;
+                    returnDish.user = {
+                        name: user.name,
+                        pictureurl: user.pictureurl
+                    };
+
                     // Here we save the photo and inform subscribers in parallel.
 
                     // Informing subscribers that there is a new dish.
@@ -344,7 +355,7 @@ router.post('/', function(req, res) {
                         // Pity that nobody is subscribed here.
                         if (!subscriptions) {
                             res.statusCode = 201;
-                            res.send(dish);
+                            res.send(returnDish);
                             return;
                         }
 
@@ -364,7 +375,7 @@ router.post('/', function(req, res) {
                             // All subscribed users are deleted?.
                             if (!subscribers) {
                                 res.statusCode = 201;
-                                res.send(dish);
+                                res.send(returnDish);
                                 return;
                             }
 
@@ -390,7 +401,7 @@ router.post('/', function(req, res) {
 
                             // All good, so we notify and finish.
                             res.statusCode = 201;
-                            res.send(dish);
+                            res.send(returnDish);
                             return;
                         });
                     });
