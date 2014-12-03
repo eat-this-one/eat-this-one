@@ -65,6 +65,8 @@ Eat-this-one source code includes both backend, frontend and development tools.
 ** **./setup_dev.sh**
 *** You may need to install previous android sdk APIs as cordova is not always using the latest version, if it is the case, run **android sdk** and select the required versions
 ** Edit dist/app/config.xml
+*** Change whatever info you like
+*** Add <icon src="icon.png" /> under <widget>
 ** Edit dist/app/platforms/AndroidManifest.xml
 *** Set android:debuggable="true" in <application> node
 

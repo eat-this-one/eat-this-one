@@ -39,7 +39,19 @@ angular.module('eat-this-one')
                 info += "\n\n" + $scope.lang.unlimitedselected;
             }
 
-            notifier.show(title, info, 'success');
+            // Notify success.
+            if (statusCode == 201) {
+                // Share with users.
+                var msg = '"' + data.user.name + '" ' + $scope.lang.sharedwithyou +
+                    ': "' + data.name + '" .' +
+                    "\n\n" + '"' + data.description + '"' +
+                    "\n\n" + $scope.lang.downloadapp + "\n" + $scope.lang.android + ": " + eatConfig.downloadAppUrl;
+                notifier.show(title, info, 'success', function(msg) {
+                    $window.plugins.socialsharing.share(msg);
+                });
+            } else {
+                notifier.show(title, info, 'success');
+            }
 
             $window.location.href = 'index.html';
 
