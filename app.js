@@ -25,6 +25,8 @@ mongoose.connect(process.env.EAT_DB_URI || nconf.get('EAT_DB_URI'));
 var app = express();
 
 // Routes to components.
+var download = require('./routes/download');
+
 var index = require('./routes/index');
 var login = require('./routes/login');
 var users = require('./routes/users');
@@ -58,6 +60,8 @@ app.use('/api', function(req, res, next) {
 
 // Default route.
 app.use('/', index);
+
+app.use('/download', download);
 
 app.use('/api', index);
 app.use('/api/login', login);
