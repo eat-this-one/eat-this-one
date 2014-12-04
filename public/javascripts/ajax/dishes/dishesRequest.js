@@ -24,13 +24,9 @@ angular.module('eat-this-one')
         }).error(function(data, errorStatus, errorMsg) {
 
             // On unauthorized access we redirect to the index.
-            if (errorStatus === 401) {
-                window.location.href = 'index.html';
-            } else {
-                appStatus.completed();
-                var msg = $scope.lang.errordishesrequest + '. "' + errorStatus + '": ' + data;
-                notifier.show($scope.lang.error, msg, 'error');
-            }
+            appStatus.completed();
+            var msg = $scope.lang.errordishesrequest + '. "' + errorStatus + '": ' + data;
+            notifier.show($scope.lang.error, msg, 'error');
         });
     };
 
