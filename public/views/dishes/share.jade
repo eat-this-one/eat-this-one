@@ -1,0 +1,19 @@
+extends ../component-layout
+
+block content
+    div(ng-controller='DishesShareController', class='container')
+
+        include ../top
+
+        div(class='centered-container')
+            button(class='btn btn-primary', ng-click='sendSms()')
+                span(class='glyphicon glyphicon-envelope button-icon')
+                {{lang.sharedish}}
+            button(class='btn btn-default', ng-click='skip()')
+                span(class='glyphicon glyphicon-hand-right button-icon')
+                {{lang.skip}}
+        div(ng-repeat='contact in contacts | orderBy: "displayName"', class='contact')
+            input(type='checkbox', value='{{contact.mobilePhone}}')
+            {{contact.displayName}}
+
+include ../footer
