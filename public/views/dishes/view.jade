@@ -23,8 +23,8 @@ block content
                 {{dish.description}}
             div(class='dish-field')
                 b {{lang.chef}}
-                img(ng-if='dish.user.pictureurl', class='user-picture', src='{{dish.user.pictureurl}}')
                 {{dish.user.name}}
+                img(ng-if='dish.user.pictureurl', class='user-picture', src='{{dish.user.pictureurl}}')
             div(ng-if='dish.photo', class='dish-field')
                 img(class='dish-img', src='{{dish.photo}}')
             div(class='dish-field')

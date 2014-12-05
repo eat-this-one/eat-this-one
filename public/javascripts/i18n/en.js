@@ -45,7 +45,7 @@ $.eatLang.en = {
     loading : 'Loading',
     location : 'Location',
     locationcreated : 'Location created',
-    locationcreatedinfo : 'Time to share dishes with your collegues! Once you add a dish you can select them.',
+    locationcreatedinfo : 'Time to share dishes! Once you add a dish you can add your colleagues.',
     locationname : 'Location name',
     login : 'Log in',
     loggedin : 'Logged in',
