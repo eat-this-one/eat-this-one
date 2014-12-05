@@ -1,16 +1,12 @@
 angular.module('eat-this-one').factory('notifier', function() {
     return {
 
-        show : function(title, msg, type, callback) {
-
-            if (typeof(callback) != "function") {
-                callback = function(){};
-            }
+        show : function(title, msg, type) {
 
             document.addEventListener('deviceready', function() {
                 navigator.notification.alert(
                     msg,
-                    callback,
+                    function(){},
                     title,
                     $.eatLang.lang.alertcontinue
                 );
