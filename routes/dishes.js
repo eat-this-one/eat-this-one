@@ -322,94 +322,107 @@ router.post('/', function(req, res) {
                     return;
                 }
 
-                dish.save(function(error) {
+                // Checking if it is the first dish the user creates.
+                // We need this value to show more options to the
+                // user after creating the first dish.
+                DishModel.count( {userid : token.userid}, function(error, userDishesCount) {
 
                     if (error) {
                         res.statusCode = 500;
-                        res.send("Error saving dish: " + error);
+                        res.send('Error getting the number of previous dishes');
                         return;
                     }
 
-                    var returnDish = {};
-                    for (var prop in dishProps) {
-                        returnDish[prop] = dish[prop];
-                    }
-                    returnDish.userid = dish.userid;
-                    returnDish.loc = locationInstance;
-                    returnDish.user = {
-                        name: user.name,
-                        pictureurl: user.pictureurl
-                    };
-
-                    // Here we save the photo and inform subscribers in parallel.
-
-                    // Informing subscribers that there is a new dish.
-                    LocationSubscriptionModel.find({ locationid : dish.locationid}, function(error, subscriptions) {
+                    dish.save(function(error) {
 
                         if (error) {
                             res.statusCode = 500;
-                            res.send('Error getting location subscriptions: ' + error);
+                            res.send("Error saving dish: " + error);
                             return;
                         }
 
-                        // Pity that nobody is subscribed here.
-                        if (!subscriptions) {
-                            res.statusCode = 201;
-                            res.send(returnDish);
-                            return;
+                        var returnDish = {};
+                        for (var prop in dishProps) {
+                            returnDish[prop] = dish[prop];
                         }
+                        returnDish.userid = dish.userid;
+                        returnDish.loc = locationInstance;
+                        returnDish.user = {
+                            name: user.name,
+                            pictureurl: user.pictureurl,
+                            dishescount: userDishesCount + 1
+                        };
 
-                        var subscriptionsIds = [];
-                        for (var i in subscriptions) {
-                            subscriptionsIds.push(subscriptions[i].userid);
-                        }
+                        // Here we save the photo and inform subscribers in parallel.
 
-                        UserModel.find({_id : { $in : subscriptionsIds }}, function(error, subscribers) {
+                        // Informing subscribers that there is a new dish.
+                        LocationSubscriptionModel.find({ locationid : dish.locationid}, function(error, subscriptions) {
 
                             if (error) {
                                 res.statusCode = 500;
-                                res.send('Error getting subscribed users: ' + error);
+                                res.send('Error getting location subscriptions: ' + error);
                                 return;
                             }
 
-                            // All subscribed users are deleted?.
-                            if (!subscribers) {
+                            // Pity that nobody is subscribed here.
+                            if (!subscriptions) {
                                 res.statusCode = 201;
                                 res.send(returnDish);
                                 return;
                             }
 
-                            var gcmregids = [];
-                            for (var i in subscribers) {
-                                // Getting user GCM reg ids.
-                                if (subscribers[i].gcmregids.length > 0) {
-                                    gcmregids = gcmregids.concat(subscribers[i].gcmregids);
+                            var subscriptionsIds = [];
+                            for (var i in subscriptions) {
+                                subscriptionsIds.push(subscriptions[i].userid);
+                            }
+
+                            UserModel.find({_id : { $in : subscriptionsIds }}, function(error, subscribers) {
+
+                                if (error) {
+                                    res.statusCode = 500;
+                                    res.send('Error getting subscribed users: ' + error);
+                                    return;
                                 }
-                            }
-                            var msgdata = {
-                                "message": "Chef " + user.name + " added a new dish! " + dish.name,
-                                "type": "dish",
-                                "dishid": dish.id
-                            };
 
-                            // GCM notifications.
-                            if (gcmregids.length > 0) {
-                                pusher.pushToGCM(gcmregids, msgdata);
-                            }
+                                // All subscribed users are deleted?.
+                                if (!subscribers) {
+                                    res.statusCode = 201;
+                                    res.send(returnDish);
+                                    return;
+                                }
 
-                            // TODO Email fallback for users without any GCM reg id nor iPhone.
+                                var gcmregids = [];
+                                for (var i in subscribers) {
+                                    // Getting user GCM reg ids.
+                                    if (subscribers[i].gcmregids.length > 0) {
+                                        gcmregids = gcmregids.concat(subscribers[i].gcmregids);
+                                    }
+                                }
+                                var msgdata = {
+                                    "message": "Chef " + user.name + " added a new dish! " + dish.name,
+                                    "type": "dish",
+                                    "dishid": dish.id
+                                };
 
-                            // All good, so we notify and finish.
-                            res.statusCode = 201;
-                            res.send(returnDish);
-                            return;
+                                // GCM notifications.
+                                if (gcmregids.length > 0) {
+                                    pusher.pushToGCM(gcmregids, msgdata);
+                                }
+
+                                // TODO Email fallback for users without any GCM reg id nor iPhone.
+
+                                // All good, so we notify and finish.
+                                res.statusCode = 201;
+                                res.send(returnDish);
+                                return;
+                            });
                         });
-                    });
 
-                    // We can save the image and notify the subscribers in parallel.
-                    if (req.param('photo')) {
-                        savePhoto(req.param('photo'), dish);
-                    }
+                        // We can save the image and notify the subscribers in parallel.
+                        if (req.param('photo')) {
+                            savePhoto(req.param('photo'), dish);
+                        }
+                    });
                 });
             });
         });
