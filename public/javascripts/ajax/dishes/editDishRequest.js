@@ -39,21 +39,28 @@ angular.module('eat-this-one')
                 info += "\n\n" + $scope.lang.unlimitedselected;
             }
 
-            // Notify success.
-            if (statusCode == 201) {
-                // Share with users.
-                var msg = '"' + data.user.name + '" ' + $scope.lang.sharedwithyou +
-                    ': "' + data.name + '" .' +
-                    "\n\n" + '"' + data.description + '"' +
-                    "\n\n" + $scope.lang.downloadapp + "\n" + $scope.lang.android + ": " + eatConfig.downloadAppUrl;
-                notifier.show(title, info, 'success', function(msg) {
-                    $window.plugins.socialsharing.share(msg);
-                });
-            } else {
-                notifier.show(title, info, 'success');
-            }
+            // If it is a dish edit we just redirect the user to index.
+            if (statusCode == 200) {
+                $window.location.href = 'index.html';
 
-            $window.location.href = 'index.html';
+            } else if (statusCode == 201) {
+
+                // When adding a new dish we always notify the success,
+                // but if this is the first dish the user is adding we
+                // should also give him/her the option to add more colleagues.
+                notifier.show(title, info, 'success');
+
+                if (data.user.dishescount == 1) {
+                    // After adding the first dish we allow people to
+                    // add their contacts to his/her location.
+                    var shareArguments = '?dishname=' + data.name +
+                        '&username=' + data.user.name +
+                        '&locationname=' + data.loc.name;
+                    $window.location.href = 'dishes/share.html' + shareArguments;
+                } else {
+                    $window.location.href = 'index.html';
+                }
+            }
 
         }).error(function(data, errorStatus, errorMsg) {
             appStatus.completed();
