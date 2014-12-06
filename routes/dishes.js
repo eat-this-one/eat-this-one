@@ -203,6 +203,7 @@ router.get('/:id', function(req, res) {
                             for (index in bookedmeals) {
                                 if (bookedmeals[index].userid === token.userid) {
                                     returnDish.booked = true;
+                                    break;
                                 }
                             }
                         }
@@ -322,6 +323,8 @@ router.post('/', function(req, res) {
                     return;
                 }
 
+                // TODO Check that the user is subscribed to this location.
+
                 // Checking if it is the first dish the user creates.
                 // We need this value to show more options to the
                 // user after creating the first dish.
@@ -398,6 +401,8 @@ router.post('/', function(req, res) {
                                         gcmregids = gcmregids.concat(subscribers[i].gcmregids);
                                     }
                                 }
+                                // TODO This message should be language-independent, frontend
+                                // should get the string according to the params we will send from here.
                                 var msgdata = {
                                     "message": "Chef " + user.name + " added a new dish! " + dish.name,
                                     "type": "dish",
@@ -494,35 +499,50 @@ router.put('/:id', function(req, res) {
                 dish[prop] = dishObj[prop];
             }
 
-            // TODO Here we skip checking that the location exists as
-            // users can initially only be subscribed to one location.
-
-            // Finally saving the dish.
-            dish.save(function(error) {
+            // Checking that the location exists.
+            LocationModel.findOne(dish.locationid, function(error, locationInstance) {
 
                 if (error) {
                     res.statusCode = 500;
-                    res.send("Error saving dish: " + error);
+                    res.send('Error getting location: ' + error);
                     return;
                 }
 
-                // Here we save the photo and inform subscribers in parallel.
-
-                // TODO Notify the subscribed users about changes in the dish.
-
-                // This action can begin while the notifications
-                // are being sent as the needed info is not related.
-                if (req.param('photo')) {
-                    savePhoto(req.param('photo'), dish);
+                if (!locationInstance) {
+                    req.statusCode = 400;
+                    req.send('Error, ' + dish.locationid + ' does not exist');
+                    return;
                 }
 
-                // In case the value exists (previous value or savePhoto()
-                // already finished), it is too big to be returned now.
-                delete dish.photoid;
+                // TODO Check that the user is subscribed to this location.
 
-                res.statusCode = 200;
-                res.send(dish);
-                return;
+                // Finally saving the dish.
+                dish.save(function(error) {
+
+                    if (error) {
+                        res.statusCode = 500;
+                        res.send("Error saving dish: " + error);
+                        return;
+                    }
+
+                    // Here we save the photo and inform subscribers in parallel.
+
+                    // TODO Notify the subscribed users about changes in the dish.
+
+                    // This action can begin while the notifications
+                    // are being sent as the needed info is not related.
+                    if (req.param('photo')) {
+                        savePhoto(req.param('photo'), dish);
+                    }
+
+                    // In case the value exists (previous value or savePhoto()
+                    // already finished), it is too big to be returned now.
+                    delete dish.photoid;
+
+                    res.statusCode = 200;
+                    res.send(dish);
+                    return;
+                });
             });
         });
     });
