@@ -68,10 +68,10 @@ angular.module('eat-this-one')
         ]
     };
 
-    // TODO This will be used for update.
-    // Arguments.
+    // For updates.
     var id = urlParser.getParam('id');
 
+    // TODO We should cache this.
     // Load the user subscriptions.
     appStatus.waiting('locationSubscriptionsRequest');
     locationSubscriptionsRequest($scope);
@@ -80,8 +80,6 @@ angular.module('eat-this-one')
     if (id) {
         appStatus.waiting('dishRequest');
         dishRequest($scope, id);
-
-        // TODO Transform when info today/tomorrow/aftertomorrow.
     }
 
     $scope.isEditing = function() {
