@@ -50,7 +50,7 @@ angular.module('eat-this-one')
             {text : 2, value : 2, btnstyle: 'btn-info'},
             {text : 3, value : 3, btnstyle: 'btn-info'},
             {text : 4, value : 4, btnstyle: 'btn-info'},
-            {text : $scope.lang.unlimited, value : 0, btnstyle: 'btn-info active'}
+            {text : $scope.lang.unlimited, value : 0, btnstyle: 'btn-warning active'}
         ]
     };
     $scope.donation = {

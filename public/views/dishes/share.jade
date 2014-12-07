@@ -6,14 +6,13 @@ block content
         include ../top
 
         div(class='centered-container')
-            button(class='btn btn-primary', ng-click='sendSms()')
+            button(class='btn btn-success', ng-click='sendSms()')
                 span(class='glyphicon glyphicon-envelope button-icon')
-                {{lang.sharedish}}
+                {{lang.notifythem}}
             button(class='btn btn-default', ng-click='skip()')
-                span(class='glyphicon glyphicon-hand-right button-icon')
+                span(class='glyphicon glyphicon-arrow-right button-icon')
                 {{lang.skip}}
-        div(ng-repeat='contact in contacts | orderBy: "displayName"', class='contact')
-            input(type='checkbox', value='{{contact.mobilePhone}}')
-            {{contact.displayName}}
+        div(id='id-contacts', class='list-group')
+            a(id='{{contact.mobilePhone}}', ng-repeat='contact in contacts | orderBy: "displayName"', class='list-group-item contact') {{contact.displayName}}
 
 include ../footer

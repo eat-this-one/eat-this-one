@@ -4,10 +4,13 @@ angular.module('eat-this-one')
     $scope.lang = $.eatLang.lang;
 
     // Page title.
-    $scope.pageTitle = $scope.lang.sharedish;
+    $scope.pageTitle = $scope.lang.invitecolleagues;
 
     // To store the user contacts with a valid name and mobile phone.
     $scope.contacts = [];
+
+    // Set the loading here as getting contacts may be slow.
+    appStatus.waiting('contacts');
 
     document.addEventListener('deviceready', function() {
 
@@ -35,11 +38,28 @@ angular.module('eat-this-one')
 
             // Update $scope.contacts.
             $scope.$apply();
+
+            // Set a class once a contact is selected.
+            $('#id-contacts .contact').each(function() {
+                $(this).on('click', function(e) {
+                    // Toggles active class.
+                    if ($(this).hasClass('active')) {
+                        $(this).removeClass('active');
+                    } else {
+                        $(this).addClass('active');
+                    }
+                });
+            });
+
+            // All done.
+            appStatus.completed('contacts');
         };
 
         function onError(contactError) {
             notifier.show($scope.lang.error, $scope.lang.errornocontacts, 'error');
             console.log('Error getting contacts: ' + contactError);
+
+            appStatus.completed('contacts');
         };
 
         var filter = [
@@ -67,25 +87,28 @@ angular.module('eat-this-one')
 
     $scope.sendSms = function() {
 
+        appStatus.waiting('selectedContacts');
+
         // Get all selected contacts.
         var phonesArray = [];
-        $('input[type=checkbox]').each(function() {
-            if (this.checked) {
-                phonesArray.push(this.value);
-            }
+        $('#id-contacts .contact.active').each(function() {
+            console.log('contact! ' + this.id);
+            phonesArray.push(this.id);
         });
 
         // The user should explicitly press 'Skip'.
         if (phonesArray.length === 0) {
             notifier.show($scope.lang.nocontacts, $scope.lang.nocontactsinfo, 'warning');
+            appStatus.completed('selectedContacts');
             return false;
         }
 
-        // Get dish.name, dish.description, user.name
-        // and location.name as GET arguments.
-        var msg = '"' + urlParser.getParam('username') + '" ' + $scope.lang.sharedwithyouin +
-             ' "' + urlParser.getParam('locationname') + '": ' + urlParser.getParam('dishname') + '.' +
-            "\n" + $scope.lang.downloadapp + "\n" + $scope.lang.android + ": " + eatConfig.downloadAppUrl;
+        // The receiver already knows who is sending the message.
+        var msg = $scope.lang.iwanttoshare + ': "' + urlParser.getParam('dishname') + '" ' +
+             $scope.lang.in + ' "' + urlParser.getParam('locationname') + '". \n' +
+             $scope.lang.downloadapp + ".\n" + $scope.lang.android + ": " + eatConfig.downloadAppUrl;
+
+        appStatus.completed('selectedContacts');
 
         // Open sms app.
         window.plugins.socialsharing.shareViaSMS(msg, phonesArray.join(','));

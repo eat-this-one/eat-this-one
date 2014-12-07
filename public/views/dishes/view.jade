@@ -9,10 +9,10 @@ block content
         include ../top
 
         div(ng-if='auth.isAuthenticated()', class='centered-container')
-            button(ng-if='userCanBook()', type='button', name='meal', ng-click='addMeal()', class='btn btn-primary')
+            button(ng-if='userCanBook()', name='meal', ng-click='addMeal()', class='btn btn-success')
                 span(class='glyphicon glyphicon-cutlery button-icon')
                 {{lang.addmeal}}
-            button(ng-if='auth.isUser(dish.userid)', type='button', name='edit', ng-click='editDish()', class='btn btn-primary')
+            button(ng-if='auth.isUser(dish.userid)', name='edit', ng-click='editDish()', class='btn btn-primary')
                 span(class='glyphicon glyphicon-edit button-icon')
                 {{lang.editdish}}
         div(class='dish-useful-info') {{dishusefulinfotext}}

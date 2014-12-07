@@ -20,7 +20,7 @@ block content
                 i(ng-show='loadingAddresses', class='glyphicon glyphicon-refresh')
 
             div(ng-if='auth.isAuthenticated()')
-                button(type='button', class='btn btn-primary', ng-click='subscribe()')
+                button(class='btn btn-success', ng-click='subscribe()')
                     span(class='glyphicon glyphicon-home button-icon')
                     {{lang.subscribelocation}}
 

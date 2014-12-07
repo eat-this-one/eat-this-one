@@ -28,10 +28,10 @@ angular.module('eat-this-one')
             if (statusCode == 201) {
                 // POST.
                 title = $scope.lang.dishadded;
-                info = $scope.lang.dishaddedinfo;
+                info = $scope.lang.dishaddedinfo + '.';
             } else {
                 // PUT.
-                title = $scope.lang.dishedited;
+                title = $scope.lang.dishedited + '.';
             }
             
             // Adding more info if unlimited was selected.
@@ -50,11 +50,12 @@ angular.module('eat-this-one')
                 // should also give him/her the option to add more colleagues.
                 notifier.show(title, info, 'success');
 
-                if (data.user.dishescount == 1) {
+                // TODO Commented for development purposes.
+                //if (data.user.dishescount == 1) {
+                if (1) {
                     // After adding the first dish we allow people to
                     // add their contacts to his/her location.
                     var shareArguments = '?dishname=' + data.name +
-                        '&username=' + data.user.name +
                         '&locationname=' + data.loc.name;
                     $window.location.href = 'dishes/share.html' + shareArguments;
                 } else {
