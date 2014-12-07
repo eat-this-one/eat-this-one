@@ -5,5 +5,6 @@
     "GCM_SEND_URL": "https://android.googleapis.com/gcm/send",
     "GCM_API_KEY": "YOURAPIEY",
     "G_OAUTH_CLIENT_ID" : "YOUROAUTHCLIENTID",
-    "G_OAUTH_CLIENT_SECRET" : "YOUROAUTHCLIENTSECRET"
+    "G_OAUTH_CLIENT_SECRET" : "YOUROAUTHCLIENTSECRET",
+    "DOWNLOAD_URL_ANDROID" : "http://www.example.com"
 }
