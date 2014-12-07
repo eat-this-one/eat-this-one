@@ -2,6 +2,9 @@
 *.swp
 *.swx
 
+# Git.
+.git
+
 # Tests.
 test/*
 
