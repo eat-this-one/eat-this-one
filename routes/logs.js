@@ -22,7 +22,8 @@ router.post('/', function(req, res) {
 
     var log = new LogModel({
         what : req.param('what'),
-        where : req.param('where')
+        where : req.param('where'),
+        target : req.param('target')
     });
 
     // TODO Please david, learn about callbacks, every
@@ -60,6 +61,8 @@ router.post('/', function(req, res) {
                 res.send('Wrong credentials');
                 return;
             }
+
+            log.userid = token.userid;
 
             log.save(function(error) {
 
