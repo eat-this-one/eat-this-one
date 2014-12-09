@@ -20,7 +20,7 @@ block content
             div(class='dish-field')
                 b {{lang.location}}
                 a(class='pointer', ng-click='openStaticMap()')
-                    i(class='glyphicon glyphicon-map-marker')
+                    span(class='glyphicon glyphicon-map-marker standalone-icon', aria-hidden='true')
                     {{dish.loc.name}}
             div(class='dish-field')
                 b {{lang.when}}

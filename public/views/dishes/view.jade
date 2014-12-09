@@ -10,10 +10,10 @@ block content
 
         div(ng-if='auth.isAuthenticated()', class='centered-container')
             button(ng-if='userCanBook()', name='meal', ng-click='addMeal()', class='btn btn-success')
-                span(class='glyphicon glyphicon-cutlery button-icon')
+                span(class='glyphicon glyphicon-cutlery button-icon', aria-hidden='true')
                 {{lang.addmeal}}
             button(ng-if='auth.isUser(dish.userid)', name='edit', ng-click='editDish()', class='btn btn-primary')
-                span(class='glyphicon glyphicon-edit button-icon')
+                span(class='glyphicon glyphicon-edit button-icon', aria-hidden='true')
                 {{lang.editdish}}
         div(class='dish-useful-info') {{dishusefulinfotext}}
 
@@ -30,7 +30,7 @@ block content
             div(class='dish-field')
                 b {{lang.location}}
                 a(class='pointer', ng-click='openStaticMap()')
-                    i(class='glyphicon glyphicon-map-marker')
+                    span(class='glyphicon glyphicon-map-marker', aria-hidden='true')
                     {{dish.loc.name}}
             div(class='dish-field')
                 b {{lang.when}}

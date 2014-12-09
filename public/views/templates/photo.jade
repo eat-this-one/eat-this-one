@@ -2,6 +2,6 @@ div(class='form-group')
     label(for='id-photo') {{lang.photo}}
     div(id='id-photo')
         button(id='id-photobtn', class='btn btn-default', ng-click='capturePhoto()')
-            span(class='glyphicon glyphicon-camera button-icon')
+            span(class='glyphicon glyphicon-camera button-icon', aria-hidden='true')
             {{lang.capturephoto}}
         img(class='small-photo', id='id-smallimage', src='')

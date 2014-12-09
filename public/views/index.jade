@@ -12,17 +12,17 @@ block content
 
             div(id='id-authenticate', ng-if='!auth.isAuthenticated()')
                 button(ng-click='authorizeGoogle()', class='btn btn-primary')
-                    span(class='glyphicon glyphicon-log-in button-icon')
+                    span(class='glyphicon glyphicon-log-in button-icon', aria-hidden='true')
                     {{lang.signingoogle}}
 
         div(ng-if='auth.isAuthenticated()')
             div(class='centered-container')
                 button(name='add', ng-click='addDish()', class='btn btn-success')
-                    span(class='glyphicon glyphicon-share button-icon')
+                    span(class='glyphicon glyphicon-share button-icon', aria-hidden='true')
                     {{lang.adddish}}
                 button(name='meals', ng-click='indexMeals()', class='btn btn-warning')
-                    span(class='glyphicon glyphicon-cutlery button-icon')
-                    {{lang.mymeals}}
+                    span(class='glyphicon glyphicon-cutlery button-icon', aria-hidden='true')
+                    {{lang.mealsibooked}}
 
             div(class='container dishes-list')
                 div(ng-show='showNoDishes')

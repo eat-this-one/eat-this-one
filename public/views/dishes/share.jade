@@ -7,10 +7,10 @@ block content
 
         div(class='centered-container')
             button(class='btn btn-success', ng-click='sendSms()')
-                span(class='glyphicon glyphicon-envelope button-icon')
+                span(class='glyphicon glyphicon-envelope button-icon', aria-hidden='true')
                 {{lang.notifythem}}
             button(class='btn btn-default', ng-click='skip()')
-                span(class='glyphicon glyphicon-arrow-right button-icon')
+                span(class='glyphicon glyphicon-arrow-right button-icon', aria-hidden='true')
                 {{lang.skip}}
         div(id='id-contacts', class='list-group')
             a(id='{{contact.mobilePhone}}', ng-repeat='contact in contacts | orderBy: "displayName"', class='list-group-item contact') {{contact.displayName}}
