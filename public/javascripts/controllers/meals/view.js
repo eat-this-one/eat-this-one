@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('MealsViewController', ['$scope', 'appStatus', 'urlParser', 'dishRequest', 'eatConfig', 'authManager', '$modal', function($scope, appStatus, urlParser, dishRequest, eatConfig, authManager, $modal) {
+    .controller('MealsViewController', ['$scope', 'appStatus', 'urlParser', 'dishRequest', 'eatConfig', 'authManager', '$modal', 'newLogRequest', function($scope, appStatus, urlParser, dishRequest, eatConfig, authManager, $modal, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -27,4 +27,5 @@ angular.module('eat-this-one')
     appStatus.waiting();
     dishRequest($scope, id);
 
+    newLogRequest('view', 'meals-view', id);
 }]);

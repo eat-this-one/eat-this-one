@@ -1,6 +1,10 @@
 angular.module('eat-this-one').factory('newLogRequest', ['$http', 'eatConfig', 'sessionManager', function($http, eatConfig, sessionManager) {
 
-    return function(what, where) {
+    return function(what, where, target) {
+
+        if (typeof target === 'undefined') {
+            target = null;
+        }
 
         $http({
             method : 'POST',
@@ -8,7 +12,8 @@ angular.module('eat-this-one').factory('newLogRequest', ['$http', 'eatConfig', '
             data : {
                 token : sessionManager.getToken(),
                 what : what,
-                where : where
+                where : where,
+                target : target
             }
         }).success(function(data) {
             // No need to do anything.

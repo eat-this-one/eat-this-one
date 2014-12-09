@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesEditController', ['$scope', 'appStatus', 'urlParser', 'dishRequest', 'editDishRequest', 'locationSubscriptionsRequest', 'eatConfig', 'authManager', 'datesConverter', function($scope, appStatus, urlParser, dishRequest, editDishRequest, locationSubscriptionsRequest, eatConfig, authManager, datesConverter) {
+    .controller('DishesEditController', ['$scope', 'appStatus', 'urlParser', 'dishRequest', 'editDishRequest', 'locationSubscriptionsRequest', 'eatConfig', 'authManager', 'datesConverter', 'newLogRequest', function($scope, appStatus, urlParser, dishRequest, editDishRequest, locationSubscriptionsRequest, eatConfig, authManager, datesConverter, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -80,6 +80,11 @@ angular.module('eat-this-one')
     if (id) {
         appStatus.waiting('dishRequest');
         dishRequest($scope, id);
+
+        newLogRequest('view', 'dishes-edit', id);
+    } else {
+        // Just log the action.
+        newLogRequest('view', 'dishes-add');
     }
 
     $scope.isEditing = function() {
@@ -112,6 +117,12 @@ angular.module('eat-this-one')
 
         appStatus.waiting();
         editDishRequest($scope, dish);
+
+        if (id) {
+            newLogRequest('click', 'dishes-edit-confirm');
+        } else {
+            newLogRequest('click', 'dishes-add-confirm');
+        }
     };
 
 }]);

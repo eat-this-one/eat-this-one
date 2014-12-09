@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesViewController', ['$scope', '$modal', 'appStatus', 'urlParser', 'dishRequest', 'newMealRequest', 'eatConfig', 'authManager', function($scope, $modal, appStatus, urlParser, dishRequest, newMealRequest, eatConfig, authManager) {
+    .controller('DishesViewController', ['$scope', '$modal', 'appStatus', 'urlParser', 'dishRequest', 'newMealRequest', 'eatConfig', 'authManager', 'newLogRequest', function($scope, $modal, appStatus, urlParser, dishRequest, newMealRequest, eatConfig, authManager, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -44,6 +44,8 @@ angular.module('eat-this-one')
     appStatus.waiting();
     dishRequest($scope, id);
 
+    newLogRequest('view', 'dishes-view', id);
+
     $scope.addMeal = function() {
 
         var meal = {
@@ -52,9 +54,12 @@ angular.module('eat-this-one')
 
         appStatus.waiting();
         newMealRequest($scope, meal);
+
+        newLogRequest('click', 'meals-add', id);
     };
 
     $scope.editDish = function() {
+        newLogRequest('click', 'dishes-edit', id);
         window.location.href = 'dishes/edit.html?id=' + id;
     };
 }]);

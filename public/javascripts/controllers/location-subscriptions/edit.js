@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('LocationSubscriptionsEditController', ['$scope', '$http', 'appStatus', 'eatConfig', 'authManager', 'newLocationRequest', 'newLocationSubscriptionRequest', function($scope, $http, appStatus, eatConfig, authManager, newLocationRequest, newLocationSubscriptionRequest) {
+    .controller('LocationSubscriptionsEditController', ['$scope', '$http', 'appStatus', 'eatConfig', 'authManager', 'newLocationRequest', 'newLocationSubscriptionRequest', 'newLogRequest', function($scope, $http, appStatus, eatConfig, authManager, newLocationRequest, newLocationSubscriptionRequest, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -33,6 +33,8 @@ angular.module('eat-this-one')
     // If the user selects an existing location we disable the
     // address input as we don't want the to user spend time on it.
     $scope.disableAddress = false;
+
+    newLogRequest('view', 'locationSubscriptions-add');
 
     // TODO We should use a cache for the system
     // locations; this is too expensive.
@@ -97,7 +99,8 @@ angular.module('eat-this-one')
             // A new location including subscription.
             newLocationRequest($scope, $scope.locationname.value, $scope.address.value);
         }
-    };
 
+        newLogRequest('click', 'locationSubscription-add-confirm');
+    };
 
 }]);

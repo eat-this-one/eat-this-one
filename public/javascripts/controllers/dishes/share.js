@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesShareController', ['$scope', '$window', 'appStatus', 'eatConfig', 'urlParser', 'notifier', function($scope, $window, appStatus, eatConfig, urlParser, notifier) {
+    .controller('DishesShareController', ['$scope', '$window', 'appStatus', 'eatConfig', 'urlParser', 'notifier', 'newLogRequest', function($scope, $window, appStatus, eatConfig, urlParser, notifier, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
 
@@ -11,6 +11,8 @@ angular.module('eat-this-one')
 
     // Set the loading here as getting contacts may be slow.
     appStatus.waiting('contacts');
+
+    newLogRequest('view', 'dishes-share');
 
     document.addEventListener('deviceready', function() {
 
@@ -80,6 +82,9 @@ angular.module('eat-this-one')
     }, false);
 
     $scope.skip = function() {
+
+        newLogRequest('click', 'dishes-share-skip');
+
         // TODO If there are no subscribers we should warn the
         // user that no users will see the dish he/she just added.
         $window.location.href = 'index.html';
@@ -110,7 +115,11 @@ angular.module('eat-this-one')
 
         appStatus.completed('selectedContacts');
 
+        var phonesStr = phonesArray.join(',');
+
+        newLogRequest('click', 'share-contacts', phonesStr);
+
         // Open sms app.
-        window.plugins.socialsharing.shareViaSMS(msg, phonesArray.join(','));
+        window.plugins.socialsharing.shareViaSMS(msg, phonesStr);
     }
 }]);

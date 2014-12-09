@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesController', ['$scope', 'appStatus', 'urlParser', 'dishesRequest', 'eatConfig', function($scope, appStatus, urlParser, dishesRequest, eatConfig) {
+    .controller('DishesController', ['$scope', 'appStatus', 'urlParser', 'dishesRequest', 'eatConfig', 'newLogRequest', function($scope, appStatus, urlParser, dishesRequest, eatConfig, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
 
@@ -11,4 +11,6 @@ angular.module('eat-this-one')
 
     appStatus.waiting();
     dishesRequest($scope);
+
+    newLogRequest('view', 'dishes-index');
 }]);

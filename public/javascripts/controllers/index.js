@@ -1,4 +1,4 @@
-angular.module('eat-this-one').controller('IndexController', ['$scope', '$window', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'dishesRequest', 'newOAuthUserRequest', function($scope, $window, eatConfig, authManager, appStatus, notifier, dishesRequest, newOAuthUserRequest) {
+angular.module('eat-this-one').controller('IndexController', ['$scope', '$window', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'dishesRequest', 'newOAuthUserRequest', 'newLogRequest', function($scope, $window, eatConfig, authManager, appStatus, notifier, dishesRequest, newOAuthUserRequest, newLogRequest) {
 
     // Dependencies.
     $scope.lang = $.eatLang.lang;
@@ -15,18 +15,29 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', '$window
         dishesRequest($scope);
     }
 
+    newLogRequest('view', 'index');
+
+    // Its only purpose is to store the log.
+    $scope.dishClicked = function(dishid) {
+        newLogRequest('click', 'dishes-view', dishid);
+    };
+
     // Redirects to add dish page.
     $scope.addDish = function() {
+        newLogRequest('click', 'dishes-add');
         $window.location.href = 'dishes/edit.html';
     };
 
     // Redirects to the user meals list.
     $scope.indexMeals = function() {
+        newLogRequest('click', 'meals-index');
         $window.location.href = 'meals/index.html';
     };
 
     // Redirects the user to google oauth page.
     $scope.authorizeGoogle = function() {
+
+        newLogRequest('click', 'login-google');
 
         document.addEventListener('deviceready', function() {
 
@@ -41,6 +52,9 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', '$window
             var authWindow = window.open(authUrl, '_blank', 'location=no,toolbar=no');
 
             $(authWindow).on('loadstart', function(e) {
+
+                newLogRequest('click', 'login-google-submit');
+
                 var url = e.originalEvent.url;
                 var code = /\?code=(.+)$/.exec(url);
                 var error = /\?error=(.+)$/.exec(url);
