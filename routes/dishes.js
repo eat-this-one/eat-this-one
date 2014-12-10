@@ -309,7 +309,7 @@ router.post('/', function(req, res) {
             var dish = new DishModel(dishObj);
 
             // Checking that the location exists.
-            LocationModel.findOne(req.param('locationid'), function(error, locationInstance) {
+            LocationModel.findOne(dishObj.locationid, function(error, locationInstance) {
 
                 if (error) {
                     res.statusCode = 500;
@@ -319,7 +319,7 @@ router.post('/', function(req, res) {
 
                 if (!locationInstance) {
                     req.statusCode = 400;
-                    req.send('Error, ' + req.param('locationid') + ' does not exist');
+                    req.send('Error: location ' + dishObj.locationid + ' does not exist');
                     return;
                 }
 
