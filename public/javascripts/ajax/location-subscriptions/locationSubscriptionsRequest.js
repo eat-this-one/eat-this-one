@@ -30,12 +30,8 @@ angular.module('eat-this-one')
                     });
                 }
 
-                // If there is just 1 result select it.
-                if ($scope.locationid.options.length === 1) {
-                    $('#id-locationid option[value="' + $scope.locationid.options[0].value + '"]').prop('selected', true);
-                    $scope.locationid.value = $scope.locationid.options[0].value;
-                    $('#id-locationid').prop('disabled', true);
-                }
+                // We use the first one.
+                $scope.locationid.value = data[0]._id;
             }
 
             appStatus.completed('locationSubscriptionsRequest');
