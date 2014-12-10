@@ -88,57 +88,116 @@ router.post('/', function(req, res) {
 
                 var gUserData = JSON.parse(body);
 
-                // Here we process all the user info and
-                // save the new user into our database.
-                var userObj = {
-                    email : gUserData.email,
-                    name : gUserData.given_name + ' ' + gUserData.family_name,
-                    locale : gUserData.locale,
-                    googletoken : gTokenData.access_token
-                };
-
-                // Not sure if the picture is always there...
-                if (gUserData.picture) {
-                    userObj.pictureurl = gUserData.picture;
-                }
-
-                // Add the GCM registration id if present (not present in web interface).
-                if (req.param('gcmregid')) {
-                    userObj.gcmregids = [req.param('gcmregid')];
-                }
-
-                var user = new UserModel(userObj);
-
-                user.save(function(error) {
+                UserModel.findOne({email: gUserData.email}, function(error, user) {
 
                     if (error) {
                         res.statusCode = 500;
-                        res.send("Error saving user: " + error);
+                        res.send("Can not get user instance. Error: " + error);
                         return;
                     }
 
-                    // We auto-login the user.
-                    var tokenData = tokenManager.new(user.id);
-                    var token = TokenModel(tokenData);
-                    token.save(function(error) {
+                    // Here we process all the user info and
+                    // save the new user into our database.
+                    var userObj = {
+                        email : gUserData.email,
+                        name : gUserData.given_name + ' ' + gUserData.family_name,
+                        locale : gUserData.locale,
+                        googletoken : gTokenData.access_token
+                    };
+
+                    // Not sure if the picture is always there...
+                    if (gUserData.picture) {
+                        userObj.pictureurl = gUserData.picture;
+                    }
+
+                    // TODO regex here to filter.
+                    var gcmregid = req.param('gcmregid');
+
+                    // TODO Check all this update registered users data from
+                    // just a google email is safe; look for the returned token
+                    // is it the same one? Can we use it to check against?
+                    if (!user) {
+                        // If the user already exists we update the
+                        // existing user and we return it.
+                        var user = new UserModel(userObj);
+
+                        // Add the GCM registration id if present (not present in web interface).
+                        if (gcmregid) {
+                            userObj.gcmregids = [gcmregid];
+                        }
+                    } else {
+                        // Update the existing user.
+
+                        var updatingUser = true;
+                        for (index in userObj) {
+                            user[index] = userObj[index];
+                        }
+
+                        var now = new Date(); 
+                        user.modified = new Date(
+                            now.getUTCFullYear(),
+                            now.getUTCMonth(),
+                            now.getUTCDate(),
+                            now.getUTCHours(),
+                            now.getUTCMinutes(),
+                            now.getUTCSeconds()
+                        );
+
+                        // Add the GCM registration id if is new.
+                        if (gcmregid) {
+                            if (user.gcmregids.length > 0) {
+                                for (index in user.gcmregids) {
+                                    if (user.gcmregids[index] === gcmregid) {
+                                        var found = 1;
+                                        break;
+                                    }
+                                }
+                                // Adding the new one to the existing one.
+                                if (typeof found === 'undefined') {
+                                    user.gcmregids.push(gcmregid);
+                                }
+                            } else {
+                                // We add the new one.
+                                user.gcmregids = [gcmregid];
+                            }
+                        }
+                    }
+
+                    user.save(function(error) {
+
                         if (error) {
                             res.statusCode = 500;
-                            res.send('Error creating token: ' + error);
+                            res.send("Error saving user: " + error);
                             return;
                         }
 
-                        // Add the token to the user object.
-                        var returnUser = {
-                            id: user.id,
-                            email: user.email,
-                            name: user.name,
-                            pictureurl: user.pictureurl,
-                            token: token.token
-                        };
+                        // We auto-login the user.
+                        var tokenData = tokenManager.new(user.id);
+                        var token = TokenModel(tokenData);
+                        token.save(function(error) {
+                            if (error) {
+                                res.statusCode = 500;
+                                res.send('Error creating token: ' + error);
+                                return;
+                            }
 
-                        res.statusCode = 201;
-                        res.send(returnUser);
-                        return;
+                            // Add the token to the user object.
+                            var returnUser = {
+                                id: user.id,
+                                email: user.email,
+                                name: user.name,
+                                pictureurl: user.pictureurl,
+                                token: token.token
+                            };
+
+                            if (typeof updatingUser !== 'undefined') {
+                                res.statusCode = 200;
+                            } else {
+                                res.statusCode = 201;
+                            }
+                            res.send(returnUser);
+                            return;
+                        });
                     });
                 });
             });
