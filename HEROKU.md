@@ -3,6 +3,7 @@ heroku create eat-this-one
 
 # Using mongolab.
 heroku addons:add mongolab:sandbox
+heroku addons:add logentries
 
 # To manage configurations.
 heroku plugins:install git://github.com/ddollar/heroku-config.git
