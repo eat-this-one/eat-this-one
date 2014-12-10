@@ -1,4 +1,4 @@
-angular.module('eat-this-one').controller('IndexController', ['$scope', '$window', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'dishesRequest', 'newOAuthUserRequest', 'newLogRequest', function($scope, $window, eatConfig, authManager, appStatus, notifier, dishesRequest, newOAuthUserRequest, newLogRequest) {
+angular.module('eat-this-one').controller('IndexController', ['$scope', '$window', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'dishesRequest', 'OAuthUserRequest', 'newLogRequest', function($scope, $window, eatConfig, authManager, appStatus, notifier, dishesRequest, OAuthUserRequest, newLogRequest) {
 
     // Dependencies.
     $scope.lang = $.eatLang.lang;
@@ -53,8 +53,6 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', '$window
 
             $(authWindow).on('loadstart', function(e) {
 
-                newLogRequest('click', 'login-google-submit');
-
                 var url = e.originalEvent.url;
                 var code = /\?code=(.+)$/.exec(url);
                 var error = /\?error=(.+)$/.exec(url);
@@ -64,7 +62,9 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', '$window
                 }
 
                 if (code) {
-                    newOAuthUserRequest.google($scope, code[1]);
+                    OAuthUserRequest.google($scope, code[1]);
+                    newLogRequest('click', 'login-google-submit');
+
                 } else if (error) {
                     notifier.show($scope.lang.error, $scope.lang.errorsigningoogle, 'error')
                     appStatus.completed('signin');

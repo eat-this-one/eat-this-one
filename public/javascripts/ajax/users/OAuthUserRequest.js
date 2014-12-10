@@ -1,24 +1,16 @@
 angular.module('eat-this-one')
-    .factory('newOAuthUserRequest', ['$window', '$http', 'appStatus', 'notifier', 'eatConfig', 'authManager', 'sessionManager', function($window, $http, appStatus, notifier, eatConfig, authManager, sessionManager) {
+    .factory('OAuthUserRequest', ['$window', '$http', 'appStatus', 'notifier', 'eatConfig', 'authManager', 'sessionManager', function($window, $http, appStatus, notifier, eatConfig, authManager, sessionManager) {
 
     return {
-    
-        google : function($scope, googleCode) {
 
-            // Using the website nothing will be send.
-            var gcmregid = localStorage.getItem('gcmRegId');
+        google : function($scope, googleCode) {
 
             var requestData = {
                 provider : 'google',
                 code : googleCode,
-                gcmregid : gcmregid
+                gcmregid : localStorage.getItem('gcmRegId')
             };
 
-            this.sendRequest($scope, requestData);
-        },
-
-        // Internal method used by the authentication methods.
-        sendRequest : function($scope, requestData) {
             $http({
                 method : 'POST',
                 url : eatConfig.backendUrl + '/users',
