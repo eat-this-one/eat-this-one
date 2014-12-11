@@ -17,7 +17,7 @@ angular.module('eat-this-one')
             var msg = $scope.lang.locationcreatedinfo + "\n\n" + $scope.lang.subscribedlocationinfo;
             notifier.show($scope.lang.locationcreated, msg, 'success');
 
-            appStatus.completed();
+            appStatus.completed('newLocationRequest');
 
             // Cache the location.
             localStorage.setItem('loc', JSON.stringify(data));
@@ -25,7 +25,7 @@ angular.module('eat-this-one')
             $window.location.href = 'index.html';
 
         }).error(function(data, errorStatus, errorMsg) {
-            appStatus.completed();
+            appStatus.completed('newLocationRequest');
             var msg = '"' + errorStatus + '": ' + data;
             notifier.show($scope.lang.error, msg, 'error');
         });

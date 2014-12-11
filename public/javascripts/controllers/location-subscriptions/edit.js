@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('LocationSubscriptionsEditController', ['$scope', '$http', '$window', 'appStatus', 'eatConfig', 'authManager', 'newLocationRequest', 'newLocationSubscriptionRequest', 'newLogRequest', function($scope, $http, $window, appStatus, eatConfig, authManager, newLocationRequest, newLocationSubscriptionRequest, newLogRequest) {
+    .controller('LocationSubscriptionsEditController', ['$scope', '$http', '$window', 'appStatus', 'eatConfig', 'authManager', 'newLocationRequest', 'newLocationSubscriptionRequest', 'locationSubscriptionsRequest', 'newLogRequest', function($scope, $http, $window, appStatus, eatConfig, authManager, newLocationRequest, newLocationSubscriptionRequest, locationSubscriptionsRequest, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -41,6 +41,10 @@ angular.module('eat-this-one')
         newLogRequest('redirected', 'index', 'locationSubscriptions-edit');
         $window.location.href = 'index.html';
     }
+
+    // We will redirect to home if the user already have a location subscription.
+    appStatus.waiting('locationSubscriptionsRequest');
+    locationSubscriptionsRequest($scope);
 
     // TODO We should use a cache for the system
     // locations; this is too expensive.
@@ -96,13 +100,13 @@ angular.module('eat-this-one')
 
     $scope.subscribe = function() {
 
-        appStatus.waiting();
-
         if ($scope.loc.value != '') {
             // Only a subscription as the location already exists.
+            appStatus.waiting('newLocationSubscriptionRequest');
             newLocationSubscriptionRequest($scope, $scope.loc.value);
         } else {
             // A new location including subscription.
+            appStatus.waiting('newLocationRequest');
             newLocationRequest($scope, $scope.locationname.value, $scope.address.value);
         }
 

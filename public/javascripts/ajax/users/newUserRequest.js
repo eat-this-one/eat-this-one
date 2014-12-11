@@ -1,3 +1,4 @@
+// UNUSED
 angular.module('eat-this-one')
     .factory('newUserRequest', ['$window', '$http', 'appStatus', 'notifier', 'eatConfig', 'authManager', 'sessionManager', function($window, $http, appStatus, notifier, eatConfig, authManager, sessionManager) {
 

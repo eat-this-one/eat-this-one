@@ -20,8 +20,6 @@ angular.module('eat-this-one')
                 authManager.authenticate();
                 sessionManager.setUser(data);
 
-                notifier.show($scope.lang.accountcreated, $scope.lang.accountcreatedinfo, 'success');
-
                 appStatus.completed('signin');
 
                 $window.location.href = 'location-subscriptions/edit.html';

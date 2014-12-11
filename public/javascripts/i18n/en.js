@@ -1,7 +1,5 @@
 $.eatLang.en = {
 
-    accountcreated : 'Account created',
-    accountcreatedinfo : 'Now you can subscribe to your lunch time location',
     adddish : 'Add dish',
     addmeal : 'Book meal!',
     address : 'Address',
@@ -96,6 +94,7 @@ $.eatLang.en = {
     subscribed : 'Subscribed',
     subscribedlocationinfo : 'You will receive a notification when a colleague adds a new dish and when a colleague books one of your dishes.',
     subscribelocation : 'Subscribe to this location',
+    subscribelunchtimelocation : 'Now you can subscribe to your lunch time location',
     to : 'To',
     today : 'Today',
     tomorrow : 'Tomorrow',

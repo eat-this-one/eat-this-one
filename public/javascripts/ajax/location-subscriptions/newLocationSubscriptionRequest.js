@@ -15,7 +15,7 @@ angular.module('eat-this-one')
 
             notifier.show($scope.lang.subscribed, $scope.lang.subscribedlocationinfo, 'success');
 
-            appStatus.completed();
+            appStatus.completed('newLocationSubscriptionRequest');
 
             // Cache the location.
             localStorage.setItem('loc', JSON.stringify(data));
@@ -23,7 +23,7 @@ angular.module('eat-this-one')
             $window.location.href = 'index.html';
 
         }).error(function(data, errorStatus, errorMsg) {
-            appStatus.completed();
+            appStatus.completed('newLocationSubscriptionRequest');
             notifier.show($scope.lang.error, data, 'error');
         });
     };
