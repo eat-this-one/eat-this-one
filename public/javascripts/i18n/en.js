@@ -6,6 +6,7 @@ $.eatLang.en = {
     addressexample : 'e.g. 224-226 Lord St Perth 6000, Western Australia, Australia',
     aftertomorrow : 'Day after tomorrow',
     alertcontinue : 'Continue',
+    alreadysubscribed : 'Already subscribed',
     alreadybookedtext : 'You already booked a meal',
     allportionsbooked : 'All portions booked!',
     android : 'Android',

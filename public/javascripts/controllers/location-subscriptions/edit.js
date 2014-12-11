@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('LocationSubscriptionsEditController', ['$scope', '$http', '$window', 'appStatus', 'eatConfig', 'authManager', 'newLocationRequest', 'newLocationSubscriptionRequest', 'locationSubscriptionsRequest', 'newLogRequest', function($scope, $http, $window, appStatus, eatConfig, authManager, newLocationRequest, newLocationSubscriptionRequest, locationSubscriptionsRequest, newLogRequest) {
+    .controller('LocationSubscriptionsEditController', ['$scope', '$http', '$window', 'appStatus', 'eatConfig', 'authManager', 'notifier', 'newLocationRequest', 'newLocationSubscriptionRequest', 'locationSubscriptionsRequest', 'newLogRequest', function($scope, $http, $window, appStatus, eatConfig, authManager, notifier, newLocationRequest, newLocationSubscriptionRequest, locationSubscriptionsRequest, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -38,6 +38,8 @@ angular.module('eat-this-one')
 
     // If there is already one redirect home.
     if (localStorage.getItem('loc')) {
+        notifier.show($scope.lang.alreadysubscribed, $scope.lang.subscribedlocationinfo, 'success');
+
         newLogRequest('redirected', 'index', 'locationSubscriptions-edit');
         $window.location.href = 'index.html';
     }
