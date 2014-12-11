@@ -28,7 +28,6 @@ var app = express();
 var download = require('./routes/download');
 
 var index = require('./routes/index');
-var login = require('./routes/login');
 var users = require('./routes/users');
 var locations = require('./routes/locations');
 var locationSubscriptions = require('./routes/locationSubscriptions');
@@ -65,7 +64,6 @@ app.use('/', index);
 app.use('/download', download);
 
 app.use('/api', index);
-app.use('/api/login', login);
 app.use('/api/users', users);
 app.use('/api/locations', locations);
 app.use('/api/location-subscriptions', locationSubscriptions);
