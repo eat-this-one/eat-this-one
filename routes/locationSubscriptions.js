@@ -43,7 +43,7 @@ router.get('/', function(req, res) {
 
             if (!locationSubscriptions) {
                 res.statusCode = 200;
-                res.send(locationSubscriptions);
+                res.send([]);
                 return;
             }
 
