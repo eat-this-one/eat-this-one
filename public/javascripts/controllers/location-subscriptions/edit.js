@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('LocationSubscriptionsEditController', ['$scope', '$http', 'appStatus', 'eatConfig', 'authManager', 'newLocationRequest', 'newLocationSubscriptionRequest', 'newLogRequest', function($scope, $http, appStatus, eatConfig, authManager, newLocationRequest, newLocationSubscriptionRequest, newLogRequest) {
+    .controller('LocationSubscriptionsEditController', ['$scope', '$http', '$window', 'appStatus', 'eatConfig', 'authManager', 'newLocationRequest', 'newLocationSubscriptionRequest', 'newLogRequest', function($scope, $http, $window, appStatus, eatConfig, authManager, newLocationRequest, newLocationSubscriptionRequest, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -35,6 +35,12 @@ angular.module('eat-this-one')
     $scope.disableAddress = false;
 
     newLogRequest('view', 'locationSubscriptions-add');
+
+    // If there is already one redirect home.
+    if (localStorage.getItem('loc')) {
+        newLogRequest('redirected', 'index', 'locationSubscriptions-edit');
+        $window.location.href = 'index.html';
+    }
 
     // TODO We should use a cache for the system
     // locations; this is too expensive.

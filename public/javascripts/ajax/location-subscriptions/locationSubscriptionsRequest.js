@@ -1,3 +1,4 @@
+// UNUSED
 angular.module('eat-this-one')
     .factory('locationSubscriptionsRequest', ['$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', function($http, appStatus, notifier, eatConfig, sessionManager) {
 

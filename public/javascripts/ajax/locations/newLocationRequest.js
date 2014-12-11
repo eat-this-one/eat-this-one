@@ -19,6 +19,9 @@ angular.module('eat-this-one')
 
             appStatus.completed();
 
+            // Cache the location.
+            localStorage.setItem('loc', JSON.stringify(data));
+
             $window.location.href = 'index.html';
 
         }).error(function(data, errorStatus, errorMsg) {

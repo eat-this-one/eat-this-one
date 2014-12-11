@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesEditController', ['$scope', 'appStatus', 'urlParser', 'dishRequest', 'editDishRequest', 'locationSubscriptionsRequest', 'eatConfig', 'authManager', 'datesConverter', 'newLogRequest', function($scope, appStatus, urlParser, dishRequest, editDishRequest, locationSubscriptionsRequest, eatConfig, authManager, datesConverter, newLogRequest) {
+    .controller('DishesEditController', ['$scope', '$window', 'appStatus', 'urlParser', 'dishRequest', 'editDishRequest', 'eatConfig', 'authManager', 'datesConverter', 'newLogRequest', function($scope, $window, appStatus, urlParser, dishRequest, editDishRequest, eatConfig, authManager, datesConverter, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -71,10 +71,16 @@ angular.module('eat-this-one')
     // For updates.
     var id = urlParser.getParam('id');
 
-    // TODO We should cache this.
-    // Load the user subscriptions.
-    appStatus.waiting('locationSubscriptionsRequest');
-    locationSubscriptionsRequest($scope);
+    // We only support having one location subscription.
+    // No security issues on having the location in localStorage
+    // as the locations info is public.
+    var loc = localStorage.getItem('loc');
+    if (!loc) {
+        newLogRequest('redirected', 'locationSubscriptions-add', 'index');
+        $window.location.href = 'location-subscriptions/edit.html';
+    }
+    var locationInstance = JSON.parse(loc);
+    $scope.locationid.value = locationInstance._id;
 
     // Load the dish info.
     if (id) {
