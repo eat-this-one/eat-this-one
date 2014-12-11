@@ -117,31 +117,39 @@ router.post('/', function(req, res) {
                 return;
             }
 
-            // Setting the userid from the token.
-            locationSubscriptionObj = {
-                userid : token.userid,
-                locationid : locationid
-            };
+            // Restricted to one location per user.
+            LocationSubscriptionModel.find({userid : token.userid}, function(error, locationSubscriptions) {
 
-            var locationSubscriptionInstance = new LocationSubscriptionModel(locationSubscriptionObj);
-            locationSubscriptionInstance.save(function(error) {
                 if (error) {
                     res.statusCode = 500;
-                    res.send("Error saving location subscription: " + error);
+                    res.send('Error getting location subscriptions: ' + error);
                     return;
                 }
 
-                // Returned object.
-                var locationSubscriptionReturn = {
-                    userid : locationSubscriptionInstance.userid,
-                    locationid : locationSubscriptionInstance.locationid,
-                    created : locationSubscriptionInstance.created,
-                    loc : locationInstance
+                if (locationSubscriptions.length > 0) {
+                    res.statuscode = 401;
+                    res.send('Only one location subscription per user.');
+                    return;
+                }
+
+                // Setting the userid from the token.
+                locationSubscriptionObj = {
+                    userid : token.userid,
+                    locationid : locationid
                 };
 
-                // Same output for all output formats.
-                res.statusCode = 201;
-                res.send(locationSubscriptionReturn);
+                var locationSubscriptionInstance = new LocationSubscriptionModel(locationSubscriptionObj);
+                locationSubscriptionInstance.save(function(error) {
+                    if (error) {
+                        res.statusCode = 500;
+                        res.send("Error saving location subscription: " + error);
+                        return;
+                    }
+
+                    // Like in location->post()
+                    res.statusCode = 201;
+                    res.send(locationInstance);
+                });
             });
         });
     });

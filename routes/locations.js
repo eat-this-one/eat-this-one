@@ -8,6 +8,11 @@ var TokenModel = require('../models/token.js').model;
 var LocationModel = require('../models/location.js').model;
 var LocationSubscriptionModel = require('../models/locationSubscription.js').model;
 
+var locationProps = {
+    'name' : 'required',
+    'address' : 'required'
+};
+
 // GET - Locations list.
 router.get('/', function(req, res) {
 
@@ -60,11 +65,6 @@ router.get('/:id', function(req, res) {
 // POST - Create a location.
 router.post('/', function(req, res) {
 
-    var locationProps = {
-        'name' : 'required',
-        'address' : 'required'
-    };
-
     var locationObj = {};
     var missing = [];
     for (var prop in locationProps) {
@@ -96,34 +96,49 @@ router.post('/', function(req, res) {
             return;
         }
 
-        // Setting the userid from the token.
-        locationObj.userid = token.userid;
+        // Restricted to one location per user.
+        LocationSubscriptionModel.find({userid: token.userid}, function(error, locationSubscriptions) {
 
-        var locationInstance = new LocationModel(locationObj);
-        locationInstance.save(function(error) {
             if (error) {
                 res.statusCode = 500;
-                res.send("Error saving location: " + error);
+                res.send('Error getting possible user location subscriptions: ' + error);
                 return;
             }
 
-            // Now we auto-subscribe the user to that location.
-            var locationSubscriptionInstance = new LocationSubscriptionModel({
-                userid: token.userid,
-                locationid: locationInstance.id
-            });
-            locationSubscriptionInstance.save(function(error) {
+            if (locationSubscriptions.length > 0) {
+                res.statuscode = 401;
+                res.send('Only one location subscription per user.');
+                return;
+            }
+
+            // Setting the userid from the token.
+            locationObj.userid = token.userid;
+
+            var locationInstance = new LocationModel(locationObj);
+            locationInstance.save(function(error) {
                 if (error) {
                     res.statusCode = 500;
-                    res.send("Error saving location subscription: " + error);
+                    res.send("Error saving location: " + error);
                     return;
                 }
 
-                // Same output for all output formats.
-                res.statusCode = 201;
-                res.send(locationInstance);
-            });
+                // Now we auto-subscribe the user to that location.
+                var locationSubscriptionInstance = new LocationSubscriptionModel({
+                    userid: token.userid,
+                    locationid: locationInstance.id
+                });
+                locationSubscriptionInstance.save(function(error) {
+                    if (error) {
+                        res.statusCode = 500;
+                        res.send("Error saving location subscription: " + error);
+                        return;
+                    }
 
+                    // Like in locationSubscriptions->post()
+                    res.statusCode = 201;
+                    res.send(locationInstance);
+                });
+            });
         });
     });
 });
