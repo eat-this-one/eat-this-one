@@ -22,15 +22,6 @@ angular.module('eat-this-one')
                     window.location.href = 'location-subscriptions/edit.html';
                 }, 1000);
             } else {
-                
-                // Populates the location field.
-                for (var locIndex in data) {
-                    $scope.locationid.options.push({
-                        text: data[locIndex].name,
-                        value: data[locIndex]._id
-                    });
-                }
-
                 // We use the first one.
                 $scope.locationid.value = data[0]._id;
             }

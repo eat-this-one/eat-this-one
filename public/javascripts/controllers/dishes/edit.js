@@ -25,10 +25,7 @@ angular.module('eat-this-one')
     };
     $scope.locationid = {
         name: 'locationid',
-        label: $scope.lang.where,
-        placeholder: $scope.lang.where,
         value: '',
-        options: []
     };
     $scope.when = {
         name: 'when',
