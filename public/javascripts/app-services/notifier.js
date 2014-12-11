@@ -1,6 +1,7 @@
 angular.module('eat-this-one').factory('notifier', function() {
     return {
 
+        // UNUSED type
         show : function(title, msg, type) {
 
             document.addEventListener('deviceready', function() {

@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesEditController', ['$scope', '$window', 'appStatus', 'urlParser', 'dishRequest', 'editDishRequest', 'eatConfig', 'authManager', 'datesConverter', 'newLogRequest', function($scope, $window, appStatus, urlParser, dishRequest, editDishRequest, eatConfig, authManager, datesConverter, newLogRequest) {
+    .controller('DishesEditController', ['$scope', '$window', 'appStatus', 'urlParser', 'notifier', 'dishRequest', 'editDishRequest', 'eatConfig', 'authManager', 'datesConverter', 'newLogRequest', function($scope, $window, appStatus, urlParser, notifier, dishRequest, editDishRequest, eatConfig, authManager, datesConverter, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -111,9 +111,18 @@ angular.module('eat-this-one')
             dish.id = id;
         }
 
+        var missing = [];
         fields.forEach(function(field) {
+            if ($scope[field].value === null || $scope[field].value === '') {
+                missing.push($scope[field].label);
+            }
             dish[field] = $scope[field].value;
         });
+
+        if (missing.length > 0) {
+            notifier.show($scope.lang.missingfields, $scope.lang.missingfieldsinfo + ":\n" + missing.join("\n"));
+            return;
+        }
 
         // Adding the base64 photo.
         dish.photo = $scope.photo.value;

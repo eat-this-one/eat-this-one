@@ -57,6 +57,8 @@ $.eatLang.en = {
     mealbooked : 'Meal booked',
     mealbookedinfo : 'The chef has been notified',
     mealsibooked : 'Meals I booked',
+    missingfields : 'Missing fields',
+    missingfieldsinfo : 'The following fields needs to be filled before sharing the dish',
     mymeals : 'My meals',
     name : 'Name',
     nameexample : 'e.g. John Cobra',
