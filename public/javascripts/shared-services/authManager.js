@@ -21,32 +21,6 @@ angular.module('eat-this-one').factory('authManager', ['$modal', function($modal
         authenticate : function(userid) {
             authenticated = true;
             useridRef = userid;
-        },
-
-        // Opens the login pop up.
-        openSignInPopup : function() {
-
-            var signInModal = $modal.open({
-                templateUrl : 'templates/sign-in-popup.html',
-                controller : 'signInPopupController'
-            });
-
-            signInModal.result.then(function(success) {
-                authenticated = success;
-            });
-        },
-
-        // Opens the pop up to sign up.
-        openSignUpPopup : function() {
-
-            var signUpModal = $modal.open({
-                templateUrl : 'templates/sign-up-popup.html',
-                controller : 'signUpPopupController'
-            });
-
-            signUpModal.result.then(function(success) {
-                authenticated = success;
-            });
         }
     }
 

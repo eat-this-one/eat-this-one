@@ -4,7 +4,7 @@ angular.module('eat-this-one')
     $scope.lang = $.eatLang.lang;
 
     // Page title.
-    $scope.pageTitle = $scope.lang.invitecolleagues;
+    $scope.pageTitle = $scope.lang.addcolleagues;
 
     // To store the user contacts with a valid name and mobile phone.
     $scope.contacts = [];
