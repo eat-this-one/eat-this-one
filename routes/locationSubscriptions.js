@@ -28,7 +28,7 @@ router.get('/', function(req, res) {
         }
 
         if (!token) {
-            res.statuscode = 401;
+            res.statusCode = 401;
             res.send('Wrong credentials');
             return;
         }

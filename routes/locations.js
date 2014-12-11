@@ -106,7 +106,7 @@ router.post('/', function(req, res) {
             }
 
             if (locationSubscriptions.length > 0) {
-                res.statuscode = 401;
+                res.statusCode = 401;
                 res.send('Only one location subscription per user.');
                 return;
             }
