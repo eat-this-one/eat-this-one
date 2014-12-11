@@ -15,7 +15,7 @@ angular.module('eat-this-one')
             appStatus.completed('locationSubscriptionsRequest');
 
             // Just one location subscription per user.
-            if (data) {
+            if (data && data.length > 0) {
 
                 // It returns an array, but should only contain 1 location subscription.
                 localStorage.setItem('loc', JSON.stringify(data.shift()));
