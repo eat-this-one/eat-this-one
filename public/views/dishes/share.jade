@@ -15,7 +15,7 @@ block content
 
         div(class='centered-container info-text') {{lang.messagecontactsinfo}}
 
-        div(id='id-contacts', class='list-group')
+        div(id='id-contacts', class='list-group contacts-list')
             a(id='{{contact.mobilePhone}}', ng-repeat='contact in contacts | orderBy: "displayName"', class='list-group-item contact') {{contact.displayName}}
 
 include ../footer

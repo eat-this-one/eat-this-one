@@ -93,7 +93,7 @@ module.exports = function(grunt) {
             // Less changes compiles CSS.
             dev_css : {
                 files : [ "public/stylesheets/**/*.less" ],
-                tasks : [ "less", "cssmin", "copy:build" ],
+                tasks : [ "csslint", "less", "cssmin", "copy:build" ],
                 options : {
                     nospawn : true
                 }
@@ -159,6 +159,12 @@ module.exports = function(grunt) {
                 files : {
                     'public/shared-build/styles.css' : [ 'public/bower_components/bootstrap/dist/css/bootstrap.min.css', 'public/shared-build/styles.css' ]
                 }
+            }
+        },
+
+        csslint : {
+            strict : {
+                src : ['public/stylesheets/*.less']
             }
         },
 
@@ -229,8 +235,8 @@ module.exports = function(grunt) {
 
     // Executable tasks.
     // TODO Generate non compressed version in build:dev.
-    grunt.registerTask("build:prod", [ "clean:build", "copy:resources", "uglify", "less", "cssmin", "jade:compile", "copy:build" ]);
-    grunt.registerTask("build:dev", [ "clean:build", "copy:resources", "uglify", "less", "cssmin", "jade:compile", "copy:build" ]);
+    grunt.registerTask("build:prod", [ "clean:build", "copy:resources", "uglify", "less", "cssmin", "csslint", "jade:compile", "copy:build" ]);
+    grunt.registerTask("build:dev", [ "clean:build", "copy:resources", "uglify", "less", "cssmin", "csslint", "jade:compile", "copy:build" ]);
 
     // While developing monitor the changes. 
     grunt.registerTask("run:dev", [ "build:dev", "karma", "concurrent" ]);
@@ -245,6 +251,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-jade");
     grunt.loadNpmTasks("grunt-contrib-cssmin");
+    grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks("grunt-karma");
     grunt.loadNpmTasks('grunt-shell');
 };

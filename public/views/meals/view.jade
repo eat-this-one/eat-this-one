@@ -8,7 +8,7 @@ block content
 
         include ../top
 
-        div(ng-if='auth.isAuthenticated()', id='id-dish-info')
+        div(ng-if='auth.isAuthenticated()', class='dish-info')
             div(class='dish-field')
                 b {{lang.dishname}}
                 {{dish.name}}

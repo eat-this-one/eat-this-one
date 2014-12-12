@@ -1,10 +1,13 @@
-a,
-.pointer {
+a {
     cursor: pointer;
 }
 
 html {
     height: 100%;
+}
+
+.pointer {
+    cursor: pointer;
 }
 
 table tr td a {
@@ -17,13 +20,12 @@ table tr td a:hover {
     text-decoration: none;
 }
 
-///////////// Specific app aspects //////////
-
-#id-page-title {
+.page-title {
     text-align: center;
+    margin-bottom: 10px;
 }
 
-#id-mask {
+.mask {
     opacity: 0.5;
     z-index: 9000;
     background-image: url('images/loading.gif');
@@ -31,19 +33,19 @@ table tr td a:hover {
     background-position: center;
 }
 
-#id-notification {
+.notification {
     display: none;
 }
 
-#id-dish-info {
+.dish-info {
     margin-bottom: 20px;
 }
 
-#id-dish-info div {
+.dish-info div {
     padding-top: 5px;
 }
 
-#id-contacts {
+.contacts-list {
     margin: 10px 0 10px 0;
 }
 
@@ -89,7 +91,7 @@ table tr td a:hover {
     height: 25px;
 }
 
-///////////// Generics ////////////
+/* -------- Generics ------- */
 
 .hidden {
     display: none;
@@ -100,6 +102,10 @@ table tr td a:hover {
     margin: auto;
 }
 
+.centered-container button {
+    margin: 3px;
+}
+
 .info-text {
-    margin: 10px;
+    margin: 20px 10px 20px 10px;
 }
