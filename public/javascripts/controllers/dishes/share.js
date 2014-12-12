@@ -81,9 +81,9 @@ angular.module('eat-this-one')
 
     }, false);
 
-    $scope.skip = function() {
+    $scope.continue = function() {
 
-        newLogRequest('click', 'dishes-share-skip');
+        newLogRequest('click', 'dishes-share-continue');
 
         // TODO If there are no subscribers we should warn the
         // user that no users will see the dish he/she just added.
