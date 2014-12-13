@@ -47,8 +47,10 @@ angular.module('eat-this-one')
                     // Toggles active class.
                     if ($(this).hasClass('active')) {
                         $(this).removeClass('active');
+                        $(this).children('span.glyphicon').removeClass('glyphicon-ok')
                     } else {
                         $(this).addClass('active');
+                        $(this).children('span.glyphicon').addClass('glyphicon-ok')
                     }
                 });
             });

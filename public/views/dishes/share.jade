@@ -17,5 +17,6 @@ block content
 
         div(id='id-contacts', class='list-group contacts-list')
             a(id='{{contact.mobilePhone}}', ng-repeat='contact in contacts | orderBy: "displayName"', class='list-group-item contact') {{contact.displayName}}
+                span(class='glyphicon pull-right')
 
 include ../footer
