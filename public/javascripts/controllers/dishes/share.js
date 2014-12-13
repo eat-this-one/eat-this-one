@@ -83,7 +83,7 @@ angular.module('eat-this-one')
 
     }, false);
 
-    $scope.continue = function() {
+    $scope.noSms = function() {
 
         newLogRequest('click', 'dishes-share-continue');
 

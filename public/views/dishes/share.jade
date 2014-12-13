@@ -9,9 +9,9 @@ block content
             button(class='btn btn-success', ng-click='sendSms()')
                 span(class='glyphicon glyphicon-envelope button-icon', aria-hidden='true')
                 {{lang.message}}
-            button(class='btn btn-default', ng-click='continue()')
-                span(class='glyphicon glyphicon-arrow-right button-icon', aria-hidden='true')
-                {{lang.continue}}
+            button(class='btn btn-default', ng-click='noSms()')
+                span(class='glyphicon glyphicon-remove button-icon', aria-hidden='true')
+                {{lang.skip}}
 
         div(class='centered-container info-text') {{lang.messagecontactsinfo}}
 
