@@ -367,8 +367,10 @@ router.post('/', function(req, res) {
                                 return;
                             }
 
-                            // Pity that nobody is subscribed here.
+                            // Pity that nobody is subscribed here, BUT weird,
+                            // as the current user should be already subscribed here
                             if (!subscriptions) {
+                                returnDish.nsubscriptors = 0;
                                 res.statusCode = 201;
                                 res.send(returnDish);
                                 return;
@@ -387,8 +389,10 @@ router.post('/', function(req, res) {
                                     return;
                                 }
 
-                                // All subscribed users are deleted?.
+                                // All subscribed users are deleted? The current user
+                                // should be subscribed so unlikely that we enter here.
                                 if (!subscribers) {
+                                    returnDish.nsubscriptors = 0;
                                     res.statusCode = 201;
                                     res.send(returnDish);
                                     return;
@@ -417,6 +421,7 @@ router.post('/', function(req, res) {
                                 // TODO Email fallback for users without any GCM reg id nor iPhone.
 
                                 // All good, so we notify and finish.
+                                returnDish.nsubscriptors = subscribers.length;
                                 res.statusCode = 201;
                                 res.send(returnDish);
                                 return;
