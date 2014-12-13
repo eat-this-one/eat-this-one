@@ -19,7 +19,7 @@ block content
             input(type='hidden', name='currency', id='id-currency',  value='aud', ng-model='dish.currency')
 
             div(ng-if='auth.isAuthenticated()')
-                button(ng-if='!isEditing()', ng-click='save()', class='btn btn-primary')
+                button(ng-if='!isEditing()', ng-click='save()', id='id-share-dish-button', class='btn btn-primary')
                     span(class='glyphicon glyphicon-ok button-icon', aria-hidden='true')
                     {{lang.sharedish}}
                 button(ng-if='isEditing()', ng-click='save()', class='btn btn-primary')

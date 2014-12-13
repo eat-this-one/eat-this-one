@@ -110,7 +110,7 @@ angular.module('eat-this-one')
 
         // The receiver already knows who is sending the message.
         var msg = $scope.lang.iwanttoshare + ': "' + urlParser.getParam('dishname') + '" ' +
-             $scope.lang.in + ' "' + urlParser.getParam('locationname') + '". \n' +
+             $scope.lang.at + ' "' + urlParser.getParam('locationname') + '". \n' +
              $scope.lang.downloadapp + ".\n" + $scope.lang.android + ": " + eatConfig.downloadAppUrl;
 
         appStatus.completed('selectedContacts');

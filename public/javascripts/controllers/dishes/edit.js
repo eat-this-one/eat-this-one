@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesEditController', ['$scope', '$window', 'appStatus', 'urlParser', 'notifier', 'dishRequest', 'editDishRequest', 'eatConfig', 'authManager', 'datesConverter', 'newLogRequest', function($scope, $window, appStatus, urlParser, notifier, dishRequest, editDishRequest, eatConfig, authManager, datesConverter, newLogRequest) {
+    .controller('DishesEditController', ['$scope', '$window', 'appStatus', 'urlParser', 'notifier', 'dishRequest', 'editDishRequest', 'eatConfig', 'authManager', 'datesConverter', 'formsManager', 'newLogRequest', function($scope, $window, appStatus, urlParser, notifier, dishRequest, editDishRequest, eatConfig, authManager, datesConverter, formsManager, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -77,6 +77,10 @@ angular.module('eat-this-one')
         $window.location.href = 'location-subscriptions/edit.html';
     }
     var locationInstance = JSON.parse(loc);
+    if (typeof locationInstance._id === 'undefined') {
+        newLogRequest('redirected', 'locationSubscriptions-add', 'index');
+        $window.location.href = 'location-subscriptions/edit.html';
+    }
     $scope.locationid.value = locationInstance._id;
 
     // Load the dish info.
@@ -103,23 +107,19 @@ angular.module('eat-this-one')
 
         var dish = {};
 
+        // Validate the form text forms, the other ones have a default value.
+        if (!formsManager.validate(['name', 'description'], $scope)) {
+            return;
+        }
+
         // Edit mode.
         if (id) {
             dish.id = id;
         }
 
-        var missing = [];
         fields.forEach(function(field) {
-            if ($scope[field].value === null || $scope[field].value === '') {
-                missing.push($scope[field].label);
-            }
             dish[field] = $scope[field].value;
         });
-
-        if (missing.length > 0) {
-            notifier.show($scope.lang.missingfields, $scope.lang.missingfieldsinfo + ":\n" + missing.join("\n"));
-            return;
-        }
 
         // Adding the base64 photo.
         dish.photo = $scope.photo.value;

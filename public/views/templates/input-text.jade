@@ -1,4 +1,4 @@
 // Uses public/javascript/directives/input-text.js
 div(class='form-group')
     label(for='id-{{element.name}}') {{element.label}}
-    input(type='text', name='{{element.name}}', id='id-{{element.name}}', placeholder='{{element.placeholder}}', class='form-control', ng-model='element.value')
+    input(type='text', name='{{element.name}}', id='id-{{element.name}}', placeholder='{{element.placeholder}}', class='form-control', ng-model='element.value' required)

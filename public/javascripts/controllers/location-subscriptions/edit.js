@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('LocationSubscriptionsEditController', ['$scope', '$http', '$window', 'appStatus', 'eatConfig', 'authManager', 'notifier', 'newLocationRequest', 'newLocationSubscriptionRequest', 'locationSubscriptionsRequest', 'newLogRequest', function($scope, $http, $window, appStatus, eatConfig, authManager, notifier, newLocationRequest, newLocationSubscriptionRequest, locationSubscriptionsRequest, newLogRequest) {
+    .controller('LocationSubscriptionsEditController', ['$scope', '$http', '$window', 'appStatus', 'eatConfig', 'authManager', 'notifier', 'formsManager', 'newLocationRequest', 'newLocationSubscriptionRequest', 'locationSubscriptionsRequest', 'newLogRequest', function($scope, $http, $window, appStatus, eatConfig, authManager, notifier, formsManager, newLocationRequest, newLocationSubscriptionRequest, locationSubscriptionsRequest, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -102,11 +102,21 @@ angular.module('eat-this-one')
 
     $scope.subscribe = function() {
 
-        if ($scope.loc.value != '') {
+        if ($scope.loc.value != '' &&
+                $scope.loc.value != null &&
+                typeof $scope.loc.value === 'undefined') {
+
+            if (!formsManager.validate(['loc'], $scope)) {
+                return;
+            }
             // Only a subscription as the location already exists.
             appStatus.waiting('newLocationSubscriptionRequest');
             newLocationSubscriptionRequest($scope, $scope.loc.value);
         } else {
+
+            if (!formsManager.validate(['locationname', 'address'], $scope)) {
+                return;
+            }
             // A new location including subscription.
             appStatus.waiting('newLocationRequest');
             newLocationRequest($scope, $scope.locationname.value, $scope.address.value);
