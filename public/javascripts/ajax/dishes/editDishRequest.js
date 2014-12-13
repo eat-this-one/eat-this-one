@@ -28,7 +28,13 @@ angular.module('eat-this-one')
             if (statusCode == 201) {
                 // POST.
                 title = $scope.lang.dishadded;
-                info = $scope.lang.dishaddedinfo + '.';
+
+                // The current user will be subscribed, so more than 1.
+                if (data.nsubscriptors <= 1) {
+                    info = $scope.lang.dishaddednosubscriptorsinfo + '.';
+                } else {
+                    info = $scope.lang.dishaddednotifiedinfo + '.';
+                }
             } else {
                 // PUT.
                 title = $scope.lang.dishedited + '.';
@@ -58,7 +64,15 @@ angular.module('eat-this-one')
                     var shareArguments = '?dishname=' + data.name +
                         '&locationname=' + data.loc.name;
                     $window.location.href = 'dishes/share.html' + shareArguments;
+                } else if (data.nsubscriptors <= 1) {
+                    // If there are no subscriptors the user needs to contact more
+                    // people, otherwise it is not worth to share the dish with nobody.
+                    var shareArguments = '?dishname=' + data.name +
+                        '&locationname=' + data.loc.name;
+                    $window.location.href = 'dishes/share.html' + shareArguments;
                 } else {
+                    // TODO Extra confirm to let the user choose if
+                    // he/she wants to add more colleagues.
                     $window.location.href = 'index.html';
                 }
             }
