@@ -1,4 +1,4 @@
-angular.module('eat-this-one').controller('IndexController', ['$scope', '$window', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'dishesRequest', 'OAuthUserRequest', 'newLogRequest', function($scope, $window, eatConfig, authManager, appStatus, notifier, dishesRequest, OAuthUserRequest, newLogRequest) {
+angular.module('eat-this-one').controller('IndexController', ['$scope', '$window', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'datesConverter', 'dishesRequest', 'OAuthUserRequest', 'newLogRequest', function($scope, $window, eatConfig, authManager, appStatus, notifier, datesConverter, dishesRequest, OAuthUserRequest, newLogRequest) {
 
     // Dependencies.
     $scope.lang = $.eatLang.lang;
@@ -10,9 +10,32 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', '$window
     $scope.dishes = [];
     $scope.showNoDishes = false;
 
+    // Getting the list of dishes.
     if ($scope.auth.isAuthenticated()) {
-        appStatus.waiting();
-        dishesRequest($scope);
+
+        appStatus.waiting('dishesRequest');
+
+        // Success callback.
+        var dishesCallback = function(dishesData) {
+
+            $scope.dishes = dishesData;
+            appStatus.completed('dishesRequest');
+
+            if ($scope.dishes.length === 0) {
+                $scope.showNoDishes = true;
+            } else {
+                for (index in $scope.dishes) {
+                    $scope.dishes[index].when = datesConverter.timeToDay(Date.parse($scope.dishes[index].when));
+                }
+            }
+        };
+        var errorCallback = function(data, errorStatus, errorMsg) {
+            // On unauthorized access we redirect to the index.
+            appStatus.completed('dishesRequest');
+            var msg = $scope.lang.errordishesrequest + '. "' + errorStatus + '": ' + data;
+            notifier.show($scope.lang.error, msg, 'error');
+        };
+        dishesRequest($scope, dishesCallback, errorCallback);
     }
 
     newLogRequest('view', 'index');
