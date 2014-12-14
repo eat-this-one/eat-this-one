@@ -111,9 +111,9 @@ angular.module('eat-this-one')
         }
 
         // The receiver already knows who is sending the message.
-        var msg = $scope.lang.iwanttoshare + ': "' + urlParser.getParam('dishname') + '" ' +
-             $scope.lang.at + ' "' + urlParser.getParam('locationname') + '". \n' +
-             $scope.lang.downloadapp + ".\n" + $scope.lang.android + ": " + eatConfig.downloadAppUrl;
+        var msg = $scope.lang.icooked + ' ' + urlParser.getParam('dishname') + '. ' +
+             $scope.lang.use + ' ' + eatConfig.downloadAppUrl + ' ' + $scope.lang.seedishandbook +
+             $scope.lang.subscriptioncode + ' "' + urlParser.getParam('locationname') + '"' +
 
         appStatus.completed('selectedContacts');
 
