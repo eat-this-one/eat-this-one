@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesViewController', ['$scope', '$modal', 'appStatus', 'urlParser', 'dishRequest', 'newMealRequest', 'eatConfig', 'authManager', 'newLogRequest', function($scope, $modal, appStatus, urlParser, dishRequest, newMealRequest, eatConfig, authManager, newLogRequest) {
+    .controller('DishesViewController', ['$scope', '$modal', 'appStatus', 'notifier', 'urlParser', 'dishRequest', 'newMealRequest', 'eatConfig', 'authManager', 'newLogRequest', function($scope, $modal, appStatus, notifier, urlParser, dishRequest, newMealRequest, eatConfig, authManager, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -48,12 +48,19 @@ angular.module('eat-this-one')
 
     $scope.addMeal = function() {
 
-        var meal = {
-            dishid: id
-        };
+        appStatus.waiting('newMeal');
 
-        appStatus.waiting();
-        newMealRequest($scope, meal);
+        var mealCallback = function(data) {
+            appStatus.completed('newMeal');
+            notifier.show($scope.lang.mealbooked, $scope.lang.mealbookedinfo, 'success');
+            $window.location.href = 'index.html';
+        };
+        var errorCallback = function(data, errorStatus, errorMsg) {
+            appStatus.completed('newMeal');
+            var msg = $scope.lang.errornewmeal + '. "' + errorStatus + '": ' + data;
+            notifier.show($scope.lang.error, msg, 'error');
+        }
+        newMealRequest($scope, {dishid: id}, mealCallback, errorCallback);
 
         newLogRequest('click', 'meals-add', id);
     };

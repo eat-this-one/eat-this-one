@@ -1,7 +1,7 @@
 angular.module('eat-this-one')
-    .factory('newMealRequest', ['$window', '$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', function($window, $http, appStatus, notifier, eatConfig, sessionManager) {
+    .factory('newMealRequest', ['$window', '$http', 'eatConfig', 'sessionManager', function($window, $http, eatConfig, sessionManager) {
 
-    return function($scope, meal) {
+    return function($scope, meal, mealCallback, errorCallback) {
 
         // Adding the session token to the request.
         meal.token = sessionManager.getToken();
@@ -11,18 +11,9 @@ angular.module('eat-this-one')
             url : eatConfig.backendUrl + '/meals',
             data : meal
 
-        }).success(function(data) {
-
-            appStatus.completed();
-            notifier.show($scope.lang.mealbooked, $scope.lang.mealbookedinfo, 'success');
-
-            $window.location.href = 'index.html';
-
-        }).error(function(data, errorStatus, errorMsg) {
-            appStatus.completed();
-            var msg = $scope.lang.errornewmeal + '. "' + errorStatus + '": ' + data;
-            notifier.show($scope.lang.error, msg, 'error');
-        });
+        })
+        .success(mealCallback)
+        .error(errorCallback);
     };
 
 }]);
