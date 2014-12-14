@@ -88,6 +88,8 @@ router.post('/', function(req, res) {
         return;
     }
 
+    var locationid = req.param('locationid');
+
     TokenModel.findOne({token: req.param('token')}, function(error, token) {
 
         if (error) {
@@ -103,7 +105,7 @@ router.post('/', function(req, res) {
         }
 
         // Check that the location exists.
-        LocationModel.findById(req.param('locationid'), function(error, locationInstance) {
+        LocationModel.findById(locationid, function(error, locationInstance) {
 
             if (error) {
                 res.statusCode = 500;
