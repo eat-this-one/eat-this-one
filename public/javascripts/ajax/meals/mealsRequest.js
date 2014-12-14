@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('mealsRequest', ['$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', 'datesConverter', function($http, appStatus, notifier, eatConfig, sessionManager, datesConverter) {
+    .factory('mealsRequest', ['$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', 'datesConverter', 'newLogRequest', function($http, appStatus, notifier, eatConfig, sessionManager, datesConverter, newLogRequest) {
 
     return function($scope) {
 
@@ -27,6 +27,7 @@ angular.module('eat-this-one')
 
             // On unauthorized access we redirect to the index.
             if (errorStatus === 401) {
+                newLogRequest('redirected', 'index', 'meals-index');
                 window.location.href = 'index.html';
             } else {
                 appStatus.completed();

@@ -20,9 +20,10 @@ angular.module('eat-this-one')
                 // It returns an array, but should only contain 1 location subscription.
                 localStorage.setItem('loc', JSON.stringify(data.shift()));
 
-                newLogRequest('redirected', 'index', 'locationSubscriptions-edit');
-
                 document.addEventListener('deviceready', function() {
+
+                    newLogRequest('redirected', 'index', 'locationSubscriptions-edit');
+
                     notifier.show($scope.lang.alreadysubscribed, $scope.lang.subscribedlocationinfo, 'success');
                     $window.location.href = 'index.html';
                 });
