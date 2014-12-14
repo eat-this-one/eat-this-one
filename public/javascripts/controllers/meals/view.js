@@ -24,7 +24,7 @@ angular.module('eat-this-one')
     var id = urlParser.getParam('id');
 
     // Load the dish info into the fields.
-    appStatus.waiting();
+    appStatus.waiting('dishRequest');
     dishRequest($scope, id);
 
     newLogRequest('view', 'meals-view', id);

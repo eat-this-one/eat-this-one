@@ -1,6 +1,7 @@
 angular.module('eat-this-one')
     .factory('editDishRequest', ['$window', '$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', function($window, $http, appStatus, notifier, eatConfig, sessionManager) {
 
+    // Not using callbacks as it would be hardly reusable.
     return function($scope, dish) {
 
         // Defaults to new dish values.

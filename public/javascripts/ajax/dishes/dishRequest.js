@@ -66,7 +66,7 @@ angular.module('eat-this-one')
             appStatus.completed('dishRequest');
 
         }).error(function(data, errorStatus, errorMsg) {
-            appStatus.completed();
+            appStatus.completed('dishRequest');
             var msg = $scope.lang.errordishrequest + '. "' + errorStatus + '": ' + data;
             notifier.show($scope.lang.error, msg, 'error');
         });
