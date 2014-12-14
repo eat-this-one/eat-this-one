@@ -117,14 +117,15 @@ router.post('/', function(req, res) {
                     // just a google email is safe; look for the returned token
                     // is it the same one? Can we use it to check against?
                     if (!user) {
-                        // If the user already exists we update the
-                        // existing user and we return it.
-                        var user = new UserModel(userObj);
 
                         // Add the GCM registration id if present (not present in web interface).
                         if (gcmregid) {
                             userObj.gcmregids = [gcmregid];
                         }
+
+                        // If the user already exists we update the
+                        // existing user and we return it.
+                        var user = new UserModel(userObj);
                     } else {
                         // Update the existing user.
 
