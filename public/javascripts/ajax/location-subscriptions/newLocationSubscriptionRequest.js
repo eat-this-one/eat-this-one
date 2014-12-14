@@ -1,7 +1,7 @@
 angular.module('eat-this-one')
-    .factory('newLocationSubscriptionRequest', ['$window', '$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', function($window, $http, appStatus, notifier, eatConfig, sessionManager) {
+    .factory('newLocationSubscriptionRequest', ['$window', '$http', 'eatConfig', 'sessionManager', function($window, $http, eatConfig, sessionManager) {
 
-    return function($scope, locationid) {
+    return function($scope, locationid, locSubscriptionCallback, errorCallback) {
 
         $http({
             method : 'POST',
@@ -11,20 +11,6 @@ angular.module('eat-this-one')
                 token : sessionManager.getToken()
             }
 
-        }).success(function(data) {
-
-            notifier.show($scope.lang.subscribed, $scope.lang.subscribedlocationinfo, 'success');
-
-            appStatus.completed('newLocationSubscriptionRequest');
-
-            // Cache the location.
-            localStorage.setItem('loc', JSON.stringify(data));
-
-            $window.location.href = 'index.html';
-
-        }).error(function(data, errorStatus, errorMsg) {
-            appStatus.completed('newLocationSubscriptionRequest');
-            notifier.show($scope.lang.error, data, 'error');
-        });
+        }).success(locSubscriptionCallback).error(errorCallback);
     };
 }]);

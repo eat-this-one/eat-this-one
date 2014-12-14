@@ -111,15 +111,48 @@ angular.module('eat-this-one')
             }
             // Only a subscription as the location already exists.
             appStatus.waiting('newLocationSubscriptionRequest');
-            newLocationSubscriptionRequest($scope, $scope.loc.value);
+
+            var locSubscriptionCallback = function(data) {
+
+                notifier.show($scope.lang.subscribed, $scope.lang.subscribedlocationinfo, 'success');
+                appStatus.completed('newLocationSubscriptionRequest');
+
+                // Cache the location.
+                localStorage.setItem('loc', JSON.stringify(data));
+                $window.location.href = 'index.html';
+            };
+            var errorCallback = function(data, errorStatus, errorMsg) {
+                appStatus.completed('newLocationSubscriptionRequest');
+                notifier.show($scope.lang.error, data, 'error');
+            };
+            newLocationSubscriptionRequest($scope, $scope.loc.value, locSubscriptionCallback, errorCallback);
+
         } else {
 
             if (!formsManager.validate(['locationname', 'address'], $scope)) {
                 return;
             }
+
             // A new location including subscription.
             appStatus.waiting('newLocationRequest');
-            newLocationRequest($scope, $scope.locationname.value, $scope.address.value);
+
+            var locationCallback = function(data) {
+
+                var msg = $scope.lang.locationcreatedinfo + "\n\n" + $scope.lang.subscribedlocationinfo;
+                notifier.show($scope.lang.locationcreated, msg, 'success');
+
+                appStatus.completed('newLocationRequest');
+
+                // Cache the location.
+                localStorage.setItem('loc', JSON.stringify(data));
+                $window.location.href = 'index.html';
+            };
+            var errorCallback = function(data, errorStatus, errorMsg) {
+                appStatus.completed('newLocationRequest');
+                var msg = '"' + errorStatus + '": ' + data;
+                notifier.show($scope.lang.error, msg, 'error');
+            };
+            newLocationRequest($scope, $scope.locationname.value, $scope.address.value, locationCallback, errorCallback);
         }
 
         newLogRequest('click', 'locationSubscription-add-confirm');
