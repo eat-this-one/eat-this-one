@@ -1,7 +1,7 @@
-angular.module('eat-this-one').factory('notifier', function() {
+angular.module('eat-this-one').factory('notifier', ['$window', function($window) {
     return {
 
-        // UNUSED type
+        // UNUSED type param.
         show : function(title, msg, type) {
 
             document.addEventListener('deviceready', function() {
@@ -31,9 +31,9 @@ angular.module('eat-this-one').factory('notifier', function() {
                 window.plugin.notification.local.onclick = function(id, state, json) {
                     var href = 'dishes/view.html?id=' +JSON.parse(json).dishid;
                     console.log('Notification clicked, user redirected to ' + href);
-                    window.location.href = href;
+                    $window.location.href = href;
                 };
             });
         }
     }
-});
+}]);

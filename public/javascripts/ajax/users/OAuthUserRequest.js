@@ -17,7 +17,7 @@ angular.module('eat-this-one')
                 data : requestData
             }).success(function(data) {
 
-                authManager.authenticate();
+                authManager.authenticate(data.id);
                 sessionManager.setUser(data);
 
                 newLogRequest('created', 'account');

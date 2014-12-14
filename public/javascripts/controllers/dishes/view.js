@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesViewController', ['$scope', '$modal', 'appStatus', 'notifier', 'urlParser', 'dishRequest', 'newMealRequest', 'eatConfig', 'authManager', 'newLogRequest', function($scope, $modal, appStatus, notifier, urlParser, dishRequest, newMealRequest, eatConfig, authManager, newLogRequest) {
+    .controller('DishesViewController', ['$scope', '$modal', '$window', 'appStatus', 'notifier', 'urlParser', 'dishRequest', 'newMealRequest', 'eatConfig', 'authManager', 'newLogRequest', function($scope, $modal, $window, appStatus, notifier, urlParser, dishRequest, newMealRequest, eatConfig, authManager, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -34,8 +34,9 @@ angular.module('eat-this-one')
         // - If the user already book it can not be booked again.
         return (
             !$scope.auth.isUser($scope.dish.userid) &&
-            $scope.dish.remainingportions > 0 &&
-            $scope.dish.booked === false);
+            ($scope.dish.remainingportions > 0 || $scope.dish.remainingportions === -1) &&
+            $scope.dish.booked === false
+        );
     };
 
     var id = urlParser.getParam('id');
@@ -67,6 +68,6 @@ angular.module('eat-this-one')
 
     $scope.editDish = function() {
         newLogRequest('click', 'dishes-edit', id);
-        window.location.href = 'dishes/edit.html?id=' + id;
+        $window.location.href = 'dishes/edit.html?id=' + id;
     };
 }]);

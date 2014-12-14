@@ -15,6 +15,7 @@ angular.module('eat-this-one')
             // All cordova calls should be inside a deviceready listener.
             document.addEventListener('deviceready', function() {
 
+                // TODO Check that this works.
                 navigator.globalization.getPreferredLanguage(
                     function(language) {
                         var shortLang = language.value.substring(0, 2);

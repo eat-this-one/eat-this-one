@@ -46,7 +46,7 @@ $.eatLang.en = {
     locationcreatedinfo : 'Time to share dishes! Once you add a dish you can add more colleagues.',
     locationname : 'Location name',
     mealbooked : 'Meal booked',
-    mealbookedinfo : 'The chef has been notified',
+    mealbookedinfo : 'Thanks for booking the meal. The chef has been notified.',
     mealsibooked : 'Meals I booked',
     message : 'Message',
     messagecontactsinfo : 'The more colleagues you share the food with, the better, invite them to join your lunch time location.',

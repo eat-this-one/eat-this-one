@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('MealsController', ['$scope', 'appStatus', 'notifier', 'mealsRequest', 'eatConfig', 'datesConverter', 'newLogRequest', function($scope, appStatus, notifier, mealsRequest, eatConfig, datesConverter, newLogRequest) {
+    .controller('MealsController', ['$scope', '$window', 'appStatus', 'notifier', 'mealsRequest', 'eatConfig', 'datesConverter', 'newLogRequest', function($scope, $window, appStatus, notifier, mealsRequest, eatConfig, datesConverter, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
 
@@ -30,7 +30,7 @@ angular.module('eat-this-one')
         // On unauthorized access we redirect to the index.
         if (errorStatus === 401) {
             newLogRequest('redirected', 'index', 'meals-index');
-            window.location.href = 'index.html';
+            $window.location.href = 'index.html';
         } else {
             appStatus.completed('mealsRequest');
             var msg = $scope.lang.errormealrequest + '. "' + errorStatus + '": ' + data;
