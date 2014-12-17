@@ -125,7 +125,7 @@ angular.module('eat-this-one')
 
         if ($scope.loc.value != '' &&
                 $scope.loc.value != null &&
-                typeof $scope.loc.value === 'undefined') {
+                typeof $scope.loc.value !== 'undefined') {
 
             if (!formsManager.validate(['loc'], $scope)) {
                 return;
