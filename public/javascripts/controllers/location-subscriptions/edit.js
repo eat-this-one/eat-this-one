@@ -14,7 +14,7 @@ angular.module('eat-this-one')
     };
     $scope.locationname = {
         name: 'loc',
-        label: $scope.lang.wherelunch,
+        label: $scope.lang.subscriptioncodeornew,
         placeholder: $scope.lang.whereexample,
         value: ''
     };
@@ -46,7 +46,28 @@ angular.module('eat-this-one')
 
     // We will redirect to home if the user already have a location subscription.
     appStatus.waiting('locationSubscriptionsRequest');
-    locationSubscriptionsRequest($scope);
+    var locationSubscriptionsCallback = function(data) {
+
+        appStatus.completed('locationSubscriptionsRequest');
+
+        // Just one location subscription per user.
+        if (data && data.length > 0) {
+
+            // It returns an array, but should only contain 1 location subscription.
+            localStorage.setItem('loc', JSON.stringify(data.shift()));
+
+            document.addEventListener('deviceready', function() {
+                newLogRequest('redirected', 'index', 'locationSubscriptions-edit');
+                notifier.show($scope.lang.alreadysubscribed, $scope.lang.subscribedlocationinfo, 'success');
+                $window.location.href = 'index.html';
+            });
+        }
+    };
+    var errorCallback = function(data, errorStatus, errorMsg) {
+        appStatus.completed('locationSubscriptionsRequest');
+        // No subscriptions expected.
+    };
+    locationSubscriptionsRequest($scope, locationSubscriptionsCallback, errorCallback);
 
     // TODO We should use a cache for the system
     // locations; this is too expensive.

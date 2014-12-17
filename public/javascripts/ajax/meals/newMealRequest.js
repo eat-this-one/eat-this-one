@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('newMealRequest', ['$window', '$http', 'eatConfig', 'sessionManager', function($window, $http, eatConfig, sessionManager) {
+    .factory('newMealRequest', ['$window', '$http', 'eatConfig', 'sessionManager', 'appStatus', 'notifier', function($window, $http, eatConfig, sessionManager, appStatus, notifier) {
 
     return function($scope, meal, mealCallback, errorCallback) {
 

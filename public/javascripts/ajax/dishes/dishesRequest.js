@@ -1,8 +1,6 @@
 angular.module('eat-this-one')
-    .factory('dishesRequest', ['$http', 'notifier', 'eatConfig', 'sessionManager', function($http, notifier, eatConfig, sessionManager) {
+    .factory('dishesRequest', ['$http', 'notifier', 'eatConfig', 'sessionManager', 'appStatus', 'notifier', function($http, notifier, eatConfig, sessionManager, appStatus, notifier) {
 
-    // Callbacks dependencies should be specified
-    // here as they will be executed here.
     return function($scope, dishesCallback, errorCallback) {
 
         $http({
@@ -10,7 +8,8 @@ angular.module('eat-this-one')
             url : eatConfig.backendUrl + '/dishes',
             params : { token : sessionManager.getToken() }
 
-        }).success(dishesCallback)
+        })
+        .success(dishesCallback)
         .error(errorCallback);
     };
 
