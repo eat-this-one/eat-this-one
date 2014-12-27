@@ -75,6 +75,12 @@ router.post('/', function(req, res) {
 
             var gTokenData = JSON.parse(body);
 
+            if (gTokenData.error) {
+                res.statusCode = 500;
+                res.send("Error getting google user token. Error: " + gTokenData.error_description);
+                return;
+            }
+
             // Get google profile info.
             request.get({
                 url: 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=' + gTokenData.access_token,
@@ -87,6 +93,12 @@ router.post('/', function(req, res) {
                 }
 
                 var gUserData = JSON.parse(body);
+
+                if (gUserData.error) {
+                    res.statusCode = 500;
+                    res.send("Error getting google user data. Error: " + gUserData.error.message);
+                    return;
+                }
 
                 UserModel.findOne({email: gUserData.email}, function(error, user) {
 
