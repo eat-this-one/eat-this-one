@@ -5,7 +5,7 @@ angular.module('eat-this-one')
 
         initSession : function() {
             var token = localStorage.getItem('token');
-            if (token !== null) {
+            if (token !== null && !token) {
                 var user = JSON.parse(localStorage.getItem('user'));
                 authManager.authenticate(user.id);
             }
@@ -53,6 +53,12 @@ angular.module('eat-this-one')
 
         getUser : function() {
             return JSON.parse(localStorage.getItem('user'));
+        },
+
+        cleanSession : function() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            authManager.unauthenticate();
         }
     }
 }]);

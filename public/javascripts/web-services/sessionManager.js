@@ -6,7 +6,7 @@ angular.module('eat-this-one')
         initSession : function() {
 
             var token = sessionStorage.getItem('token');
-            if (token !== null) {
+            if (token !== null && !token) {
                 var user = JSON.parse(sessionStorage.getItem('user'));
                 authManager.authenticate(user.id);
             }
@@ -37,6 +37,12 @@ angular.module('eat-this-one')
 
         getUser : function() {
             return JSON.parse(sessionStorage.getItem('user'));
+        },
+
+        cleanSession : function() {
+            sessionStorage.removeItem('token');
+            sessionStorage.removeItem('user');
+            authManager.unauthenticate();
         }
     }
 }]);

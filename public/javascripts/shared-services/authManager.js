@@ -21,6 +21,11 @@ angular.module('eat-this-one').factory('authManager', ['$modal', function($modal
         authenticate : function(userid) {
             authenticated = true;
             useridRef = userid;
+        },
+
+        unauthenticate : function() {
+            authenticated = false;
+            useridRef = false;
         }
     }
 
