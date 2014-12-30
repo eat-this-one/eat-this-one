@@ -131,7 +131,7 @@ angular.module('eat-this-one')
         // When.
         dish.when = datesConverter.dayToTime($scope.when.value);
 
-        appStatus.waiting();
+        appStatus.waiting('editDishRequest');
         editDishRequest($scope, dish);
 
         if (id) {
