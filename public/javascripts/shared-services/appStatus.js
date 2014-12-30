@@ -51,6 +51,13 @@ angular.module('eat-this-one')
                     $('.btn').removeClass('btn-disabled');
                 }
             });
+        },
+
+        isAllCompleted : function() {
+            if (loadingActions.length === 0) {
+                return true;
+            }
+            return false;
         }
     }
 });
