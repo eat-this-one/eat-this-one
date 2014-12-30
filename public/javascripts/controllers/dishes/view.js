@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesViewController', ['$scope', '$modal', '$window', 'appStatus', 'notifier', 'urlParser', 'dishRequest', 'newMealRequest', 'eatConfig', 'authManager', 'newLogRequest', function($scope, $modal, $window, appStatus, notifier, urlParser, dishRequest, newMealRequest, eatConfig, authManager, newLogRequest) {
+    .controller('DishesViewController', ['$scope', '$modal', '$window', 'appStatus', 'notifier', 'urlParser', 'dishFormatter', 'dishRequest', 'newMealRequest', 'eatConfig', 'authManager', 'newLogRequest', function($scope, $modal, $window, appStatus, notifier, urlParser, dishFormatter, dishRequest, newMealRequest, eatConfig, authManager, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -43,7 +43,11 @@ angular.module('eat-this-one')
 
     // Load the dish info into the fields.
     appStatus.waiting('dishRequest');
-    dishRequest($scope, id);
+    var dishCallback = function(dishData) {
+        dishFormatter($scope, dishData);
+        appStatus.completed('dishRequest');
+    };
+    dishRequest($scope, dishCallback, id);
 
     newLogRequest('view', 'dishes-view', id);
 

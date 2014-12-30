@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesEditController', ['$scope', '$window', 'appStatus', 'urlParser', 'notifier', 'dishRequest', 'editDishRequest', 'eatConfig', 'authManager', 'datesConverter', 'formsManager', 'newLogRequest', function($scope, $window, appStatus, urlParser, notifier, dishRequest, editDishRequest, eatConfig, authManager, datesConverter, formsManager, newLogRequest) {
+    .controller('DishesEditController', ['$scope', '$window', 'appStatus', 'urlParser', 'notifier', 'dishFormatter', 'dishRequest', 'editDishRequest', 'eatConfig', 'authManager', 'datesConverter', 'formsManager', 'newLogRequest', function($scope, $window, appStatus, urlParser, notifier, dishFormatter, dishRequest, editDishRequest, eatConfig, authManager, datesConverter, formsManager, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -86,7 +86,11 @@ angular.module('eat-this-one')
     // Load the dish info.
     if (id) {
         appStatus.waiting('dishRequest');
-        dishRequest($scope, id);
+        var dishCallback = function(dishData) {
+            dishFormatter($scope, dishData);
+            appStatus.completed('dishRequest');
+        };
+        dishRequest($scope, dishCallback, id);
 
         newLogRequest('view', 'dishes-edit', id);
     } else {
