@@ -2,7 +2,6 @@ Eat-this-one source code includes both backend, frontend and development tools.
 
 * Backend
 ** NodeJS (server)
-** ExpressJS (skeleton)
 ** MongoDB (persistence)
 
 * Frontend
@@ -13,45 +12,42 @@ Eat-this-one source code includes both backend, frontend and development tools.
 
 =Installation=
 
-* System dependencies
-
+==System dependencies==
+**sudo apt-get install gcc make build-essential**
 **sudo apt-get install git-core mongodb ant**
+**git user.name '$PROJECT_AUTHOR_NAME'**
+**git user.email '$PROJECT_AUTHOR_EMAIL'**
 
-** sudo npm install grunt-cli -g**
-** sudo npm install express -g**
-** sudo npm install bower -g**
-** sudo npm install express-generator -g**
-** sudo npm install cordova -g**
-
-** git user.name '$PROJECT_AUTHOR_NAME'**
-** git user.email '$PROJECT_AUTHOR_EMAIL'**
-
-* Download source code
+==Download source code==
 **git clone git://bitbucket.org/eat-this-one.git eat-this-one**
-**cd eat-this-one
+**cd eat-this-one**
 
-==Android SDK (if you want to generate the app)==
+==Download Android SDK==
 
-* Download SDK: http://developer.android.com/sdk/index.html
+* http://developer.android.com/sdk/index.html
 * Add adt-bundle-linux/sdk/platform-tools and adt-bundle-linux/sdk/tools to $PATH
-* Run **android sdk** and install "Google Play services", "Google Play APK Expansion Library" and "Google Repository"
-* http://developer.android.com/google/gcm/gs.html for messaging
+* Run **android sdk** and install:
+** "Google Play services"
+** "Google Play APK Expansion Library"
+** "Google Repository"
+* http://developer.android.com/google/gcm/gs.html for google cloud messaging
 
-=Setup=
-
+==Configure your development environment==
 * Configure your backend.
 ** **cp config_backend.json.dist config_backend.json**
 ** Edit config_backend.json with your own values
 
-* Configure your frontend pointing to the backend URL if it is different from the default one.
+* Configure your frontend pointing to the backend URL if it is different than the default one.
 ** **cp config_frontend.js.dist config_frontend.js**
 ** Edit config_frontend.js with your own values
+*** Consider that you will need to access the backend through the app; you can use the IP rather than localhost
+**** http://developer.android.com/tools/devices/emulator.html#networkaddresses
 
-* Configure your Android development tools path
+* Set your android development tools path
 ** **cp development.properties.dist development.properties**
 ** Edit development.properties with your own values
 
-* Create a virtual host to point to your dist/web dir.
+* Create a virtual host to point to your dist/web dir to run unit tests.
 <VirtualHost YOURHOSTNAME:80>
     DocumentRoot "/your/path/to/eat-this-one/dist/web"
     ServerName YOURHOSTNAME
@@ -61,15 +57,12 @@ Eat-this-one source code includes both backend, frontend and development tools.
     </Directory>
 </VirtualHost>
 
-* Development setup
-** **./setup_dev.sh**
+==Install frontend and backend dependencies==
+** **./install.sh**
 *** You may need to install previous android sdk APIs as cordova is not always using the latest version, if it is the case, run **android sdk** and select the required versions
 ** Edit dist/app/config.xml
 *** Change whatever info you like
 *** Add <icon src="icon.png" /> under <widget>
-** Edit dist/app/platforms/AndroidManifest.xml
-*** Set android:debuggable="true" in <application> node
-
 
 =Development=
 
@@ -79,34 +72,30 @@ Eat-this-one source code includes both backend, frontend and development tools.
 ** http://YOURHOSTNAME
 * Backend server URL (IP better than localhost to deploy app in mobile)
 ** http://YOURIP:3000
+* Deploy the app to your mobile
+** Android
+*** Turn on your device debugging options
+*** Plug-in your android device (USB) to your computer
+*** Allow your computer to debug your device (you will be asked for it if required)
+*** **./deploy_app** - It also opens adb logcat
+* Update project dependencies to latests
+** **./update.sh**
 
 ==Info==
 
-* CSS using less
+* CSS (less)
 ** In public/stylesheets/**/*.less
 
-* HTML views using Jade
+* HTML (Jade)
 ** In public/views/**/*.jade
 
-* Javascript
+* Javascript (frontend)
 ** Controllers in public/javascripts/controllers/**/*.js
-** Models in public/javascripts/models/**/*.js
 ** AngularJS directives in public/javascripts/directives/**/*.js
-** All shared code between web and mobile apps should go in public/javscripts/shared/**/*.js
-** When a class differs between web and mobile apps two different classes should be created (A parent prototype in public/javascripts/shared can be used to extend common parts) one inside public/javascripts/web and another one inside public/javascripts/app sharing the same interface.
+** All shared code between web and mobile apps should go in public/javscripts/shared-services/*.js
+*** When a class differs between web and mobile apps two different classes should be created (A parent prototype in public/javascripts/shared can be used to extend common parts) one inside public/javascripts/web-services and another one inside public/javascripts/app-services sharing the same interface.
 
-=Generate apps=
-
-* Using emulator
-** /path/to/sdk/tool/android avd to create an emulator if you don't have a real device
-** The app is autodeployed when saving
-
-* Using an emulator (not sure if it will be all ok, I use a real device)
-** Set an AVD http://developer.android.com/tools/devices/emulator.html
-** **cd dist/app ; cordova emulate**
-* Using a real device
-** Configure the device http://developer.android.com/tools/device.html
-** **sudo ./adb devices**
-** **cd dist/app ; cordova run**
-* Consider that you will need to access the backend through the app; you can use the IP rather than localhost
-** http://developer.android.com/tools/devices/emulator.html#networkaddresses
+* Javascript (backend)
+** Models in models/*.js
+** Routes in routes/*.js
+** Libs in lib/*.js
