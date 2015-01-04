@@ -13,7 +13,7 @@ block content
                 span(class='glyphicon glyphicon-remove button-icon', aria-hidden='true')
                 {{lang.skip}}
 
-        div(class='centered-container info-text') {{lang.messagecontactsinfo}}
+        div(class='centered-container info-text') {{infomessage}}
 
         div(id='id-contacts', class='list-group contacts-list')
             a(id='{{contact.mobilePhone}}', ng-repeat='contact in contacts | orderBy: "displayName"', class='list-group-item contact') {{contact.displayName}}

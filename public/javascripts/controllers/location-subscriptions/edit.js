@@ -14,7 +14,7 @@ angular.module('eat-this-one')
     };
     $scope.locationname = {
         name: 'loc',
-        label: $scope.lang.subscriptioncodeornew,
+        label: $scope.lang.codeornew,
         placeholder: $scope.lang.whereexample,
         value: ''
     };
@@ -38,7 +38,7 @@ angular.module('eat-this-one')
 
     // If there is already one redirect home.
     if (localStorage.getItem('loc')) {
-        notifier.show($scope.lang.alreadysubscribed, $scope.lang.subscribedlocationinfo, 'success');
+        notifier.show($scope.lang.alreadyjoined, $scope.lang.joinedgroupinfo, 'success');
 
         newLogRequest('redirected', 'index', 'locationSubscriptions-edit');
         redirecter.redirect('index.html');
@@ -58,7 +58,7 @@ angular.module('eat-this-one')
 
             document.addEventListener('deviceready', function() {
                 newLogRequest('redirected', 'index', 'locationSubscriptions-edit');
-                notifier.show($scope.lang.alreadysubscribed, $scope.lang.subscribedlocationinfo, 'success');
+                notifier.show($scope.lang.alreadyjoined, $scope.lang.joinedgroupinfo, 'success');
                 redirecter.redirect('index.html');
             });
         }
@@ -135,7 +135,8 @@ angular.module('eat-this-one')
 
             var locSubscriptionCallback = function(data) {
 
-                notifier.show($scope.lang.subscribed, $scope.lang.subscribedlocationinfo, 'success');
+                // TODO Here we should change the message depending on created/joined.
+                notifier.show($scope.lang.joined, $scope.lang.joinedgroupinfo, 'success');
                 appStatus.completed('newLocationSubscriptionRequest');
 
                 // Cache the location.
@@ -159,7 +160,7 @@ angular.module('eat-this-one')
 
             var locationCallback = function(data) {
 
-                var msg = $scope.lang.locationcreatedinfo + "\n\n" + $scope.lang.subscribedlocationinfo;
+                var msg = $scope.lang.locationcreatedinfo + "\n\n" + $scope.lang.joinedgroupinfo;
                 notifier.show($scope.lang.locationcreated, msg, 'success');
 
                 appStatus.completed('newLocationRequest');

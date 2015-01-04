@@ -32,7 +32,7 @@ angular.module('eat-this-one')
 
                 // The current user will be subscribed, so more than 1.
                 if (data.nsubscriptors <= 1) {
-                    info = $scope.lang.dishaddednosubscriptorsinfo + '.';
+                    info = $scope.lang.dishaddednomembersinfo + '.';
                 } else {
                     info = $scope.lang.dishaddednotifiedinfo + '.';
                 }

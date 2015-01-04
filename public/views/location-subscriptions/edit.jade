@@ -8,7 +8,7 @@ block content
 
         include ../top
 
-        div(class='centered-container info-text') {{lang.subscribelunchlocation}}
+        div(class='centered-container info-text') {{lang.joingroupinfo}}
 
         form(role='form')
             div(class='form-group')
@@ -24,6 +24,6 @@ block content
             div(ng-if='auth.isAuthenticated()')
                 button(class='btn btn-success', id='id-subscribe-location-button', ng-click='subscribe()')
                     span(class='glyphicon glyphicon-home button-icon')
-                    {{lang.subscribelocation}}
+                    {{lang.joingroup}}
 
     include ../footer

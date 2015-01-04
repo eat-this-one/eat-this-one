@@ -4,7 +4,10 @@ angular.module('eat-this-one')
     $scope.lang = $.eatLang.lang;
 
     // Page title.
-    $scope.pageTitle = $scope.lang.addcolleagues;
+    $scope.pageTitle = $scope.lang.invitepeople;
+
+    var loc = JSON.parse(localStorage.getItem('loc'));
+    $scope.infomessage = $scope.lang.messagecontactsinfo + ': "' + loc.name + '"';
 
     // Allow shareManager services to inject a contacts list here.
     $scope.contacts = [];
