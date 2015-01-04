@@ -57,7 +57,7 @@ describe('Main page', function() {
             sessionManager.cleanSession();
         });
 
-        it('should initially be false', function() {
+        it('should display dishes by default', function() {
             $scope = {};
             controller = $controller('IndexController', { $scope: $scope });
 

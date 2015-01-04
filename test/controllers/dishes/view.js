@@ -91,7 +91,7 @@ describe('View dish page', function() {
         appStatus = _appStatus_;
     }));
 
-    describe('$scope.userCamBook', function() {
+    describe('$scope.userCanBook()', function() {
 
         var $scope, controller;
 
@@ -99,6 +99,7 @@ describe('View dish page', function() {
             authManager.authenticate(user1.id);
             sessionManager.setUser(user1);
             localStorage.setItem('loc', JSON.stringify(userLoc));
+            $scope = {};
         });
 
         afterEach(function() {
@@ -106,7 +107,6 @@ describe('View dish page', function() {
         });
 
         it('should not allow the user to book their own dishes', function() {
-            $scope = {};
             controller = $controller('DishesViewController', { $scope: $scope, dishRequest: mockUserDishRequest });
 
             expect(appStatus.isAllCompleted()).toBe(true);
@@ -116,7 +116,6 @@ describe('View dish page', function() {
         });
 
         it('should allow the user to book other users dishes', function() {
-            $scope = {};
             controller = $controller('DishesViewController', { $scope: $scope, dishRequest: mockAnotherUserDishRequest });
 
             expect(appStatus.isAllCompleted()).toBe(true);
@@ -126,7 +125,6 @@ describe('View dish page', function() {
         });
 
         it('should not allow the user to book when the dish was already booked', function() {
-            $scope = {};
             controller = $controller('DishesViewController', { $scope: $scope, dishRequest: mockAlreadyBookedDishRequest });
 
             expect(appStatus.isAllCompleted()).toBe(true);
@@ -136,7 +134,6 @@ describe('View dish page', function() {
         });
 
         it('should not allow the user to book when no more portions are avaiable', function() {
-            $scope = {};
             controller = $controller('DishesViewController', { $scope: $scope, dishRequest: mockNoRemainingPortionsDishRequest });
 
             expect(appStatus.isAllCompleted()).toBe(true);
@@ -146,7 +143,6 @@ describe('View dish page', function() {
         });
 
         it('should allow the user to book when infinite portions are avaiable', function() {
-            $scope = {};
             controller = $controller('DishesViewController', { $scope: $scope, dishRequest: mockUnlimitedPortionsDishRequest });
 
             expect(appStatus.isAllCompleted()).toBe(true);
