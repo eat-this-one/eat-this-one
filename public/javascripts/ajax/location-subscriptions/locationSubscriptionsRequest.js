@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('locationSubscriptionsRequest', ['$window', '$http', 'eatConfig', 'sessionManager', 'appStatus', 'newLogRequest', 'notifier', function($window, $http, eatConfig, sessionManager, appStatus, newLogRequest, notifier) {
+    .factory('locationSubscriptionsRequest', ['redirecter', '$http', 'eatConfig', 'sessionManager', 'appStatus', 'newLogRequest', 'notifier', function(redirecter, $http, eatConfig, sessionManager, appStatus, newLogRequest, notifier) {
 
     return function($scope, locationSubscriptionsCallback, errorCallback) {
 

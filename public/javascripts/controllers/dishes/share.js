@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesShareController', ['$scope', '$window', 'appStatus', 'eatConfig', 'urlParser', 'notifier', 'newLogRequest', function($scope, $window, appStatus, eatConfig, urlParser, notifier, newLogRequest) {
+    .controller('DishesShareController', ['$scope', 'redirecter', 'appStatus', 'eatConfig', 'urlParser', 'notifier', 'newLogRequest', function($scope, redirecter, appStatus, eatConfig, urlParser, notifier, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
 
@@ -89,7 +89,7 @@ angular.module('eat-this-one')
 
         // TODO If there are no subscribers we should warn the
         // user that no users will see the dish he/she just added.
-        $window.location.href = 'index.html';
+        redirecter.redirect('index.html');
     };
 
     $scope.sendSms = function() {

@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('OAuthUserRequest', ['$window', '$http', 'appStatus', 'notifier', 'eatConfig', 'authManager', 'sessionManager', 'newLogRequest', function($window, $http, appStatus, notifier, eatConfig, authManager, sessionManager, newLogRequest) {
+    .factory('OAuthUserRequest', ['redirecter', '$http', 'appStatus', 'notifier', 'eatConfig', 'authManager', 'sessionManager', 'newLogRequest', function(redirecter, $http, appStatus, notifier, eatConfig, authManager, sessionManager, newLogRequest) {
 
     return {
 
@@ -23,7 +23,7 @@ angular.module('eat-this-one')
                 newLogRequest('created', 'account');
                 appStatus.completed('signin');
 
-                $window.location.href = 'location-subscriptions/edit.html';
+                redirecter.redirect('location-subscriptions/edit.html');
 
             }).error(function(data, errorStatus, errorMsg) {
                 appStatus.completed('signin');

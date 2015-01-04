@@ -1,4 +1,4 @@
-angular.module('eat-this-one').factory('notifier', ['$window', function($window) {
+angular.module('eat-this-one').factory('notifier', ['redirecter', function(redirecter) {
     return {
 
         // UNUSED type param.
@@ -31,7 +31,7 @@ angular.module('eat-this-one').factory('notifier', ['$window', function($window)
                 window.plugin.notification.local.onclick = function(id, state, json) {
                     var href = 'dishes/view.html?id=' +JSON.parse(json).dishid;
                     console.log('Notification clicked, user redirected to ' + href);
-                    $window.location.href = href;
+                    redirecter.redirect(href);
                 };
             });
         }

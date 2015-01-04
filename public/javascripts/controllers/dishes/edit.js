@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesEditController', ['$scope', '$window', 'appStatus', 'urlParser', 'notifier', 'dishFormatter', 'dishRequest', 'editDishRequest', 'eatConfig', 'authManager', 'datesConverter', 'formsManager', 'newLogRequest', function($scope, $window, appStatus, urlParser, notifier, dishFormatter, dishRequest, editDishRequest, eatConfig, authManager, datesConverter, formsManager, newLogRequest) {
+    .controller('DishesEditController', ['$scope', 'redirecter', 'appStatus', 'urlParser', 'notifier', 'dishFormatter', 'dishRequest', 'editDishRequest', 'eatConfig', 'authManager', 'datesConverter', 'formsManager', 'newLogRequest', function($scope, redirecter, appStatus, urlParser, notifier, dishFormatter, dishRequest, editDishRequest, eatConfig, authManager, datesConverter, formsManager, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -74,12 +74,12 @@ angular.module('eat-this-one')
     var loc = localStorage.getItem('loc');
     if (!loc) {
         newLogRequest('redirected', 'locationSubscriptions-add', 'index');
-        $window.location.href = 'location-subscriptions/edit.html';
+        redirecter.redirect('location-subscriptions/edit.html');
     }
     var locationInstance = JSON.parse(loc);
     if (typeof locationInstance._id === 'undefined') {
         newLogRequest('redirected', 'locationSubscriptions-add', 'index');
-        $window.location.href = 'location-subscriptions/edit.html';
+        redirecter.redirect('location-subscriptions/edit.html');
     }
     $scope.locationid.value = locationInstance._id;
 

@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesViewController', ['$scope', '$modal', '$window', 'appStatus', 'notifier', 'urlParser', 'dishFormatter', 'dishRequest', 'newMealRequest', 'eatConfig', 'authManager', 'newLogRequest', function($scope, $modal, $window, appStatus, notifier, urlParser, dishFormatter, dishRequest, newMealRequest, eatConfig, authManager, newLogRequest) {
+    .controller('DishesViewController', ['$scope', '$modal', 'redirecter', 'appStatus', 'notifier', 'urlParser', 'dishFormatter', 'dishRequest', 'newMealRequest', 'eatConfig', 'authManager', 'newLogRequest', function($scope, $modal, redirecter, appStatus, notifier, urlParser, dishFormatter, dishRequest, newMealRequest, eatConfig, authManager, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -58,7 +58,7 @@ angular.module('eat-this-one')
         var mealCallback = function(data) {
             appStatus.completed('newMeal');
             notifier.show($scope.lang.mealbooked, $scope.lang.mealbookedinfo, 'success');
-            $window.location.href = 'index.html';
+            redirecter.redirect('index.html');
         };
         var errorCallback = function(data, errorStatus, errorMsg) {
             appStatus.completed('newMeal');
@@ -72,6 +72,6 @@ angular.module('eat-this-one')
 
     $scope.editDish = function() {
         newLogRequest('click', 'dishes-edit', id);
-        $window.location.href = 'dishes/edit.html?id=' + id;
+        redirecter.redirect('dishes/edit.html?id=' + id);
     };
 }]);

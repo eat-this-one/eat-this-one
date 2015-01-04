@@ -1,5 +1,7 @@
 angular.module('eat-this-one').factory('datesConverter', function() {
 
+    var daymillisecs = (24 * 60 * 60 * 1000);
+
     var now = new Date();
 
     var today = Date.UTC(
@@ -9,6 +11,13 @@ angular.module('eat-this-one').factory('datesConverter', function() {
     );
 
     return {
+
+        /**
+         * Returns the number of milliseconds on a day.
+         */
+        getDaymillisecs : function() {
+            return daymillisecs;
+        },
 
         /**
          * Converts a timestamp to a day.
@@ -21,9 +30,9 @@ angular.module('eat-this-one').factory('datesConverter', function() {
 
             if (timestamp == today) {
                 day = 'today';
-            } else if (timestamp == today + (24 * 60 * 60 * 1000)) {
+            } else if (timestamp == today + daymillisecs) {
                 day = 'tomorrow';
-            } else if (timestamp == today + (2 * 24 * 60 * 60 * 1000)) {
+            } else if (timestamp == today + (2 * daymillisecs)) {
                 day = 'aftertomorrow';
             } else {
                 // Here we just return dd-mm-YYYY.
@@ -51,9 +60,6 @@ angular.module('eat-this-one').factory('datesConverter', function() {
                     break;
                 case 'aftertomorrow':
                     timestamp = today + (2 * 24 * 60 * 60 * 1000);
-                    break;
-                default:
-                    timestamp = today;
                     break;
             }
 

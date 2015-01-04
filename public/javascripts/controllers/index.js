@@ -1,4 +1,4 @@
-angular.module('eat-this-one').controller('IndexController', ['$scope', '$window', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'datesConverter', 'dishesRequest', 'OAuthUserRequest', 'newLogRequest', function($scope, $window, eatConfig, authManager, appStatus, notifier, datesConverter, dishesRequest, OAuthUserRequest, newLogRequest) {
+angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirecter', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'datesConverter', 'dishesRequest', 'OAuthUserRequest', 'newLogRequest', function($scope, redirecter, eatConfig, authManager, appStatus, notifier, datesConverter, dishesRequest, OAuthUserRequest, newLogRequest) {
 
     // Dependencies.
     $scope.lang = $.eatLang.lang;
@@ -48,13 +48,13 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', '$window
     // Redirects to add dish page.
     $scope.addDish = function() {
         newLogRequest('click', 'dishes-add');
-        $window.location.href = 'dishes/edit.html';
+        redirecter.redirect('dishes/edit.html');
     };
 
     // Redirects to the user meals list.
     $scope.indexMeals = function() {
         newLogRequest('click', 'meals-index');
-        $window.location.href = 'meals/index.html';
+        redirecter.redirect('meals/index.html');
     };
 
     // Redirects the user to google oauth page.

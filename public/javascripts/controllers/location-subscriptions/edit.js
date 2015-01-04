@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('LocationSubscriptionsEditController', ['$scope', '$http', '$window', 'appStatus', 'eatConfig', 'authManager', 'notifier', 'formsManager', 'newLocationRequest', 'newLocationSubscriptionRequest', 'locationSubscriptionsRequest', 'newLogRequest', function($scope, $http, $window, appStatus, eatConfig, authManager, notifier, formsManager, newLocationRequest, newLocationSubscriptionRequest, locationSubscriptionsRequest, newLogRequest) {
+    .controller('LocationSubscriptionsEditController', ['$scope', '$http', 'redirecter', 'appStatus', 'eatConfig', 'authManager', 'notifier', 'formsManager', 'newLocationRequest', 'newLocationSubscriptionRequest', 'locationSubscriptionsRequest', 'newLogRequest', function($scope, $http, redirecter, appStatus, eatConfig, authManager, notifier, formsManager, newLocationRequest, newLocationSubscriptionRequest, locationSubscriptionsRequest, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -41,7 +41,7 @@ angular.module('eat-this-one')
         notifier.show($scope.lang.alreadysubscribed, $scope.lang.subscribedlocationinfo, 'success');
 
         newLogRequest('redirected', 'index', 'locationSubscriptions-edit');
-        $window.location.href = 'index.html';
+        redirecter.redirect('index.html');
     }
 
     // We will redirect to home if the user already have a location subscription.
@@ -59,7 +59,7 @@ angular.module('eat-this-one')
             document.addEventListener('deviceready', function() {
                 newLogRequest('redirected', 'index', 'locationSubscriptions-edit');
                 notifier.show($scope.lang.alreadysubscribed, $scope.lang.subscribedlocationinfo, 'success');
-                $window.location.href = 'index.html';
+                redirecter.redirect('index.html');
             });
         }
     };
@@ -140,7 +140,7 @@ angular.module('eat-this-one')
 
                 // Cache the location.
                 localStorage.setItem('loc', JSON.stringify(data));
-                $window.location.href = 'index.html';
+                redirecter.redirect('index.html');
             };
             var errorCallback = function(data, errorStatus, errorMsg) {
                 appStatus.completed('newLocationSubscriptionRequest');
@@ -166,7 +166,7 @@ angular.module('eat-this-one')
 
                 // Cache the location.
                 localStorage.setItem('loc', JSON.stringify(data));
-                $window.location.href = 'index.html';
+                redirecter.redirect('index.html');
             };
             var errorCallback = function(data, errorStatus, errorMsg) {
                 appStatus.completed('newLocationRequest');

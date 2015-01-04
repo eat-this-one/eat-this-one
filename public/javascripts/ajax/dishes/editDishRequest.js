@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('editDishRequest', ['$window', '$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', function($window, $http, appStatus, notifier, eatConfig, sessionManager) {
+    .factory('editDishRequest', ['redirecter', '$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', function(redirecter, $http, appStatus, notifier, eatConfig, sessionManager) {
 
     // Not using callbacks as it would be hardly reusable.
     return function($scope, dish) {
@@ -48,7 +48,7 @@ angular.module('eat-this-one')
 
             // If it is a dish edit we just redirect the user to index.
             if (statusCode == 200) {
-                $window.location.href = 'index.html';
+                redirecter.redirect('index.html');
 
             } else if (statusCode == 201) {
 
@@ -64,17 +64,17 @@ angular.module('eat-this-one')
                     // add their contacts to his/her location.
                     var shareArguments = '?dishname=' + data.name +
                         '&locationname=' + data.loc.name;
-                    $window.location.href = 'dishes/share.html' + shareArguments;
+                    redirecter.redirect('dishes/share.html' + shareArguments);
                 } else if (data.nsubscriptors <= 1) {
                     // If there are no subscriptors the user needs to contact more
                     // people, otherwise it is not worth to share the dish with nobody.
                     var shareArguments = '?dishname=' + data.name +
                         '&locationname=' + data.loc.name;
-                    $window.location.href = 'dishes/share.html' + shareArguments;
+                    redirecter.redirect('dishes/share.html' + shareArguments);
                 } else {
                     // TODO Extra confirm to let the user choose if
                     // he/she wants to add more colleagues.
-                    $window.location.href = 'index.html';
+                    redirecter.redirect('index.html');
                 }
             }
 
