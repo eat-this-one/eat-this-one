@@ -1,4 +1,4 @@
-angular.module('eat-this-one').factory('shareManager', ['appStatus', 'notifier', 'newLogRequest', function(appStatus, notifier, newLogRequest) {
+angular.module('eat-this-one').factory('shareManager', ['eatConfig', 'appStatus', 'notifier', 'urlParser', 'newLogRequest', function(eatConfig, appStatus, notifier, urlParser, newLogRequest) {
 
     return {
 
@@ -85,7 +85,6 @@ angular.module('eat-this-one').factory('shareManager', ['appStatus', 'notifier',
             // Get all selected contacts.
             var phonesArray = [];
             $('#id-contacts .contact.active').each(function() {
-                console.log('contact! ' + this.id);
                 phonesArray.push(this.id);
             });
 

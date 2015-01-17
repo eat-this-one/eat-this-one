@@ -5,7 +5,7 @@ angular.module('eat-this-one')
 
         initSession : function() {
             var token = localStorage.getItem('token');
-            if (token !== null && !token) {
+            if (token !== null && token !== false) {
                 var user = JSON.parse(localStorage.getItem('user'));
                 authManager.authenticate(user.id);
             }

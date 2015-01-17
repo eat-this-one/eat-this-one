@@ -6,7 +6,7 @@ angular.module('eat-this-one')
         initSession : function() {
 
             var token = sessionStorage.getItem('token');
-            if (token !== null && !token) {
+            if (token !== null && token !== false) {
                 var user = JSON.parse(sessionStorage.getItem('user'));
                 authManager.authenticate(user.id);
             }
