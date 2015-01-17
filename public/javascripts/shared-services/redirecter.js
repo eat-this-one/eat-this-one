@@ -1,6 +1,6 @@
 angular.module('eat-this-one').factory('redirecter', ['$window', function($window) {
 
-    var timeout = 1000;
+    var timeout = 500;
 
     return {
 
