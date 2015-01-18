@@ -11,7 +11,6 @@ angular.module('eat-this-one').factory('notifier', function() {
             } else if (type === 'error') {
                 className = 'alert-danger';
             } else {
-                console.log('Not supported notification type: ' + type, error);
                 return;
             }
 

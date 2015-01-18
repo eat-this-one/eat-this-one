@@ -1,4 +1,4 @@
-angular.module('eat-this-one').directive('eatPhoto', ['eatConfig', function(eatConfig) {
+angular.module('eat-this-one').directive('eatPhoto', ['eatConfig', 'newLogRequest', function(eatConfig, newLogRequest) {
 
     return {
         restrict: 'E',
@@ -21,6 +21,7 @@ angular.module('eat-this-one').directive('eatPhoto', ['eatConfig', function(eatC
             };
 
             scope.onPhotoFail = function(message) {
+                newLogRequest('error', 'photo-take', message);
                 console.log('Error capturing the image: ' + message);
             };
 

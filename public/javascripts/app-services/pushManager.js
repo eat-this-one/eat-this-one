@@ -8,9 +8,7 @@ angular.module('eat-this-one')
 
             // Check if the device is already registered.
             // TODO We will need a new registration id once the app is updated.
-            var registrationId = localStorage.getItem('gcmRegId');
-            if (registrationId) {
-                console.log('Application already registered in GCM with id: ' + registrationId);
+            if (localStorage.getItem('gcmRegId') === null) {
                 return;
             }
 
@@ -60,6 +58,9 @@ angular.module('eat-this-one')
 
 function notificationsHandler(e) {
 
+    // We inject the service here as we are out of angular init process.
+    var newLogRequest = angular.injector(['ng', 'eat-this-one']).get('newLogRequest');
+
     switch(e.event) {
 
         // Storing the registration id.
@@ -69,6 +70,7 @@ function notificationsHandler(e) {
             if (e.regid.length > 0) {
                 localStorage.setItem('gcmRegId', e.regid);
             } else {
+                newLogRequest('error', 'gcm-registration', 'no registration id');
                 console.log('Error: We can not get the registration id');
             }
             break;
@@ -80,10 +82,12 @@ function notificationsHandler(e) {
             break;
 
         case 'error':
+            newLogRequest('error', 'gcm-error', e.msg);
             console.log('Error: Message can not be received. ' + e.msg);
             break;
 
         default:
+            newLogRequest('error', 'gcm-unknown');
             console.log('Error: Unknown event received');
             break;
     }

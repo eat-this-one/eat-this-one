@@ -91,6 +91,7 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
                 } else if (error) {
                     notifier.show($scope.lang.error, $scope.lang.errorsigningoogle, 'error')
                     appStatus.completed('signin');
+                    newLogRequest('error', 'google-signin', error[1]);
                     console.log('Sign in with Google error: ' + error[1]);
                 }
             });
