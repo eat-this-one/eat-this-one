@@ -31,7 +31,7 @@ module.exports = function(grunt) {
                         "public/javascripts/i18n/**/*.js",
                         "public/javascripts/controllers/**/*.js" ,
                         "public/javascripts/directives/**/*.js" ,
-                        "public/javascripts/ajax/**/*.js" ,
+                        "public/javascripts/restclient/**/*.js" ,
                         "public/javascripts/shared-services/**/*.js",
                         "public/javascripts/web-services/**/*.js"
                     ],
@@ -45,7 +45,7 @@ module.exports = function(grunt) {
                         "public/javascripts/i18n/**/*.js",
                         "public/javascripts/controllers/**/*.js" ,
                         "public/javascripts/directives/**/*.js" ,
-                        "public/javascripts/ajax/**/*.js" ,
+                        "public/javascripts/restclient/**/*.js" ,
                         "public/javascripts/shared-services/**/*.js",
                         "public/javascripts/app-services/**/*.js"
                     ]
