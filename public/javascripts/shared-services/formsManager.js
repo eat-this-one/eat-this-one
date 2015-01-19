@@ -14,6 +14,11 @@ angular.module('eat-this-one').factory('formsManager', function() {
                     return;
                 }
 
+                if (typeof fields[field].validation === 'undefined') {
+                    console.log('Wrong use of formsManager.validate, fields should contain a validation field.');
+                    return;
+                }
+
                 // Iterate through the field required validations.
                 fields[field].validation.forEach(function(process) {
                     switch (process) {

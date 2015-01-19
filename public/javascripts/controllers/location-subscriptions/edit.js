@@ -16,6 +16,7 @@ angular.module('eat-this-one')
         name: 'loc',
         label: $scope.lang.codeornew,
         placeholder: $scope.lang.whereexample,
+        validation: ['required', 'text'],
         value: ''
     };
 
@@ -23,6 +24,7 @@ angular.module('eat-this-one')
         name: 'address',
         label: $scope.lang.address,
         placeholder: $scope.lang.addressexample,
+        validation: ['required'],
         value: ''
     };
 
