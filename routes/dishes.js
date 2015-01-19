@@ -163,6 +163,7 @@ router.get('/:id', function(req, res) {
                 for (var prop in dishProps) {
                     returnDish[prop] = dish[prop];
                 }
+                returnDish.id = dish._id;
                 returnDish.userid = dish.userid;
                 returnDish.loc = locationInstance;
 
@@ -348,6 +349,7 @@ router.post('/', function(req, res) {
                         for (var prop in dishProps) {
                             returnDish[prop] = dish[prop];
                         }
+                        returnDish.id = dish._id;
                         returnDish.userid = dish.userid;
                         returnDish.loc = locationInstance;
                         returnDish.user = {
