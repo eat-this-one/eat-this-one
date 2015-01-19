@@ -1,4 +1,4 @@
-angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirecter', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'datesConverter', 'dishesRequest', 'OAuthUserRequest', 'newLogRequest', function($scope, redirecter, eatConfig, authManager, appStatus, notifier, datesConverter, dishesRequest, OAuthUserRequest, newLogRequest) {
+angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirecter', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'datesConverter', 'formsManager', 'dishesRequest', 'newRegIdUserRequest', 'newLogRequest', function($scope, redirecter, eatConfig, authManager, appStatus, notifier, datesConverter, formsManager, dishesRequest, newRegIdUserRequest, newLogRequest) {
 
     // Dependencies.
     $scope.lang = $.eatLang.lang;
@@ -10,9 +10,8 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
     $scope.dishes = [];
     $scope.showNoDishes = false;
 
-    // Getting the list of dishes.
     if ($scope.auth.isAuthenticated()) {
-
+        // Getting the list of dishes.
         appStatus.waiting('dishesRequest');
 
         // Success callback.
@@ -36,6 +35,23 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
             notifier.show($scope.lang.error, msg, 'error');
         };
         dishesRequest($scope, dishesCallback, errorCallback);
+
+    } else {
+
+        $scope.name = {
+            name: 'name',
+            label: $scope.lang.username,
+            placeholder: $scope.lang.usernameexample,
+            validation: ['required', 'text'],
+            value: ''
+        };
+        $scope.email = {
+            name: 'email',
+            label: $scope.lang.email,
+            placeholder: $scope.lang.emailexample,
+            validation: ['required', 'email'],
+            value: ''
+        };
     }
 
     newLogRequest('view', 'index');
@@ -57,46 +73,15 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
         redirecter.redirect('meals/index.html');
     };
 
-    // Redirects the user to google oauth page.
-    $scope.authorizeGoogle = function() {
+    // Creates a user account.
+    $scope.signup = function() {
+        newLogRequest('click', 'signup');
 
-        newLogRequest('click', 'login-google');
+        if (!formsManager.validate(['name', 'email'], $scope)) {
+            return;
+        }
 
-        document.addEventListener('deviceready', function() {
-
-            appStatus.waiting('signin');
-
-            var authUrl = 'https://accounts.google.com/o/oauth2/auth?' + $.param({
-                client_id: eatConfig.gOAuthClientId,
-                redirect_uri: 'http://localhost',
-                response_type: 'code',
-                scope: 'profile email'
-            });
-            var authWindow = window.open(authUrl, '_blank', 'location=no,toolbar=no');
-
-            $(authWindow).on('loadstart', function(e) {
-
-                var url = e.originalEvent.url;
-                var code = /\?code=(.+)$/.exec(url);
-                var error = /\?error=(.+)$/.exec(url);
-
-                if (code || error) {
-                    authWindow.close();
-                }
-
-                if (code) {
-                    OAuthUserRequest.google($scope, code[1]);
-                    newLogRequest('click', 'login-google-submit');
-
-                } else if (error) {
-                    notifier.show($scope.lang.error, $scope.lang.errorsigningoogle, 'error')
-                    appStatus.completed('signin');
-                    newLogRequest('error', 'google-signin', error[1]);
-                    console.log('Sign in with Google error: ' + error[1]);
-                }
-            });
-
-        });
-    };
-
+        appStatus.waiting('signup');
+        newRegIdUserRequest($scope);
+    }
 }]);

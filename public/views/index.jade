@@ -11,9 +11,12 @@ block content
                     {{lang.infowelcome}}
 
             div(id='id-authenticate', ng-if='!auth.isAuthenticated()')
-                button(ng-click='authorizeGoogle()', class='btn btn-primary')
-                    span(class='glyphicon glyphicon-log-in button-icon', aria-hidden='true')
-                    {{lang.signingoogle}}
+                form(role='form')
+                    eat-input-text(element='name')
+                    eat-input-text(element='email')
+                    button(ng-click='signup()', class='btn btn-success')
+                        span(class='glyphicon glyphicon-user button-icon', aria-hidden='true')
+                        {{lang.signin}}
 
         div(ng-if='auth.isAuthenticated()')
             div(class='centered-container')

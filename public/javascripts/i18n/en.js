@@ -25,6 +25,8 @@ $.eatLang.en = {
     dishname : 'Dish name',
     dishnameexample : 'e.g. Paella',
     editdish : 'Edit dish',
+    email : 'Email',
+    emailexample : 'e.g. john.cobra@gmail.com',
     error : 'Error',
     errordishedit : 'Dish can not be added/edited',
     errordishesrequest : 'Dishes data can not be obtained',
@@ -33,7 +35,6 @@ $.eatLang.en = {
     errornewmeal : 'Meal can not be added',
     errornewuser : 'User can not be created',
     errornocontacts : 'The list of your contacts can not be obtained',
-    errorsigningoogle : 'Sign in with Google failed',
     expecteddonation : 'Expected donation',
     dishes : 'Dishes list',
     groupcode : 'The group code is',
@@ -72,7 +73,6 @@ $.eatLang.en = {
     refresh : 'Refresh',
     sharedish : 'Share dish',
     signin : 'Sign in',
-    signingoogle : 'Sign in with Google',
     sitename : 'Eat this one',
     skip : 'Skip',
     to : 'To',
@@ -80,10 +80,10 @@ $.eatLang.en = {
     tomorrow : 'Tomorrow',
     unlimited : 'Unlimited',
     unlimitedselected : 'You selected unlimited portions option. If you don\'t want to receive more meal bookings you can change this later.',
+    username : 'User name',
+    usernameexample : 'e.g. John Cobra',
     when : 'When',
     where : 'Where',
     codeornew : ' Use your code or create a new group',
-    whereexample : 'e.g. Moodle Pty Ltd',
-    youremail : 'Your email',
-    yourname : 'Your name'
+    whereexample : 'e.g. Moodle Pty Ltd'
 };

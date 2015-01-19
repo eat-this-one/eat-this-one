@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('editDishRequest', ['redirecter', '$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', function(redirecter, $http, appStatus, notifier, eatConfig, sessionManager) {
+    .factory('editDishRequest', ['redirecter', '$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', 'newLogRequest', function(redirecter, $http, appStatus, notifier, eatConfig, sessionManager, newLogRequest) {
 
     // Not using callbacks as it would be hardly reusable.
     return function($scope, dish) {
@@ -28,6 +28,8 @@ angular.module('eat-this-one')
             var info = '';
             if (statusCode == 201) {
                 // POST.
+                newLogRequest('created', 'dish', data.id);
+
                 title = $scope.lang.dishadded;
 
                 // The current user will be subscribed, so more than 1.
@@ -38,9 +40,11 @@ angular.module('eat-this-one')
                 }
             } else {
                 // PUT.
+                newLogRequest('updated', 'dish', data.id);
+
                 title = $scope.lang.dishedited + '.';
             }
-            
+
             // Adding more info if unlimited was selected.
             if (data.nportions === 0) {
                 info += "\n\n" + $scope.lang.unlimitedselected;
@@ -79,7 +83,10 @@ angular.module('eat-this-one')
             }
 
         }).error(function(data, errorStatus, errorMsg) {
+
             appStatus.completed('editDishRequest');
+            newLogRequest('error', 'dish-edit', errorMsg);
+
             var msg = $scope.lang.errordishedit + '. "' + errorStatus + '": ' + data;
             notifier.show($scope.lang.error, msg, 'error');
         });
