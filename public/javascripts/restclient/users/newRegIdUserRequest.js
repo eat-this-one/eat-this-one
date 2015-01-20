@@ -21,13 +21,7 @@ angular.module('eat-this-one')
 
             newLogRequest('created', 'account', data.id);
 
-            if (localStorage.getItem('loc') === null) {
-                redirecter.redirect('location-subscriptions/edit.html');
-            }
-
-            // I don't think we will never reach that point but anyway,
-            // just closing what was opened.
-            appStatus.completed('signup');
+            redirecter.redirect('location-subscriptions/edit.html');
 
         }).error(function(data, errorStatus, errorMsg) {
 

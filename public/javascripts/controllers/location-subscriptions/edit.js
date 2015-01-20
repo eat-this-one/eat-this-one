@@ -139,7 +139,6 @@ angular.module('eat-this-one')
 
                 // TODO Here we should change the message depending on created/joined.
                 notifier.show($scope.lang.joined, $scope.lang.joinedgroupinfo, 'success');
-                appStatus.completed('newLocationSubscriptionRequest');
 
                 // Cache the location.
                 localStorage.setItem('loc', JSON.stringify(data));
@@ -164,8 +163,6 @@ angular.module('eat-this-one')
 
                 var msg = $scope.lang.locationcreatedinfo + "\n\n" + $scope.lang.joinedgroupinfo;
                 notifier.show($scope.lang.locationcreated, msg, 'success');
-
-                appStatus.completed('newLocationRequest');
 
                 // Cache the location.
                 localStorage.setItem('loc', JSON.stringify(data));
