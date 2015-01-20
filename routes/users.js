@@ -68,13 +68,20 @@ router.post('/', function(req, res) {
             return;
         }
 
+        if (req.param('gcmregid') === null) {
+            res.statusCode = 400;
+            res.send("Missing params, can not create user");
+            return;
+        }
+
         var userObj = {
+            gcmregid : req.param('gcmregid'),
             name : req.param('name'),
             email : req.param('email')
         };
 
-        // The email should be unique.
-        UserModel.findOne({email: userObj.email}, function(error, user) {
+        // The gcmregid should be unique.
+        UserModel.findOne({gcmregid: userObj.gcmregid}, function(error, user) {
 
             if (error) {
                 res.statusCode = 500;
@@ -82,18 +89,10 @@ router.post('/', function(req, res) {
                 return;
             }
 
-            // TODO regex here to filter.
-            var gcmregid = req.param('gcmregid');
-
             // TODO Check all this update registered users data from
             // just a google email is safe; look for the returned token
             // is it the same one? Can we use it to check against?
             if (!user) {
-
-                // Add the GCM registration id if present (not present in web interface).
-                if (gcmregid) {
-                    userObj.gcmregids = [gcmregid];
-                }
 
                 // If the user already exists we update the
                 // existing user and we return it.
@@ -115,25 +114,6 @@ router.post('/', function(req, res) {
                     now.getUTCMinutes(),
                     now.getUTCSeconds()
                 );
-
-                // Add the GCM registration id if is new.
-                if (gcmregid) {
-                    if (user.gcmregids.length > 0) {
-                        for (index in user.gcmregids) {
-                            if (user.gcmregids[index] === gcmregid) {
-                                var found = 1;
-                                break;
-                            }
-                        }
-                        // Adding the new one to the existing one.
-                        if (typeof found === 'undefined') {
-                            user.gcmregids.push(gcmregid);
-                        }
-                    } else {
-                        // We add the new one.
-                        user.gcmregids = [gcmregid];
-                    }
-                }
             }
 
             user.save(function(error) {

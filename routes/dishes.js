@@ -402,10 +402,7 @@ router.post('/', function(req, res) {
 
                                 var gcmregids = [];
                                 for (var i in subscribers) {
-                                    // Getting user GCM reg ids.
-                                    if (subscribers[i].gcmregids.length > 0) {
-                                        gcmregids = gcmregids.concat(subscribers[i].gcmregids);
-                                    }
+                                    gcmregids = gcmregids.push(subscribers[i].gcmregid);
                                 }
                                 // TODO This message should be language-independent, frontend
                                 // should get the string according to the params we will send from here.

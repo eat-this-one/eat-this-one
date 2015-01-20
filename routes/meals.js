@@ -257,15 +257,12 @@ router.post('/', function(req, res) {
                             // TODO This message should be language independent and frontend should get
                             // the i18n message according to the params we will attach here.
                             var msgdata = {
-                                "message": user.name + " booked a " + dish.name + " dish! Remember to bring a lunchbox tomorrow",
+                                "message": user.name + " booked a " + dish.name + " dish! Remember to bring a lunchbox",
                                 "type": "meal",
                                 "dishid": dish.id
                             };
 
-                            // TODO Email fallback.
-                            if (chef.gcmregids.length > 0) {
-                                pusher.pushToGCM(chef.gcmregids, msgdata);
-                            }
+                            pusher.pushToGCM([chef.gcmregid], msgdata);
 
                             // Same output for all output formats.
                             res.statusCode = 200;
