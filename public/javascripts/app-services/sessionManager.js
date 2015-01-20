@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('sessionManager', ['authManager', 'pushManager', 'eatConfig', 'newLogRequest', function(authManager, pushManager, eatConfig, newLogRequest) {
+    .factory('sessionManager', ['authManager', 'pushManager', 'eatConfig', function(authManager, pushManager, eatConfig) {
 
     return {
 
@@ -29,7 +29,6 @@ angular.module('eat-this-one')
                     function() {
                         // We default to 'en' if any problem.
                         $.eatLang.lang = $.eatLang[eatConfig.defaultLang];
-                        newLogRequest('error', 'language-preferred');
                         console.log('Error getting preferred language');
                     }
                 );
