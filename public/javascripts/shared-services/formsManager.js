@@ -4,9 +4,11 @@ angular.module('eat-this-one').factory('formsManager', function() {
 
         validate : function(fieldNames, fields) {
 
-            var missing = [];
-            var wrongcontents = [];
+            var errors = [];
+            var validated = [];
             fieldNames.forEach(function(field) {
+
+                var fieldHasErrors = false;
 
                 // DEV
                 if (typeof fields[field] === 'undefined') {
@@ -28,7 +30,8 @@ angular.module('eat-this-one').factory('formsManager', function() {
                             if (fields[field].value === null ||
                                 fields[field].value === '' ||
                                 typeof fields[field].value === 'undefined') {
-                                    missing.push(fields[field].label);
+                                    errors.push(fields[field].name);
+                                    fieldHasErrors = true;
                             }
                             break;
 
@@ -38,7 +41,8 @@ angular.module('eat-this-one').factory('formsManager', function() {
                             if (fields[field].value && fields[field].value.length > 0) {
                                 var textexpression = new RegExp(/^[A-Za-z1-9-_=".',;\s]*$/);
                                 if (!textexpression.test(fields[field].value)) {
-                                    wrongcontents.push(fields[field].label);
+                                    errors.push(fields[field].name);
+                                    fieldHasErrors = true;
                                 }
                             }
                             break;
@@ -48,19 +52,33 @@ angular.module('eat-this-one').factory('formsManager', function() {
                             if (fields[field].value && fields[field].value.length > 0) {
                                 var emailexpression = new RegExp(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
                                 if (!emailexpression.test(fields[field].value)) {
-                                    wrongcontents.push(fields[field].label);
+                                    errors.push(fields[field].name);
+                                    fieldHasErrors = true;
                                 }
                             }
                             break;
                     }
+
+                    if (fieldHasErrors === false) {
+                        validated.push(fields[field].name);
+                    }
                 });
             });
 
-            if (missing.length > 0) {
-                return false;
+            // Remove error class.
+            for (var index in validated) {
+                var group = $('#id-' + validated[index]).closest('.form-group');
+                group.removeClass('has-error');
+                group.addClass('has-success');
             }
 
-            if (wrongcontents.length > 0) {
+            // Set error class.
+            if (errors.length > 0) {
+                for (var index in errors) {
+                    var group = $('#id-' + errors[index]).closest('.form-group');
+                    group.addClass('has-error');
+                    group.removeClass('has-success');
+                }
                 return false;
             }
 

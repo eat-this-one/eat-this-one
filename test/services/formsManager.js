@@ -7,32 +7,32 @@ describe('Forms manager', function() {
     var $scope = {
 
         emptyName : {
-            label : 'Name',
+            name : 'Name',
             validation : ['required'],
             value : ''
         },
         goodName : {
-            label : 'Name',
+            name : 'Name',
             validation : ['required', 'text'],
             value : 'IV\' asda " asd .;,AL_-=s UE'
         },
         wrongName : {
-            label : 'Name',
+            name : 'Name',
             validation : ['required', 'text'],
             value : 'I CONTAIN < P./OO'
         },
         goodEmail : {
-            label : 'Email',
+            name : 'Email',
             validation : ['required', 'email'],
             value : 'name@email.com'
         },
         wrongEmail1 : {
-            label : 'Email',
+            name : 'Email',
             validation : ['required', 'email'],
             value : 'name@domain'
         },
         wrongEmail2 : {
-            label : 'Email',
+            name : 'Email',
             validation : ['required', 'email'],
             value : '@domain.com'
         }
