@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('sessionManager', ['authManager', 'eatConfig', function(authManager, eatConfig) {
+    .factory('sessionManager', ['authManager', 'eatConfig', 'pushManager', function(authManager, eatConfig, pushManager) {
 
     return {
 

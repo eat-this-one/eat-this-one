@@ -4,7 +4,7 @@ angular.module('eat-this-one')
     return {
 
         register : function() {
-            if (localStorage.getItem('gcmRegId') === null) {
+            if (localStorage.getItem('gcmRegId') !== null) {
                 return;
             }
 
