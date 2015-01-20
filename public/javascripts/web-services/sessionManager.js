@@ -21,6 +21,8 @@ angular.module('eat-this-one')
                 $.eatLang.lang = $.eatLang[eatConfig.defaultLang];
             }
 
+            // Creates fake registration id.
+            pushManager.register();
         },
 
         setUser : function(userData) {
