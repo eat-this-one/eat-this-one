@@ -1,6 +1,5 @@
 $.eatLang.en = {
 
-    invitepeople : 'Invite people',
     adddish : 'Add dish',
     addmeal : 'Book meal!',
     address : 'Address',
@@ -40,6 +39,8 @@ $.eatLang.en = {
     groupcode : 'The group code is',
     imcooking : 'Hi, I\'m cooking',
     infowelcome : 'Share the meals you cook with the people you share the lunch time! Log in with your existing user or create a new account',
+    inviteemailsubject : 'I\'ve cooked a dish I\'d like to share with you',
+    invitepeople : 'Invite people',
     joindetailsbook : 'Join my \'Eat this one\' group to see the details and book a portion',
     joined : 'Joined',
     joinedgroupinfo : 'You will receive a notification when a colleague adds a new dish and when a colleague books one of your dishes.',

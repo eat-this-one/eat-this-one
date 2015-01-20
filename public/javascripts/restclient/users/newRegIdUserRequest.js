@@ -21,7 +21,9 @@ angular.module('eat-this-one')
 
             newLogRequest('created', 'account', data.id);
 
-            redirecter.redirect('location-subscriptions/edit.html');
+            if (localStorage.getItem('loc') === null) {
+                redirecter.redirect('location-subscriptions/edit.html');
+            }
 
             // I don't think we will never reach that point but anyway,
             // just closing what was opened.
