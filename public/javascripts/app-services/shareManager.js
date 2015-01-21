@@ -54,6 +54,7 @@ angular.module('eat-this-one').factory('shareManager', ['eatConfig', 'appStatus'
 
                 function onError(contactError) {
                     notifier.show($scope.lang.error, $scope.lang.errornocontacts, 'error');
+                    newLogRequest('error', 'contacts-get', contactError);
                     console.log('Error getting contacts: ' + contactError);
 
                     appStatus.completed('contacts');
