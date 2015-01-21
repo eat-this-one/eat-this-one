@@ -8,7 +8,7 @@ angular.module('eat-this-one')
 
             // Check if the device is already registered.
             // TODO We will need a new registration id once the app is updated.
-            if (localStorage.getItem('gcmRegId') === null) {
+            if (localStorage.getItem('gcmRegId') !== null) {
                 return;
             }
 
@@ -69,6 +69,7 @@ function notificationsHandler(e) {
             // Storing the registration id.
             if (e.regid.length > 0) {
                 localStorage.setItem('gcmRegId', e.regid);
+                newLogRequest('process', 'gcm-registration', e.regid);
             } else {
                 newLogRequest('error', 'gcm-registration', 'no registration id');
                 console.log('Error: We can not get the registration id');
