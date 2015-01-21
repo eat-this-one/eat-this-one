@@ -37,7 +37,7 @@ angular.module('eat-this-one').factory('datesConverter', function() {
             } else {
                 // Here we just return dd-mm-YYYY.
                 var date = new Date(timestamp);
-                day = date.getDate() + '-' + date.getMonth() + '-' + date.getFullYear();
+                day = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
             }
 
             return day;
