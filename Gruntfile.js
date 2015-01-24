@@ -26,6 +26,10 @@ module.exports = function(grunt) {
                         "public/bower_components/angular/angular.min.js",
                         "public/bower_components/angular-bootstrap/ui-bootstrap.min.js",
                         "public/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js",
+                        "public/bower_components/angular-aria/angular-aria.min.js",
+                        "public/bower_components/angular-animate/angular-animate.min.js",
+                        "public/bower_components/hammerjs/hammer.min.js",
+                        "public/bower_components/angular-material/angular-material.min.js",
                         "public/javascripts/bootstrap.js",
                         "config_frontend.js",
                         "public/javascripts/i18n/**/*.js",
@@ -40,6 +44,10 @@ module.exports = function(grunt) {
                         "public/bower_components/angular/angular.min.js",
                         "public/bower_components/angular-bootstrap/ui-bootstrap.min.js",
                         "public/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js",
+                        "public/bower_components/angular-aria/angular-aria.min.js",
+                        "public/bower_components/angular-animate/angular-animate.min.js",
+                        "public/bower_components/hammerjs/hammer.min.js",
+                        "public/bower_components/angular-material/angular-material.min.js",
                         "public/javascripts/bootstrap.js",
                         "config_frontend.js",
                         "public/javascripts/i18n/**/*.js",
@@ -157,7 +165,11 @@ module.exports = function(grunt) {
         cssmin : {
             minify : {
                 files : {
-                    'public/shared-build/styles.css' : [ 'public/bower_components/bootstrap/dist/css/bootstrap.min.css', 'public/shared-build/styles.css' ]
+                    'public/shared-build/styles.css' : [
+                        'public/bower_components/bootstrap/dist/css/bootstrap.min.css',
+                        'public/bower_components/angular-material/angular-material.min.css',
+                        'public/shared-build/styles.css'
+                    ]
                 }
             }
         },

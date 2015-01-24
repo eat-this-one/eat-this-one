@@ -1,4 +1,4 @@
-angular.module('eat-this-one').factory('authManager', ['$modal', function($modal) {
+angular.module('eat-this-one').factory('authManager', function() {
 
     var authenticated = false;
 
@@ -29,4 +29,4 @@ angular.module('eat-this-one').factory('authManager', ['$modal', function($modal
         }
     }
 
-}]);
+});
