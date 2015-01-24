@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('pushManager', ['$window', 'messagesHandler', 'notifier', 'eatConfig', function($window, messagesHandler, notifier, eatConfig) {
+    .factory('pushManager', ['$window', 'eatConfig', function($window, eatConfig) {
 
     return {
 
@@ -59,7 +59,7 @@ angular.module('eat-this-one')
 function notificationsHandler(e) {
 
     // We inject the service here as we are out of angular init process.
-    var newLogRequest = angular.injector(['ng', 'eat-this-one']).get('newLogRequest');
+    var newLogRequest = angular.element('#id-body').injector().get('newLogRequest');
 
     switch(e.event) {
 
@@ -79,7 +79,7 @@ function notificationsHandler(e) {
         case 'message':
 
             // Delegated to the messages handler.
-            angular.injector(['ng', 'eat-this-one']).get('messagesHandler').message(e.payload);
+            angular.element('#id-body').injector().get('messagesHandler').message(e.payload);
             break;
 
         case 'error':

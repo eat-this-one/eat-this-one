@@ -74,7 +74,7 @@ $.eatLang.en = {
     sharedish : 'Share dish',
     signin : 'Sign in',
     sitename : 'Eat this one',
-    skip : 'Finish',
+    skip : 'Exit',
     to : 'To',
     today : 'Today',
     tomorrow : 'Tomorrow',
