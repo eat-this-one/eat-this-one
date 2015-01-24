@@ -66,18 +66,18 @@ angular.module('eat-this-one').factory('formsManager', function() {
             });
 
             // Remove error class.
-            for (var index in validated) {
-                var group = $('#id-' + validated[index]).closest('.form-group');
-                group.removeClass('has-error');
-                group.addClass('has-success');
+            if (validated.length > 0) {
+                for (var index in validated) {
+                    var group = $('#id-' + validated[index]).closest('md-input-container');
+                    group.removeClass('md-input-invalid');
+                }
             }
 
             // Set error class.
             if (errors.length > 0) {
                 for (var index in errors) {
-                    var group = $('#id-' + errors[index]).closest('.form-group');
-                    group.addClass('has-error');
-                    group.removeClass('has-success');
+                    var group = $('#id-' + errors[index]).closest('md-input-container');
+                    group.addClass('md-input-invalid');
                 }
                 return false;
             }
