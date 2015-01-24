@@ -13,7 +13,7 @@ angular.module('eat-this-one')
         .error(function(data, errorStatus, errorMsg) {
             appStatus.completed('dishRequest');
             var msg = $scope.lang.errordishrequest + '. "' + errorStatus + '": ' + data;
-            notifier.show($scope.lang.error, msg, 'error');
+            notifier.show($scope.lang.error, msg);
         });
     };
 

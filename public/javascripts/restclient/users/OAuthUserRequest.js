@@ -31,7 +31,7 @@ angular.module('eat-this-one')
             }).error(function(data, errorStatus, errorMsg) {
                 appStatus.completed('signin');
                 var msg = $scope.lang.errornewuser + '. "' + errorStatus + '": ' + data;
-                notifier.show($scope.lang.error, msg, 'error');
+                notifier.show($scope.lang.error, msg);
             });
         }
 

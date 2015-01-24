@@ -34,7 +34,7 @@ angular.module('eat-this-one')
         } else {
             appStatus.completed('mealsRequest');
             var msg = $scope.lang.errormealrequest + '. "' + errorStatus + '": ' + data;
-            notifier.show($scope.lang.error, msg, 'error');
+            notifier.show($scope.lang.error, msg);
         }
     };
     mealsRequest($scope, mealsCallback, errorCallback);

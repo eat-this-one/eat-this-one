@@ -59,27 +59,28 @@ angular.module('eat-this-one')
                 // When adding a new dish we always notify the success,
                 // but if this is the first dish the user is adding we
                 // should also give him/her the option to add more colleagues.
-                notifier.show(title, info, 'success');
+                notifier.show(title, info, function() {
 
-                // TODO Commented for development purposes.
-                //if (data.user.dishescount == 1) {
-                if (1) {
-                    // After adding the first dish we allow people to
-                    // add their contacts to his/her location.
-                    var shareArguments = '?dishname=' + data.name +
-                        '&locationname=' + data.loc.name;
-                    redirecter.redirect('dishes/share.html' + shareArguments);
-                } else if (data.nsubscriptors <= 1) {
-                    // If there are no subscriptors the user needs to contact more
-                    // people, otherwise it is not worth to share the dish with nobody.
-                    var shareArguments = '?dishname=' + data.name +
-                        '&locationname=' + data.loc.name;
-                    redirecter.redirect('dishes/share.html' + shareArguments);
-                } else {
-                    // TODO Extra confirm to let the user choose if
-                    // he/she wants to add more colleagues.
-                    redirecter.redirect('index.html');
-                }
+                    // TODO Commented for development purposes.
+                    //if (data.user.dishescount == 1) {
+                    if (1) {
+                        // After adding the first dish we allow people to
+                        // add their contacts to his/her location.
+                        var shareArguments = '?dishname=' + data.name +
+                            '&locationname=' + data.loc.name;
+                        redirecter.redirect('dishes/share.html' + shareArguments);
+                    } else if (data.nsubscriptors <= 1) {
+                        // If there are no subscriptors the user needs to contact more
+                        // people, otherwise it is not worth to share the dish with nobody.
+                        var shareArguments = '?dishname=' + data.name +
+                            '&locationname=' + data.loc.name;
+                        redirecter.redirect('dishes/share.html' + shareArguments);
+                    } else {
+                        // TODO Extra confirm to let the user choose if
+                        // he/she wants to add more colleagues.
+                        redirecter.redirect('index.html');
+                    }
+                });
             }
 
         }).error(function(data, errorStatus, errorMsg) {
@@ -88,7 +89,7 @@ angular.module('eat-this-one')
             newLogRequest('error', 'dish-edit', errorMsg);
 
             var msg = $scope.lang.errordishedit + '. "' + errorStatus + '": ' + data;
-            notifier.show($scope.lang.error, msg, 'error');
+            notifier.show($scope.lang.error, msg);
         });
     };
 

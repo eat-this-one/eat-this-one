@@ -57,13 +57,14 @@ angular.module('eat-this-one')
 
         var mealCallback = function(data) {
             appStatus.completed('newMeal');
-            notifier.show($scope.lang.mealbooked, $scope.lang.mealbookedinfo, 'success');
-            redirecter.redirect('index.html');
+            notifier.show($scope.lang.mealbooked, $scope.lang.mealbookedinfo, function() {
+                redirecter.redirect('index.html');
+            });
         };
         var errorCallback = function(data, errorStatus, errorMsg) {
             appStatus.completed('newMeal');
             var msg = $scope.lang.errornewmeal + '. "' + errorStatus + '": ' + data;
-            notifier.show($scope.lang.error, msg, 'error');
+            notifier.show($scope.lang.error, msg);
         }
         newMealRequest($scope, {dishid: id}, mealCallback, errorCallback);
 

@@ -40,10 +40,10 @@ angular.module('eat-this-one')
 
     // If there is already one redirect home.
     if (localStorage.getItem('loc')) {
-        notifier.show($scope.lang.alreadyjoined, $scope.lang.joinedgroupinfo, 'success');
-
-        newLogRequest('redirected', 'index', 'locationSubscriptions-edit');
-        redirecter.redirect('index.html');
+        notifier.show($scope.lang.alreadyjoined, $scope.lang.joinedgroupinfo, function() {
+            newLogRequest('redirected', 'index', 'locationSubscriptions-edit');
+            redirecter.redirect('index.html');
+        });
     }
 
     // We will redirect to home if the user already have a location subscription.
@@ -60,8 +60,9 @@ angular.module('eat-this-one')
 
             document.addEventListener('deviceready', function() {
                 newLogRequest('redirected', 'index', 'locationSubscriptions-edit');
-                notifier.show($scope.lang.alreadyjoined, $scope.lang.joinedgroupinfo, 'success');
-                redirecter.redirect('index.html');
+                notifier.show($scope.lang.alreadyjoined, $scope.lang.joinedgroupinfo, function() {
+                    redirecter.redirect('index.html');
+                });
             });
         }
     };
@@ -138,15 +139,15 @@ angular.module('eat-this-one')
             var locSubscriptionCallback = function(data) {
 
                 // TODO Here we should change the message depending on created/joined.
-                notifier.show($scope.lang.joined, $scope.lang.joinedgroupinfo, 'success');
-
-                // Cache the location.
-                localStorage.setItem('loc', JSON.stringify(data));
-                redirecter.redirect('index.html');
+                notifier.show($scope.lang.joined, $scope.lang.joinedgroupinfo, function() {
+                    // Cache the location.
+                    localStorage.setItem('loc', JSON.stringify(data));
+                    redirecter.redirect('index.html');
+                });
             };
             var errorCallback = function(data, errorStatus, errorMsg) {
                 appStatus.completed('newLocationSubscriptionRequest');
-                notifier.show($scope.lang.error, data, 'error');
+                notifier.show($scope.lang.error, data);
             };
             newLocationSubscriptionRequest($scope, $scope.loc.value, locSubscriptionCallback, errorCallback);
 
@@ -162,16 +163,16 @@ angular.module('eat-this-one')
             var locationCallback = function(data) {
 
                 var msg = $scope.lang.locationcreatedinfo + "\n\n" + $scope.lang.joinedgroupinfo;
-                notifier.show($scope.lang.locationcreated, msg, 'success');
-
-                // Cache the location.
-                localStorage.setItem('loc', JSON.stringify(data));
-                redirecter.redirect('index.html');
+                notifier.show($scope.lang.locationcreated, msg, function() {
+                    // Cache the location.
+                    localStorage.setItem('loc', JSON.stringify(data));
+                    redirecter.redirect('index.html');
+                });
             };
             var errorCallback = function(data, errorStatus, errorMsg) {
                 appStatus.completed('newLocationRequest');
                 var msg = '"' + errorStatus + '": ' + data;
-                notifier.show($scope.lang.error, msg, 'error');
+                notifier.show($scope.lang.error, msg);
             };
             newLocationRequest($scope, $scope.locationname.value, $scope.address.value, locationCallback, errorCallback);
         }

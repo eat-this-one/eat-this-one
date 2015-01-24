@@ -32,7 +32,7 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
             // On unauthorized access we redirect to the index.
             appStatus.completed('dishesRequest');
             var msg = $scope.lang.errordishesrequest + '. "' + errorStatus + '": ' + data;
-            notifier.show($scope.lang.error, msg, 'error');
+            notifier.show($scope.lang.error, msg);
         };
         dishesRequest($scope, dishesCallback, errorCallback);
 
