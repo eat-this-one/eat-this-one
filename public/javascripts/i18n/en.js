@@ -20,7 +20,6 @@ $.eatLang.en = {
     dishdescription : 'Description',
     dishdescriptionexample : 'e.g. Seafood paella, not gluten free',
     dishedited : 'Dish edited',
-    dishesnextdays : 'These dishes will be available within 3 days',
     dishname : 'Dish name',
     dishnameexample : 'e.g. Paella',
     editdish : 'Edit dish',

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="39px" height="21px" viewBox="0 0 39 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.0.4 (8053) - http://www.bohemiancoding.com/sketch -->
+    <title>Taco</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Food&amp;Cooking" sketch:type="MSArtboardGroup" transform="translate(-202.000000, -564.000000)">
+            <g id="Taco" sketch:type="MSLayerGroup" transform="translate(203.000000, 565.000000)">
+                <path d="M14.92,4.895 C23.204,4.895 29.92,11.611 29.92,19.895 L-0.08,19.895 C-0.08,11.611 6.636,4.895 14.92,4.895" id="Fill-185" fill="#EEAF4B" sketch:type="MSShapeGroup"></path>
+                <path d="M23.42,14.895 C21.281,14.895 19.388,13.857 18.204,12.262 C17.754,12.476 17.276,12.637 16.778,12.745 C16.156,15.687 13.547,17.895 10.42,17.895 C6.83,17.895 3.92,14.985 3.92,11.395 C3.92,8.271 6.125,5.663 9.064,5.039 C9.688,2.101 12.295,-0.105 15.42,-0.105 C17.559,-0.105 19.451,0.933 20.636,2.528 C21.481,2.126 22.422,1.895 23.42,1.895 C27.01,1.895 29.92,4.805 29.92,8.395 C29.92,11.985 27.01,14.895 23.42,14.895" id="Fill-186" fill="#88C057" sketch:type="MSShapeGroup"></path>
+                <path d="M22.92,4.895 C31.204,4.895 37.92,11.611 37.92,19.895 L7.92,19.895 C7.92,11.611 14.636,4.895 22.92,4.895" id="Fill-187" fill="#FBD490" sketch:type="MSShapeGroup"></path>
+                <path d="M16.42,11.895 C17.248,11.895 17.92,12.567 17.92,13.395 C17.92,14.223 17.248,14.895 16.42,14.895 C15.591,14.895 14.92,14.223 14.92,13.395 C14.92,12.567 15.591,11.895 16.42,11.895" id="Fill-188" fill="#EEAF4B" sketch:type="MSShapeGroup"></path>
+                <path d="M24.42,13.895 C25.248,13.895 25.92,14.567 25.92,15.395 C25.92,16.223 25.248,16.895 24.42,16.895 C23.591,16.895 22.92,16.223 22.92,15.395 C22.92,14.567 23.591,13.895 24.42,13.895" id="Fill-189" fill="#EEAF4B" sketch:type="MSShapeGroup"></path>
+                <path d="M22.42,7.895 C23.248,7.895 23.92,8.567 23.92,9.395 C23.92,10.223 23.248,10.895 22.42,10.895 C21.591,10.895 20.92,10.223 20.92,9.395 C20.92,8.567 21.591,7.895 22.42,7.895" id="Fill-190" fill="#EEAF4B" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>
