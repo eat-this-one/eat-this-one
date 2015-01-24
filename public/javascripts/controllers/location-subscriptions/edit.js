@@ -163,6 +163,7 @@ angular.module('eat-this-one')
             var locationCallback = function(data) {
 
                 var msg = $scope.lang.locationcreatedinfo + "\n\n" + $scope.lang.joinedgroupinfo;
+                appStatus.completed('newLocationRequest');
                 notifier.show($scope.lang.locationcreated, msg, function() {
                     // Cache the location.
                     localStorage.setItem('loc', JSON.stringify(data));

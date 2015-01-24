@@ -53,10 +53,10 @@ angular.module('eat-this-one').factory('shareManager', ['eatConfig', 'appStatus'
                 };
 
                 function onError(contactError) {
+                    appStatus.completed('contacts');
                     notifier.show($scope.lang.error, $scope.lang.errornocontacts, function() {
                         newLogRequest('error', 'contacts-get', contactError);
                         console.log('Error getting contacts: ' + contactError);
-                        appStatus.completed('contacts');
                     });
                 };
 
@@ -91,8 +91,8 @@ angular.module('eat-this-one').factory('shareManager', ['eatConfig', 'appStatus'
 
             // The user should explicitly press 'Skip'.
             if (phonesArray.length === 0) {
+                appStatus.completed('selectedContacts');
                 notifier.show($scope.lang.nocontacts, $scope.lang.nocontactsinfo, function() {
-                    appStatus.completed('selectedContacts');
                     return false;
                 });
             }
