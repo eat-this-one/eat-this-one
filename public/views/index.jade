@@ -14,16 +14,16 @@ block content
                 form(role='form')
                     eat-input-text(element='name')
                     eat-input-text(element='email')
-                    button(ng-click='signup()', class='btn btn-success')
+                    md-button(ng-click='signup()', class='md-accent md-raised')
                         span(class='glyphicon glyphicon-user button-icon', aria-hidden='true')
                         {{lang.signin}}
 
         div(ng-if='auth.isAuthenticated()')
             div(class='centered-container')
-                button(name='add', ng-click='addDish()', class='btn btn-success')
+                md-button(name='add', ng-click='addDish()', class='md-accent md-raised')
                     span(class='glyphicon glyphicon-share button-icon', aria-hidden='true')
                     {{lang.adddish}}
-                button(name='meals', ng-click='indexMeals()', class='btn btn-warning')
+                md-button(name='meals', ng-click='indexMeals()', class='md-primary md-raised')
                     span(class='glyphicon glyphicon-cutlery button-icon', aria-hidden='true')
                     {{lang.mealsibooked}}
 

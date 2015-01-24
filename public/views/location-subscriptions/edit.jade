@@ -22,7 +22,7 @@ block content
                 span(ng-show='loadingAddresses', class='glyphicon glyphicon-refresh standalone-icon', aria-hidden='true', aria-label='{{lang.loading}}')
 
             div(ng-if='auth.isAuthenticated()')
-                button(class='btn btn-success', id='id-subscribe-location-button', ng-click='subscribe()')
+                md-button(class='md-raised md-accent', id='id-subscribe-location-button', ng-click='subscribe()')
                     span(class='glyphicon glyphicon-home button-icon')
                     {{lang.joingroup}}
 

@@ -17,10 +17,10 @@ block content
             eat-radio(element='donation')
 
             div(ng-if='auth.isAuthenticated()')
-                button(ng-if='!isEditing()', ng-click='save()', id='id-share-dish-button', class='btn btn-primary')
+                md-button(ng-if='!isEditing()', ng-click='save()', id='id-share-dish-button', class='md-raised md-primary')
                     span(class='glyphicon glyphicon-ok button-icon', aria-hidden='true')
                     {{lang.sharedish}}
-                button(ng-if='isEditing()', ng-click='save()', class='btn btn-primary')
+                md-button(ng-if='isEditing()', ng-click='save()', class='md-raised md-primary')
                     span(class='glyphicon glyphicon-ok button-icon', aria-hidden='true')
                     {{lang.editdish}}
 

@@ -6,10 +6,10 @@ block content
         include ../top
 
         div(class='centered-container')
-            button(class='btn btn-success', ng-click='share()')
+            md-button(class='md-raised md-accent', ng-click='share()')
                 span(class='glyphicon glyphicon-envelope button-icon', aria-hidden='true')
                 {{lang.message}}
-            button(class='btn btn-default', ng-click='noShare()')
+            md-button(class='md-raised', ng-click='noShare()')
                 span(class='glyphicon glyphicon-remove button-icon', aria-hidden='true')
                 {{lang.skip}}
 
