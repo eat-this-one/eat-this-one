@@ -1,4 +1,4 @@
-angular.module('eat-this-one').factory('notifier', ['redirecter', function(redirecter) {
+angular.module('eat-this-one').factory('notifier', ['redirecter', '$mdDialog', function(redirecter, $mdDialog) {
     return {
 
         dialog : null,
