@@ -1,10 +1,35 @@
 angular.module('eat-this-one')
-    .controller('DishesShareController', ['$scope', 'redirecter', 'eatConfig', 'urlParser', 'shareManager', 'newLogRequest', function($scope, redirecter, eatConfig, urlParser, shareManager, newLogRequest) {
+    .controller('DishesShareController', ['$scope', 'authManager', 'redirecter', 'eatConfig', 'urlParser', 'shareManager', 'newLogRequest', function($scope, authManager, redirecter, eatConfig, urlParser, shareManager, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
+    $scope.auth = authManager;
+    $scope.redirectAction = redirecter.redirectAction;
 
-    // Page title.
+    // Define header.
     $scope.pageTitle = $scope.lang.invitepeople;
+    $scope.actionIcons = [
+        {
+            name : $scope.lang.message,
+            icon : 'glyphicon glyphicon-envelope',
+            callback : 'share'
+        }
+    ];
+    $scope.menuIcons = [
+        {
+            name : $scope.lang.dishes,
+            icon : 'glyphicon glyphicon-list',
+            callback : 'index'
+        }, {
+            name : $scope.lang.mealsibooked,
+            icon : 'glyphicon glyphicon-list',
+            callback : 'indexMeals'
+        }
+    ];
+
+    $scope.showToggleMenu = false;
+    if ($scope.auth.isAuthenticated()) {
+        $scope.showToggleMenu = true;
+    }
 
     var loc = JSON.parse(localStorage.getItem('loc'));
     $scope.infomessage = $scope.lang.messagecontactsinfo + ': "' + loc.name + '"';
@@ -28,5 +53,18 @@ angular.module('eat-this-one')
 
     $scope.share = function() {
         shareManager.process($scope);
-    }
+    };
+
+    // Redirects to the user meals list.
+    $scope.indexMeals = function() {
+        newLogRequest('click', 'meals-index');
+        redirecter.redirect('meals/index.html');
+    };
+
+    // Redirects to index.
+    $scope.index = function() {
+        newLogRequest('click', 'index');
+        redirecter.redirect('index.html');
+    };
+
 }]);

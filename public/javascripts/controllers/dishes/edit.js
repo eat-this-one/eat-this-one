@@ -3,9 +3,33 @@ angular.module('eat-this-one')
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
+    $scope.redirectAction = redirecter.redirectAction;
 
-    // Page title.
+    // Define header.
     $scope.pageTitle = $scope.lang.adddish;
+    $scope.actionIcons = [
+        {
+            name : $scope.lang.save,
+            icon : 'glyphicon glyphicon-ok',
+            callback : 'save'
+        }
+    ];
+    $scope.menuIcons = [
+        {
+            name : $scope.lang.dishes,
+            icon : 'glyphicon glyphicon-list',
+            callback : 'index'
+        }, {
+            name : $scope.lang.mealsibooked,
+            icon : 'glyphicon glyphicon-list',
+            callback : 'indexMeals'
+        }
+    ];
+
+    $scope.showToggleMenu = false;
+    if ($scope.auth.isAuthenticated()) {
+        $scope.showToggleMenu = true;
+    }
 
     // Declare form fields.
     $scope.photo = {
@@ -143,4 +167,15 @@ angular.module('eat-this-one')
         }
     };
 
+    // Redirects to the user meals list.
+    $scope.indexMeals = function() {
+        newLogRequest('click', 'meals-index');
+        redirecter.redirect('meals/index.html');
+    };
+
+    // Redirects to index.
+    $scope.index = function() {
+        newLogRequest('click', 'index');
+        redirecter.redirect('index.html');
+    };
 }]);

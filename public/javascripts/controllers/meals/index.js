@@ -2,11 +2,25 @@ angular.module('eat-this-one')
     .controller('MealsController', ['$scope', 'redirecter', 'appStatus', 'notifier', 'mealsRequest', 'eatConfig', 'datesConverter', 'newLogRequest', function($scope, redirecter, appStatus, notifier, mealsRequest, eatConfig, datesConverter, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
+    $scope.redirectAction = redirecter.redirectAction;
 
-    // Page title.
+    // Define header.
     $scope.pageTitle = $scope.lang.mymeals;
+    $scope.menuIcons = [
+        {
+            name : $scope.lang.dishes,
+            icon : 'glyphicon glyphicon-list',
+            callback : 'index'
+        }
+    ];
 
     $scope.meals = [];
+
+    $scope.showToggleMenu = false;
+    if ($scope.auth.isAuthenticated()) {
+        $scope.showToggleMenu = true;
+    }
+
     $scope.showNoMeals = false;
 
     appStatus.waiting('mealsRequest');
@@ -45,4 +59,11 @@ angular.module('eat-this-one')
     $scope.mealClicked = function(dishid) {
         newLogRequest('click', 'meals-view', dishid);
     };
+
+    // Redirects to index.
+    $scope.index = function() {
+        newLogRequest('click', 'index');
+        redirecter.redirect('index.html');
+    };
+
 }]);

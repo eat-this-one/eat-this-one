@@ -3,9 +3,22 @@ angular.module('eat-this-one')
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
+    $scope.redirectAction = redirecter.redirectAction;
 
-    // Page title.
+    // Define header.
     $scope.pageTitle = $scope.lang.location;
+    $scope.actionIcons = [
+        {
+            name : $scope.lang.joingroup,
+            icon : 'glyphicon glyphicon-arrow-right',
+            callback : 'subscribe'
+        }
+    ];
+
+    $scope.showToggleMenu = false;
+    if ($scope.auth.isAuthenticated()) {
+        $scope.showToggleMenu = true;
+    }
 
     // To store the id.
     // TODO We really need to change all this shit.

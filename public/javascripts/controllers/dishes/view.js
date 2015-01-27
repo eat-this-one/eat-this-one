@@ -3,9 +3,26 @@ angular.module('eat-this-one')
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
+    $scope.redirectAction = redirecter.redirectAction;
 
-    // Page title.
+    // Define header.
     $scope.pageTitle = $scope.lang.dish;
+    $scope.menuIcons = [
+        {
+            name : $scope.lang.dishes,
+            icon : 'glyphicon glyphicon-list',
+            callback : 'index'
+        }, {
+            name : $scope.lang.mealsibooked,
+            icon : 'glyphicon glyphicon-list',
+            callback : 'indexMeals'
+        }
+    ];
+
+    $scope.showToggleMenu = false;
+    if ($scope.auth.isAuthenticated()) {
+        $scope.showToggleMenu = true;
+    }
 
     $scope.dish = {};
 
@@ -46,6 +63,25 @@ angular.module('eat-this-one')
     var dishCallback = function(dishData) {
         dishFormatter($scope, dishData);
         appStatus.completed('dishRequest');
+
+        // Fill the actions items.
+        if ($scope.userCanBook()) {
+            $scope.actionIcons = [
+                {
+                    name : $scope.lang.addmeal,
+                    icon : 'glyphicon glyphicon-cutlery',
+                    callback : 'addMeal'
+                }
+            ];
+        } else if ($scope.auth.isUser($scope.dish.userid)) {
+            $scope.actionIcons = [
+                {
+                    name : $scope.lang.editdish,
+                    icon : 'glyphicon glyphicon-pencil',
+                    callback : 'editDish'
+                }
+            ];
+        }
     };
     dishRequest($scope, dishCallback, id);
 
@@ -71,8 +107,22 @@ angular.module('eat-this-one')
         newLogRequest('click', 'meals-add', id);
     };
 
+    // Redirects to edit dish.
     $scope.editDish = function() {
         newLogRequest('click', 'dishes-edit', id);
         redirecter.redirect('dishes/edit.html?id=' + id);
     };
+
+    // Redirects to the user meals list.
+    $scope.indexMeals = function() {
+        newLogRequest('click', 'meals-index');
+        redirecter.redirect('meals/index.html');
+    };
+
+    // Redirects to index.
+    $scope.index = function() {
+        newLogRequest('click', 'index');
+        redirecter.redirect('index.html');
+    };
+
 }]);

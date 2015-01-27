@@ -3,16 +3,34 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
     // Dependencies.
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
+    $scope.redirectAction = redirecter.redirectAction;
 
-    // Page title.
+    // Define header.
     $scope.pageTitle = $scope.lang.sitename;
+    $scope.actionIcons = [
+        {
+            name : $scope.lang.adddish,
+            icon : 'glyphicon glyphicon-plus',
+            callback : 'addDish'
+        }
+    ];
+    $scope.menuIcons = [
+        {
+            name : $scope.lang.mealsibooked,
+            icon : 'glyphicon glyphicon-list',
+            callback : 'indexMeals'
+        }
+    ];
 
     $scope.dishes = [];
     $scope.showNoDishes = false;
 
+    $scope.showToggleMenu = false;
     if ($scope.auth.isAuthenticated()) {
         // Getting the list of dishes.
         appStatus.waiting('dishesRequest');
+
+        $scope.showToggleMenu = true;
 
         // Success callback.
         var dishesCallback = function(dishesData) {

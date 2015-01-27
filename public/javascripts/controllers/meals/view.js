@@ -1,11 +1,28 @@
 angular.module('eat-this-one')
-    .controller('MealsViewController', ['$scope', 'appStatus', 'urlParser', 'dishFormatter', 'dishRequest', 'eatConfig', 'authManager', '$modal', 'newLogRequest', function($scope, appStatus, urlParser, dishFormatter, dishRequest, eatConfig, authManager, $modal, newLogRequest) {
+    .controller('MealsViewController', ['$scope', 'appStatus', 'urlParser', 'dishFormatter', 'dishRequest', 'eatConfig', 'authManager', 'redirecter', '$modal', 'newLogRequest', function($scope, appStatus, urlParser, dishFormatter, dishRequest, eatConfig, authManager, redirecter, $modal, newLogRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
+    $scope.redirectAction = redirecter.redirectAction;
 
-    // Page title.
+    // Define header.
     $scope.pageTitle = $scope.lang.dish;
+    $scope.menuIcons = [
+        {
+            name : $scope.lang.dishes,
+            icon : 'glyphicon glyphicon-list',
+            callback : 'index'
+        }, {
+            name : $scope.lang.mealsibooked,
+            icon : 'glyphicon glyphicon-list',
+            callback : 'indexMeals'
+        }
+    ];
+
+    $scope.showToggleMenu = false;
+    if ($scope.auth.isAuthenticated()) {
+        $scope.showToggleMenu = true;
+    }
 
     $scope.dish = {};
 
@@ -32,4 +49,17 @@ angular.module('eat-this-one')
     dishRequest($scope, dishCallback, id);
 
     newLogRequest('view', 'meals-view', id);
+
+    // Redirects to the user meals list.
+    $scope.indexMeals = function() {
+        newLogRequest('click', 'meals-index');
+        redirecter.redirect('meals/index.html');
+    };
+
+    // Redirects to index.
+    $scope.index = function() {
+        newLogRequest('click', 'index');
+        redirecter.redirect('index.html');
+    };
+
 }]);
