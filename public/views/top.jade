@@ -1,3 +1,11 @@
 div(id='id-mask', class='mask')
 
-h1(class='page-title') {{pageTitle}}
+md-toolbar
+    div(class='md-toolbar-tools')
+        md-button(ng-click='toggleMenu()', ng-if='showToggleMenu', aria-label='{{lang.menu}}')
+            span(class='glyphicon glyphicon-menu-hamburger', aria-hidden='true')
+        span {{pageTitle}}
+        span(flex)
+        div(ng-repeat='actionIcon in actionIcons')
+            md-button(ng-click='redirect(actionIcon.url, actionIcon.log)', ng-if='showToggleMenu', aria-label='{{actionIcon.name}}')
+                span(class='{{actionIcon.icon}}', aria-hidden='true')
