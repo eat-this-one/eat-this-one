@@ -7,5 +7,5 @@ md-toolbar
         span {{pageTitle}}
         span(flex)
         div(ng-repeat='actionIcon in actionIcons')
-            md-button(ng-click='redirect(actionIcon.url, actionIcon.log)', ng-if='showToggleMenu', aria-label='{{actionIcon.name}}')
+            md-button(ng-click='redirectAction(this, actionIcon.callback)', ng-if='showToggleMenu', aria-label='{{actionIcon.name}}')
                 span(class='{{actionIcon.icon}}', aria-hidden='true')
