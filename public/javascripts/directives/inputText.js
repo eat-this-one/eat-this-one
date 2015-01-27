@@ -16,7 +16,7 @@ angular.module('eat-this-one').directive('eatInputText', ['formsManager', functi
                 formsManager.validate([scope.element.name], fields);
             };
             input.on('keyup', validateForm);
-            input.on('click', validateForm);
+            input.on('change', validateForm);
         },
         templateUrl: "templates/input-text.html"
     };
