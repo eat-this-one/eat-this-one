@@ -8,35 +8,29 @@ block content
 
         include ../top
 
-        div(ng-if='auth.isAuthenticated()', class='centered-container')
-            md-button(ng-if='userCanBook()', name='meal', ng-click='addMeal()', class='md-raised md-accent')
-                span(class='glyphicon glyphicon-cutlery button-icon', aria-hidden='true')
-                {{lang.addmeal}}
-            md-button(ng-if='auth.isUser(dish.userid)', name='edit', ng-click='editDish()', class='md-raised md-primary')
-                span(class='glyphicon glyphicon-edit button-icon', aria-hidden='true')
-                {{lang.editdish}}
-        div(class='dish-useful-info') {{dishusefulinfotext}}
+        div(ng-if='auth.isAuthenticated()')
+            div(class='dish-useful-info') {{dishusefulinfotext}}
 
-        div(class='dish-info')
-            div(class='dish-field')
-                b {{lang.dishdescription}}
-                {{dish.description}}
-            div(class='dish-field')
-                b {{lang.chef}}
-                {{dish.user.name}}
-                img(ng-if='dish.user.pictureurl', class='user-picture', src='{{dish.user.pictureurl}}')
-            div(ng-if='dish.photo', class='dish-field')
-                img(class='dish-img', src='{{dish.photo}}')
-            div(class='dish-field')
-                b {{lang.location}}
-                a(class='pointer', ng-click='openStaticMap()')
-                    span(class='glyphicon glyphicon-map-marker', aria-hidden='true')
-                    {{dish.loc.name}}
-            div(class='dish-field')
-                b {{lang.when}}
-                {{dish.when}}
-            div(class='dish-field')
-                b {{lang.expecteddonation}}
-                {{dish.donation}}
+            div(class='dish-info')
+                div(class='dish-field')
+                    b {{lang.dishdescription}}
+                    {{dish.description}}
+                div(class='dish-field')
+                    b {{lang.chef}}
+                    {{dish.user.name}}
+                    img(ng-if='dish.user.pictureurl', class='user-picture', src='{{dish.user.pictureurl}}')
+                div(ng-if='dish.photo', class='dish-field')
+                    img(class='dish-img', src='{{dish.photo}}')
+                div(class='dish-field')
+                    b {{lang.location}}
+                    a(class='pointer', ng-click='openStaticMap()')
+                        span(class='glyphicon glyphicon-map-marker', aria-hidden='true')
+                        {{dish.loc.name}}
+                div(class='dish-field')
+                    b {{lang.when}}
+                    {{dish.when}}
+                div(class='dish-field')
+                    b {{lang.expecteddonation}}
+                    {{dish.donation}}
 
     include ../footer

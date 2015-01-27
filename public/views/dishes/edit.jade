@@ -16,12 +16,4 @@ block content
             eat-radio(element='nportions')
             eat-radio(element='donation')
 
-            div(ng-if='auth.isAuthenticated()')
-                md-button(ng-if='!isEditing()', ng-click='save()', id='id-share-dish-button', class='md-raised md-primary')
-                    span(class='glyphicon glyphicon-ok button-icon', aria-hidden='true')
-                    {{lang.sharedish}}
-                md-button(ng-if='isEditing()', ng-click='save()', class='md-raised md-primary')
-                    span(class='glyphicon glyphicon-ok button-icon', aria-hidden='true')
-                    {{lang.editdish}}
-
     include ../footer

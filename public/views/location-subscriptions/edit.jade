@@ -21,9 +21,4 @@ block content
                 input(id='id-{{address.name}}', name='{{address.name}}', ng-model='address.value', typeahead='address for address in getAddresses($viewValue) | limitTo:10', typeahead-loading='loadingAddresses', ng-disabled='disableAddress')
             span(ng-show='loadingAddresses', class='glyphicon glyphicon-refresh standalone-icon', aria-hidden='true', aria-label='{{lang.loading}}')
 
-            div(ng-if='auth.isAuthenticated()')
-                md-button(class='md-raised md-accent', id='id-subscribe-location-button', ng-click='subscribe()')
-                    span(class='glyphicon glyphicon-home button-icon')
-                    {{lang.joingroup}}
-
     include ../footer

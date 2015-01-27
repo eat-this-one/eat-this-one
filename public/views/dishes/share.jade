@@ -5,14 +5,6 @@ block content
 
         include ../top
 
-        div(class='centered-container')
-            md-button(class='md-raised md-accent', ng-click='share()')
-                span(class='glyphicon glyphicon-envelope button-icon', aria-hidden='true')
-                {{lang.message}}
-            md-button(class='md-raised', ng-click='noShare()')
-                span(class='glyphicon glyphicon-remove button-icon', aria-hidden='true')
-                {{lang.skip}}
-
         div(class='centered-container info-text') {{infomessage}}
 
         div(id='id-contacts', class='list-group contacts-list')

@@ -14,19 +14,11 @@ block content
                 form(role='form')
                     eat-input-text(element='name')
                     eat-input-text(element='email')
-                    md-button(ng-click='signup()', class='md-accent md-raised')
+                    md-button(ng-click='signup()', class='md-primary')
                         span(class='glyphicon glyphicon-user button-icon', aria-hidden='true')
                         {{lang.signin}}
 
         div(ng-if='auth.isAuthenticated()')
-            div(class='centered-container')
-                md-button(name='add', ng-click='addDish()', class='md-accent md-raised')
-                    span(class='glyphicon glyphicon-share button-icon', aria-hidden='true')
-                    {{lang.adddish}}
-                md-button(name='meals', ng-click='indexMeals()', class='md-primary md-raised')
-                    span(class='glyphicon glyphicon-cutlery button-icon', aria-hidden='true')
-                    {{lang.mealsibooked}}
-
             div(class='container dishes-list')
                 div(ng-show='showNoDishes')
                     p {{lang.nodishes}}
