@@ -20,11 +20,10 @@ html
             md-sidenav(ng-if='showToggleMenu && menuIcons', class='md-sidenav-left', md-component-id='menu')
                 md-toolbar
                     h1(class='md-toolbar-tools') {{lang.menu}}
-                md-content
-                    md-list(role='list')
-                        md-item(ng-repeat='menuIcon in menuIcons', role='listitem')
-                            md-button(ng-click='redirectAction(this, menuIcon.callback)', aria-label='{{menuIcon.name}}')
-                                span(class='{{menuIcon.icon}}', aria-hidden='true') {{menuIcon.name}}
+                md-list(role='list', layout='column', layout-fill)
+                    md-item(ng-repeat='menuIcon in menuIcons', role='listitem')
+                        md-button(ng-click='redirectAction(this, menuIcon.callback)', aria-label='{{menuIcon.name}}')
+                            span(class='{{menuIcon.icon}} button-icon', aria-hidden='true') {{menuIcon.name}}
 
             //- Main content container.
             md-content
@@ -34,10 +33,12 @@ html
                     div(class='md-toolbar-tools')
 
                         //- The menu is only available when the controller specifies it.
-                        md-button(ng-click='toggleMenu()', ng-if='showToggleMenu && menuIcons', aria-label='{{lang.menu}}')
-                            span(class='glyphicon glyphicon-menu-hamburger', aria-hidden='true')
-                        span {{pageTitle}}
-                        span(flex)
+                        div(class='md-tile-left')
+                            md-button(ng-click='menu.toggle()', ng-if='showToggleMenu && menuIcons', aria-label='{{lang.menu}}')
+                                span(class='glyphicon glyphicon-menu-hamburger', aria-hidden='true')
+                        div(class='md-tile-content')
+                            span {{pageTitle}}
+                            span(flex)
 
                         //- Action buttons. The controller sets them.
                         div(ng-repeat='actionIcon in actionIcons')
@@ -45,6 +46,7 @@ html
                                 span(class='{{actionIcon.icon}}', aria-hidden='true')
 
                 //- Delegated to the specific view logic.
-                block logic
+                md-content(class='md-padding')
+                    block logic
 
     include footer
