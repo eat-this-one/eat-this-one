@@ -1,9 +1,10 @@
 angular.module('eat-this-one')
-    .controller('DishesShareController', ['$scope', 'authManager', 'redirecter', 'eatConfig', 'urlParser', 'shareManager', 'newLogRequest', function($scope, authManager, redirecter, eatConfig, urlParser, shareManager, newLogRequest) {
+    .controller('DishesShareController', ['$scope', 'authManager', 'redirecter', 'eatConfig', 'urlParser', 'shareManager', 'newLogRequest', 'menuManager', function($scope, authManager, redirecter, eatConfig, urlParser, shareManager, newLogRequest, menuManager) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
     $scope.redirectAction = redirecter.redirectAction;
+    $scope.menu = menuManager;
 
     // Define header.
     $scope.pageTitle = $scope.lang.invitepeople;

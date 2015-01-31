@@ -1,9 +1,10 @@
-angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirecter', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'datesConverter', 'formsManager', 'dishesRequest', 'newRegIdUserRequest', 'newLogRequest', function($scope, redirecter, eatConfig, authManager, appStatus, notifier, datesConverter, formsManager, dishesRequest, newRegIdUserRequest, newLogRequest) {
+angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirecter', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'datesConverter', 'formsManager', 'dishesRequest', 'newRegIdUserRequest', 'newLogRequest', 'menuManager', function($scope, redirecter, eatConfig, authManager, appStatus, notifier, datesConverter, formsManager, dishesRequest, newRegIdUserRequest, newLogRequest, menuManager) {
 
     // Dependencies.
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
     $scope.redirectAction = redirecter.redirectAction;
+    $scope.menu = menuManager;
 
     // Define header.
     $scope.pageTitle = $scope.lang.sitename;

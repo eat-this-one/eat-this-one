@@ -1,9 +1,10 @@
 angular.module('eat-this-one')
-    .controller('MealsViewController', ['$scope', 'appStatus', 'urlParser', 'dishFormatter', 'dishRequest', 'eatConfig', 'authManager', 'redirecter', '$modal', 'newLogRequest', function($scope, appStatus, urlParser, dishFormatter, dishRequest, eatConfig, authManager, redirecter, $modal, newLogRequest) {
+    .controller('MealsViewController', ['$scope', 'appStatus', 'urlParser', 'dishFormatter', 'dishRequest', 'eatConfig', 'authManager', 'redirecter', '$modal', 'newLogRequest', 'menuManager', function($scope, appStatus, urlParser, dishFormatter, dishRequest, eatConfig, authManager, redirecter, $modal, newLogRequest, menuManager) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
     $scope.redirectAction = redirecter.redirectAction;
+    $scope.menu = menuManager;
 
     // Define header.
     $scope.pageTitle = $scope.lang.dish;
