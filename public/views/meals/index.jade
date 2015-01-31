@@ -1,26 +1,23 @@
-// This template requires dishes array to be set in $scope
-//
+extends ../layout
 
-extends ../component-layout
+block configuration
+    - var controllerName = "MealsController"
 
-block content
-    div(ng-controller='MealsController', class='container')
+block base
+    base(href='../')
 
-        include ../top
-
-        div(ng-show='showNoMeals')
-            p {{lang.nomeals}}
-        md-list(ng-show='!showNoDishes')
-            md-item(ng-repeat='dish in meals', class='dish', ng-click='mealClicked(dish._id)', role='listitem')
-                md-item-content
-                    div(class='md-tile-left')
-                        a(href='meals/view.html?id={{dish._id}}')
-                            img(ng-src='images/default.svg', class='face', src='images/default.svg')
-                    div(class='md-tile-content')
-                        h3
-                            a(href='meals/view.html?id={{dish._id}}') {{dish.name}} - {{dish.when}}
-                        h4
-                            a(href='meals/view.html?id={{dish._id}}') {{dish.description}}
-                md-divider
-
-    include ../footer
+block logic
+    div(ng-show='showNoMeals')
+        p {{lang.nomeals}}
+    md-list(ng-show='!showNoDishes')
+        md-item(ng-repeat='dish in meals', class='dish', ng-click='mealClicked(dish._id)', role='listitem')
+            md-item-content
+                div(class='md-tile-left')
+                    a(href='meals/view.html?id={{dish._id}}')
+                        img(ng-src='images/default.svg', class='face', src='images/default.svg')
+                div(class='md-tile-content')
+                    h3
+                        a(href='meals/view.html?id={{dish._id}}') {{dish.name}} - {{dish.when}}
+                    h4
+                        a(href='meals/view.html?id={{dish._id}}') {{dish.description}}
+            md-divider

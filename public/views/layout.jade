@@ -1,7 +1,50 @@
 doctype html
 html
     head
+        //- This block CAN specify a different base for all paths (see base tag).
+        block base
+
+        //- This block MUST define the controller name (controllerName var).
+        block configuration
+
+        //- All the scripts + styles includes.
         include head
 
     body(id='id-body', ng-app='eat-this-one')
-        block content
+        div(id='id-mask', class='mask')
+
+        //- Here we use controllerName var to set the page JS controller.
+        div(ng-controller='#{controllerName}')
+
+            //- The user menu. Only available when the controller set icons on it.
+            md-sidenav(ng-if='showToggleMenu && menuIcons', class='md-sidenav-left', md-component-id='menu')
+                md-toolbar
+                    h1(class='md-toolbar-tools') {{lang.menu}}
+                md-content
+                    md-list(role='list')
+                        md-item(ng-repeat='menuIcon in menuIcons', role='listitem')
+                            md-button(ng-click='redirectAction(this, menuIcon.callback)', aria-label='{{menuIcon.name}}')
+                                span(class='{{menuIcon.icon}}', aria-hidden='true') {{menuIcon.name}}
+
+            //- Main content container.
+            md-content
+
+                //- Page heading
+                md-toolbar
+                    div(class='md-toolbar-tools')
+
+                        //- The menu is only available when the controller specifies it.
+                        md-button(ng-click='toggleMenu()', ng-if='showToggleMenu && menuIcons', aria-label='{{lang.menu}}')
+                            span(class='glyphicon glyphicon-menu-hamburger', aria-hidden='true')
+                        span {{pageTitle}}
+                        span(flex)
+
+                        //- Action buttons. The controller sets them.
+                        div(ng-repeat='actionIcon in actionIcons')
+                            md-button(ng-click='redirectAction(this, actionIcon.callback)', ng-if='showToggleMenu', aria-label='{{actionIcon.name}}')
+                                span(class='{{actionIcon.icon}}', aria-hidden='true')
+
+                //- Delegated to the specific view logic.
+                block logic
+
+    include footer

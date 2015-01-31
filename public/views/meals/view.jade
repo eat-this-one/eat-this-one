@@ -1,32 +1,29 @@
-// This template requires dish object to be set in $scope
-//
+extends ../layout
 
-extends ../component-layout
+block configuration
+    - var controllerName = "MealsViewController"
 
-block content
-    div(ng-controller='MealsViewController', class='container')
+block base
+    base(href='../')
 
-        include ../top
-
-        div(ng-if='auth.isAuthenticated()', class='dish-info')
-            div(class='dish-field')
-                b {{lang.dishname}}
-                {{dish.name}}
-            div(class='dish-field')
-                b {{lang.dishdescription}}
-                {{dish.description}}
-            div(ng-if='dish.photo', class='dish-field')
-                img(class='dish-img', src='{{dish.photo}}')
-            div(class='dish-field')
-                b {{lang.location}}
-                a(class='pointer', ng-click='openStaticMap()')
-                    span(class='glyphicon glyphicon-map-marker standalone-icon', aria-hidden='true')
-                    {{dish.loc.name}}
-            div(class='dish-field')
-                b {{lang.when}}
-                {{dish.when}}
-            div(class='dish-field')
-                b {{lang.expecteddonation}}
-                {{dish.donation}}
-
-    include ../footer
+block logic
+    div(ng-if='auth.isAuthenticated()', class='dish-info')
+        div(class='dish-field')
+            b {{lang.dishname}}
+            {{dish.name}}
+        div(class='dish-field')
+            b {{lang.dishdescription}}
+            {{dish.description}}
+        div(ng-if='dish.photo', class='dish-field')
+            img(class='dish-img', src='{{dish.photo}}')
+        div(class='dish-field')
+            b {{lang.location}}
+            a(class='pointer', ng-click='openStaticMap()')
+                span(class='glyphicon glyphicon-map-marker standalone-icon', aria-hidden='true')
+                {{dish.loc.name}}
+        div(class='dish-field')
+            b {{lang.when}}
+            {{dish.when}}
+        div(class='dish-field')
+            b {{lang.expecteddonation}}
+            {{dish.donation}}

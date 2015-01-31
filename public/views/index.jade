@@ -1,38 +1,34 @@
-extends layout
+extends ./layout
 
-block content
-    div(ng-controller='IndexController', class='container')
+block configuration
+    - var controllerName = "IndexController"
+block logic
+    div(ng-if='!auth.isAuthenticated()')
+        blockquote
+            p
+                {{lang.infowelcome}}
 
-        include top
+        div(id='id-authenticate', ng-if='!auth.isAuthenticated()')
+            form(role='form')
+                eat-input-text(element='name')
+                eat-input-text(element='email')
+                md-button(ng-click='signup()', class='md-primary')
+                    span(class='glyphicon glyphicon-user button-icon', aria-hidden='true')
+                    {{lang.signin}}
 
-        div(ng-if='!auth.isAuthenticated()')
-            blockquote
-                p
-                    {{lang.infowelcome}}
-
-            div(id='id-authenticate', ng-if='!auth.isAuthenticated()')
-                form(role='form')
-                    eat-input-text(element='name')
-                    eat-input-text(element='email')
-                    md-button(ng-click='signup()', class='md-primary')
-                        span(class='glyphicon glyphicon-user button-icon', aria-hidden='true')
-                        {{lang.signin}}
-
-        div(ng-if='auth.isAuthenticated()')
-            div(class='container dishes-list')
-                div(ng-show='showNoDishes')
-                    p {{lang.nodishes}}
-                md-list(ng-show='!showNoDishes')
-                    md-item(ng-repeat='dish in dishes', class='dish', ng-click='dishClicked(dish._id)', role='listitem')
-                        md-item-content
-                            div(class='md-tile-left')
-                                a(href='dishes/view.html?id={{dish._id}}')
-                                    img(ng-src='images/default.svg', class='face', src='images/default.svg')
-                            div(class='md-tile-content')
-                                h3
-                                    a(href='dishes/view.html?id={{dish._id}}') {{dish.name}} - {{dish.when}}
-                                h4
-                                    a(href='dishes/view.html?id={{dish._id}}') {{dish.description}}
-                        md-divider
-
-    include footer
+    div(ng-if='auth.isAuthenticated()')
+        div(class='container dishes-list')
+            div(ng-show='showNoDishes')
+                p {{lang.nodishes}}
+            md-list(ng-show='!showNoDishes')
+                md-item(ng-repeat='dish in dishes', class='dish', ng-click='dishClicked(dish._id)', role='listitem')
+                    md-item-content
+                        div(class='md-tile-left')
+                            a(href='dishes/view.html?id={{dish._id}}')
+                                img(ng-src='images/default.svg', class='face', src='images/default.svg')
+                        div(class='md-tile-content')
+                            h3
+                                a(href='dishes/view.html?id={{dish._id}}') {{dish.name}} - {{dish.when}}
+                            h4
+                                a(href='dishes/view.html?id={{dish._id}}') {{dish.description}}
+                    md-divider

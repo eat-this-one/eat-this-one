@@ -1,36 +1,34 @@
-// This template requires dish object to be set in $scope
-//
+extends ../layout
 
-extends ../component-layout
+block configuration
+    - var controllerName = "DishesViewController"
 
-block content
-    div(ng-controller='DishesViewController', class='container')
+block base
+    base(href='../')
 
-        include ../top
+block logic
 
-        div(ng-if='auth.isAuthenticated()')
-            div(class='dish-useful-info') {{dishusefulinfotext}}
+    div(ng-if='auth.isAuthenticated()')
+        div(class='dish-useful-info') {{dishusefulinfotext}}
 
-            div(class='dish-info')
-                div(class='dish-field')
-                    b {{lang.dishdescription}}
-                    {{dish.description}}
-                div(class='dish-field')
-                    b {{lang.chef}}
-                    {{dish.user.name}}
-                    img(ng-if='dish.user.pictureurl', class='user-picture', src='{{dish.user.pictureurl}}')
-                div(ng-if='dish.photo', class='dish-field')
-                    img(class='dish-img', src='{{dish.photo}}')
-                div(class='dish-field')
-                    b {{lang.location}}
-                    a(class='pointer', ng-click='openStaticMap()')
-                        span(class='glyphicon glyphicon-map-marker', aria-hidden='true')
-                        {{dish.loc.name}}
-                div(class='dish-field')
-                    b {{lang.when}}
-                    {{dish.when}}
-                div(class='dish-field')
-                    b {{lang.expecteddonation}}
-                    {{dish.donation}}
-
-    include ../footer
+        div(class='dish-info')
+            div(class='dish-field')
+                b {{lang.dishdescription}}
+                {{dish.description}}
+            div(class='dish-field')
+                b {{lang.chef}}
+                {{dish.user.name}}
+                img(ng-if='dish.user.pictureurl', class='user-picture', src='{{dish.user.pictureurl}}')
+            div(ng-if='dish.photo', class='dish-field')
+                img(class='dish-img', src='{{dish.photo}}')
+            div(class='dish-field')
+                b {{lang.location}}
+                a(class='pointer', ng-click='openStaticMap()')
+                    span(class='glyphicon glyphicon-map-marker', aria-hidden='true')
+                    {{dish.loc.name}}
+            div(class='dish-field')
+                b {{lang.when}}
+                {{dish.when}}
+            div(class='dish-field')
+                b {{lang.expecteddonation}}
+                {{dish.donation}}

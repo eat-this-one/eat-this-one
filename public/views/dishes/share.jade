@@ -1,14 +1,14 @@
-extends ../component-layout
+extends ../layout
 
-block content
-    div(ng-controller='DishesShareController', class='container')
+block configuration
+    - var controllerName = "DishesShareController"
 
-        include ../top
+block base
+    base(href='../')
 
-        div(class='centered-container info-text') {{infomessage}}
+block logic
+    div(class='centered-container info-text') {{infomessage}}
 
-        div(id='id-contacts', class='list-group contacts-list')
-            a(id='{{contact.mobilePhone}}', ng-repeat='contact in contacts | orderBy: "displayName"', class='list-group-item contact') {{contact.displayName}}
-                span(class='glyphicon pull-right')
-
-include ../footer
+    div(id='id-contacts', class='list-group contacts-list')
+        a(id='{{contact.mobilePhone}}', ng-repeat='contact in contacts | orderBy: "displayName"', class='list-group-item contact') {{contact.displayName}}
+            span(class='glyphicon pull-right')

@@ -1,19 +1,16 @@
-// This template requires dish object to be set in $scope
-//
+extends ../layout
 
-extends ../component-layout
+block configuration
+    - var controllerName = "DishesEditController"
 
-block content
-    div(ng-controller='DishesEditController', class='container')
+block base
+    base(href='../')
 
-        include ../top
-
-        form(role='form')
-            eat-input-text(element='name')
-            eat-photo(element='photo')
-            eat-input-text(element='description')
-            eat-radio(element='when')
-            eat-radio(element='nportions')
-            eat-radio(element='donation')
-
-    include ../footer
+block logic
+    form(role='form')
+        eat-input-text(element='name')
+        eat-photo(element='photo')
+        eat-input-text(element='description')
+        eat-radio(element='when')
+        eat-radio(element='nportions')
+        eat-radio(element='donation')
