@@ -10,11 +10,12 @@ var LocationSubscriptionModel = require('../models/locationSubscription.js').mod
 
 var locationProps = {
     'name' : 'required',
-    'address' : 'required'
 };
 
 // GET - Locations list.
 router.get('/', function(req, res) {
+
+    // TODO Check for token.
 
     // Here we accept filters.
     var filter = {};
@@ -41,13 +42,23 @@ router.get('/', function(req, res) {
             res.send("Error getting location: " + error);
             return;
         }
+
+        if (locations.length === 0) {
+            res.statusCode = 404;
+            res.send('No locations matching criteria');
+            return;
+        }
+
         res.statusCode = 200;
         res.send(locations);
+        return;
     });
 });
 
 // GET - Obtain a specific location.
 router.get('/:id', function(req, res) {
+
+    // TODO Check for token.
 
     var id = req.param('id');
 
@@ -57,6 +68,13 @@ router.get('/:id', function(req, res) {
             res.send("Error getting '" + id + "' location: " + error);
             return;
         }
+
+        if (!loc) {
+            res.statusCode = 404;
+            res.send('Location not found');
+            return;
+        }
+
         res.statusCode = 200;
         res.send(loc);
     });
@@ -114,6 +132,8 @@ router.post('/', function(req, res) {
             // Setting the userid from the token.
             locationObj.userid = token.userid;
 
+            // Check that a location with the same name already exists.
+            
             var locationInstance = new LocationModel(locationObj);
             locationInstance.save(function(error) {
                 if (error) {

@@ -10,12 +10,9 @@ block logic
     div(class='centered-container info-text') {{lang.joingroupinfo}}
 
     form(role='form')
-        md-input-container(flex)
-            label() {{locationname.label}}
-            input(id='id-{{locationname.name}}', name='{{locationname.name}}', ng-model='locationname.value', typeahead='locationname.name as locationname.name for locationname in getLocations($viewValue)', typeahead-loading='loadingLocationNames', typeahead-on-select='fillAddress($item, $model, $label)', typeahead-min-length='2')
-        span(ng-show='loadingLocationNames', class='glyphicon glyphicon-refresh standalone-icon', aria-hidden='true')
+        md-radio-group(ng-model='usedfield')
+            md-radio-button(value='joingroup') {{lang.joingroup}}
+            md-radio-button(value='newgroup') {{lang.newgroup}}
+        eat-input-text(element='joingroup', ng-show='usedfield === "joingroup"')
+        eat-input-text(element='newgroup', ng-show='usedfield === "newgroup"')
 
-        md-input-container(ng-if='showAddress', flex)
-            label() {{address.label}}
-            input(id='id-{{address.name}}', name='{{address.name}}', ng-model='address.value', typeahead='address for address in getAddresses($viewValue) | limitTo:10', typeahead-loading='loadingAddresses', ng-disabled='disableAddress')
-        span(ng-show='loadingAddresses', class='glyphicon glyphicon-refresh standalone-icon', aria-hidden='true', aria-label='{{lang.loading}}')

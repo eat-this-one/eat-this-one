@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('LocationSubscriptionsEditController', ['$scope', '$http', 'redirecter', 'appStatus', 'eatConfig', 'authManager', 'notifier', 'formsManager', 'newLocationRequest', 'newLocationSubscriptionRequest', 'locationSubscriptionsRequest', 'newLogRequest', 'menuManager', function($scope, $http, redirecter, appStatus, eatConfig, authManager, notifier, formsManager, newLocationRequest, newLocationSubscriptionRequest, locationSubscriptionsRequest, newLogRequest, menuManager) {
+    .controller('LocationSubscriptionsEditController', ['$scope', '$http', 'redirecter', 'appStatus', 'eatConfig', 'authManager', 'notifier', 'formsManager', 'newLocationRequest', 'newLocationSubscriptionRequest', 'locationSubscriptionsRequest', 'newLogRequest', 'locationRequest', 'menuManager', function($scope, $http, redirecter, appStatus, eatConfig, authManager, notifier, formsManager, newLocationRequest, newLocationSubscriptionRequest, locationSubscriptionsRequest, newLogRequest, locationRequest, menuManager) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -10,7 +10,7 @@ angular.module('eat-this-one')
     $scope.pageTitle = $scope.lang.location;
     $scope.actionIcons = [
         {
-            name : $scope.lang.joingroup,
+            name : $scope.lang.continue,
             icon : 'glyphicon glyphicon-arrow-right',
             callback : 'subscribe'
         }
@@ -21,36 +21,28 @@ angular.module('eat-this-one')
         $scope.showToggleMenu = true;
     }
 
+    // By default to join a group.
+    $scope.usedfield = 'joingroup';
+
     // To store the id.
     // TODO We really need to change all this shit.
     $scope.loc = {
         value: ''
     };
-    $scope.locationname = {
-        name: 'loc',
-        label: $scope.lang.codeornew,
-        placeholder: $scope.lang.whereexample,
+    $scope.joingroup = {
+        name: 'joingroup',
+        label: $scope.lang.insertgroupcode,
+        placeholder: $scope.lang.joingroupexample,
         validation: ['required', 'text'],
         value: ''
     };
-
-    $scope.address = {
-        name: 'address',
-        label: $scope.lang.address,
-        placeholder: $scope.lang.addressexample,
-        validation: ['required'],
+    $scope.newgroup = {
+        name: 'newgroup',
+        label: $scope.lang.setgroupname,
+        placeholder: $scope.lang.newgroupexample,
+        validation: ['required', 'text'],
         value: ''
     };
-
-    // Initially hidden, we show the address box once the user
-    // starts to type in the location box.
-    $scope.showAddress = false;
-
-    // If the user selects an existing location we disable the
-    // address input as we don't want the to user spend time on it.
-    $scope.disableAddress = false;
-
-    newLogRequest('view', 'locationSubscriptions-add');
 
     // If there is already one redirect home.
     if (localStorage.getItem('loc')) {
@@ -72,6 +64,7 @@ angular.module('eat-this-one')
             // It returns an array, but should only contain 1 location subscription.
             localStorage.setItem('loc', JSON.stringify(data.shift()));
 
+            // TODO Change this, only works in mobile.
             document.addEventListener('deviceready', function() {
                 newLogRequest('redirected', 'index', 'locationSubscriptions-edit');
                 notifier.show($scope.lang.alreadyjoined, $scope.lang.joinedgroupinfo, function() {
@@ -86,98 +79,58 @@ angular.module('eat-this-one')
     };
     locationSubscriptionsRequest($scope, locationSubscriptionsCallback, errorCallback);
 
-    // TODO We should use a cache for the system
-    // locations; this is too expensive.
-    $scope.getLocations = function(value) {
-
-        // We need all the location data.
-        var locations = [];
-
-        // We show the address box until an
-        // existing location is selected.
-        $scope.showAddress = true;
-
-        // Sending the request without requiring the
-        // name to match exactly the provided value.
-        return $http.get(eatConfig.backendUrl + '/locations', {
-            params: {
-                name: value,
-                regex: 1
-            }
-        }).then(function(res) {
-            angular.forEach(res.data, function(item) {
-                locations.push(item);
-            });
-            return locations;
-        });
-    };
-
-    $scope.getAddresses = function(value) {
-        return $http.get('http://maps.googleapis.com/maps/api/geocode/json', {
-            params: {
-                address: value,
-                sensor: false
-            }
-        }).then(function(res){
-            var addresses = [];
-            angular.forEach(res.data.results, function(item){
-                addresses.push(item.formatted_address);
-            });
-            return addresses;
-        });
-    };
-
-    // Runs when an existing location is selected.
-    // Fills the address with the location address.
-    $scope.fillAddress = function($item, $model, $label) {
-
-        $scope.address.value = $item.address;
-        $scope.disableAddress = true;
-
-        // We save the locationid.
-        $scope.loc.value = $item._id;
-    };
-
+    // Continue button clicked.
     $scope.subscribe = function() {
 
-        if ($scope.loc.value != '' &&
-                $scope.loc.value != null &&
-                typeof $scope.loc.value !== 'undefined') {
+        newLogRequest('click', 'locationSubscription-add-confirm');
 
-            if (!formsManager.validate(['loc'], $scope)) {
-                return;
-            }
-            // Only a subscription as the location already exists.
+        if (!formsManager.validate([$scope.usedfield], $scope)) {
+            return;
+        }
+
+        if ($scope.usedfield === 'joingroup') {
+
             appStatus.waiting('newLocationSubscriptionRequest');
 
-            var locSubscriptionCallback = function(data) {
+            // Checking that the location exists.
+            var locCallback = function(locationsData) {
 
-                // TODO Here we should change the message depending on created/joined.
-                notifier.show($scope.lang.joined, $scope.lang.joinedgroupinfo, function() {
-                    // Cache the location.
-                    localStorage.setItem('loc', JSON.stringify(data));
-                    redirecter.redirect('index.html');
-                });
+                // We looked for an exact match before, so only 1 group should match.
+                locationid = locationsData[0]._id;
+
+                // If it exists add a new subscription to the location.
+                var locSubscriptionCallback = function(data) {
+                    notifier.show($scope.lang.joined, $scope.lang.joinedgroupinfo, function() {
+                        // Cache the location.
+                        localStorage.setItem('loc', JSON.stringify(data));
+                        redirecter.redirect('index.html');
+                    });
+                };
+                var errorCallback = function(data, errorStatus, errorMsg) {
+                    appStatus.completed('newLocationSubscriptionRequest');
+                    notifier.show($scope.lang.error, errorMsg);
+                };
+                newLocationSubscriptionRequest($scope, locationid, locSubscriptionCallback, errorCallback);
             };
-            var errorCallback = function(data, errorStatus, errorMsg) {
+
+            // If the location does not exists we notify the user about it.
+            var noLocationErrorCallback = function(data, errorStatus, errorMsg) {
+                notifier.show($scope.lang.locationnoexists, $scope.lang.locationnoexistsinfo);
                 appStatus.completed('newLocationSubscriptionRequest');
-                notifier.show($scope.lang.error, data);
             };
-            newLocationSubscriptionRequest($scope, $scope.loc.value, locSubscriptionCallback, errorCallback);
+            locationRequest($scope, $scope.joingroup.value, locCallback, noLocationErrorCallback);
 
         } else {
 
-            if (!formsManager.validate(['locationname', 'address'], $scope)) {
-                return;
-            }
+            // TODO Check that the location name does not exist.
+            // Probably this checking could be shared with the upper
+            // condition.
 
             // A new location including subscription.
             appStatus.waiting('newLocationRequest');
 
             var locationCallback = function(data) {
-
                 var msg = $scope.lang.locationcreatedinfo + "\n\n" + $scope.lang.joinedgroupinfo;
-                appStatus.completed('newLocationRequest');
                 notifier.show($scope.lang.locationcreated, msg, function() {
                     // Cache the location.
                     localStorage.setItem('loc', JSON.stringify(data));
@@ -189,10 +142,8 @@ angular.module('eat-this-one')
                 var msg = '"' + errorStatus + '": ' + data;
                 notifier.show($scope.lang.error, msg);
             };
-            newLocationRequest($scope, $scope.locationname.value, $scope.address.value, locationCallback, errorCallback);
+            newLocationRequest($scope, $scope.newgroup.value, locationCallback, errorCallback);
         }
-
-        newLogRequest('click', 'locationSubscription-add-confirm');
     };
 
 }]);

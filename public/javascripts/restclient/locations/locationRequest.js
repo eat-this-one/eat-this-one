@@ -1,12 +1,12 @@
 angular.module('eat-this-one')
-    .factory('newLocationRequest', ['redirecter', '$http', 'eatConfig', 'sessionManager', 'appStatus', 'notifier', 'newLogRequest', function(redirecter, $http, eatConfig, sessionManager, appStatus, notifier, newLogRequest) {
+    .factory('locationRequest', ['redirecter', '$http', 'eatConfig', 'sessionManager', 'appStatus', 'notifier', 'newLogRequest', function(redirecter, $http, eatConfig, sessionManager, appStatus, notifier, newLogRequest) {
 
     return function($scope, name, locationCallback, errorCallback) {
 
         $http({
-            method : 'POST',
+            method : 'GET',
             url : eatConfig.backendUrl + '/locations',
-            data : {
+            params : {
                 name : name,
                 token : sessionManager.getToken()
             }
