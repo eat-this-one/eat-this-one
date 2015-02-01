@@ -21,7 +21,7 @@ angular.module('eat-this-one')
             icon : 'glyphicon glyphicon-list',
             callback : 'index'
         }, {
-            name : $scope.lang.mealsibooked,
+            name : $scope.lang.bookedmeals,
             icon : 'glyphicon glyphicon-list',
             callback : 'indexMeals'
         }

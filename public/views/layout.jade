@@ -23,7 +23,9 @@ html
                 md-list(role='list', layout='column', layout-fill)
                     md-item(ng-repeat='menuIcon in menuIcons', role='listitem')
                         md-button(ng-click='redirectAction(this, menuIcon.callback)', aria-label='{{menuIcon.name}}')
-                            span(class='{{menuIcon.icon}} button-icon', aria-hidden='true') {{menuIcon.name}}
+                            md-inline-list-icon
+                                span(class='{{menuIcon.icon}} button-icon')
+                                span(class='md-inline-list-icon-label', aria-hidden='true') {{menuIcon.name}}
 
             //- Main content container.
             md-content

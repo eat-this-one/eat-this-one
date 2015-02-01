@@ -53,7 +53,7 @@ $.eatLang.en = {
     locationname : 'Location name',
     mealbooked : 'Meal booked',
     mealbookedinfo : 'Thanks for booking the meal. The chef has been notified.',
-    mealsibooked : 'Meals I booked',
+    bookedmeals : 'Booked meals',
     menu : 'Menu',
     message : 'Message',
     messagecontactsinfo : 'The more people you share the food with, the better, invite them to join your group',

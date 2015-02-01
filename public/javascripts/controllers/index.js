@@ -17,7 +17,7 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
     ];
     $scope.menuIcons = [
         {
-            name : $scope.lang.mealsibooked,
+            name : $scope.lang.bookedmeals,
             icon : 'glyphicon glyphicon-list',
             callback : 'indexMeals'
         }
