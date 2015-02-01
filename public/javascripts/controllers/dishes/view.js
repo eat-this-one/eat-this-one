@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesViewController', ['$scope', '$modal', 'redirecter', 'appStatus', 'notifier', 'urlParser', 'dishFormatter', 'dishRequest', 'newMealRequest', 'eatConfig', 'authManager', 'newLogRequest', 'menuManager', function($scope, $modal, redirecter, appStatus, notifier, urlParser, dishFormatter, dishRequest, newMealRequest, eatConfig, authManager, newLogRequest, menuManager) {
+    .controller('DishesViewController', ['$scope', '$mdDialog', 'redirecter', 'appStatus', 'notifier', 'urlParser', 'dishFormatter', 'dishRequest', 'newMealRequest', 'eatConfig', 'authManager', 'newLogRequest', 'menuManager', function($scope, $mdDialog, redirecter, appStatus, notifier, urlParser, dishFormatter, dishRequest, newMealRequest, eatConfig, authManager, newLogRequest, menuManager) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -33,10 +33,11 @@ angular.module('eat-this-one')
     // # Last portion available | All portions booked
     $scope.dishusefulinfotext = '';
 
-    $scope.openStaticMap = function() {
-        var staticMapModal = $modal.open({
-            templateUrl: 'templates/static-map.html',
+    $scope.openStaticMap = function(ev) {
+        var staticMapModal = $mdDialog.show({
             controller: 'staticMapController',
+            templateUrl: 'templates/static-map.html',
+            targetEvent: ev,
             resolve: {
                 dish : function() {
                     return $scope.dish;

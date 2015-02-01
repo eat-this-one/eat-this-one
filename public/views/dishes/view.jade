@@ -23,7 +23,7 @@ block logic
                 img(class='dish-img', src='{{dish.photo}}')
             div(class='dish-field')
                 b {{lang.location}}
-                a(class='pointer', ng-click='openStaticMap()')
+                a(class='pointer', ng-click='openStaticMap($event)')
                     span(class='glyphicon glyphicon-map-marker', aria-hidden='true')
                     {{dish.loc.name}}
             div(class='dish-field')

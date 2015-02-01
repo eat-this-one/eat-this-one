@@ -24,8 +24,6 @@ module.exports = function(grunt) {
                     "public/web-build/client.js": [
                         "public/bower_components/jquery/dist/jquery.min.js",
                         "public/bower_components/angular/angular.min.js",
-                        "public/bower_components/angular-bootstrap/ui-bootstrap.min.js",
-                        "public/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js",
                         "public/bower_components/angular-aria/angular-aria.min.js",
                         "public/bower_components/angular-animate/angular-animate.min.js",
                         "public/bower_components/hammerjs/hammer.min.js",
@@ -42,8 +40,6 @@ module.exports = function(grunt) {
                     "public/app-build/client.js": [
                         "public/bower_components/jquery/dist/jquery.min.js",
                         "public/bower_components/angular/angular.min.js",
-                        "public/bower_components/angular-bootstrap/ui-bootstrap.min.js",
-                        "public/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js",
                         "public/bower_components/angular-aria/angular-aria.min.js",
                         "public/bower_components/angular-animate/angular-animate.min.js",
                         "public/bower_components/hammerjs/hammer.min.js",

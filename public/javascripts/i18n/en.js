@@ -12,6 +12,7 @@ $.eatLang.en = {
     cancel : 'Cancel',
     capturephoto : 'Capture Photo',
     chef : 'Chef',
+    close : 'Close',
     deleteduser : 'The user does not exist anymore',
     dish : 'Dish',
     dishadded : 'Dish added',

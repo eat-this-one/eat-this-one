@@ -1,8 +1,6 @@
-div(class='modal-header')
-    button(class='close', ng-click='close()')
-        span(aria-hidden='true') &times;
-        span(class='sr-only')
-        {{lang.close}}
-    h3(class='modal-title') {{dish.loc.name}} - {{dish.loc.address}}
-div(class='modal-body text-center')
-    img(ng-src='{{dish.map}}')
+md-dialog(aria-label='{{dish.loc.name}} - {{dish.loc.address}}')
+    md-content
+        md-subheader(class='md-sticky-no-effect') {{dish.loc.name}} - {{dish.loc.address}}
+        img(ng-src='{{dish.map}}')
+    div(class='md-actions', layout='row')
+        md-button(ng-click='close()', class='md-primary') {{lang.close}}
