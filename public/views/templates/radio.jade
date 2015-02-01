@@ -2,5 +2,5 @@ div(class='form-group')
     label(for='id-{{element.name}}') {{element.label}}
     //- Adding extra div as btn-group is an inline-block.
     div(id='id-{{element.name}}')
-        div(class='btn-group')
-            label(ng-repeat='option in element.options', ng-model='element.value', btn-radio='option.value', class='btn {{option.btnstyle}}') {{option.text}}
+        div(id='id-group-{{element.name}}', class='btn-group', role='group')
+            md-button(ng-repeat='option in element.options', ng-click='setValue(option.value)', class='md-padding', value='{{option.value}}', id='id-option-{{element.name}}-{{option.value}}') {{option.text}}
