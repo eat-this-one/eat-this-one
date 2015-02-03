@@ -36,7 +36,7 @@ html
 
                         //- The menu is only available when the controller specifies it.
                         div(class='md-tile-left')
-                            md-button(ng-click='menu.toggle()', ng-if='showToggleMenu && menuIcons', aria-label='{{lang.menu}}')
+                            md-button(ng-click='menu.toggle()', ng-if='showToggleMenu && menuIcons', aria-label='{{lang.menu}}', class='md-primary md-fab no-box-shadow')
                                 span(class='glyphicon glyphicon-menu-hamburger', aria-hidden='true')
                         div(class='md-tile-content')
                             span {{pageTitle}}
@@ -44,7 +44,7 @@ html
 
                         //- Action buttons. The controller sets them.
                         div(ng-repeat='actionIcon in actionIcons')
-                            md-button(ng-click='redirectAction(this, actionIcon.callback)', ng-if='showToggleMenu', aria-label='{{actionIcon.name}}')
+                            md-button(ng-click='redirectAction(this, actionIcon.callback)', ng-if='showToggleMenu', aria-label='{{actionIcon.name}}', class='md-primary md-fab no-box-shadow')
                                 span(class='{{actionIcon.icon}}', aria-hidden='true')
 
                 //- Delegated to the specific view logic.
