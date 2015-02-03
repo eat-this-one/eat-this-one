@@ -11,11 +11,11 @@ angular.module('eat-this-one')
     $scope.menuIcons = [
         {
             name : $scope.lang.dishes,
-            icon : 'glyphicon glyphicon-list',
+            icon : 'glyphicon glyphicon-piggy-bank',
             callback : 'index'
         }, {
             name : $scope.lang.bookedmeals,
-            icon : 'glyphicon glyphicon-list',
+            icon : 'glyphicon glyphicon-cutlery',
             callback : 'indexMeals'
         }
     ];

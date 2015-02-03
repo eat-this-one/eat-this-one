@@ -11,7 +11,7 @@ angular.module('eat-this-one').directive('eatRadio', ['$timeout', function($time
             $timeout(function() {
                 var defaultOptionId = 'id-option-' + scope.element.name + '-' + scope.element.value;
                 console.log(angular.element('#' + defaultOptionId));
-                angular.element('#' + defaultOptionId).addClass('md-primary');
+                angular.element('#' + defaultOptionId).addClass('md-accent');
                 angular.element('#' + defaultOptionId).addClass('md-raised');
             });
 
@@ -22,10 +22,10 @@ angular.module('eat-this-one').directive('eatRadio', ['$timeout', function($time
 
                 // Set style.
                 for (var i = 0; i < scope.element.options.length; i++) {
-                    angular.element('#id-option-' + scope.element.name + '-' + scope.element.options[i].value).removeClass('md-primary');
+                    angular.element('#id-option-' + scope.element.name + '-' + scope.element.options[i].value).removeClass('md-accent');
                     angular.element('#id-option-' + scope.element.name + '-' + scope.element.options[i].value).removeClass('md-raised');
                 }
-                angular.element('#id-option-' + scope.element.name + '-' + value).addClass('md-primary');
+                angular.element('#id-option-' + scope.element.name + '-' + value).addClass('md-accent');
                 angular.element('#id-option-' + scope.element.name + '-' + value).addClass('md-raised');
             };
         },
