@@ -13,4 +13,13 @@ angular.module('eat-this-one')
         $httpProvider.defaults.headers.put = {};
         $httpProvider.defaults.headers.get = {};
         $httpProvider.defaults.headers.delete = {};
-}]);
+    }]);
+
+angular.module('eat-this-one')
+    .config(['$mdThemingProvider', function($mdThemingProvider) {
+        $mdThemingProvider.theme('default')
+        .primaryPalette('green')
+        .accentPalette('green', {
+            'default': '200'
+        });
+    }]);
