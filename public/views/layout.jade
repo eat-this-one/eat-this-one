@@ -11,7 +11,6 @@ html
         include head
 
     body(id='id-body', ng-app='eat-this-one')
-        div(id='id-mask', class='mask')
 
         //- Here we use controllerName var to set the page JS controller.
         div(ng-controller='#{controllerName}')
@@ -32,7 +31,7 @@ html
 
                 //- Page heading
                 md-toolbar
-                    div(class='md-toolbar-tools')
+                    div(class='md-toolbar-tools no-toolbar-padding')
 
                         //- The menu is only available when the controller specifies it.
                         div(class='md-tile-left')

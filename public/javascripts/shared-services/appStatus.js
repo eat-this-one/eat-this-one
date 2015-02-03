@@ -20,13 +20,12 @@ angular.module('eat-this-one')
 
             $(document).ready(function() {
 
-                if (!$('#id-mask').hasClass('modal-backdrop')) {
-                    $('#id-mask').addClass('modal-backdrop');
-                    $('#id-mask').removeClass('hidden');
+                if (!$('#id-body').hasClass('mask')) {
+                    $('#id-body').addClass('mask');
                 }
 
                 // Disables action buttons.
-                $('.btn').addClass('btn-disabled');
+                $('.md-button').addClass('disabled');
 
                 // List the action as waiting for it.
                 loadingActions.push(action);
@@ -42,13 +41,12 @@ angular.module('eat-this-one')
                 // Only remove the action when there are no more loadingActions.
                 loadingActions.splice(loadingActions.indexOf(action), 1);
 
-                if (loadingActions.length === 0 && $('#id-mask').hasClass('modal-backdrop')) {
-                    $('#id-mask').removeClass('modal-backdrop');
-                    $('#id-mask').addClass('hidden');
+                if (loadingActions.length === 0 && $('#id-body').hasClass('mask')) {
+                    $('#id-body').removeClass('mask');
                 }
                 if (loadingActions.length === 0) {
                     // Enable buttons again.
-                    $('.btn').removeClass('btn-disabled');
+                    $('.md-button').removeClass('disabled');
                 }
             });
         },
