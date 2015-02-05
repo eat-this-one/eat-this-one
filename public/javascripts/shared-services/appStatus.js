@@ -20,8 +20,12 @@ angular.module('eat-this-one')
 
             $(document).ready(function() {
 
+                // There is an issue with md-content and its display block that
+                // I've spent 1 hour trying to solve. I hide the main contents
+                // div until the app is ready.
                 if (!$('#id-body').hasClass('mask')) {
                     $('#id-body').addClass('mask');
+                    $('#id-contents').addClass('hidden');
                 }
 
                 // Disables action buttons.
@@ -43,6 +47,7 @@ angular.module('eat-this-one')
 
                 if (loadingActions.length === 0 && $('#id-body').hasClass('mask')) {
                     $('#id-body').removeClass('mask');
+                    $('#id-contents').removeClass('hidden');
                 }
                 if (loadingActions.length === 0) {
                     // Enable buttons again.
