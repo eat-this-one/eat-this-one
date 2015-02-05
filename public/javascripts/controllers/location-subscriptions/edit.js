@@ -100,6 +100,7 @@ angular.module('eat-this-one')
 
                 // If it exists add a new subscription to the location.
                 var locSubscriptionCallback = function(data) {
+                    appStatus.completed('newLocationSubscriptionRequest');
                     notifier.show($scope.lang.joined, $scope.lang.joinedgroupinfo, function() {
                         // Cache the location.
                         localStorage.setItem('loc', JSON.stringify(data));
@@ -115,8 +116,8 @@ angular.module('eat-this-one')
 
             // If the location does not exists we notify the user about it.
             var noLocationErrorCallback = function(data, errorStatus, errorMsg) {
-                notifier.show($scope.lang.locationnoexists, $scope.lang.locationnoexistsinfo);
                 appStatus.completed('newLocationSubscriptionRequest');
+                notifier.show($scope.lang.locationnoexists, $scope.lang.locationnoexistsinfo);
             };
             locationRequest($scope, $scope.joingroup.value, locCallback, noLocationErrorCallback);
 
@@ -130,6 +131,7 @@ angular.module('eat-this-one')
             appStatus.waiting('newLocationRequest');
 
             var locationCallback = function(data) {
+                appStatus.completed('newLocationRequest');
                 var msg = $scope.lang.locationcreatedinfo + "\n\n" + $scope.lang.joinedgroupinfo;
                 notifier.show($scope.lang.locationcreated, msg, function() {
                     // Cache the location.
