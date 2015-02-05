@@ -101,9 +101,11 @@ angular.module('eat-this-one')
                 // If it exists add a new subscription to the location.
                 var locSubscriptionCallback = function(data) {
                     appStatus.completed('newLocationSubscriptionRequest');
+
+                    // Cache the location.
+                    localStorage.setItem('loc', JSON.stringify(data));
+
                     notifier.show($scope.lang.joined, $scope.lang.joinedgroupinfo, function() {
-                        // Cache the location.
-                        localStorage.setItem('loc', JSON.stringify(data));
                         redirecter.redirect('index.html');
                     });
                 };
@@ -140,10 +142,12 @@ angular.module('eat-this-one')
                 // Ok, if it does not exist we add the new location.
                 var locationCallback = function(data) {
                     appStatus.completed('newLocationRequest');
+
+                    // Cache the location.
+                    localStorage.setItem('loc', JSON.stringify(data));
+
                     var msg = $scope.lang.locationcreatedinfo + "\n\n" + $scope.lang.joinedgroupinfo;
                     notifier.show($scope.lang.locationcreated, msg, function() {
-                        // Cache the location.
-                        localStorage.setItem('loc', JSON.stringify(data));
                         redirecter.redirect('index.html');
                     });
                 };
