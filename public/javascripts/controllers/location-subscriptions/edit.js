@@ -130,21 +130,31 @@ angular.module('eat-this-one')
             // A new location including subscription.
             appStatus.waiting('newLocationRequest');
 
-            var locationCallback = function(data) {
+            var locExistsCallback = function(data) {
+                // Pity, notify the user that the location already exists.
                 appStatus.completed('newLocationRequest');
-                var msg = $scope.lang.locationcreatedinfo + "\n\n" + $scope.lang.joinedgroupinfo;
-                notifier.show($scope.lang.locationcreated, msg, function() {
-                    // Cache the location.
-                    localStorage.setItem('loc', JSON.stringify(data));
-                    redirecter.redirect('index.html');
-                });
+                notifier.show($scope.lang.locationexists, $scope.lang.locationexistsinfo);
             };
-            var errorCallback = function(data, errorStatus, errorMsg) {
-                appStatus.completed('newLocationRequest');
-                var msg = '"' + errorStatus + '": ' + data;
-                notifier.show($scope.lang.error, msg);
+            var noLocationCallback = function(data, errorStatus, errorMessage) {
+
+                // Ok, if it does not exist we add the new location.
+                var locationCallback = function(data) {
+                    appStatus.completed('newLocationRequest');
+                    var msg = $scope.lang.locationcreatedinfo + "\n\n" + $scope.lang.joinedgroupinfo;
+                    notifier.show($scope.lang.locationcreated, msg, function() {
+                        // Cache the location.
+                        localStorage.setItem('loc', JSON.stringify(data));
+                        redirecter.redirect('index.html');
+                    });
+                };
+                var errorCallback = function(data, errorStatus, errorMsg) {
+                    appStatus.completed('newLocationRequest');
+                    var msg = '"' + errorStatus + '": ' + data;
+                    notifier.show($scope.lang.error, msg);
+                };
+                newLocationRequest($scope, $scope.newgroup.value, locationCallback, errorCallback);
             };
-            newLocationRequest($scope, $scope.newgroup.value, locationCallback, errorCallback);
+            locationRequest($scope, $scope.newgroup.value, locExistsCallback, noLocationCallback);
         }
     };
 

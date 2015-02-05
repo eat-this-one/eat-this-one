@@ -54,6 +54,8 @@ $.eatLang.en = {
     location : 'Location',
     locationcreated : 'Location created',
     locationcreatedinfo : 'Time to share dishes! Once you add a dish you can invite more people to your group.',
+    locationexists : 'Location already used',
+    locationexistsinfo : 'Select another location name. This one is already used.',
     locationname : 'Location name',
     locationnoexists : 'Wrong code',
     locationnoexistsinfo : 'The provided code does not match any group',
