@@ -16,15 +16,15 @@ html
         div(ng-controller='#{controllerName}')
 
             //- The user menu. Only available when the controller set icons on it.
-            md-sidenav(ng-if='showToggleMenu && menuIcons', class='md-sidenav-left', md-component-id='menu')
+            md-sidenav(ng-if='showToggleMenu && menuIcons', class='md-sidenav-left sidenav-short', md-component-id='menu')
                 md-toolbar
                     h1(class='md-toolbar-tools') {{lang.menu}}
                 md-list(role='list', layout='column', layout-fill)
                     md-item(ng-repeat='menuIcon in menuIcons', role='listitem')
                         md-button(ng-click='redirectAction(this, menuIcon.callback)', aria-label='{{menuIcon.name}}')
                             md-inline-list-icon
-                                span(class='{{menuIcon.icon}} button-icon')
-                                span(class='md-inline-list-icon-label', aria-hidden='true') {{menuIcon.name}}
+                            span(class='{{menuIcon.icon}} button-icon big-icon')
+                            span(class='md-inline-list-icon-label', aria-hidden='true') {{menuIcon.name}}
 
             //- Main content container.
             md-content
