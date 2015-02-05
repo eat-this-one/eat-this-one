@@ -114,49 +114,64 @@ router.post('/', function(req, res) {
             return;
         }
 
-        // Restricted to one location per user.
-        LocationSubscriptionModel.find({userid: token.userid}, function(error, locationSubscriptions) {
+        LocationModel.findOne({name: locationObj.name}, function(error, loc) {
 
             if (error) {
                 res.statusCode = 500;
-                res.send('Error getting possible user location subscriptions: ' + error);
+                res.send('Error getting location: ' + error);
                 return;
             }
 
-            if (locationSubscriptions.length > 0) {
-                res.statusCode = 401;
-                res.send('Only one location subscription per user.');
+            if (loc) {
+                res.statuscode = 400;
+                res.send('There is already a location with that name');
                 return;
             }
 
-            // Setting the userid from the token.
-            locationObj.userid = token.userid;
+            // Restricted to one location per user.
+            LocationSubscriptionModel.find({userid: token.userid}, function(error, locationSubscriptions) {
 
-            // Check that a location with the same name already exists.
-            
-            var locationInstance = new LocationModel(locationObj);
-            locationInstance.save(function(error) {
                 if (error) {
                     res.statusCode = 500;
-                    res.send("Error saving location: " + error);
+                    res.send('Error getting possible user location subscriptions: ' + error);
                     return;
                 }
 
-                // Now we auto-subscribe the user to that location.
-                var locationSubscriptionInstance = new LocationSubscriptionModel({
-                    userid: token.userid,
-                    locationid: locationInstance.id
-                });
-                locationSubscriptionInstance.save(function(error) {
+                if (locationSubscriptions.length > 0) {
+                    res.statusCode = 401;
+                    res.send('Only one location subscription per user.');
+                    return;
+                }
+
+                // Setting the userid from the token.
+                locationObj.userid = token.userid;
+
+                // Check that a location with the same name already exists.
+
+                var locationInstance = new LocationModel(locationObj);
+                locationInstance.save(function(error) {
                     if (error) {
                         res.statusCode = 500;
-                        res.send("Error saving location subscription: " + error);
+                        res.send("Error saving location: " + error);
                         return;
                     }
 
-                    // Like in locationSubscriptions->post()
-                    res.statusCode = 201;
-                    res.send(locationInstance);
+                    // Now we auto-subscribe the user to that location.
+                    var locationSubscriptionInstance = new LocationSubscriptionModel({
+                        userid: token.userid,
+                        locationid: locationInstance.id
+                    });
+                    locationSubscriptionInstance.save(function(error) {
+                        if (error) {
+                            res.statusCode = 500;
+                            res.send("Error saving location subscription: " + error);
+                            return;
+                        }
+
+                        // Like in locationSubscriptions->post()
+                        res.statusCode = 201;
+                        res.send(locationInstance);
+                    });
                 });
             });
         });
