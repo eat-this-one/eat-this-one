@@ -7,7 +7,7 @@ block base
     base(href='../')
 
 block logic
-    div(class='centered-container info-text') {{infomessage}}
+    div(class='info-text') {{infomessage}}
 
     div(id='id-contacts', class='list-group contacts-list')
         a(id='{{contact.mobilePhone}}', ng-repeat='contact in contacts | orderBy: "displayName"', class='list-group-item contact') {{contact.displayName}}
