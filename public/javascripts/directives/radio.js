@@ -10,7 +10,6 @@ angular.module('eat-this-one').directive('eatRadio', ['$timeout', function($time
             // Set the styles for the preset value.
             $timeout(function() {
                 var defaultOptionId = 'id-option-' + scope.element.name + '-' + scope.element.value;
-                console.log(angular.element('#' + defaultOptionId));
                 angular.element('#' + defaultOptionId).addClass('md-accent');
                 angular.element('#' + defaultOptionId).addClass('md-raised');
             });
