@@ -1,9 +1,8 @@
-angular.module('eat-this-one').factory('dishFormatter', ['notifier', 'mapsManager', 'datesConverter', function(notifier, mapsManager, datesConverter) {
+angular.module('eat-this-one').factory('dishFormatter', ['notifier', 'datesConverter', function(notifier, datesConverter) {
 
     return function($scope, dishData) {
 
         $scope.dish = dishData;
-        $scope.dish.map = mapsManager.getStaticMap($scope.dish.loc.address);
 
         // Nice when format.
         $scope.dish.when = datesConverter.timeToDay(Date.parse($scope.dish.when));

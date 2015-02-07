@@ -2,7 +2,6 @@ angular.module('eat-this-one').constant('eatConfig', {
     backendUrl : 'http://eat-this-one.herokuapp.com/api',
     downloadAppUrl : 'http://eat-this-one.herokuapp.com/android.apk',
     defaultLang : 'en',
-    mapsBaseUrl : 'http://maps.googleapis.com/maps/api/staticmap',
     gcmSenderId : 'YOURSENDERID',
     gOAuthClientId : 'YOUROAUTHCLIENTID',
 });

@@ -1,9 +1,11 @@
 doctype html
 html
     head
+        //- Delegated to the extension.
         //- This block CAN specify a different base for all paths (see base tag).
         block base
 
+        //- Delegated to the extension.
         //- This block MUST define the controller name (controllerName var).
         block configuration
 
@@ -48,6 +50,7 @@ html
 
                 //- Delegated to the specific view logic.
                 md-content(id='id-contents', class='md-padding')
+                    //- Delegated to the extension.
                     block logic
 
     include footer

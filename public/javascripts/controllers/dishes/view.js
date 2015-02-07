@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesViewController', ['$scope', '$mdDialog', 'redirecter', 'appStatus', 'notifier', 'urlParser', 'dishFormatter', 'dishRequest', 'newMealRequest', 'eatConfig', 'authManager', 'newLogRequest', 'menuManager', function($scope, $mdDialog, redirecter, appStatus, notifier, urlParser, dishFormatter, dishRequest, newMealRequest, eatConfig, authManager, newLogRequest, menuManager) {
+    .controller('DishesViewController', ['$scope', 'redirecter', 'appStatus', 'notifier', 'urlParser', 'dishFormatter', 'dishRequest', 'newMealRequest', 'eatConfig', 'authManager', 'newLogRequest', 'menuManager', function($scope, redirecter, appStatus, notifier, urlParser, dishFormatter, dishRequest, newMealRequest, eatConfig, authManager, newLogRequest, menuManager) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -32,19 +32,6 @@ angular.module('eat-this-one')
     // # The user already booked the dish
     // # Last portion available | All portions booked
     $scope.dishusefulinfotext = '';
-
-    $scope.openStaticMap = function(ev) {
-        var staticMapModal = $mdDialog.show({
-            controller: 'staticMapController',
-            templateUrl: 'templates/static-map.html',
-            targetEvent: ev,
-            resolve: {
-                dish : function() {
-                    return $scope.dish;
-                }
-            }
-        });
-    };
 
     // Returns whether the user can book this dish or not.
     $scope.userCanBook = function() {

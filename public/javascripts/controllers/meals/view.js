@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('MealsViewController', ['$scope', 'appStatus', 'urlParser', 'dishFormatter', 'dishRequest', 'eatConfig', 'authManager', 'redirecter', '$mdDialog', 'newLogRequest', 'menuManager', function($scope, appStatus, urlParser, dishFormatter, dishRequest, eatConfig, authManager, redirecter, $mdDialog, newLogRequest, menuManager) {
+    .controller('MealsViewController', ['$scope', 'appStatus', 'urlParser', 'dishFormatter', 'dishRequest', 'eatConfig', 'authManager', 'redirecter', 'newLogRequest', 'menuManager', function($scope, appStatus, urlParser, dishFormatter, dishRequest, eatConfig, authManager, redirecter, newLogRequest, menuManager) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -26,19 +26,6 @@ angular.module('eat-this-one')
     }
 
     $scope.dish = {};
-
-    $scope.openStaticMap = function(ev) {
-        var staticMapModal = $mdDialog.show({
-            controller: 'staticMapController',
-            templateUrl: 'templates/static-map.html',
-            targetEvent: ev,
-            resolve: {
-                dish : function() {
-                    return $scope.dish;
-                }
-            }
-        });
-    };
 
     var id = urlParser.getParam('id');
 

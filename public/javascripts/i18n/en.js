@@ -2,8 +2,6 @@ $.eatLang.en = {
 
     adddish : 'Add dish',
     addmeal : 'Book meal!',
-    address : 'Address',
-    addressexample : 'e.g. 18 Richardson St, West Perth, WA',
     aftertomorrow : 'After tomorrow',
     alertcontinue : 'Continue',
     alreadyjoined : 'Already joined a group',

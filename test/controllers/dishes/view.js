@@ -26,7 +26,6 @@ describe('View dish page', function() {
         id : 'asd',
         userid : 'notimportant',
         name : 'Empty Location',
-        address : '123 Tarragona Patria',
         created : new Date()
     };
 
