@@ -9,8 +9,6 @@ describe('Authentication', function() {
         id : 'idvalue',
         name : 'Test User 1',
         email : 'test@user1.com',
-        locale : 'en-GB',
-        pictureurl : '',
         token : 'tokenuser'
     };
 

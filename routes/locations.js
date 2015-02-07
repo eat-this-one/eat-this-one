@@ -19,20 +19,11 @@ router.get('/', function(req, res) {
 
     // Here we accept filters.
     var filter = {};
-    if (req.param('name') || req.param('address')) {
-        if (req.param('name')) {
-            if (req.param('regex')) {
-                filter.name = new RegExp(req.param('name'), 'i');
-            } else {
-                filter.name = req.param('name');
-            }
-        }
-        if (req.param('address')) {
-            if (req.param('regex')) {
-                filter.address = new RegExp(req.param('address'), 'i');
-            } else {
-                filter.address = req.param('address');
-            }
+    if (req.param('name')) {
+        if (req.param('regex')) {
+            filter.name = new RegExp(req.param('name'), 'i');
+        } else {
+            filter.name = req.param('name');
         }
     }
 

@@ -8,8 +8,6 @@ describe('Main page', function() {
         id : 'unexisting',
         name : 'Test User 1',
         email : 'test@user1.com',
-        locale : 'en-GB',
-        pictureurl : '',
         token : 'tokenuser1'
     };
 

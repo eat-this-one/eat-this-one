@@ -184,7 +184,6 @@ router.get('/:id', function(req, res) {
                     } else {
                         returnDish.user = {
                             name: user.name,
-                            pictureurl: user.pictureurl
                         };
                     }
 
@@ -354,7 +353,6 @@ router.post('/', function(req, res) {
                         returnDish.loc = locationInstance;
                         returnDish.user = {
                             name: user.name,
-                            pictureurl: user.pictureurl,
                             dishescount: userDishesCount + 1
                         };
 

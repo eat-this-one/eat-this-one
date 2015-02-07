@@ -8,8 +8,6 @@ describe('View dish page', function() {
         id : 'user1',
         name : 'Test User 1',
         email : 'test@user1.com',
-        locale : 'en-GB',
-        pictureurl : '',
         token : 'tokenuser1'
     };
 
@@ -17,8 +15,6 @@ describe('View dish page', function() {
         id : 'user2',
         name : 'Test User 2',
         email : 'test@user2.com',
-        locale : 'en-GB',
-        pictureurl : '',
         token : 'tokenuser2'
     };
 
