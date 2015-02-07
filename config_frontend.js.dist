@@ -3,5 +3,4 @@ angular.module('eat-this-one').constant('eatConfig', {
     downloadAppUrl : 'http://eat-this-one.herokuapp.com/android.apk',
     defaultLang : 'en',
     gcmSenderId : 'YOURSENDERID',
-    gOAuthClientId : 'YOUROAUTHCLIENTID',
 });
