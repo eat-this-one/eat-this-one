@@ -19,7 +19,7 @@ angular.module('eat-this-one')
     .config(['$mdThemingProvider', function($mdThemingProvider) {
         $mdThemingProvider.theme('default')
         .primaryPalette('green')
-        .accentPalette('grey', {
+        .accentPalette('light-green', {
             'default': '300'
         });
     }]);
