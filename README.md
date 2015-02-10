@@ -1,3 +1,4 @@
+# Eat-this-one
 Eat-this-one source code includes both backend, frontend and development tools.
 
 * Backend
@@ -10,21 +11,22 @@ Eat-this-one source code includes both backend, frontend and development tools.
 ** Bootstrap & less (CSS)
 ** jQuery (JS)
 
-=Installation=
+# Installation
 
-==System dependencies==
-**sudo apt-get install gcc make build-essential**
-**sudo apt-get install git-core mongodb ant**
-**git user.name '$PROJECT_AUTHOR_NAME'**
-**git user.email '$PROJECT_AUTHOR_EMAIL'**
+## System dependencies
+** **sudo apt-get install gcc make build-essential**
+** **sudo apt-get install git-core mongodb ant**
+** **git user.name '$PROJECT_AUTHOR_NAME'**
+** **git user.email '$PROJECT_AUTHOR_EMAIL'**
 
-==Download source code==
-**git clone git://bitbucket.org/eat-this-one.git eat-this-one**
-**cd eat-this-one**
+## Download source code
+** **git clone git://bitbucket.org/eat-this-one.git eat-this-one**
+** **cd eat-this-one**
 
-==Download Android SDK==
+## Download Android SDK
 
-* http://developer.android.com/sdk/index.html
+Follow the normal procedure to install android SDK (http://developer.android.com/sdk/index.html)
+
 * Add adt-bundle-linux/sdk/platform-tools and adt-bundle-linux/sdk/tools to $PATH
 * Run **android sdk** and install:
 ** "Google Play services"
@@ -32,22 +34,23 @@ Eat-this-one source code includes both backend, frontend and development tools.
 ** "Google Repository"
 * http://developer.android.com/google/gcm/gs.html for google cloud messaging
 
-==Configure your development environment==
-* Configure your backend.
+## Configure your development environment
+
+### Configure your backend.
 ** **cp config_backend.json.dist config_backend.json**
 ** Edit config_backend.json with your own values
 
-* Configure your frontend pointing to the backend URL if it is different than the default one.
+### Configure your frontend pointing to the backend URL if it is different than the default one.
 ** **cp config_frontend.js.dist config_frontend.js**
 ** Edit config_frontend.js with your own values
 *** Consider that you will need to access the backend through the app; you can use the IP rather than localhost
 **** http://developer.android.com/tools/devices/emulator.html#networkaddresses
 
-* Set your android development tools path
+### Set your android development tools path
 ** **cp development.properties.dist development.properties**
 ** Edit development.properties with your own values
 
-* Create a virtual host to point to your dist/web dir to run unit tests.
+### Create a virtual host to point to your dist/web
 <VirtualHost YOURHOSTNAME:80>
     DocumentRoot "/your/path/to/eat-this-one/dist/web"
     ServerName YOURHOSTNAME
@@ -57,18 +60,18 @@ Eat-this-one source code includes both backend, frontend and development tools.
     </Directory>
 </VirtualHost>
 
-==Install frontend and backend dependencies==
+## Install frontend and backend dependencies
 ** **./install.sh**
 *** You may need to install previous android sdk APIs as cordova is not always using the latest version, if it is the case, run **android sdk** and select the required versions
 ** Edit dist/app/config.xml
 *** Change whatever info you like
 *** Add <icon src="icon.png" /> under <widget>
 
-=Development=
+# Development
 
-* Start development monitor
+* Start development monitoring changes
 ** ./init_development.sh
-* Frontend URL
+* Browse the web environment
 ** http://YOURHOSTNAME
 * Backend server URL (IP better than localhost to deploy app in mobile)
 ** http://YOURIP:3000
@@ -81,21 +84,21 @@ Eat-this-one source code includes both backend, frontend and development tools.
 * Update project dependencies to latests
 ** **./update.sh**
 
-==Info==
+# Info
 
-* CSS (less)
+* Styles (CSS - less)
 ** In public/stylesheets/**/*.less
 
-* HTML (Jade)
+* Views (HTML - Jade)
 ** In public/views/**/*.jade
 
-* Javascript (frontend)
+* Frontend app (JS - AngularJS)
 ** Controllers in public/javascripts/controllers/**/*.js
 ** AngularJS directives in public/javascripts/directives/**/*.js
 ** All shared code between web and mobile apps should go in public/javscripts/shared-services/*.js
 *** When a class differs between web and mobile apps two different classes should be created (A parent prototype in public/javascripts/shared can be used to extend common parts) one inside public/javascripts/web-services and another one inside public/javascripts/app-services sharing the same interface.
 
-* Javascript (backend)
+* Backend app (JS - node)
 ** Models in models/*.js
 ** Routes in routes/*.js
 ** Libs in lib/*.js
