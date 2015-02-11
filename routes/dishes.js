@@ -356,9 +356,9 @@ router.post('/', function(req, res) {
                             dishescount: userDishesCount + 1
                         };
 
-                        // Here we save the photo and inform subscribers in parallel.
+                        // Here we save the photo and inform subscriptors in parallel.
 
-                        // Informing subscribers that there is a new dish.
+                        // Informing subscriptors that there is a new dish.
                         LocationSubscriptionModel.find({ locationid : dish.locationid}, function(error, subscriptions) {
 
                             if (error) {
@@ -381,7 +381,7 @@ router.post('/', function(req, res) {
                                 subscriptionsIds.push(subscriptions[i].userid);
                             }
 
-                            UserModel.find({_id : { $in : subscriptionsIds }}, function(error, subscribers) {
+                            UserModel.find({_id : { $in : subscriptionsIds }}, function(error, subscriptors) {
 
                                 if (error) {
                                     res.statusCode = 500;
@@ -391,7 +391,7 @@ router.post('/', function(req, res) {
 
                                 // All subscribed users are deleted? The current user
                                 // should be subscribed so unlikely that we enter here.
-                                if (!subscribers) {
+                                if (!subscriptors) {
                                     returnDish.nsubscriptors = 0;
                                     res.statusCode = 201;
                                     res.send(returnDish);
@@ -399,8 +399,8 @@ router.post('/', function(req, res) {
                                 }
 
                                 var gcmregids = [];
-                                for (var i in subscribers) {
-                                    gcmregids.push(subscribers[i].gcmregid);
+                                for (var i in subscriptors) {
+                                    gcmregids.push(subscriptors[i].gcmregid);
                                 }
                                 // TODO This message should be language-independent, frontend
                                 // should get the string according to the params we will send from here.
@@ -418,14 +418,14 @@ router.post('/', function(req, res) {
                                 // TODO Email fallback for users without any GCM reg id nor iPhone.
 
                                 // All good, so we notify and finish.
-                                returnDish.nsubscriptors = subscribers.length;
+                                returnDish.nsubscriptors = subscriptors.length;
                                 res.statusCode = 201;
                                 res.send(returnDish);
                                 return;
                             });
                         });
 
-                        // We can save the image and notify the subscribers in parallel.
+                        // We can save the image and notify the subscriptors in parallel.
                         if (req.param('photo')) {
                             savePhoto(req.param('photo'), dish);
                         }
@@ -527,7 +527,7 @@ router.put('/:id', function(req, res) {
                         return;
                     }
 
-                    // Here we save the photo and inform subscribers in parallel.
+                    // Here we save the photo and inform subscriptors in parallel.
 
                     // TODO Notify the subscribed users about changes in the dish.
 
