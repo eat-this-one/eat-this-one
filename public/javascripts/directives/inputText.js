@@ -1,4 +1,4 @@
-angular.module('eat-this-one').directive('eatInputText', ['formsManager', function(formsManager) {
+angular.module('eat-this-one').directive('eatInputText', ['$mdToast', 'formsManager', function($mdToast, formsManager) {
 
     return {
         restrict: 'E',
@@ -12,11 +12,29 @@ angular.module('eat-this-one').directive('eatInputText', ['formsManager', functi
             var fields = {};
             fields[scope.element.name] = scope.element;
 
+            // To validate the form.
             var validateForm = function() {
                 formsManager.validate([scope.element.name], fields);
             };
             input.on('keyup', validateForm);
             input.on('change', validateForm);
+
+            // Only if a placeholder is set.
+            if (typeof scope.element.placeholder != 'undefined' &&
+                    scope.element.placeholder != null) {
+
+                // To show a toast notification (replacement of the normal placeholder behaviour).
+                var showToast = function() {
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .content(scope.element.placeholder)
+                            .position('right top')
+                            .hideDelay(1000)
+                    );
+                };
+                input.on('focus', showToast);
+            }
+
         },
         templateUrl: "templates/input-text.html"
     };
