@@ -20,8 +20,13 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
             name : $scope.lang.bookedmeals,
             icon : 'glyphicon glyphicon-cutlery',
             callback : 'indexMeals'
+        }, {
+            name : $scope.lang.feedback,
+            icon : 'glyphicon glyphicon-send',
+            callback : 'feedback'
         }
     ];
+
 
     $scope.dishes = [];
     $scope.showNoDishes = false;
@@ -90,6 +95,12 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
     $scope.indexMeals = function() {
         newLogRequest('click', 'meals-index');
         redirecter.redirect('meals/index.html');
+    };
+
+    // Redirects to the feedback screen.
+    $scope.feedback = function() {
+        newLogRequest('click', 'feedback-add');
+        redirecter.redirect('feedback/add.html');
     };
 
     // Creates a user account.

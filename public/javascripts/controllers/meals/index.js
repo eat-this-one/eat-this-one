@@ -13,6 +13,10 @@ angular.module('eat-this-one')
             name : $scope.lang.dishes,
             icon : 'glyphicon glyphicon-piggy-bank',
             callback : 'index'
+        }, {
+            name : $scope.lang.feedback,
+            icon : 'glyphicon glyphicon-send',
+            callback : 'feedback'
         }
     ];
 
@@ -66,6 +70,12 @@ angular.module('eat-this-one')
     $scope.index = function() {
         newLogRequest('click', 'index');
         redirecter.redirect('index.html');
+    };
+
+    // Redirects to the feedback screen.
+    $scope.feedback = function() {
+        newLogRequest('click', 'feedback-add');
+        redirecter.redirect('feedback/add.html');
     };
 
 }]);

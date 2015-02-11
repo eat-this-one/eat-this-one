@@ -1,0 +1,13 @@
+extends ../layout
+
+block configuration
+    - var controllerName = "FeedbackAddController"
+
+block base
+    base(href='../')
+
+block logic
+    form(role='form')
+        md-input-container(flex)
+            label {{lang.feedback}}
+            textarea(id='id-{{feedback.name}}', ng-model='feedback.value', columns='1', md-maxlength='256')
