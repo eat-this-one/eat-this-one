@@ -1,6 +1,6 @@
 {
   "name": "eat-this-one",
-  "description": "Helping people who don't have time to cook to find people who cooks more than they should.",
+  "description": "Share cooking specialties with your colleagues at lunch time! Receive notifications when a colleague cooks a new dish and share your own dishes with them.",
   "version": "0.0.1",
   "engines": {
     "node": "0.10.x"
