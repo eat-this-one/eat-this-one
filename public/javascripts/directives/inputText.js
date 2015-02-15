@@ -25,12 +25,16 @@ angular.module('eat-this-one').directive('eatInputText', ['$mdToast', 'formsMana
 
                 // To show a toast notification (replacement of the normal placeholder behaviour).
                 var showToast = function() {
-                    $mdToast.show(
-                        $mdToast.simple()
-                            .content(scope.element.placeholder)
-                            .position('right top')
-                            .hideDelay(1000)
-                    );
+
+                    // Only when the field has not value.
+                    if (scope.element.value == '') {
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .content(scope.element.placeholder)
+                                .position('right top')
+                                .hideDelay(1000)
+                        );
+                    }
                 };
                 input.on('focus', showToast);
             }
