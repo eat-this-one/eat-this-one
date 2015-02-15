@@ -32,7 +32,7 @@ angular.module('eat-this-one').directive('eatInputText', ['$mdToast', 'formsMana
                             $mdToast.simple()
                                 .content(scope.element.placeholder)
                                 .position('right top')
-                                .hideDelay(1000)
+                                .hideDelay(2000)
                         );
                     }
                 };
