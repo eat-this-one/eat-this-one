@@ -40,7 +40,6 @@ $.eatLang.en = {
     feedbackaddedinfo : 'Thanks for your feedback, it is very appreciated.',
     groupcode : 'The group code is',
     imcooking : 'Hi, I\'m cooking',
-    infowelcome : 'Share the meals you cook with the people you share the lunch time! Log in with your existing user or create a new account',
     insertgroupcode : 'Group code',
     inviteemailsubject : 'I\'ve cooked a dish I\'d like to share with you',
     invitepeople : 'Invite people',

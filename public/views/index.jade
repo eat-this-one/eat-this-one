@@ -4,10 +4,6 @@ block configuration
     - var controllerName = "IndexController"
 block logic
     div(ng-if='!auth.isAuthenticated()')
-        blockquote
-            p
-                {{lang.infowelcome}}
-
         div(id='id-authenticate', ng-if='!auth.isAuthenticated()')
             form(role='form')
                 eat-input-text(element='name')
