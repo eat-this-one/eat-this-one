@@ -7,12 +7,12 @@ public/bower_components/
 *.swx
 
 # Config-dependant files.
-config_backend.json
-config_frontend.js
-development.properties
+/config_backend.json
+/config_frontend.js
+/development.properties
 
 # Compiled packages.
-public/shared-build/
-public/web-build/
-public/app-build/
-dist/
+/public/shared-build/
+/public/web-build/
+/public/app-build/
+/dist/
