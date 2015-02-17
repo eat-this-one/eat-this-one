@@ -10,7 +10,7 @@ sudo npm update express-generator -g
 sudo npm update cordova -g
 
 # Update project dependencies.
-sudo npm update
+npm update
 bower update
 
 cd dist/app

@@ -10,7 +10,7 @@ sudo npm install express-generator -g
 sudo npm install cordova -g
 
 # Install project dependencies.
-sudo npm install
+npm install
 bower install
 
 # Create cordova app and add dependencies.

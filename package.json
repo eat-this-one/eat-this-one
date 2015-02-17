@@ -24,7 +24,6 @@
     "node-gcm": "~0.9"
   },
   "devDependencies": {
-    "bower": "1.2.7",
     "karma": "~0.12",
     "karma-jasmine": "~0.3",
     "karma-phantomjs-launcher": "~0.1",
