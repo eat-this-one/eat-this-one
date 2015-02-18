@@ -79,12 +79,12 @@ Edit development.properties with your own values
     * http://YOURHOSTNAME
 * Backend server URL (IP better than localhost to deploy app in mobile)
     * http://YOURIP:3000
-* Deploy the app to your mobile
+* Install the app to your mobile
     * Android
         * Turn on your device debugging options
         * Plug-in your android device (USB) to your computer
         * Allow your computer to debug your device (you will be asked for it if required)
-        * **./deploy_app** - It also opens adb logcat
+        * **./install_app.sh** - It also opens adb logcat
 
 To update project dependencies to latests
 * **./update.sh**
