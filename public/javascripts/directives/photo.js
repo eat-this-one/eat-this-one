@@ -34,14 +34,19 @@ angular.module('eat-this-one').directive('eatPhoto', ['eatConfig', 'newLogReques
             scope.capturePhoto = function() {
                 navigator.camera.getPicture(scope.onPictureSuccess, scope.onCapturePhotoFail, {
                     quality: 30,
-                    destinationType: Camera.DestinationType.DATA_URL
+                    destinationType: Camera.DestinationType.DATA_URL,
+                    saveToPhotoAlbum: true,
+                    encodingType: Camera.EncodingType.JPEG,
+                    allowEdit: false
                 });
             };
 
             scope.selectImage = function() {
                 navigator.camera.getPicture(scope.onPictureSuccess, scope.onSelectImageFail, {
                     destinationType: Camera.DestinationType.DATA_URL,
-                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                    mediaType: Camera.MediaType.PICTURE,
+                    allowEdit: false
                 });
             };
         },
