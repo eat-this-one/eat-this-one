@@ -8,13 +8,6 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
 
     // Define header.
     $scope.pageTitle = $scope.lang.sitename;
-    $scope.actionIcons = [
-        {
-            name : $scope.lang.adddish,
-            icon : 'glyphicon glyphicon-bullhorn',
-            callback : 'addDish'
-        }
-    ];
     $scope.menuIcons = [
         {
             name : $scope.lang.bookedmeals,

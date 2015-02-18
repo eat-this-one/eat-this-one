@@ -3,6 +3,11 @@ extends ./layout
 block configuration
     - var controllerName = "IndexController"
 block logic
+
+    //- Its position is fixed so it does not really matter where we add it.
+    md-button(class='add-dish-button', ng-click='addDish()', ng-if='showToggleMenu', aria-label='lang.adddish', class='md-primary md-fab no-box-shadow')
+        span(class='glyphicon glyphicon-bullhorn', aria-hidden='true')
+
     div(ng-if='!auth.isAuthenticated()')
         div(id='id-authenticate', ng-if='!auth.isAuthenticated()')
             form(role='form')
