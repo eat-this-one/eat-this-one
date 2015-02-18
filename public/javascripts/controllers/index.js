@@ -85,6 +85,12 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
         newLogRequest('click', 'dishes-view', dishid);
     };
 
+    // Redirects to the selected dish.
+    $scope.redirectToDish = function(dishid) {
+        newLogRequest('click', 'dishes-view', dishid);
+        redirecter.redirect('dishes/view.html?id=' + dishid);
+    };
+
     // Redirects to add dish page.
     $scope.addDish = function() {
         newLogRequest('click', 'dishes-add');

@@ -18,7 +18,7 @@ block logic
                 p {{lang.nodishes}}
             md-list(ng-show='!showNoDishes')
                 md-item(ng-repeat='dish in dishes', class='dish', ng-click='dishClicked(dish._id)', role='listitem')
-                    md-item-content
+                    md-item-content(ng-click='redirectToDish(dish._id)')
                         div(class='md-tile-left')
                             a(href='dishes/view.html?id={{dish._id}}')
                                 img(ng-src='images/default.svg', class='face', src='images/default.svg')

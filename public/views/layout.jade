@@ -23,7 +23,7 @@ html
                     h1(class='md-toolbar-tools') {{lang.menu}}
                 md-list(role='list', layout='column', layout-fill)
                     md-item(ng-repeat='menuIcon in menuIcons', role='listitem')
-                        md-button(ng-click='redirectAction(this, menuIcon.callback)', aria-label='{{menuIcon.name}}')
+                        md-button(ng-click='redirectAction(this, menuIcon.callback)', class='menu-item', aria-label='{{menuIcon.name}}')
                             md-inline-list-icon
                             span(class='{{menuIcon.icon}} button-icon big-icon')
                             span(class='md-inline-list-icon-label', aria-hidden='true') {{menuIcon.name}}

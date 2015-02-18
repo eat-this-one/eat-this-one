@@ -11,7 +11,7 @@ block logic
         p {{lang.nomeals}}
     md-list(ng-show='!showNoDishes')
         md-item(ng-repeat='dish in meals', class='dish', ng-click='mealClicked(dish._id)', role='listitem')
-            md-item-content
+            md-item-content(ng-click='redirectToMeal(dish._id)')
                 div(class='md-tile-left')
                     a(href='meals/view.html?id={{dish._id}}')
                         img(ng-src='images/default.svg', class='face', src='images/default.svg')

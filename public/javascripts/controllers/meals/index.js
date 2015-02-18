@@ -66,6 +66,12 @@ angular.module('eat-this-one')
         newLogRequest('click', 'meals-view', dishid);
     };
 
+    // Redirects to the selected meal.
+    $scope.redirectToMeal = function(dishid) {
+        newLogRequest('click', 'meals-view', dishid);
+        redirecter.redirect('meals/view.html?id=' + dishid);
+    };
+
     // Redirects to index.
     $scope.index = function() {
         newLogRequest('click', 'index');
