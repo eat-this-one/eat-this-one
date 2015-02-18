@@ -29,6 +29,8 @@ angular.module('eat-this-one')
                     function() {
                         // We default to 'en' if any problem.
                         $.eatLang.lang = $.eatLang[eatConfig.defaultLang];
+
+                        // TODO Here we can not add a newLogRequest circular reference.
                         console.log('Error getting preferred language');
                     }
                 );

@@ -1,4 +1,4 @@
-angular.module('eat-this-one').factory('notifier', ['redirecter', '$mdDialog', function(redirecter, $mdDialog) {
+angular.module('eat-this-one').factory('notifier', ['redirecter', '$mdDialog', 'newLogRequest', function(redirecter, $mdDialog, newLogRequest) {
     return {
 
         dialog : null,
@@ -33,9 +33,9 @@ angular.module('eat-this-one').factory('notifier', ['redirecter', '$mdDialog', f
                 // TODO Not always working.
                 // Move to the requested page.
                 window.plugin.notification.local.onclick = function(id, state, json) {
-                    var href = 'dishes/view.html?id=' +JSON.parse(json).dishid;
-                    console.log('Notification clicked, user redirected to ' + href);
-                    redirecter.redirect(href);
+                    var id = JSON.parse(json).dishid;
+                    newLogRequest('click', 'notification', id);
+                    redirecter.redirect('dishes/view.html?id=' + id);
                 };
             });
         }
