@@ -69,8 +69,9 @@ app.get('/android.apk', function(req, res) {
         res.sendFile(filepath, {}, function(error) {
             if (error) {
                 res.statusCode = 400;
-                res.send(error);
+                res.send('Error downloading the android.apk');
                 console.log(error);
+                return;
             }
         });
         return;
