@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var nconf = require('nconf');
 var mongoose = require('mongoose');
+var fs = require('fs');
 
 // Load config file.
 nconf.argv().env().file({file: path.join(__dirname, '/config_backend.json')});
@@ -62,7 +63,22 @@ app.use('/', index);
 
 // Downloads.
 app.get('/android.apk', function(req, res) {
-    res.redirect(nconf.get('DOWNLOAD_URL_ANDROID'));
+    var download = nconf.get('DOWNLOAD_URL_ANDROID');
+    var filepath = nconf.get('DOWNLOAD_FILEPATH_ANDROID');
+    if (filepath != null) {
+        res.sendFile(filepath, {}, function(error) {
+            if (error) {
+                res.statusCode = 400;
+                res.send(error);
+                console.log(error);
+            }
+        });
+        return;
+    } else if (download != null) {
+        res.redirect(nconf.get('DOWNLOAD_URL_ANDROID'));
+    } else {
+        throw new Error('DOWNLOAD_URL_ANDROID nor DOWNLOAD_FILEPATH_ANDROID are defined.');
+    }
 });
 
 app.use('/api', index);

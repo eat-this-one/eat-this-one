@@ -15,7 +15,7 @@
     "cookie-parser": "~1.0",
     "crypto": "0.0.3",
     "debug": "~0.7",
-    "express": "~4.2",
+    "express": "~4.8",
     "mongoose": "~3.8",
     "morgan": "~1.0",
     "nconf": "~0.7",
