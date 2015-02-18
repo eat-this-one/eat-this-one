@@ -83,6 +83,7 @@ $.eatLang.en = {
     portions : 'Number of portions you want',
     refresh : 'Refresh',
     save : 'Save',
+    selectimage : 'Select image',
     setgroupname : 'New group name',
     sharedish : 'Share dish',
     signin : 'Sign in',

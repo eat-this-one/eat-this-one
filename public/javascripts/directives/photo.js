@@ -10,28 +10,40 @@ angular.module('eat-this-one').directive('eatPhoto', ['eatConfig', 'newLogReques
             // Import lang strings.
             scope.lang = $.eatLang.lang;
 
-            scope.onPhotoDataSuccess = function(imageData) {
+            scope.onPictureSuccess = function(imageData) {
                 var smallimg = $('#id-smallimage');
                 smallimg.css('display', 'block');
                 smallimg.prop('src', "data:image/jpeg;base64," + imageData);
                 $('#id-photobtn').css('display', 'none');
+                $('#id-imagebtn').css('display', 'none');
 
                 // And send data back to the controller scope.
                 scope.element.value = imageData;
             };
 
-            scope.onPhotoFail = function(message) {
+            scope.onCapturePhotoFail = function(message) {
                 newLogRequest('error', 'photo-take', message);
                 console.log('Error capturing the image: ' + message);
             };
 
+            scope.onSelectImageFail = function(message) {
+                newLogRequest('error', 'select-image', message);
+                console.log('Error selecting the image: ' + message);
+            };
+
             scope.capturePhoto = function() {
-                navigator.camera.getPicture(scope.onPhotoDataSuccess, scope.onPhotoFail, {
+                navigator.camera.getPicture(scope.onPictureSuccess, scope.onCapturePhotoFail, {
                     quality: 30,
-                    destinationType: navigator.camera.DestinationType.DATA_URL
+                    destinationType: Camera.DestinationType.DATA_URL
                 });
             };
 
+            scope.selectImage = function() {
+                navigator.camera.getPicture(scope.onPictureSuccess, scope.onSelectImageFail, {
+                    destinationType: Camera.DestinationType.DATA_URL,
+                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+                });
+            };
         },
         templateUrl: "templates/photo.html"
     };
