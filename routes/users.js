@@ -1,9 +1,10 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var nconf = require('nconf');
-var request = require('request');
 
 var tokenManager = require('../lib/tokenManager.js');
+
+var Eat = require('../lib/Eat.js');
+var EatUsers = require('../lib/EatUsers.js');
 
 var router = express.Router();
 
@@ -13,34 +14,20 @@ var TokenModel = require('../models/token.js').model;
 
 // GET - Users list.
 router.get('/', function(req, res) {
-
-    UserModel.find(function(error, users) {
-        if (error) {
-            res.statusCode = 500;
-            res.send("Error getting users: " + error);
-            return;
-        }
-        res.statusCode = 200;
-        res.send(users);
-    });
+    // There is no use case for it.
+    res.send("Not supported.");
+    return;
+    //Eat.setReqRes(req, res);
+    //EatUsers.getAll();
 });
 
 // GET - Obtain a specific user.
 router.get('/:id', function(req, res) {
-
-    var id = req.param('id');
-
-    // TODO We should require a valid token here.
-
-    UserModel.findById(id, function(error, user) {
-        if (error) {
-            res.statusCode = 500;
-            res.send("Error getting '" + id + "' user: " + error);
-            return;
-        }
-        res.statusCode = 200;
-        res.send(user);
-    });
+    // There is no use case for it.
+    res.send("Not supported.");
+    return;
+    //Eat.setReqRes(req, res);
+    //EatUsers.getOne();
 });
 
 // POST - Create an user.

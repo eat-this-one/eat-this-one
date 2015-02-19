@@ -21,7 +21,8 @@
     "nconf": "~0.7",
     "request": "^2.40",
     "static-favicon": "~1.0",
-    "node-gcm": "~0.9"
+    "node-gcm": "~0.9",
+    "validator": "~3.30.0"
   },
   "devDependencies": {
     "karma": "~0.12",
