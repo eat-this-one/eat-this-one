@@ -57,8 +57,27 @@ router.post('/', function(req, res) {
     }
 });
 
+// PUT - Update an user.
 router.put('/:id', function(req, res) {
-    res.send("Not supported");
+
+    Eat.setReqRes(req, res);
+
+    if (req.param('provider') === 'regid') {
+
+        Eat.checkValidToken(function(error) {
+            if (error) {
+                Eat.returnCallback(error);
+            }
+            EatUsers.updateRegid();
+        });
+
+    } else {
+        var error = {
+            code : 400,
+            msg : 'Unknown auth provided'
+        };
+        Eat.returnCallback(error);
+    }
 });
 
 router.post('/:id', function(req, req) {
