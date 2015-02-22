@@ -15,6 +15,22 @@ angular.module('eat-this-one')
             // care about security in web.
             var randomNumber = Math.random() + new Date().getTime();
             localStorage.setItem('gcmRegId', randomNumber);
+
+            if (forceUpdate) {
+                updateRegistration(randomNumber);
+            }
         }
     }
 }]);
+
+/**
+ * Mock just to mimic the app functionality to detect issues injecting services.
+ */
+function updateRegistration(regid) {
+
+    var bodyscope = angular.element('#id-body');
+    bodyscope.ready(function() {
+        var updateRegIdRequest = bodyscope.injector().get('updateRegIdRequest');
+        updateRegIdRequest(regid);
+    });
+}

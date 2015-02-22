@@ -58,38 +58,42 @@ angular.module('eat-this-one')
 
 function notificationsHandler(e) {
 
-    // We inject the service here as we are out of angular init process.
-    var newLogRequest = angular.element('#id-body').injector().get('newLogRequest');
-
     switch(e.event) {
 
         // Storing the registration id.
         case 'registered':
 
-            // Storing the registration id.
-            if (e.regid.length > 0) {
+            var bodyscope = angular.element('#id-body');
+            bodyscope.ready(function() {
+                // We inject the service here as we are out of angular init process.
+                var newLogRequest = bodyscope.injector().get('newLogRequest');
 
-                var previousGcmRegId = localStorage.getItem('gcmRegId');
+                // Storing the registration id.
+                if (e.regid.length > 0) {
 
-                if (previousGcmRegId === null || previousGcmRegId == false) {
-                    // Store it if there was nothing before.
-                    localStorage.setItem('gcmRegId', e.regid);
-                    newLogRequest('create', 'gcm-registration', e.regid);
-                } else if (previousGcmRegId != e.regid) {
-                    // We also check that the current one is different.
-                    localStorage.setItem('gcmRegId', e.regid);
-                    newLogRequest('update', 'gcm-registration', e.regid);
+                    var previousGcmRegId = localStorage.getItem('gcmRegId');
 
-                    // We also update the backend.
-                    var updateRegIdRequest = angular.element('#id-body').injector().get('updateRegIdRequest');
-                    updateRegIdRequest(e.regid);
+                    if (previousGcmRegId === null || previousGcmRegId == false) {
+                        // Store it if there was nothing before.
+                        localStorage.setItem('gcmRegId', e.regid);
+                        newLogRequest('create', 'gcm-registration', e.regid);
+                    } else if (previousGcmRegId != e.regid) {
+                        // We also check that the current one is different.
+                        localStorage.setItem('gcmRegId', e.regid);
+                        newLogRequest('update', 'gcm-registration', e.regid);
+
+                        // We also update the backend.
+                        var updateRegIdRequest = bodyscope.injector().get('updateRegIdRequest');
+                        updateRegIdRequest(e.regid);
+                    } else {
+                        newLogRequest('nothing', 'gcm-registration', e.regid);
+                    }
+
                 } else {
-                    newLogRequest('nothing', 'gcm-registration', e.regid);
+                    newLogRequest('error', 'gcm-registration', 'no registration id');
                 }
+            });
 
-            } else {
-                newLogRequest('error', 'gcm-registration', 'no registration id');
-            }
             break;
 
         case 'message':

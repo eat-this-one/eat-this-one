@@ -1,14 +1,10 @@
-angular.module('eat-this-one').factory('redirecter', ['$window', 'newLogRequest', function($window, newLogRequest) {
+angular.module('eat-this-one').factory('redirecter', ['$window', function($window) {
 
     var timeout = 300;
 
     return {
 
-        redirect : function(url, log) {
-
-            if (typeof log != 'undefined') {
-                newLogRequest('click', log);
-            }
+        redirect : function(url) {
 
             $('#id-body').fadeOut(timeout);
             setTimeout(function() {

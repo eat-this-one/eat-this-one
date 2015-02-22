@@ -1,4 +1,4 @@
-angular.module('eat-this-one').factory('notifier', ['redirecter', '$mdDialog', 'newLogRequest', function(redirecter, $mdDialog, newLogRequest) {
+angular.module('eat-this-one').factory('notifier', ['redirecter', '$mdDialog', function(redirecter, $mdDialog) {
     return {
 
         dialog : null,
@@ -34,7 +34,9 @@ angular.module('eat-this-one').factory('notifier', ['redirecter', '$mdDialog', '
                 // Move to the requested page.
                 window.plugin.notification.local.onclick = function(id, state, json) {
                     var id = JSON.parse(json).dishid;
-                    newLogRequest('click', 'notification', id);
+                    // TODO We need to log this, but we are having
+                    // a circular dependency on sessionManager.
+                    //newLogRequest('click', 'notification', id);
                     redirecter.redirect('dishes/view.html?id=' + id);
                 };
             });

@@ -8,9 +8,11 @@ angular.module('eat-this-one')
             var updatedApp = false;
 
             // Update to the current app version, later we will
-            // update gcmregid, user token and show news to the user.
+            // update gcmregid.
             var previousVersion = localStorage.getItem('version');
-            if (previousVersion !== eatConfig.version) {
+            if (previousVersion !== eatConfig.version &&
+                    previousVersion !== null &&
+                    this.getUser() !== null) {
                 updatedApp = true;
             }
             localStorage.setItem('version', eatConfig.version);
@@ -35,7 +37,7 @@ angular.module('eat-this-one')
             pushManager.register(updatedApp);
 
             // Show info to the user about the new version if required.
-            if (updatedApp === true) {
+            if (updatedApp === true && this.getUser() !== null) {
                 updateManager.showChanges(previousVersion);
             }
         },
