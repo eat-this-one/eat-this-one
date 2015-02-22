@@ -51,7 +51,7 @@ router.post('/', function(req, res) {
     } else {
         var error = {
             code : 400,
-            msg : 'Unknown auth provided'
+            message : 'Unknown auth provided'
         };
         Eat.returnCallback(error);
     }
@@ -74,7 +74,7 @@ router.put('/:id', function(req, res) {
     } else {
         var error = {
             code : 400,
-            msg : 'Unknown auth provided'
+            message : 'Unknown auth provided'
         };
         Eat.returnCallback(error);
     }
