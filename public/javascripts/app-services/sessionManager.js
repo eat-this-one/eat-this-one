@@ -1,9 +1,20 @@
 angular.module('eat-this-one')
-    .factory('sessionManager', ['authManager', 'pushManager', 'eatConfig', function(authManager, pushManager, eatConfig) {
+    .factory('sessionManager', ['authManager', 'pushManager', 'eatConfig', 'updateManager', function(authManager, pushManager, eatConfig, updateManager) {
 
     return {
 
         initSession : function() {
+
+            var updatedApp = false;
+
+            // Update to the current app version, later we will
+            // update gcmregid, user token and show news to the user.
+            var previousVersion = localStorage.getItem('version');
+            if (previousVersion !== eatConfig.version) {
+                updatedApp = true;
+            }
+            localStorage.setItem('version', eatConfig.version);
+
             var token = localStorage.getItem('token');
             if (token !== null && token !== false) {
                 var user = JSON.parse(localStorage.getItem('user'));
@@ -14,6 +25,9 @@ angular.module('eat-this-one')
 
             // All cordova calls should be inside a deviceready listener.
             document.addEventListener('deviceready', function() {
+
+                // Register the app to receive and send notifications.
+                pushManager.register(updatedApp);
 
                 // TODO Check that this works.
                 navigator.globalization.getPreferredLanguage(
@@ -35,9 +49,12 @@ angular.module('eat-this-one')
                     }
                 );
 
-                // Register the app to receive and send notifications.
-                pushManager.register();
             });
+
+            // Show info to the user about the new version if required.
+            if (updatedApp === true) {
+                updateManager.showChanges(previousVersion);
+            }
         },
 
         setUser : function(userData) {

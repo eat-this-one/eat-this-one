@@ -4,11 +4,11 @@ angular.module('eat-this-one')
     return {
 
         // Here we register which functions will handle the notifications.
-        register : function() {
+        register : function(forceUpdate) {
 
             // Check if the device is already registered.
-            // TODO We will need a new registration id once the app is updated.
-            if (localStorage.getItem('gcmRegId') !== null) {
+            if (forceUpdate === false &&
+                    localStorage.getItem('gcmRegId') !== null) {
                 return;
             }
 
@@ -68,11 +68,27 @@ function notificationsHandler(e) {
 
             // Storing the registration id.
             if (e.regid.length > 0) {
-                localStorage.setItem('gcmRegId', e.regid);
-                newLogRequest('process', 'gcm-registration', e.regid);
+
+                var previousGcmRegId = localStorage.getItem('gcmRegId');
+
+                if (previousGcmRegId === null || previousGcmRegId == false) {
+                    // Store it if there was nothing before.
+                    localStorage.setItem('gcmRegId', e.regid);
+                    newLogRequest('create', 'gcm-registration', e.regid);
+                } else if (previousGcmRegId != e.regid) {
+                    // We also check that the current one is different.
+                    localStorage.setItem('gcmRegId', e.regid);
+                    newLogRequest('update', 'gcm-registration', e.regid);
+
+                    // We also update the backend.
+                    var updateRegIdRequest = angular.element('#id-body').injector().get('updateRegIdRequest');
+                    updateRegIdRequest(e.regid);
+                } else {
+                    newLogRequest('nothing', 'gcm-registration', e.regid);
+                }
+
             } else {
                 newLogRequest('error', 'gcm-registration', 'no registration id');
-                console.log('Error: We can not get the registration id');
             }
             break;
 

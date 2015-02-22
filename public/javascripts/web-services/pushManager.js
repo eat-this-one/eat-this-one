@@ -3,8 +3,10 @@ angular.module('eat-this-one')
 
     return {
 
-        register : function() {
-            if (localStorage.getItem('gcmRegId') !== null) {
+        register : function(forceUpdate) {
+
+            if (forceUpdate !== true &&
+                    localStorage.getItem('gcmRegId') !== null) {
                 return;
             }
 

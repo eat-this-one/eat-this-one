@@ -1,9 +1,19 @@
 angular.module('eat-this-one')
-    .factory('sessionManager', ['authManager', 'eatConfig', 'pushManager', function(authManager, eatConfig, pushManager) {
+    .factory('sessionManager', ['authManager', 'eatConfig', 'pushManager', 'updateManager', function(authManager, eatConfig, pushManager, updateManager) {
 
     return {
 
         initSession : function() {
+
+            var updatedApp = false;
+
+            // Update to the current app version, later we will
+            // update gcmregid, user token and show news to the user.
+            var previousVersion = localStorage.getItem('version');
+            if (previousVersion !== eatConfig.version) {
+                updatedApp = true;
+            }
+            localStorage.setItem('version', eatConfig.version);
 
             var token = sessionStorage.getItem('token');
             if (token !== null && token !== false) {
@@ -22,7 +32,12 @@ angular.module('eat-this-one')
             }
 
             // Creates fake registration id.
-            pushManager.register();
+            pushManager.register(updatedApp);
+
+            // Show info to the user about the new version if required.
+            if (updatedApp === true) {
+                updateManager.showChanges(previousVersion);
+            }
         },
 
         setUser : function(userData) {
