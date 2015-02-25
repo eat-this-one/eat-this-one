@@ -1,7 +1,7 @@
 angular.module('eat-this-one').constant('eatConfig', {
     version : '1',
-    backendUrl : 'http://eat-this-one.herokuapp.com/api',
-    downloadAppUrl : 'http://eat-this-one.herokuapp.com/android.apk',
+    backendUrl : 'https://www.eat-this-one.com/api',
+    downloadAppUrl : 'https://www.eat-this-one.com/android.apk',
     defaultLang : 'en',
     gcmSenderId : 'YOURSENDERID',
 });
