@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('LocationSubscriptionsEditController', ['$scope', '$http', 'redirecter', 'appStatus', 'eatConfig', 'authManager', 'notifier', 'formsManager', 'newLocationRequest', 'newLocationSubscriptionRequest', 'locationSubscriptionsRequest', 'newLogRequest', 'locationRequest', 'menuManager', function($scope, $http, redirecter, appStatus, eatConfig, authManager, notifier, formsManager, newLocationRequest, newLocationSubscriptionRequest, locationSubscriptionsRequest, newLogRequest, locationRequest, menuManager) {
+    .controller('LocationSubscriptionsEditController', ['$scope', '$http', 'redirecter', 'appStatus', 'eatConfig', 'authManager', 'notifier', 'formsManager', 'newLocationRequest', 'newLocationSubscriptionRequest', 'locationSubscriptionsRequest', 'newLogRequest', 'locationsRequest', 'menuManager', function($scope, $http, redirecter, appStatus, eatConfig, authManager, notifier, formsManager, newLocationRequest, newLocationSubscriptionRequest, locationSubscriptionsRequest, newLogRequest, locationsRequest, menuManager) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -59,7 +59,7 @@ angular.module('eat-this-one')
         appStatus.completed('locationSubscriptionsRequest');
 
         // Just one location subscription per user.
-        if (data && data.length > 0) {
+        if (data.length > 0) {
 
             // It returns an array, but should only contain 1 location subscription.
             localStorage.setItem('loc', JSON.stringify(data.shift()));
@@ -92,13 +92,23 @@ angular.module('eat-this-one')
 
             appStatus.waiting('newLocationSubscriptionRequest');
 
+            // If the location does not exists we notify the user about it.
+            var noLocationErrorCallback = function(data, errorStatus, errorMsg) {
+                appStatus.completed('newLocationSubscriptionRequest');
+                notifier.show($scope.lang.locationnoexists, $scope.lang.locationnoexistsinfo);
+            };
+
             // Checking that the location exists.
             var locCallback = function(locationsData) {
 
-                // We looked for an exact match before, so only 1 group should match.
+                // If the location does not exist will return data but length = 0.
+                if (locationsData.length === 0) {
+                    return noLocationErrorCallback(null, null, null);
+                }
+
+                // We should only have 1 result here.
                 locationid = locationsData[0]._id;
 
-                // If it exists add a new subscription to the location.
                 var locSubscriptionCallback = function(data) {
                     appStatus.completed('newLocationSubscriptionRequest');
 
@@ -109,34 +119,35 @@ angular.module('eat-this-one')
                         redirecter.redirect('index.html');
                     });
                 };
+
+                // New location subscription error.
                 var errorCallback = function(data, errorStatus, errorMsg) {
                     appStatus.completed('newLocationSubscriptionRequest');
-                    notifier.show($scope.lang.error, errorMsg);
+                    notifier.show($scope.lang.error, $scope.lang.useralreadyingroup);
                 };
+
                 newLocationSubscriptionRequest($scope, locationid, locSubscriptionCallback, errorCallback);
             };
 
-            // If the location does not exists we notify the user about it.
-            var noLocationErrorCallback = function(data, errorStatus, errorMsg) {
-                appStatus.completed('newLocationSubscriptionRequest');
-                notifier.show($scope.lang.locationnoexists, $scope.lang.locationnoexistsinfo);
-            };
-            locationRequest($scope, $scope.joingroup.value, locCallback, noLocationErrorCallback);
+            locationsRequest($scope, $scope.joingroup.value, locCallback, noLocationErrorCallback);
 
         } else {
-
-            // TODO Check that the location name does not exist.
-            // Probably this checking could be shared with the upper
-            // condition.
 
             // A new location including subscription.
             appStatus.waiting('newLocationRequest');
 
-            var locExistsCallback = function(data) {
+            var locExistsCallback = function(locations) {
+
+                // If there are zero locations forward to noLocationCallback.
+                if (locations.length === 0) {
+                    noLocationCallback(locations);
+                }
+
                 // Pity, notify the user that the location already exists.
                 appStatus.completed('newLocationRequest');
                 notifier.show($scope.lang.locationexists, $scope.lang.locationexistsinfo);
             };
+
             var noLocationCallback = function(data, errorStatus, errorMessage) {
 
                 // Ok, if it does not exist we add the new location.
@@ -153,12 +164,13 @@ angular.module('eat-this-one')
                 };
                 var errorCallback = function(data, errorStatus, errorMsg) {
                     appStatus.completed('newLocationRequest');
-                    var msg = '"' + errorStatus + '": ' + data;
-                    notifier.show($scope.lang.error, msg);
+                    notifier.show($scope.lang.error, $scope.lang.weird, function() {
+                        redirecter.redirect('index.html');
+                    });
                 };
                 newLocationRequest($scope, $scope.newgroup.value, locationCallback, errorCallback);
             };
-            locationRequest($scope, $scope.newgroup.value, locExistsCallback, noLocationCallback);
+            locationsRequest($scope, $scope.newgroup.value, locExistsCallback, noLocationCallback);
         }
     };
 
