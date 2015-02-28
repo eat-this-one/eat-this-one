@@ -50,9 +50,7 @@ app.use(cookieParser());
 app.use('/api', function(req, res, next) {
 
     // Accept different origins than the same domain.
-    var origin = (req.headers.origin || "*");
-    res.setHeader("Access-Control-Allow-Origin", origin);
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Content-Length, X-Requested-With');
     next();
@@ -61,6 +59,9 @@ app.use('/api', function(req, res, next) {
 // Default route.
 app.use('/', index);
 
+app.options('*', function(req, res) {
+    res.status(200).end();
+});
 // Downloads.
 app.get('/android.apk', function(req, res) {
     var download = nconf.get('DOWNLOAD_URL_ANDROID');

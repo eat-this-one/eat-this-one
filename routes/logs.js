@@ -1,14 +1,13 @@
 var express = require('express');
-var mongoose = require('mongoose');
-
 var router = express.Router();
 
 var EatLogs = require('../lib/EatLogs.js');
 var Eat = require('../lib/Eat.js');
 
 router.post('/', function(req, res) {
-    Eat.setReqRes(req, res);
-    EatLogs.addLog();
+    var eat = new Eat(req, res);
+    var logs = new EatLogs(eat);
+    return logs.add();
 });
 
 router.get('/', function(req, res) {

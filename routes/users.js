@@ -1,28 +1,21 @@
 var express = require('express');
-var mongoose = require('mongoose');
-
-var tokenManager = require('../lib/tokenManager.js');
+var router = express.Router();
 
 var Eat = require('../lib/Eat.js');
 var EatUsers = require('../lib/EatUsers.js');
-
-var router = express.Router();
-
-// Required models.
-var UserModel = require('../models/user.js').model;
-var TokenModel = require('../models/token.js').model;
 
 // GET - Users list.
 router.get('/', function(req, res) {
     // TODO Comment it, there is no use case for it.
     //res.send("Not supported.");
     //return;
-    Eat.setReqRes(req, res);
-    Eat.checkValidToken(function(error) {
+    var eat = new Eat(req, res);
+    eat.checkValidToken(function(error) {
         if (error) {
-            Eat.returnCallback(error);
+            return eat.returnCallback(error);
         }
-        EatUsers.getAll();
+        var eatusers = new EatUsers(eat);
+        return eatusers.get();
     });
 });
 
@@ -31,44 +24,47 @@ router.get('/:id', function(req, res) {
     // TODO Comment it, there is no use case for it.
     //res.send("Not supported.");
     //return;
-    Eat.setReqRes(req, res);
-    Eat.checkValidToken(function(error) {
+    var eat = new Eat(req, res);
+    eat.checkValidToken(function(error) {
         if (error) {
-            Eat.returnCallback(error);
+            return eat.returnCallback(error);
         }
-        EatUsers.getById();
+        var eatusers = new EatUsers(eat);
+        return eatusers.getById();
     });
 });
 
 // POST - Create an user.
 router.post('/', function(req, res) {
 
-    Eat.setReqRes(req, res);
+    var eat = new Eat(req, res);
 
     if (req.param('provider') === 'regid') {
         // Authentication based on the registration id.
-        EatUsers.addUserRegid();
+        var eatusers = new EatUsers(eat);
+        return eatusers.addUserRegid();
     } else {
         var error = {
             code : 400,
             message : 'Unknown auth provided'
         };
-        Eat.returnCallback(error);
+        return eat.returnCallback(error);
     }
 });
 
 // PUT - Update an user.
 router.put('/:id', function(req, res) {
 
-    Eat.setReqRes(req, res);
+    var eat = new Eat(req, res);
 
     if (req.param('provider') === 'regid') {
 
-        Eat.checkValidToken(function(error) {
+        eat.checkValidToken(function(error) {
             if (error) {
-                Eat.returnCallback(error);
+                return eat.returnCallback(error);
             }
-            EatUsers.updateRegid();
+            var eatusers = new EatUsers(eat);
+            return eatusers.updateRegid();
         });
 
     } else {
@@ -76,7 +72,7 @@ router.put('/:id', function(req, res) {
             code : 400,
             message : 'Unknown auth provided'
         };
-        Eat.returnCallback(error);
+        return eat.returnCallback(error);
     }
 });
 
