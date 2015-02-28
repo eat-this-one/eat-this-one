@@ -1,52 +1,18 @@
 var express = require('express');
-var mongoose = require('mongoose');
-
 var router = express.Router();
 
-var TokenModel = require('../models/token.js').model;
-var FeedbackModel = require('../models/feedback.js').model;
+var Eat = require('../lib/Eat.js');
+var EatFeedback = require('../lib/EatFeedback.js');
 
 router.post('/', function(req, res) {
 
-    if (req.param('feedback') === null) {
-        res.statusCode = 400;
-        res.send("Missing feedback param");
-        return;
-    }
-
-    // Getting userid from the token if there is a token
-    TokenModel.findOne({token: req.param('token')}, function(error, token) {
-
+    var eat = new Eat(req, res);
+    eat.checkValidToken(function(error) {
         if (error) {
-            res.statusCode = 500;
-            res.send('Error getting token: ' + error);
-            return;
+            eat.returnCallback(error);
         }
-
-        if (!token) {
-            res.statusCode = 401;
-            res.send('Wrong credentials');
-            return;
-        }
-
-
-        var feedback = new FeedbackModel({
-            userid : token.userid,
-            content : req.param('feedback')
-        });
-
-        feedback.save(function(error) {
-
-            if (error) {
-                res.statusCode = 500;
-                res.send('Error saving feedback: ' + error);
-                return;
-            }
-
-            res.statusCode = 201;
-            res.send(feedback);
-            return;
-        });
+        var feedback = new EatFeedback(eat);
+        return feedback.add();
     });
 });
 

@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Eat = require('../lib/Eat.js');
-var EatLocations = require('../lib/EatLocations.js');
+var EatLocation = require('../lib/EatLocation.js');
 
 // GET - Locations list.
 router.get('/', function(req, res) {
@@ -12,8 +12,8 @@ router.get('/', function(req, res) {
         if (error) {
             return eat.returnCallback(error);
         }
-        var locations = new EatLocations(eat);
-        return locations.getByName();
+        var loc = new EatLocation(eat);
+        return loc.getByName();
     });
 });
 
@@ -25,8 +25,8 @@ router.post('/', function(req, res) {
         if (error) {
             return eat.returnCallback(error);
         }
-        var locations = new EatLocations(eat);
-        return locations.add();
+        var loc = new EatLocation(eat);
+        return loc.add();
     });
 });
 

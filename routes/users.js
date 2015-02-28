@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Eat = require('../lib/Eat.js');
-var EatUsers = require('../lib/EatUsers.js');
+var EatUser = require('../lib/EatUser.js');
 
 // GET - Users list.
 router.get('/', function(req, res) {
@@ -14,8 +14,8 @@ router.get('/', function(req, res) {
         if (error) {
             return eat.returnCallback(error);
         }
-        var eatusers = new EatUsers(eat);
-        return eatusers.get();
+        var eatuser = new EatUser(eat);
+        return eatuser.get();
     });
 });
 
@@ -29,8 +29,8 @@ router.get('/:id', function(req, res) {
         if (error) {
             return eat.returnCallback(error);
         }
-        var eatusers = new EatUsers(eat);
-        return eatusers.getById();
+        var eatuser = new EatUser(eat);
+        return eatuser.getById();
     });
 });
 
@@ -41,8 +41,8 @@ router.post('/', function(req, res) {
 
     if (req.param('provider') === 'regid') {
         // Authentication based on the registration id.
-        var eatusers = new EatUsers(eat);
-        return eatusers.addUserRegid();
+        var eatuser = new EatUser(eat);
+        return eatuser.addUserRegid();
     } else {
         var error = {
             code : 400,
@@ -63,8 +63,8 @@ router.put('/:id', function(req, res) {
             if (error) {
                 return eat.returnCallback(error);
             }
-            var eatusers = new EatUsers(eat);
-            return eatusers.updateRegid();
+            var eatuser = new EatUser(eat);
+            return eatuser.updateRegid();
         });
 
     } else {

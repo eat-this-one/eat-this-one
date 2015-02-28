@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Eat = require('../lib/Eat.js');
-var EatLocationSubscriptions = require('../lib/EatLocationSubscriptions.js');
+var EatLocationSubscription = require('../lib/EatLocationSubscription.js');
 
 // GET - Location subscriptions list.
 router.get('/', function(req, res) {
@@ -12,8 +12,8 @@ router.get('/', function(req, res) {
         if (error) {
             return eat.returnCallback(error);
         }
-        var locationSubscriptions = new EatLocationSubscriptions(eat);
-        return locationSubscriptions.get();
+        var locSubscription = new EatLocationSubscription(eat);
+        return locSubscription.get();
     });
 });
 
@@ -25,8 +25,8 @@ router.post('/', function(req, res) {
         if (error) {
             return eat.returnCallback(error);
         }
-        var locationSubscriptions = new EatLocationSubscriptions(eat);
-        return locationSubscriptions.add();
+        var locSubscription = new EatLocationSubscription(eat);
+        return locSubscription.add();
     });
 
 });
