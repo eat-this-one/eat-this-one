@@ -57,6 +57,11 @@ module.exports = function(grunt) {
             }
         },
 
+        // JS Quality.
+        jshint : {
+            backend : [ "lib/**/*.js", "routes/*.js", "models/*.js" ]
+        },
+
         // Less compiles to CSS all the .less files.
         less: {
             development: {
@@ -105,13 +110,19 @@ module.exports = function(grunt) {
             // JS Changes triggers karma unit tests and behaviour tests.
             // TODO Add behaviour tests
             // TODO Run JS tests!!
-            dev_js : {
+            dev_js_frontend : {
                 files : [ "public/javascripts/**/*.js", "config_frontend.js" ],
                 tasks : [ "uglify", "copy:build" ],
                 options : {
                     nospawn : true
                 }
-
+            },
+            dev_js_backend : {
+                files : [ "lib/**/*.js", "routes/*.js", "models/*.js", "config_backend.js" ],
+                tasks : [ "jshint:backend" ],
+                options : {
+                    nospawn : true
+                }
             },
             // Jade changes compiles HTML and only triggers behaviour tests.
             dev_html : {
@@ -246,7 +257,7 @@ module.exports = function(grunt) {
     grunt.registerTask("build:prod", [ "clean:build", "copy:resources", "uglify", "less", "cssmin", "csslint", "jade:compile", "copy:build" ]);
     grunt.registerTask("build:dev", [ "clean:build", "copy:resources", "uglify", "less", "cssmin", "csslint", "jade:compile", "copy:build" ]);
 
-    // While developing monitor the changes. 
+    // While developing monitor the changes.
     grunt.registerTask("run:dev", [ "build:dev", "karma", "concurrent" ]);
 
     // Dependencies.
@@ -260,6 +271,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-jade");
     grunt.loadNpmTasks("grunt-contrib-cssmin");
     grunt.loadNpmTasks('grunt-contrib-csslint');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks("grunt-karma");
     grunt.loadNpmTasks('grunt-shell');
 };
