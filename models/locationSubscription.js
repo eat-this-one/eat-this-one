@@ -2,8 +2,17 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var LocationSubscriptionSchema = new Schema({
-    userid: { type: String, required: true},
-    locationid: { type: String, required: true},
+    userid : {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        unique: true,
+        ref: 'User'
+    },
+    locationid: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Location'
+    },
     created: { type: Date, default: Date.now}
 });
 LocationSubscriptionSchema.index( {userid: 1, locationid: 1}, {unique : true} );

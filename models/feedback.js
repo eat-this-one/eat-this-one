@@ -2,7 +2,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var FeedbackSchema = new Schema({
-    userid : { type: String, required: true},
+    userid : {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    },
     content : { type: String, required: true},
     time : { type: Date, default: Date.now},
 });

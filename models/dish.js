@@ -2,9 +2,23 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var DishSchema = new Schema({
-    userid: { type: String, required: true, index: true},
-    locationid: { type: String, required: true, index: true},
-    photoid: { type: String, required: false, default: ''},
+    userid: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        index: true,
+        ref: 'User'
+    },
+    locationid: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        index: true,
+        ref: 'Location'
+    },
+    photoid: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false,
+        ref: 'Photo'
+    },
     name: { type: String, required: true},
     description: { type: String, required: false, default: ''},
     when: { type: Date, required: true},
