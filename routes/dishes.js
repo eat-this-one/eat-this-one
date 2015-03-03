@@ -1,8 +1,8 @@
 var express = require('express');
-var mongoose = require('mongoose');
+var router = express.Router();
+
 var pusher = require('../lib/pusher.js');
 
-var router = express.Router();
 
 // Required models.
 var DishModel = require('../models/dish.js').model;
@@ -21,6 +21,9 @@ var dishProps = {
     'nportions' : 'required',
     'donation' : 'required'
 };
+
+var Eat = require('../lib/Eat.js');
+var EatDish = require('../lib/EatDish.js');
 
 // TODO Change this old way function format.
 function savePhoto(photoparam, dish) {
@@ -45,204 +48,26 @@ function savePhoto(photoparam, dish) {
 // GET - Dishes list.
 router.get('/', function(req, res) {
 
-    // Getting userid from the token.
-    TokenModel.findOne({token: req.param('token')}, function(error, token) {
-
+    var eat = new Eat(req, res);
+    eat.checkValidToken(function(error) {
         if (error) {
-            res.statusCode = 500;
-            res.send('Error getting the token: ' + error);
-            return;
+            return eat.returnCallback(error);
         }
-
-        if (!token) {
-            res.statusCode = 401;
-            res.send('Wrong credentials');
-            return;
-        }
-
-        // Getting user location subscriptions.
-        LocationSubscriptionModel.find({userid: token.userid}, function(error, locationSubscriptions) {
-
-            if (error) {
-                res.statusCode = 500;
-                res.send('Error getting user location subscriptions');
-                return;
-            }
-
-            if (!locationSubscriptions) {
-                res.statusCode = 200;
-                res.send([]);
-                return;
-            }
-
-            var locationIds = [];
-            for (var i in locationSubscriptions) {
-                locationIds.push(locationSubscriptions[i].locationid);
-            }
-
-            // Only passed events when listing.
-            var now = new Date();
-            var yesterday = Date.UTC(
-                now.getFullYear(),
-                now.getMonth(),
-                now.getDate()
-            ) - (24 * 60 * 60);
-            var dishfilter = {
-                locationid : {
-                    $in : locationIds
-                }, when : {
-                    $gt : yesterday
-                }
-            };
-            var extra = {sort: {'created' : -1}};
-            DishModel.find(dishfilter, {}, extra, function(error, dishes) {
-
-                if (error) {
-                    res.statusCode = 500;
-                    res.send("Error getting dishes: " + error);
-                    return;
-                }
-
-                res.statusCode = 200;
-                res.send(dishes);
-                return;
-            });
-        });
+        var eatdish = new EatDish(eat);
+        return eatdish.getByUser();
     });
 });
 
 // GET - Obtain a specific dish.
 router.get('/:id', function(req, res) {
 
-    var id = req.param('id');
-
-    // Getting userid from the token.
-    TokenModel.findOne({token: req.param('token')}, function(error, token) {
-
+    var eat = new Eat(req, res);
+    eat.checkValidToken(function(error) {
         if (error) {
-            res.statusCode = 500;
-            res.send('Error getting the token: ' + error);
-            return;
+            return eat.returnCallback(error);
         }
-
-        if (!token) {
-            res.statusCode = 401;
-            res.send('Wrong credentials');
-            return;
-        }
-
-        DishModel.findById(id, function(error, dish) {
-            if (error) {
-                res.statusCode = 500;
-                res.send("Error getting '" + id + "' dish: " + error);
-                return;
-            }
-
-            if (!dish) {
-                res.statusCode = 400;
-                res.send("This dish does not exist");
-                return;
-            }
-
-            // We attach location data.
-            LocationModel.findById(dish.locationid, function(error, locationInstance) {
-
-                if (error) {
-                    res.statusCode = 500;
-                    res.send("Error getting '" + id + "' dish location: " + error);
-                    return;
-                }
-
-                if (!locationInstance) {
-                    res.statusCode = 500;
-                    res.send("No location can be found for location id = " + dish.locationid);
-                    return;
-                }
-
-                var returnDish = {};
-                for (var prop in dishProps) {
-                    returnDish[prop] = dish[prop];
-                }
-                returnDish.id = dish._id;
-                returnDish.userid = dish.userid;
-                returnDish.loc = locationInstance;
-
-                UserModel.findById(dish.userid, function(error, user) {
-
-                    if (error) {
-                        res.statusCode = 500;
-                        res.send("Error getting '" + dish.userid + "' user: " + error);
-                        return;
-                    }
-
-                    // This may happen, but we hope nobody never deletes the app
-                    // and it he/she does delete the app, not after adding a dish.
-                    if (!user) {
-                        returnDish.user = {
-                            name: 'deleted',
-                        };
-                    } else {
-                        returnDish.user = {
-                            name: user.name,
-                        };
-                    }
-
-                    // Remaining dishes.
-                    MealModel.find({dishid : id}, function(error, bookedmeals) {
-
-                        if (error) {
-                            res.statusCode = 500;
-                            res.send('Error getting booked meals');
-                            return;
-                        }
-
-                        // Has the current user booked this dish?
-                        // TODO Change this loop please...
-                        returnDish.booked = false;
-                        if (bookedmeals) {
-                            for (index in bookedmeals) {
-                                if (bookedmeals[index].userid === token.userid) {
-                                    returnDish.booked = true;
-                                    break;
-                                }
-                            }
-                        }
-
-                        // Frontend will manage to count the remaining portions.
-                        returnDish.bookedmeals = bookedmeals.length;
-
-                        // Attach the image if there is an image.
-                        if (dish.photoid !== '') {
-                            PhotoModel.findById(dish.photoid, function(error, photo) {
-                                if (error) {
-                                    res.statusCode = 500;
-                                    res.send("Error getting '" + id + "' dish photo: " + error);
-                                    return;
-                                }
-
-                                if (!locationInstance) {
-                                    res.statusCode = 500;
-                                    res.send("No photo can be found for photo id = " + dish.locationid);
-                                    return;
-                                }
-
-                                returnDish.photo = "data:image/jpeg;base64," + photo.data;
-
-                                // Sending the dish back with the image.
-                                res.statusCode = 200;
-                                res.send(returnDish);
-                                return;
-                            });
-                        } else {
-                            // If no picture that's all.
-                            res.statusCode = 200;
-                            res.send(returnDish);
-                            return;
-                        }
-                    });
-                });
-            });
-        });
+        var eatdish = new EatDish(eat);
+        return eatdish.getById();
     });
 });
 

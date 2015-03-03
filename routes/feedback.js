@@ -9,7 +9,7 @@ router.post('/', function(req, res) {
     var eat = new Eat(req, res);
     eat.checkValidToken(function(error) {
         if (error) {
-            eat.returnCallback(error);
+            return eat.returnCallback(error);
         }
         var feedback = new EatFeedback(eat);
         return feedback.add();
