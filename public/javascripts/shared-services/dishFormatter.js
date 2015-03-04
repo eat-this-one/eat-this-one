@@ -8,7 +8,7 @@ angular.module('eat-this-one').factory('dishFormatter', ['notifier', 'datesConve
         $scope.dish.when = datesConverter.timeToDay(Date.parse($scope.dish.when));
 
         // Fill form values if they exist.
-        var fields = ['userid', 'name', 'description', 'when', 'nportions', 'donation'];
+        var fields = ['name', 'description', 'when', 'nportions', 'donation'];
         for (var fieldName in fields) {
             if ($scope[fields[fieldName]]) {
                 $scope[fields[fieldName]].value = $scope.dish[fields[fieldName]];
@@ -35,7 +35,7 @@ angular.module('eat-this-one').factory('dishFormatter', ['notifier', 'datesConve
             // No text as they are unlimited, rendundant info.
             $scope.dish.remainingportions = -1;
         } else {
-            $scope.dish.remainingportions = $scope.dish.nportions - dishData.bookedmeals;
+            $scope.dish.remainingportions = $scope.dish.nportions - dishData.nbookedmeals;
             if ($scope.dish.remainingportions == 1) {
                 // Show last portion text.
                 $scope.dishusefulinfotext = $scope.lang.lastportion;

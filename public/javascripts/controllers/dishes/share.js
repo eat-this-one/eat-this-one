@@ -47,7 +47,7 @@ angular.module('eat-this-one')
 
         newLogRequest('click', 'dishes-share-continue');
 
-        // TODO If there are no subscriptors we should warn the
+        // TODO If there are no subscribers we should warn the
         // user that no users will see the dish he/she just added.
         redirecter.redirect('index.html');
     };

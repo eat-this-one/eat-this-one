@@ -39,7 +39,7 @@ angular.module('eat-this-one')
         // - If there are no more portions it can not be booked.
         // - If the user already book it can not be booked again.
         return (
-            !$scope.auth.isUser($scope.dish.userid) &&
+            !$scope.auth.isUser($scope.dish.user._id) &&
             ($scope.dish.remainingportions > 0 || $scope.dish.remainingportions === -1) &&
             $scope.dish.booked === false
         );
@@ -62,7 +62,7 @@ angular.module('eat-this-one')
                     callback : 'addMeal'
                 }
             ];
-        } else if ($scope.auth.isUser($scope.dish.userid)) {
+        } else if ($scope.auth.isUser($scope.dish.user._id)) {
             $scope.actionIcons = [
                 {
                     name : $scope.lang.editdish,

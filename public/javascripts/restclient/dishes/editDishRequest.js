@@ -33,7 +33,7 @@ angular.module('eat-this-one')
                 title = $scope.lang.dishadded;
 
                 // The current user will be subscribed, so more than 1.
-                if (data.nsubscriptors <= 1) {
+                if (data.nsubscribers <= 1) {
                     info = $scope.lang.dishaddednomembersinfo + '.';
                 } else {
                     info = $scope.lang.dishaddednotifiedinfo + '.';
@@ -69,7 +69,7 @@ angular.module('eat-this-one')
                         var shareArguments = '?dishname=' + data.name +
                             '&locationname=' + data.loc.name;
                         redirecter.redirect('dishes/share.html' + shareArguments);
-                    } else if (data.nsubscriptors <= 1) {
+                    } else if (data.nsubscribers <= 1) {
                         // If there are no subscriptors the user needs to contact more
                         // people, otherwise it is not worth to share the dish with nobody.
                         var shareArguments = '?dishname=' + data.name +
