@@ -2,13 +2,13 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var DishSchema = new Schema({
-    userid: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         index: true,
         ref: 'User'
     },
-    locationid: {
+    loc: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         index: true,
