@@ -27,13 +27,22 @@ angular.module('eat-this-one').directive('eatInputText', ['$mdToast', 'formsMana
                 // To show a toast notification (replacement of the normal placeholder behaviour).
                 var showToast = function() {
 
+                    // Default to almost 1 second.
+                    var delay = 700;
+
                     // Only when the field has not value.
                     if (scope.element.value === "") {
+
+                        // Overwrite the default delay if necessary.
+                        if (typeof scope.element.infodelay !== "undefined") {
+                            delay = scope.element.infodelay;
+                        }
+
                         $mdToast.show(
                             $mdToast.simple()
                                 .content(scope.element.placeholder)
                                 .position('right top')
-                                .hideDelay(2000)
+                                .hideDelay(delay)
                         );
                     }
                 };
