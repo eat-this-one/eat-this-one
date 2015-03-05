@@ -77,7 +77,7 @@ angular.module('eat-this-one').factory('formsManager', function() {
             if (errors.length > 0) {
                 errors.forEach(function(fieldname) {
                     var group = $('#id-' + fieldname).closest('md-input-container');
-                    group.removeClass('md-input-invalid');
+                    group.addClass('md-input-invalid');
                 });
                 return false;
             }
