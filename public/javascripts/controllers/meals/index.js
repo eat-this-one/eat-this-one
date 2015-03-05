@@ -31,17 +31,17 @@ angular.module('eat-this-one')
 
     appStatus.waiting('mealsRequest');
 
-    var mealsCallback = function(dishesData) {
-        $scope.meals = dishesData;
+    var mealsCallback = function(meals) {
 
-        if ($scope.meals.length === 0) {
+        if (meals.length === 0) {
             $scope.showNoMeals = true;
         } else {
-            for (var index in $scope.meals) {
-                $scope.meals[index].when = datesConverter.timeToDay(Date.parse($scope.meals[index].when));
-            }
+            meals.forEach(function(meal) {
+                // Converting the dish date to a friendly format.
+                meal.dish.when = datesConverter.timeToDay(Date.parse(meal.dish.when));
+                $scope.meals.push(meal.dish);
+            });
         }
-
         appStatus.completed('mealsRequest');
 
     };
