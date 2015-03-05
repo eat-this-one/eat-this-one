@@ -309,7 +309,7 @@ module.exports = function(grunt) {
         // Runs shell commands.
         shell : {
             deploy_app : {
-                command: 'cd dist/app ; cordova run'
+                command: 'cd dist/app ; cordova run --device'
             }
         }
 
