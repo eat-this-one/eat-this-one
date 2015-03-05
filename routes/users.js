@@ -76,7 +76,7 @@ router.put('/:id', function(req, res) {
     }
 });
 
-router.post('/:id', function(req, req) {
+router.post('/:id', function(req, res) {
     res.send("Not supported.");
 });
 
