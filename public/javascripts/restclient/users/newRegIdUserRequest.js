@@ -16,10 +16,10 @@ angular.module('eat-this-one')
             data : requestData
         }).success(function(data) {
 
-            authManager.authenticate(data.id);
+            authManager.authenticate(data._id);
             sessionManager.setUser(data);
 
-            newLogRequest('created', 'account', data.id);
+            newLogRequest('created', 'account', data._id);
 
             redirecter.redirect('location-subscriptions/edit.html');
 
