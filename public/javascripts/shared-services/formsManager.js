@@ -67,22 +67,22 @@ angular.module('eat-this-one').factory('formsManager', function() {
 
             // Remove error class.
             if (validated.length > 0) {
-                for (var index in validated) {
-                    var group = $('#id-' + validated[index]).closest('md-input-container');
+                validated.forEach(function(fieldname) {
+                    var group = $('#id-' + fieldname).closest('md-input-container');
                     group.removeClass('md-input-invalid');
-                }
+                });
             }
 
             // Set error class.
             if (errors.length > 0) {
-                for (var index in errors) {
-                    var group = $('#id-' + errors[index]).closest('md-input-container');
-                    group.addClass('md-input-invalid');
-                }
+                errors.forEach(function(fieldname) {
+                    var group = $('#id-' + fieldname).closest('md-input-container');
+                    group.removeClass('md-input-invalid');
+                });
                 return false;
             }
 
             return true;
         }
-    }
+    };
 });

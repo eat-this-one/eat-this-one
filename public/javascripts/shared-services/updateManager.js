@@ -6,6 +6,6 @@ angular.module('eat-this-one')
         showChanges : function(previousVersion) {
             // TODO
         }
-    }
+    };
 }]);
 

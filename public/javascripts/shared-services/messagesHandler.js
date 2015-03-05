@@ -4,5 +4,5 @@ angular.module('eat-this-one').factory('messagesHandler', ['notifier', function(
         message : function(msgData) {
             notifier.statusBar('Eat this one', msgData.message, msgData.type, msgData.dishid);
         }
-    }
+    };
 }]);

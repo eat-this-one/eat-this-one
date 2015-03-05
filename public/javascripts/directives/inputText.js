@@ -20,14 +20,15 @@ angular.module('eat-this-one').directive('eatInputText', ['$mdToast', 'formsMana
             input.on('change', validateForm);
 
             // Only if a placeholder is set.
-            if (typeof scope.element.placeholder != 'undefined' &&
-                    scope.element.placeholder != null) {
+            if (typeof scope.element.placeholder !== "undefined" &&
+                    scope.element.placeholder !== null &&
+                    scope.element.placeholder !== false) {
 
                 // To show a toast notification (replacement of the normal placeholder behaviour).
                 var showToast = function() {
 
                     // Only when the field has not value.
-                    if (scope.element.value == '') {
+                    if (scope.element.value === "") {
                         $mdToast.show(
                             $mdToast.simple()
                                 .content(scope.element.placeholder)

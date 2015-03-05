@@ -27,6 +27,6 @@ angular.module('eat-this-one').factory('authManager', function() {
             authenticated = false;
             useridRef = false;
         }
-    }
+    };
 
 });

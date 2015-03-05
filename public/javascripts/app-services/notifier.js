@@ -32,14 +32,14 @@ angular.module('eat-this-one').factory('notifier', ['redirecter', '$mdDialog', f
 
                 // TODO Not always working.
                 // Move to the requested page.
-                window.plugin.notification.local.onclick = function(id, state, json) {
-                    var id = JSON.parse(json).dishid;
+                window.plugin.notification.local.onclick = function(msgid, state, json) {
+                    var dishid = JSON.parse(json).dishid;
                     // TODO We need to log this, but we are having
                     // a circular dependency on sessionManager.
-                    //newLogRequest('click', 'notification', id);
-                    redirecter.redirect('dishes/view.html?id=' + id);
+                    //newLogRequest('click', 'notification', dishid);
+                    redirecter.redirect('dishes/view.html?id=' + dishid);
                 };
             });
         }
-    }
+    };
 }]);

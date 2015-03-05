@@ -13,10 +13,15 @@ angular.module('eat-this-one').factory('shareManager', ['eatConfig', 'appStatus'
 
                     // Expensive method.
                     for (var i = 0; i < contacts.length; i++) {
-                        if (contacts[i].displayName === "" && contacts[i].displayName == null) {
+                        if (contacts[i].displayName === "" ||
+                                contacts[i].displayName === null ||
+                                contacts[i].displayName === false) {
                             break;
                         }
-                        if (typeof contacts[i].phoneNumbers != 'undefined' && contacts[i].phoneNumbers != null) {
+                        if (typeof contacts[i].phoneNumbers !== "undefined" &&
+                                contacts[i].phoneNumbers !== null &&
+                                contacts[i].phoneNumbers !== false) {
+
                             for (var j = 0; j < contacts[i].phoneNumbers.length; j++) {
                                 if (contacts[i].phoneNumbers[j].type === 'mobile') {
                                     // We pick the first one removing spaces from the phone number.
@@ -40,24 +45,24 @@ angular.module('eat-this-one').factory('shareManager', ['eatConfig', 'appStatus'
                             // Toggles active class.
                             if ($(this).hasClass('active')) {
                                 $(this).removeClass('active');
-                                $(this).children('span.glyphicon').removeClass('glyphicon-ok')
+                                $(this).children('span.glyphicon').removeClass('glyphicon-ok');
                             } else {
                                 $(this).addClass('active');
-                                $(this).children('span.glyphicon').addClass('glyphicon-ok')
+                                $(this).children('span.glyphicon').addClass('glyphicon-ok');
                             }
                         });
                     });
 
                     // All done.
                     appStatus.completed('contacts');
-                };
+                }
 
                 function onError(contactError) {
                     appStatus.completed('contacts');
                     notifier.show($scope.lang.error, $scope.lang.errornocontacts, function() {
                         newLogRequest('error', 'contacts-get', contactError);
                     });
-                };
+                }
 
                 var filter = [
                     navigator.contacts.fieldType.displayName,

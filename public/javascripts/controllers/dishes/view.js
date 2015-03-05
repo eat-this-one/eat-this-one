@@ -90,7 +90,7 @@ angular.module('eat-this-one')
             appStatus.completed('newMeal');
             var msg = $scope.lang.errornewmeal + '. "' + errorStatus + '": ' + data;
             notifier.show($scope.lang.error, msg);
-        }
+        };
         newMealRequest($scope, {dishid: id}, mealCallback, errorCallback);
 
         newLogRequest('click', 'meals-add', id);

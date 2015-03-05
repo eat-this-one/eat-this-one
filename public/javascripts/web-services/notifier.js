@@ -21,6 +21,5 @@ angular.module('eat-this-one').factory('notifier', ['$mdDialog', function($mdDia
         statusBar : function(title, message, type, dishid) {
             // Not supported by the web interface.
         }
-
-    }
+    };
 }]);

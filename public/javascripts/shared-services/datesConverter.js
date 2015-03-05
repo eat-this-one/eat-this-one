@@ -65,5 +65,5 @@ angular.module('eat-this-one').factory('datesConverter', function() {
 
             return timestamp;
         }
-    }
+    };
 });

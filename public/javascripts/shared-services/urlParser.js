@@ -13,6 +13,5 @@ angular.module('eat-this-one')
            }
            return null;
         }
-
-    }
+    };
 }]);

@@ -52,7 +52,7 @@ angular.module('eat-this-one')
         error : function(error) {
             console.log('Error, not able to get the registration ID: ' + error);
         }
-    }
+    };
 
 }]);
 
@@ -73,7 +73,7 @@ function notificationsHandler(e) {
 
                     var previousGcmRegId = localStorage.getItem('gcmRegId');
 
-                    if (previousGcmRegId === null || previousGcmRegId == false) {
+                    if (previousGcmRegId === null || previousGcmRegId === false || previousGcmRegId === '') {
                         // Store it if there was nothing before.
                         localStorage.setItem('gcmRegId', e.regid);
                         newLogRequest('create', 'gcm-registration', e.regid);

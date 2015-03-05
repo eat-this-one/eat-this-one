@@ -40,7 +40,7 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
             if ($scope.dishes.length === 0) {
                 $scope.showNoDishes = true;
             } else {
-                for (index in $scope.dishes) {
+                for (var index in $scope.dishes) {
                     $scope.dishes[index].when = datesConverter.timeToDay(Date.parse($scope.dishes[index].when));
                 }
             }
@@ -112,5 +112,5 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
 
         appStatus.waiting('signup');
         newRegIdUserRequest($scope);
-    }
+    };
 }]);

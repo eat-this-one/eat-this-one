@@ -37,7 +37,7 @@ angular.module('eat-this-one')
         if ($scope.meals.length === 0) {
             $scope.showNoMeals = true;
         } else {
-            for (index in $scope.meals) {
+            for (var index in $scope.meals) {
                 $scope.meals[index].when = datesConverter.timeToDay(Date.parse($scope.meals[index].when));
             }
         }

@@ -112,7 +112,17 @@ module.exports = function(grunt) {
 
         // JS Quality.
         jshint : {
-            backend : [ "lib/**/*.js", "routes/*.js", "models/*.js" ]
+            backend : [ "lib/**/*.js", "routes/*.js", "models/*.js", "appjs" ],
+            frontend : [
+                "public/javascripts/i18n/en.js",
+                "public/javascripts/bootstrap.js",
+                "public/javascripts/shared-services",
+                "public/javascripts/web-services",
+                "public/javascripts/app-services",
+                "public/javascripts/directives",
+                "public/javascripts/controllers",
+                "public/javascripts/restclient"
+            ]
         },
 
         // Less compiles to CSS all the .less files.
@@ -165,7 +175,7 @@ module.exports = function(grunt) {
             // TODO Run JS tests!!
             dev_js_frontend : {
                 files : [ "public/javascripts/**/*.js", "config_frontend.js" ],
-                tasks : [ "uglify:dev", "copy:build" ],
+                tasks : [ "jshint:frontend", "uglify:dev", "copy:build" ],
                 options : {
                     nospawn : true
                 }
@@ -306,10 +316,10 @@ module.exports = function(grunt) {
     });
 
     // Uncompressed JS.
-    grunt.registerTask("build:dev", [ "clean:build", "copy:resources", "uglify:dev", "less", "cssmin", "csslint", "jshint:backend", "jade:compile", "copy:build" ]);
+    grunt.registerTask("build:dev", [ "clean:build", "copy:resources", "uglify:dev", "less", "cssmin", "csslint", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]);
 
     // All compressed + linting before production.
-    grunt.registerTask("build:prod", [ "clean:build", "copy:resources", "uglify:prod", "less", "cssmin", "csslint", "jshint:backend", "jade:compile", "copy:build" ]);
+    grunt.registerTask("build:prod", [ "clean:build", "copy:resources", "uglify:prod", "less", "cssmin", "csslint", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]);
 
     // While developing monitor the changes.
     grunt.registerTask("run:dev", [ "build:dev", "karma", "concurrent" ]);

@@ -81,5 +81,5 @@ angular.module('eat-this-one')
             localStorage.removeItem('user');
             authManager.unauthenticate();
         }
-    }
+    };
 }]);

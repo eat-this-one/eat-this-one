@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('dishesRequest', ['$http', 'notifier', 'eatConfig', 'sessionManager', 'appStatus', 'notifier', function($http, notifier, eatConfig, sessionManager, appStatus, notifier) {
+    .factory('dishesRequest', ['$http', 'eatConfig', 'sessionManager', 'appStatus', 'notifier', function($http, eatConfig, sessionManager, appStatus, notifier) {
 
     return function($scope, dishesCallback, errorCallback) {
 

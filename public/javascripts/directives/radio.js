@@ -29,5 +29,5 @@ angular.module('eat-this-one').directive('eatRadio', ['$timeout', function($time
             };
         },
         templateUrl: 'templates/radio.html'
-    }
+    };
 }]);

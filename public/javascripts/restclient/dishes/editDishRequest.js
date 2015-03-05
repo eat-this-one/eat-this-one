@@ -7,7 +7,9 @@ angular.module('eat-this-one')
         // Defaults to new dish values.
         var method = 'POST';
         var url = '/dishes';
-        if (typeof dish.id != 'undefined' && dish.id != null) {
+        if (typeof dish.id !== "undefined" &&
+                dish.id !== null &&
+                dish.id !== false) {
             method = 'PUT';
             url = '/dishes/' + dish.id;
         }
@@ -61,18 +63,20 @@ angular.module('eat-this-one')
                 // should also give him/her the option to add more colleagues.
                 notifier.show(title, info, function() {
 
+                    var shareArguments = null;
+
                     // TODO Commented for development purposes.
                     //if (data.user.dishescount == 1) {
                     if (1) {
                         // After adding the first dish we allow people to
                         // add their contacts to his/her location.
-                        var shareArguments = '?dishname=' + data.name +
+                        shareArguments = '?dishname=' + data.name +
                             '&locationname=' + data.loc.name;
                         redirecter.redirect('dishes/share.html' + shareArguments);
                     } else if (data.nsubscribers <= 1) {
                         // If there are no subscriptors the user needs to contact more
                         // people, otherwise it is not worth to share the dish with nobody.
-                        var shareArguments = '?dishname=' + data.name +
+                        shareArguments = '?dishname=' + data.name +
                             '&locationname=' + data.loc.name;
                         redirecter.redirect('dishes/share.html' + shareArguments);
                     } else {

@@ -20,7 +20,7 @@ angular.module('eat-this-one')
                 updateRegistration(randomNumber);
             }
         }
-    }
+    };
 }]);
 
 /**

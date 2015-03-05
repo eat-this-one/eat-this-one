@@ -62,5 +62,5 @@ angular.module('eat-this-one')
             }
             return false;
         }
-    }
+    };
 });

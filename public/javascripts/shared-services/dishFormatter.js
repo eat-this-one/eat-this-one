@@ -31,16 +31,16 @@ angular.module('eat-this-one').factory('dishFormatter', ['notifier', 'datesConve
         }
 
         // Number of remaining portions to book.
-        if ($scope.dish.nportions == 0) {
+        if ($scope.dish.nportions === 0) {
             // No text as they are unlimited, rendundant info.
             $scope.dish.remainingportions = -1;
         } else {
             $scope.dish.remainingportions = $scope.dish.nportions - dishData.nbookedmeals;
-            if ($scope.dish.remainingportions == 1) {
+            if ($scope.dish.remainingportions === 1) {
                 // Show last portion text.
                 $scope.dishusefulinfotext = $scope.lang.lastportion;
 
-            } else if ($scope.dish.remainingportions == 0) {
+            } else if ($scope.dish.remainingportions === 0) {
                 // Show all booked text.
                 $scope.dishusefulinfotext = $scope.lang.allportionsbooked;
             } else {
