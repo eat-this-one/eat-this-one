@@ -2,7 +2,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var LogSchema = new Schema({
-    userid : { type: String, required: true},
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false,
+        ref: 'User'
+    },
     what : { type: String, required: true},
     where : { type: String, required: true},
     target : {type: String, required: false, default: null},
