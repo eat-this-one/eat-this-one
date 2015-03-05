@@ -3,7 +3,7 @@ nl.x-services.plugins.socialsharing https://github.com/EddyVerbruggen/SocialShar
 com.phonegap.plugins.PushPlugin https://github.com/phonegap-build/PushPlugin.git
 org.apache.cordova.dialogs https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git
 org.apache.cordova.inappbrowser https://github.com/apache/cordova-plugin-inappbrowser.git
-org.apache.cordova.contacts org.apache.cordova.contacts
+com.dbaq.cordova.contactsPhoneNumbers https://github.com/dbaq/cordova-plugin-contacts-phone-numbers
 org.apache.cordova.camera org.apache.cordova.camera
 org.apache.cordova.globalization org.apache.cordova.globalization
 org.apache.cordova.device org.apache.cordova.device

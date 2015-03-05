@@ -11,33 +11,27 @@ angular.module('eat-this-one').factory('shareManager', ['eatConfig', 'appStatus'
 
                 function onSuccess(contacts) {
 
-                    // Expensive method.
+                    // To prevent duplicates.
+                    var contactPhones = [];
+                    var phoneNumber = null;
                     for (var i = 0; i < contacts.length; i++) {
-                        if (contacts[i].displayName === "" ||
-                                contacts[i].displayName === null ||
-                                contacts[i].displayName === false) {
-                            break;
+                        if (contacts[i].displayName === null || contacts[i].phoneNumbers === null) {
+                            continue;
                         }
-                        if (typeof contacts[i].phoneNumbers !== "undefined" &&
-                                contacts[i].phoneNumbers !== null &&
-                                contacts[i].phoneNumbers !== false) {
-
-                            for (var j = 0; j < contacts[i].phoneNumbers.length; j++) {
-                                if (contacts[i].phoneNumbers[j].type === 'mobile') {
-                                    // We pick the first one removing spaces from the phone number.
-                                    // TODO Avoid duplicates adding a contacts[mobilePhone] key.
-                                    $scope.contacts.push({
-                                        displayName: contacts[i].displayName,
-                                        mobilePhone: contacts[i].phoneNumbers[j].value.replace(/\s+/g, '')
-                                    });
-                                    break;
-                                }
+                        for (var j = 0; j < contacts[i].phoneNumbers.length; j++) {
+                            phoneNumber = contacts[i].phoneNumbers[j].normalizedNumber.replace(/-/g, '');
+                            if (contactPhones.indexOf(phoneNumber) === -1) {
+                                $scope.contacts.push({
+                                    displayName: contacts[i].displayName + ' - ' + phoneNumber,
+                                    mobilePhone: phoneNumber
+                                });
+                                contactPhones.push(phoneNumber);
                             }
                         }
                     }
 
                     // Update $scope.contacts.
-                    $scope.$apply();
+                    $scope.$digest();
 
                     // Set a class once a contact is selected.
                     $('#id-contacts .contact').each(function() {
@@ -64,20 +58,8 @@ angular.module('eat-this-one').factory('shareManager', ['eatConfig', 'appStatus'
                     });
                 }
 
-                var filter = [
-                    navigator.contacts.fieldType.displayName,
-                    navigator.contacts.fieldType.name
-                ];
-                // TODO Try to filter by something (not null...) to avoid the big big iteration.
-                var options = new ContactFindOptions();
-                options.filter = "";
-                options.multiple = true;
-                options.desiredFields = [
-                    navigator.contacts.fieldType.displayName,
-                    navigator.contacts.fieldType.name,
-                    navigator.contacts.fieldType.phoneNumbers
-                ];
-                navigator.contacts.find(filter, onSuccess, onError, options);
+                // Get the contacts with phone number.
+                navigator.contactsPhoneNumbers.list(onSuccess, onError);
 
             }, false);
 
