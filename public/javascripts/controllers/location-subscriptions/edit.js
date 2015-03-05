@@ -46,14 +46,6 @@ angular.module('eat-this-one')
         value: ''
     };
 
-    // If there is already one redirect home.
-    if (localStorage.getItem('loc')) {
-        notifier.show($scope.lang.alreadyjoined, $scope.lang.joinedgroupinfo, function() {
-            newLogRequest('redirected', 'index', 'locationSubscriptions-edit');
-            redirecter.redirect('index.html');
-        });
-    }
-
     // We will redirect to home if the user already have a location subscription.
     appStatus.waiting('locationSubscriptionsRequest');
     var locationSubscriptionsCallback = function(data) {
