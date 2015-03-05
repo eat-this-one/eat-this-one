@@ -24,12 +24,9 @@ angular.module('eat-this-one')
             redirecter.redirect('location-subscriptions/edit.html');
 
         }).error(function(data, errorStatus, errorMsg) {
-
             appStatus.completed('signup');
             newLogRequest('error', 'create-account', errorMsg);
-
-            var msg = $scope.lang.errornewuser + '. "' + errorStatus + '": ' + data;
-            notifier.show($scope.lang.error, msg);
+            notifier.show($scope.lang.error, $scope.lang.weird);
         });
     };
 

@@ -88,8 +88,8 @@ angular.module('eat-this-one')
         };
         var errorCallback = function(data, errorStatus, errorMsg) {
             appStatus.completed('newMeal');
-            var msg = $scope.lang.errornewmeal + '. "' + errorStatus + '": ' + data;
-            notifier.show($scope.lang.error, msg);
+            newLogRequest('error', 'meals-add', errorMsg);
+            notifier.show($scope.lang.error, $scope.lang.weird);
         };
         newMealRequest($scope, {dishid: id}, mealCallback, errorCallback);
 

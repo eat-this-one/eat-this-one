@@ -53,8 +53,8 @@ angular.module('eat-this-one')
             redirecter.redirect('index.html');
         } else {
             appStatus.completed('mealsRequest');
-            var msg = $scope.lang.errormealrequest + '. "' + errorStatus + '": ' + data;
-            notifier.show($scope.lang.error, msg);
+            newLogRequest('error', 'meals-index', errorMsg);
+            notifier.show($scope.lang.error, $scope.lang.weird);
         }
     };
     mealsRequest($scope, mealsCallback, errorCallback);

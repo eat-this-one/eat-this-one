@@ -166,6 +166,7 @@ angular.module('eat-this-one')
                 };
                 var errorCallback = function(data, errorStatus, errorMsg) {
                     appStatus.completed('newLocationRequest');
+                    newLogRequest('error', 'location-add', errorMsg);
                     notifier.show($scope.lang.error, $scope.lang.weird, function() {
                         redirecter.redirect('index.html');
                     });
