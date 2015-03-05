@@ -57,8 +57,8 @@ angular.module('eat-this-one')
         };
         var feedbackErrorCallback = function(data, errorStatus, errorMsg) {
             appStatus.completed('feedback');
-            var msg = $scope.lang.errorfeedback + '. "' + errorStatus + '": ' + data;
-            notifier.show($scope.lang.error, msg);
+            newLogRequest('error', 'feedback-add', errorMsg);
+            notifier.show($scope.lang.error, $scope.lang.weird);
         };
         addFeedbackRequest($scope, $scope.feedback.value, feedbackCallback, feedbackErrorCallback);
     };

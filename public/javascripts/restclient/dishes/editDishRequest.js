@@ -88,12 +88,9 @@ angular.module('eat-this-one')
             }
 
         }).error(function(data, errorStatus, errorMsg) {
-
             appStatus.completed('editDishRequest');
             newLogRequest('error', 'dish-edit', errorMsg);
-
-            var msg = $scope.lang.errordishedit + '. "' + errorStatus + '": ' + data;
-            notifier.show($scope.lang.error, msg);
+            notifier.show($scope.lang.error, $scope.lang.weird);
         });
     };
 

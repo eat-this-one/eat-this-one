@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('dishRequest', ['$http', 'appStatus', 'notifier', 'eatConfig', 'datesConverter', 'sessionManager', function($http, appStatus, notifier, eatConfig, datesConverter, sessionManager) {
+    .factory('dishRequest', ['$http', 'appStatus', 'notifier', 'eatConfig', 'datesConverter', 'sessionManager', 'newLogRequest', function($http, appStatus, notifier, eatConfig, datesConverter, sessionManager, newLogRequest) {
 
     return function($scope, dishCallback, id) {
 
@@ -12,8 +12,8 @@ angular.module('eat-this-one')
         .success(dishCallback)
         .error(function(data, errorStatus, errorMsg) {
             appStatus.completed('dishRequest');
-            var msg = $scope.lang.errordishrequest + '. "' + errorStatus + '": ' + data;
-            notifier.show($scope.lang.error, msg);
+            newLogRequest('error', 'dish-view', errorMsg);
+            notifier.show($scope.lang.error, $scope.lang.weird);
         });
     };
 
