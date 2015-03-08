@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var LocationSchema = new Schema({
-    userid : {
+    user : {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         unique: true,
