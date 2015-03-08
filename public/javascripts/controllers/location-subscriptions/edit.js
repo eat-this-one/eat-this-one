@@ -135,11 +135,11 @@ angular.module('eat-this-one')
                 // If there are zero locations forward to noLocationCallback.
                 if (locations.length === 0) {
                     noLocationCallback(locations);
+                } else {
+                    // Pity, notify the user that the location already exists.
+                    appStatus.completed('newLocationRequest');
+                    notifier.show($scope.lang.locationexists, $scope.lang.locationexistsinfo);
                 }
-
-                // Pity, notify the user that the location already exists.
-                appStatus.completed('newLocationRequest');
-                notifier.show($scope.lang.locationexists, $scope.lang.locationexistsinfo);
             };
 
             var noLocationCallback = function(data, errorStatus, errorMessage) {

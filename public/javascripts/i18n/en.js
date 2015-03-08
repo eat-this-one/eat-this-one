@@ -83,7 +83,7 @@ $.eatLang.en = {
     setgroupname : 'New group name',
     sharedish : 'Share dish',
     signin : 'Sign in',
-    sitename : 'Eat this one',
+    sitename : 'Eat this one!',
     skip : 'Exit',
     thanks : 'Thanks',
     to : 'To',
