@@ -44,7 +44,8 @@ html
                             md-button(ng-click='menu.toggle()', ng-if='showToggleMenu && menuIcons', aria-label='{{lang.menu}}', class='md-primary md-fab no-box-shadow')
                                 span(class='glyphicon glyphicon-menu-hamburger', aria-hidden='true')
                         div(class='md-tile-content')
-                            span {{pageTitle}}
+                            span
+                                b {{pageTitle}}
                             span(flex)
 
                         //- Action buttons. The controller sets them.
@@ -53,7 +54,7 @@ html
                                 span(class='{{actionIcon.icon}}', aria-hidden='true')
 
                 //- Delegated to the specific view logic.
-                md-content(id='id-contents', class='md-padding')
+                md-content(id='id-contents', class='md-padding main-content')
                     //- Delegated to the extension.
                     block logic
 
