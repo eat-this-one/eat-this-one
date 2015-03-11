@@ -14,8 +14,12 @@ html
 
     body(id='id-body', ng-app='eat-this-one')
 
+        //- Loading div.
+        div(id="id-loading", class="centered hidden", layout="row", layout-sm="column", layout-align="space-around")
+            md-progress-circular(md-mode="indeterminate")
+
         //- Here we use controllerName var to set the page JS controller.
-        div(ng-controller='#{controllerName}')
+        div(id="id-main", ng-controller='#{controllerName}')
 
             //- The user menu. Only available when the controller set icons on it.
             md-sidenav(ng-if='showToggleMenu && menuIcons', class='md-sidenav-left sidenav-short', md-component-id='menu')

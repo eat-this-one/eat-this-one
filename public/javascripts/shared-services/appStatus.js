@@ -23,13 +23,14 @@ angular.module('eat-this-one')
                 // There is an issue with md-content and its display block that
                 // I've spent 1 hour trying to solve. I hide the main contents
                 // div until the app is ready.
-                if (!$('#id-body').hasClass('mask')) {
-                    $('#id-body').addClass('mask');
+                if (!$('#id-main').hasClass('mask')) {
+                    $('#id-main').addClass('mask');
                     $('#id-contents').addClass('hidden');
+                    $('#id-loading').removeClass('hidden');
                 }
 
                 // Disables action buttons.
-                $('.md-button').addClass('disabled');
+                $('button').attr('disabled', 'disabled');
 
                 // List the action as waiting for it.
                 loadingActions.push(action);
@@ -45,13 +46,14 @@ angular.module('eat-this-one')
                 // Only remove the action when there are no more loadingActions.
                 loadingActions.splice(loadingActions.indexOf(action), 1);
 
-                if (loadingActions.length === 0 && $('#id-body').hasClass('mask')) {
-                    $('#id-body').removeClass('mask');
+                if (loadingActions.length === 0 && $('#id-main').hasClass('mask')) {
+                    $('#id-main').removeClass('mask');
                     $('#id-contents').removeClass('hidden');
+                    $('#id-loading').addClass('hidden');
                 }
                 if (loadingActions.length === 0) {
                     // Enable buttons again.
-                    $('.md-button').removeClass('disabled');
+                    $('button').removeAttr('disabled');
                 }
             });
         },
