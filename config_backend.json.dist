@@ -1,5 +1,5 @@
 {
-    "EAT_DB_URI": "mongodb://localhost:27017/eat-this-one",
+    "MONGO_URI": "mongodb://localhost:27017/eat-this-one",
     "APP_PORT": "3000",
     "SALT": "WHATEVER_STRING_BUT_CHANGE_IT",
     "GCM_SEND_URL": "https://android.googleapis.com/gcm/send",
