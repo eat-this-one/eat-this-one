@@ -4,5 +4,4 @@
     "SALT": "WHATEVER_STRING_BUT_CHANGE_IT",
     "GCM_SEND_URL": "https://android.googleapis.com/gcm/send",
     "GCM_API_KEY": "YOURAPIEY",
-    "DOWNLOAD_URL_ANDROID" : "https://www.eat-this-one.com/android.apk"
 }

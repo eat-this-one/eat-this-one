@@ -62,26 +62,6 @@ app.use('/', index);
 app.options('*', function(req, res) {
     res.status(200).end();
 });
-// Downloads.
-app.get('/android.apk', function(req, res) {
-    var download = nconf.get('DOWNLOAD_URL_ANDROID');
-    var filepath = nconf.get('DOWNLOAD_FILEPATH_ANDROID');
-    if (filepath != null) {
-        res.sendFile(filepath, {}, function(error) {
-            if (error) {
-                res.statusCode = 400;
-                res.send('Error downloading the android.apk');
-                console.log(error);
-                return;
-            }
-        });
-        return;
-    } else if (download != null) {
-        res.redirect(nconf.get('DOWNLOAD_URL_ANDROID'));
-    } else {
-        throw new Error('DOWNLOAD_URL_ANDROID nor DOWNLOAD_FILEPATH_ANDROID are defined.');
-    }
-});
 
 app.use('/api', index);
 app.use('/api/users', users);
