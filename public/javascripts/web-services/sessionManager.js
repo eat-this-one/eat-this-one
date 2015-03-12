@@ -20,7 +20,7 @@ angular.module('eat-this-one')
             var token = sessionStorage.getItem('token');
             if (token !== null && token !== false) {
                 var user = JSON.parse(sessionStorage.getItem('user'));
-                authManager.authenticate(user.id);
+                authManager.authenticate(user._id);
             }
 
             // TODO: Load here user data.

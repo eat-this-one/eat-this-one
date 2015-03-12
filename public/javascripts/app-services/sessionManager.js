@@ -20,7 +20,7 @@ angular.module('eat-this-one')
             var token = localStorage.getItem('token');
             if (token !== null && token !== false) {
                 var user = JSON.parse(localStorage.getItem('user'));
-                authManager.authenticate(user.id);
+                authManager.authenticate(user._id);
             }
 
             $.eatLang.lang = $.eatLang[eatConfig.defaultLang];
