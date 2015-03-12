@@ -1,7 +1,7 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
-var logger = require('morgan');
+var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var nconf = require('nconf');
@@ -36,7 +36,16 @@ var logs = require('./routes/logs');
 var feedback = require('./routes/feedback');
 
 app.use(favicon());
-app.use(logger('dev'));
+
+// Log requests to a file.
+var accessLogStream = fs.createWriteStream(
+    nconf.get('LOGS_DIR') + '/access.log',
+    {flags: 'a'}
+);
+app.use(morgan('combined', {stream: accessLogStream}));
+
+// And also display them in the console.
+app.use(morgan('dev'));
 
 // Increasing request size as the image comes with the dish data.
 app.use(bodyParser.json({
