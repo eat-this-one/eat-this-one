@@ -4,6 +4,7 @@ angular.module('eat-this-one')
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
     $scope.redirectAction = redirecter.redirectAction;
+    $scope.redirectMenuItem = redirecter.redirectMenuItem;
     $scope.menu = menuManager;
 
     // Define header.
@@ -15,16 +16,9 @@ angular.module('eat-this-one')
             callback : 'save'
         }
     ];
-    $scope.menuIcons = [
-        {
-            name : $scope.lang.dishes,
-            icon : 'glyphicon glyphicon-piggy-bank',
-            callback : 'index'
-        }, {
-            name : $scope.lang.bookedmeals,
-            icon : 'glyphicon glyphicon-cutlery',
-            callback : 'indexMeals'
-        }
+    $scope.menuItems = [
+        menuManager.dishesListItem(),
+        menuManager.bookedMealsItem()
     ];
 
     $scope.showToggleMenu = false;
@@ -166,17 +160,5 @@ angular.module('eat-this-one')
         } else {
             newLogRequest('click', 'dishes-add-confirm');
         }
-    };
-
-    // Redirects to the user meals list.
-    $scope.indexMeals = function() {
-        newLogRequest('click', 'meals-index');
-        redirecter.redirect('meals/index.html');
-    };
-
-    // Redirects to index.
-    $scope.index = function() {
-        newLogRequest('click', 'index');
-        redirecter.redirect('index.html');
     };
 }]);

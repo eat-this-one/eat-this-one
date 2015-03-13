@@ -22,15 +22,15 @@ html
         div(id="id-main", ng-controller='#{controllerName}')
 
             //- The user menu. Only available when the controller set icons on it.
-            md-sidenav(ng-if='showToggleMenu && menuIcons', class='md-sidenav-left sidenav-short', md-component-id='menu')
+            md-sidenav(ng-if='showToggleMenu && menuItems', class='md-sidenav-left sidenav-short', md-component-id='menu')
                 md-toolbar
                     h1(class='md-toolbar-tools') {{lang.menu}}
                 md-list(role='list', layout='column', layout-fill)
-                    md-item(ng-repeat='menuIcon in menuIcons', role='listitem')
-                        md-button(ng-click='redirectAction(this, menuIcon.callback)', class='menu-item', aria-label='{{menuIcon.name}}')
+                    md-item(ng-repeat='item in menuItems', role='listitem')
+                        md-button(ng-click='redirectMenuItem(this, item.callback)', class='menu-item', aria-label='{{item.name}}')
                             md-inline-list-icon
-                            span(class='{{menuIcon.icon}} button-icon big-icon')
-                            span(class='md-inline-list-icon-label', aria-hidden='true') {{menuIcon.name}}
+                            span(class='{{item.icon}} button-icon big-icon')
+                            span(class='md-inline-list-icon-label', aria-hidden='true') {{item.name}}
 
             //- Main content container.
             md-content
@@ -41,7 +41,7 @@ html
 
                         //- The menu is only available when the controller specifies it.
                         div(class='md-tile-left')
-                            md-button(ng-click='menu.toggle()', ng-if='showToggleMenu && menuIcons', aria-label='{{lang.menu}}', class='md-primary md-fab no-box-shadow')
+                            md-button(ng-click='menu.toggle()', ng-if='showToggleMenu && menuItems', aria-label='{{lang.menu}}', class='md-primary md-fab no-box-shadow')
                                 span(class='glyphicon glyphicon-menu-hamburger', aria-hidden='true')
                         div(class='md-tile-content')
                             span

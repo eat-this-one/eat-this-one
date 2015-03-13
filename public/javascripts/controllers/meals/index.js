@@ -4,20 +4,14 @@ angular.module('eat-this-one')
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
     $scope.redirectAction = redirecter.redirectAction;
+    $scope.redirectMenuItem = redirecter.redirectMenuItem;
     $scope.menu = menuManager;
 
     // Define header.
     $scope.pageTitle = $scope.lang.mymeals;
-    $scope.menuIcons = [
-        {
-            name : $scope.lang.dishes,
-            icon : 'glyphicon glyphicon-piggy-bank',
-            callback : 'index'
-        }, {
-            name : $scope.lang.feedback,
-            icon : 'glyphicon glyphicon-send',
-            callback : 'feedback'
-        }
+    $scope.menuItems = [
+        menuManager.dishesListItem(),
+        menuManager.feedbackItem()
     ];
 
     $scope.meals = [];
@@ -71,17 +65,4 @@ angular.module('eat-this-one')
         newLogRequest('click', 'meals-view', dishid);
         redirecter.redirect('meals/view.html?id=' + dishid);
     };
-
-    // Redirects to index.
-    $scope.index = function() {
-        newLogRequest('click', 'index');
-        redirecter.redirect('index.html');
-    };
-
-    // Redirects to the feedback screen.
-    $scope.feedback = function() {
-        newLogRequest('click', 'feedback-add');
-        redirecter.redirect('feedback/add.html');
-    };
-
 }]);

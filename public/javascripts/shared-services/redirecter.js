@@ -19,6 +19,13 @@ angular.module('eat-this-one').factory('redirecter', ['$window', function($windo
          */
         redirectAction : function($scope, callbackName) {
             $scope[callbackName]();
+        },
+
+        /**
+         * Executes the required menu callback.
+         */
+        redirectMenuItem : function($scope, callbackName) {
+            $scope.menu[callbackName]();
         }
     };
 }]);

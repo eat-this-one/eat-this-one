@@ -4,20 +4,14 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
     $scope.redirectAction = redirecter.redirectAction;
+    $scope.redirectMenuItem = redirecter.redirectMenuItem;
     $scope.menu = menuManager;
 
     // Define header.
     $scope.pageTitle = $scope.lang.sitename;
-    $scope.menuIcons = [
-        {
-            name : $scope.lang.bookedmeals,
-            icon : 'glyphicon glyphicon-cutlery',
-            callback : 'indexMeals'
-        }, {
-            name : $scope.lang.feedback,
-            icon : 'glyphicon glyphicon-send',
-            callback : 'feedback'
-        }
+    $scope.menuItems = [
+        menuManager.bookedMealsItem(),
+        menuManager.feedbackItem()
     ];
 
 
@@ -88,18 +82,6 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
     $scope.addDish = function() {
         newLogRequest('click', 'dishes-add');
         redirecter.redirect('dishes/edit.html');
-    };
-
-    // Redirects to the user meals list.
-    $scope.indexMeals = function() {
-        newLogRequest('click', 'meals-index');
-        redirecter.redirect('meals/index.html');
-    };
-
-    // Redirects to the feedback screen.
-    $scope.feedback = function() {
-        newLogRequest('click', 'feedback-add');
-        redirecter.redirect('feedback/add.html');
     };
 
     // Creates a user account.
