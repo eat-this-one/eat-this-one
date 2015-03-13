@@ -81,6 +81,7 @@ $.eatLang.en = {
     save : 'Save',
     selectimage : 'Select image',
     setgroupname : 'New group name',
+    setmygroup : 'Set my group',
     sharedish : 'Share dish',
     signin : 'Sign in',
     sitename : 'Eat this one!',
