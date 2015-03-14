@@ -58,12 +58,9 @@ angular.module('eat-this-one')
             // It returns an array, but should only contain 1 location subscription.
             localStorage.setItem('loc', JSON.stringify(data.shift()));
 
-            // TODO Change this, only works in mobile.
-            document.addEventListener('deviceready', function() {
-                newLogRequest('redirected', 'index', 'locationSubscriptions-edit');
-                notifier.show($scope.lang.alreadyjoined, $scope.lang.joinedgroupinfo, function() {
-                    redirecter.redirect('index.html');
-                });
+            newLogRequest('redirected', 'index', 'locationSubscriptions-edit');
+            notifier.show($scope.lang.alreadyjoined, $scope.lang.joinedgroupinfo, function() {
+                redirecter.redirect('index.html');
             });
         }
     };
@@ -89,7 +86,7 @@ angular.module('eat-this-one')
             // If the location does not exists we notify the user about it.
             var noLocationErrorCallback = function(data, errorStatus, errorMsg) {
                 appStatus.completed('newLocationSubscriptionRequest');
-                notifier.show($scope.lang.locationnoexists, $scope.lang.locationnoexistsinfo);
+                notifier.show($scope.lang.wrongcode, $scope.lang.wrongcodeinfo);
             };
 
             // Checking that the location exists.

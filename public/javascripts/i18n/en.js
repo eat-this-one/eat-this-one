@@ -53,8 +53,7 @@ $.eatLang.en = {
     locationexists : 'Location already used',
     locationexistsinfo : 'Select another location name. This one is already used.',
     locationname : 'Location name',
-    locationnoexists : 'Wrong code',
-    locationnoexistsinfo : 'The provided code does not match any group',
+    locationnoexists : 'The location does not exist',
     mealbooked : 'Meal booked',
     mealbookedinfo : 'Thanks for booking the meal. The chef has been notified.',
     bookedmeals : 'Booked meals',
@@ -99,5 +98,7 @@ $.eatLang.en = {
     when : 'When',
     where : 'Where',
     codeornew : ' Use your code or create a new group',
-    whereexample : 'e.g. Moodle Pty Ltd'
+    whereexample : 'e.g. Moodle Pty Ltd',
+    wrongcode : 'Wrong code',
+    wrongcodeinfo : 'The provided code does not match any group'
 };

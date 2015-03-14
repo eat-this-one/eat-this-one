@@ -94,7 +94,7 @@ angular.module('eat-this-one')
     // No security issues on having the location in localStorage
     // as the locations info is public.
     var loc = localStorage.getItem('loc');
-    if (!loc) {
+    if (loc === null) {
         newLogRequest('redirected', 'locationSubscriptions-add', 'index');
         redirecter.redirect('location-subscriptions/edit.html');
     }
