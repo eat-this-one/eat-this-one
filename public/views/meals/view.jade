@@ -10,14 +10,14 @@ block logic
     div(ng-if='auth.isAuthenticated()', class='container')
         md-card
             md-card-content
+                div(ng-if='dish.photo', class='dish-field')
+                    img(class='dish-img', src='{{dish.photo}}')
                 div(class='dish-field')
                     b {{lang.dishname}}
                     {{dish.name}}
                 div(class='dish-field')
                     b {{lang.dishdescription}}
                     {{dish.description}}
-                div(ng-if='dish.photo', class='dish-field')
-                    img(class='dish-img', src='{{dish.photo}}')
                 div(class='dish-field')
                     b {{lang.when}}
                     {{dish.when}}

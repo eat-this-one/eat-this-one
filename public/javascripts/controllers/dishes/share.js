@@ -39,15 +39,6 @@ angular.module('eat-this-one')
     // Initializes the share manager (loads phone contacts if necessary...).
     shareManager.init($scope);
 
-    $scope.noShare = function() {
-
-        newLogRequest('click', 'dishes-share-continue');
-
-        // TODO If there are no subscribers we should warn the
-        // user that no users will see the dish he/she just added.
-        redirecter.redirect('index.html');
-    };
-
     $scope.share = function() {
         shareManager.process($scope);
     };

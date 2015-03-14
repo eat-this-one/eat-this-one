@@ -22,6 +22,7 @@ angular.module('eat-this-one')
     if ($scope.auth.isAuthenticated()) {
         $scope.showToggleMenu = true;
     }
+    $scope.showMembers = false;
 
     var id = urlParser.getParam('id');
 
@@ -47,8 +48,19 @@ angular.module('eat-this-one')
         var locData = locations[0];
 
         $scope.pageTitle = locData.name;
-        $scope.members = locData.members;
 
+        // If you can see the members you are one of them.
+        if (typeof locData.members !== "undefined") {
+            $scope.members = locData.members;
+            $scope.showMembers = true;
+            $scope.actionIcons = [
+                {
+                    name : $scope.lang.invitepeople,
+                    icon : 'glyphicon glyphicon-plus',
+                    callback : 'inviteMembers'
+                }
+            ];
+        }
         appStatus.completed('locationsRequest');
     };
 
@@ -73,6 +85,12 @@ angular.module('eat-this-one')
     // We check the permissions in the backend, if the user
     // is not a member we will only return the location data, not members.
     locationsRequest($scope, {id: id}, locationCallback, errorCallback);
+
+    // Redirects to invite people to the location page.
+    $scope.inviteMembers = function() {
+        newLogRequest('click', 'location-share', id);
+        redirecter.redirect('location/share.html?id=' + id);
+    };
 
     newLogRequest('view', 'location-view', id);
 }]);

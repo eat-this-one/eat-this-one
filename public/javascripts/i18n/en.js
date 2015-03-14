@@ -35,6 +35,7 @@ $.eatLang.en = {
     feedback : 'Feedback',
     feedbackaddedinfo : 'Thanks for your feedback, it is very appreciated.',
     groupcode : 'The group code is',
+    groupparticipants : 'Group participants',
     imcooking : 'Hi, I\'m cooking',
     insertgroupcode : 'Group code',
     inviteemailsubject : 'I\'ve cooked a dish I\'d like to share with you',
