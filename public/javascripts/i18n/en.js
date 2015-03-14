@@ -95,6 +95,7 @@ $.eatLang.en = {
     useralreadyingroup : 'You can only be member of one group',
     username : 'User name',
     usernameexample : 'e.g. John Cobra',
+    users : 'users',
     weird : 'Something weird happened... try again in a while',
     when : 'When',
     where : 'Where',

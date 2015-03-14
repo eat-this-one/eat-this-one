@@ -10,6 +10,7 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
     // Define header.
     $scope.pageTitle = $scope.lang.sitename;
     $scope.menuItems = [
+        menuManager.dishAddItem(),
         menuManager.dishesListItem(),
         menuManager.locationViewItem(),
         menuManager.bookedMealsItem(),

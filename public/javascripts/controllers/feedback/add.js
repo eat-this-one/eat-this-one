@@ -17,6 +17,7 @@ angular.module('eat-this-one')
         }
     ];
     $scope.menuItems = [
+        menuManager.dishAddItem(),
         menuManager.dishesListItem(),
         menuManager.locationViewItem(),
         menuManager.bookedMealsItem(),

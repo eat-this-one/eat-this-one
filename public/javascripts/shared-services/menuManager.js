@@ -7,6 +7,19 @@ angular.module('eat-this-one').factory('menuManager', ['$mdSidenav', 'newLogRequ
             $mdSidenav('menu').toggle();
         },
 
+        dishAddItem : function() {
+            return {
+                name : this.lang.adddish,
+                icon : 'glyphicon glyphicon-cutlery',
+                callback : 'dishAddCallback'
+            };
+        },
+
+        dishAddCallback : function() {
+            newLogRequest('click', 'dishes-add');
+            redirecter.redirect('dishes/edit.html');
+        },
+
         locationViewItem : function() {
 
             var item = {
@@ -23,6 +36,7 @@ angular.module('eat-this-one').factory('menuManager', ['$mdSidenav', 'newLogRequ
                 loc = JSON.parse(loc);
                 item.name = loc.name;
             }
+            item.name = item.name + ' ' + this.lang.users;
 
             return item;
         },
@@ -58,7 +72,7 @@ angular.module('eat-this-one').factory('menuManager', ['$mdSidenav', 'newLogRequ
         bookedMealsItem : function() {
             return {
                 name : this.lang.bookedmeals,
-                icon : 'glyphicon glyphicon-cutlery',
+                icon : 'glyphicon glyphicon-shopping-cart',
                 callback : 'bookedMealsCallback'
             };
         },

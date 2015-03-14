@@ -12,6 +12,7 @@ angular.module('eat-this-one')
     // Define header (the title will be replaced later by the location name).
     $scope.pageTitle = $scope.lang.location;
     $scope.menuItems = [
+        menuManager.dishAddItem(),
         menuManager.dishesListItem(),
         menuManager.locationViewItem(),
         menuManager.bookedMealsItem(),

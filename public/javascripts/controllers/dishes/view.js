@@ -10,6 +10,7 @@ angular.module('eat-this-one')
     // Define header.
     $scope.pageTitle = $scope.lang.dish;
     $scope.menuItems = [
+        menuManager.dishAddItem(),
         menuManager.dishesListItem(),
         menuManager.locationViewItem(),
         menuManager.bookedMealsItem(),
@@ -54,7 +55,7 @@ angular.module('eat-this-one')
             $scope.actionIcons = [
                 {
                     name : $scope.lang.addmeal,
-                    icon : 'glyphicon glyphicon-cutlery',
+                    icon : 'glyphicon glyphicon-shopping-cart',
                     callback : 'addMeal'
                 }
             ];
