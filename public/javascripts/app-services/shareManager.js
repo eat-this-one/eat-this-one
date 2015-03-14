@@ -78,9 +78,8 @@ angular.module('eat-this-one').factory('shareManager', ['eatConfig', 'appStatus'
             // The user should explicitly press 'Skip'.
             if (phonesArray.length === 0) {
                 appStatus.completed('selectedContacts');
-                notifier.show($scope.lang.nocontacts, $scope.lang.nocontactsinfo, function() {
-                    return false;
-                });
+                notifier.show($scope.lang.nocontacts, $scope.lang.nocontactsinfo);
+                return false;
             }
 
             // The receiver already knows who is sending the message.
