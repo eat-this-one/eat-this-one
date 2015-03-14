@@ -12,6 +12,7 @@ angular.module('eat-this-one')
     $scope.menuItems = [
         menuManager.dishesListItem(),
         menuManager.locationViewItem(),
+        menuManager.bookedMealsItem(),
         menuManager.feedbackItem()
     ];
 

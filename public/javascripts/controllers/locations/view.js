@@ -13,6 +13,7 @@ angular.module('eat-this-one')
     $scope.pageTitle = $scope.lang.location;
     $scope.menuItems = [
         menuManager.dishesListItem(),
+        menuManager.locationViewItem(),
         menuManager.bookedMealsItem(),
         menuManager.feedbackItem()
     ];
