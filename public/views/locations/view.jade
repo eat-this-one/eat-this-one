@@ -7,12 +7,13 @@ block base
     base(href='../')
 
 block logic
-    md-list
-        md-item(ng-repeat='member in members', role='listitem')
-            md-card
-                md-card-content
-                    md-item-content
-                        div
-                            span(class='glyphicon glyphicon-user', aria-hidden='true')
-                        div(class='md-tile-content')
-                            h3 member.name
+    div(class='container users-list')
+        md-list
+            md-item(ng-repeat='member in members', role='listitem')
+                md-card
+                    md-card-content
+                        md-item-content
+                            div
+                                span(class='glyphicon glyphicon-user', aria-hidden='true')
+                            div(class='md-tile-content')
+                                h3 {{member.user.name}}

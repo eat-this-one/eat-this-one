@@ -29,7 +29,7 @@ html
                     md-item(ng-repeat='item in menuItems', role='listitem')
                         md-button(ng-click='redirectMenuItem(this, item.callback)', class='menu-item', aria-label='{{item.name}}')
                             md-inline-list-icon
-                            span(class='{{item.icon}} button-icon big-icon')
+                            span(class='{{item.icon}} big-icon')
                             span(class='md-inline-list-icon-label', aria-hidden='true') {{item.name}}
 
             //- Main content container.

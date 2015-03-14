@@ -162,7 +162,7 @@ angular.module('eat-this-one')
                 };
                 newLocationRequest($scope, $scope.newgroup.value, locationCallback, errorCallback);
             };
-            locationsRequest($scope, $scope.newgroup.value, locExistsCallback, noLocationCallback);
+            locationsRequest($scope, {name: $scope.newgroup.value}, locExistsCallback, noLocationCallback);
         }
     };
 

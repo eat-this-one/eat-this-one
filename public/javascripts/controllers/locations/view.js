@@ -17,6 +17,11 @@ angular.module('eat-this-one')
         menuManager.feedbackItem()
     ];
 
+    $scope.showToggleMenu = false;
+    if ($scope.auth.isAuthenticated()) {
+        $scope.showToggleMenu = true;
+    }
+
     var id = urlParser.getParam('id');
 
     // All location members (filled later only if the user is a member).
