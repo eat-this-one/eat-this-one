@@ -27,10 +27,7 @@ block logic
                         md-card-content
                             md-item-content(ng-click='redirectToDish(dish._id)')
                                 div
-                                    a(href='dishes/view.html?id={{dish._id}}')
-                                        img(ng-src='images/default.svg', class='face', src='images/default.svg')
+                                    img(ng-src='images/default.svg', class='face', src='images/default.svg')
                                 div(class='md-tile-content')
-                                    h3
-                                        a(href='dishes/view.html?id={{dish._id}}') {{dish.name}} - {{dish.when}}
-                                    h4
-                                        a(href='dishes/view.html?id={{dish._id}}') {{dish.description}}
+                                    h3 {{dish.name}} - {{dish.when}}
+                                    h4 {{dish.description}}
