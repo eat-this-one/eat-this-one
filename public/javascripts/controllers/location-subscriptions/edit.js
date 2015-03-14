@@ -123,7 +123,7 @@ angular.module('eat-this-one')
                 newLocationSubscriptionRequest($scope, locationid, locSubscriptionCallback, errorCallback);
             };
 
-            locationsRequest($scope, $scope.joingroup.value, locCallback, noLocationErrorCallback);
+            locationsRequest($scope, {name: $scope.joingroup.value}, locCallback, noLocationErrorCallback);
 
         } else {
 
