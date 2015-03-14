@@ -8,21 +8,22 @@ block base
 
 block logic
 
-    div(ng-if='auth.isAuthenticated()')
+    div(ng-if='auth.isAuthenticated()', class='container')
         div(class='dish-useful-info') {{dishusefulinfotext}}
-
-        div(class='dish-info')
-            div(class='dish-field')
-                b {{lang.dishdescription}}
-                {{dish.description}}
-            div(class='dish-field')
-                b {{lang.chef}}
-                {{dish.user.name}}
-            div(ng-if='dish.photo', class='dish-field')
-                img(class='dish-img', src='{{dish.photo}}')
-            div(class='dish-field')
-                b {{lang.when}}
-                {{dish.when}}
-            div(class='dish-field')
-                b {{lang.expecteddonation}}
-                {{dish.donation}}
+        md-card
+            md-card-content
+                div(class='dish-info')
+                    div(class='dish-field')
+                        b {{lang.dishdescription}}
+                        {{dish.description}}
+                    div(class='dish-field')
+                        b {{lang.chef}}
+                        {{dish.user.name}}
+                    div(ng-if='dish.photo', class='dish-field')
+                        img(class='dish-img', src='{{dish.photo}}')
+                    div(class='dish-field')
+                        b {{lang.when}}
+                        {{dish.when}}
+                    div(class='dish-field')
+                        b {{lang.expecteddonation}}
+                        {{dish.donation}}

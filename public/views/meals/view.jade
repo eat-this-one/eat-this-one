@@ -7,18 +7,20 @@ block base
     base(href='../')
 
 block logic
-    div(ng-if='auth.isAuthenticated()', class='dish-info')
-        div(class='dish-field')
-            b {{lang.dishname}}
-            {{dish.name}}
-        div(class='dish-field')
-            b {{lang.dishdescription}}
-            {{dish.description}}
-        div(ng-if='dish.photo', class='dish-field')
-            img(class='dish-img', src='{{dish.photo}}')
-        div(class='dish-field')
-            b {{lang.when}}
-            {{dish.when}}
-        div(class='dish-field')
-            b {{lang.expecteddonation}}
-            {{dish.donation}}
+    div(ng-if='auth.isAuthenticated()', class='container')
+        md-card
+            md-card-content
+                div(class='dish-field')
+                    b {{lang.dishname}}
+                    {{dish.name}}
+                div(class='dish-field')
+                    b {{lang.dishdescription}}
+                    {{dish.description}}
+                div(ng-if='dish.photo', class='dish-field')
+                    img(class='dish-img', src='{{dish.photo}}')
+                div(class='dish-field')
+                    b {{lang.when}}
+                    {{dish.when}}
+                div(class='dish-field')
+                    b {{lang.expecteddonation}}
+                    {{dish.donation}}
