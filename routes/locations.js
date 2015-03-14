@@ -13,7 +13,7 @@ router.get('/', function(req, res) {
             return eat.returnCallback(error);
         }
         var loc = new EatLocation(eat);
-        return loc.getByName();
+        return loc.get();
     });
 });
 
