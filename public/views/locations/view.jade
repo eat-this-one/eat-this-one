@@ -1,0 +1,18 @@
+extends ../layout
+
+block configuration
+    - var controllerName = "LocationsViewController"
+
+block base
+    base(href='../')
+
+block logic
+    md-list
+        md-item(ng-repeat='member in members', role='listitem')
+            md-card
+                md-card-content
+                    md-item-content
+                        div
+                            span(class='glyphicon glyphicon-user', aria-hidden='true')
+                        div(class='md-tile-content')
+                            h3 member.name
