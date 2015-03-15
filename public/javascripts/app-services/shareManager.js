@@ -9,21 +9,26 @@ angular.module('eat-this-one').factory('shareManager', ['eatConfig', 'appStatus'
                 function onSuccess(contacts) {
 
                     // To prevent duplicates.
+                    var contactsPhones = [];
                     var contactPhones = [];
                     var phoneNumber = null;
                     for (var i = 0; i < contacts.length; i++) {
                         if (contacts[i].displayName === null || contacts[i].phoneNumbers === null) {
                             continue;
                         }
+                        contactPhones = [];
                         for (var j = 0; j < contacts[i].phoneNumbers.length; j++) {
                             phoneNumber = contacts[i].phoneNumbers[j].normalizedNumber.replace(/-/g, '');
                             if (contactPhones.indexOf(phoneNumber) === -1) {
-                                $scope.contacts.push({
-                                    displayName: contacts[i].displayName + ' - ' + phoneNumber,
-                                    mobilePhones: phoneNumber
-                                });
                                 contactPhones.push(phoneNumber);
                             }
+                        }
+                        // If there are valid mobiles we add the contact.
+                        if (contactPhones.length !== 0) {
+                            $scope.contacts.push({
+                                displayName: contacts[i].displayName,
+                                mobilePhones: contactPhones.join(',')
+                            });
                         }
                     }
 
