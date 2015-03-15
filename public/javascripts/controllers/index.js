@@ -13,7 +13,6 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
         menuManager.dishAddItem(),
         menuManager.dishesListItem(),
         menuManager.locationViewItem(),
-        menuManager.bookedMealsItem(),
         menuManager.feedbackItem()
     ];
 

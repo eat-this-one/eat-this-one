@@ -57,7 +57,6 @@ $.eatLang.en = {
     locationnoexists : 'The location does not exist',
     mealbooked : 'Meal booked',
     mealbookedinfo : 'Thanks for booking the meal. The chef has been notified.',
-    bookedmeals : 'Booked meals',
     menu : 'Menu',
     message : 'Message',
     messagecontactsinfo : 'The more people you share the food with, the better, invite them to join your group',

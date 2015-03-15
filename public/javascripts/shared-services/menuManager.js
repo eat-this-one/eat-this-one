@@ -69,19 +69,6 @@ angular.module('eat-this-one').factory('menuManager', ['$mdSidenav', 'newLogRequ
             redirecter.redirect('index.html');
         },
 
-        bookedMealsItem : function() {
-            return {
-                name : this.lang.bookedmeals,
-                icon : 'glyphicon glyphicon-shopping-cart',
-                callback : 'bookedMealsCallback'
-            };
-        },
-
-        bookedMealsCallback : function() {
-            newLogRequest('click', 'meals-index');
-            redirecter.redirect('meals/index.html');
-        },
-
         feedbackItem : function() {
             return {
                 name : this.lang.feedback,

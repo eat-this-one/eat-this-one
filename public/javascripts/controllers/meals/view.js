@@ -13,7 +13,6 @@ angular.module('eat-this-one')
         menuManager.dishAddItem(),
         menuManager.dishesListItem(),
         menuManager.locationViewItem(),
-        menuManager.bookedMealsItem(),
         menuManager.feedbackItem()
     ];
 
