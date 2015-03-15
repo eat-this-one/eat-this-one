@@ -18,7 +18,7 @@ block logic
                     {{lang.signin}}
 
     div(ng-if='auth.isAuthenticated()')
-        div(class='container dishes-list')
+        div(class='dishes-list')
             div(ng-show='showNoDishes')
                 p {{lang.nodishes}}
             md-list(ng-show='!showNoDishes')

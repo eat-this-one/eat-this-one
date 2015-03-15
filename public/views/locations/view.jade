@@ -7,7 +7,7 @@ block base
     base(href='../')
 
 block logic
-    div(class='container users-list')
+    div(class='users-list')
         h3(ng-show='showMembers') {{lang.groupparticipants}}
         md-list
             md-item(ng-repeat='member in members', role='listitem')
