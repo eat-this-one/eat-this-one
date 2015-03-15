@@ -36,7 +36,7 @@ html
             md-content
 
                 //- Page heading
-                md-toolbar
+                md-toolbar(class='navbar-fixed-top')
                     div(class='md-toolbar-tools no-toolbar-padding')
 
                         //- The menu is only available when the controller specifies it.
@@ -54,7 +54,7 @@ html
                                 span(class='{{actionIcon.icon}}', aria-hidden='true')
 
                 //- Delegated to the specific view logic.
-                md-content(id='id-contents', class='md-padding main-content')
+                md-content(id='id-contents', class='main-content')
                     //- Delegated to the extension.
                     block logic
 
