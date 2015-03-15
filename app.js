@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var nconf = require('nconf');
 var mongoose = require('mongoose');
 var fs = require('fs');
+var moment = require('moment');
 
 // Load config file.
 nconf.argv().env().file({file: path.join(__dirname, '/config_backend.json')});
@@ -37,10 +38,15 @@ var feedback = require('./routes/feedback');
 
 app.use(favicon());
 
+// Store the time (human-friendly) the server started.
+nconf.set('startedtime', moment().format('YYYYMMDDHHmmss'));
+
 // Log requests to a file.
 var accessLogStream = fs.createWriteStream(
-    nconf.get('LOGS_DIR') + '/access.log',
-    {flags: 'a'}
+    nconf.get('LOGS_DIR') + '/access.' + nconf.get('startedtime') + '.log',
+    {
+        flags: 'a'
+    }
 );
 app.use(morgan('combined', {stream: accessLogStream}));
 
