@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('editDishRequest', ['redirecter', '$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', 'newLogRequest', function(redirecter, $http, appStatus, notifier, eatConfig, sessionManager, newLogRequest) {
+    .factory('editDishRequest', ['redirecter', '$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', 'storage', 'newLogRequest', function(redirecter, $http, appStatus, notifier, eatConfig, sessionManager, storage, newLogRequest) {
 
     // Not using callbacks as it would be hardly reusable.
     return function($scope, dish) {
@@ -26,11 +26,14 @@ angular.module('eat-this-one')
 
             appStatus.completed('editDishRequest');
 
+            // Add the dish to the cached list of my dishes.
+            storage.add('mydishes', data._id);
+
             var title = '';
             var info = '';
             if (statusCode == 201) {
                 // POST.
-                newLogRequest('created', 'dish', data.id);
+                newLogRequest('created', 'dish', data._id);
 
                 title = $scope.lang.dishadded;
 
@@ -42,7 +45,7 @@ angular.module('eat-this-one')
                 }
             } else {
                 // PUT.
-                newLogRequest('updated', 'dish', data.id);
+                newLogRequest('updated', 'dish', data._id);
 
                 title = $scope.lang.dishedited + '.';
             }

@@ -31,3 +31,5 @@ block logic
                                 div(class='md-tile-content')
                                     h3 {{dish.name}} - {{dish.when}}
                                     h4 {{dish.description}}
+                                div(ng-if='dish.icon')
+                                    span(class='{{dish.icon}}')

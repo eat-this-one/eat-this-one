@@ -1,4 +1,4 @@
-angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirecter', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'datesConverter', 'formsManager', 'dishesRequest', 'newRegIdUserRequest', 'newLogRequest', 'menuManager', function($scope, redirecter, eatConfig, authManager, appStatus, notifier, datesConverter, formsManager, dishesRequest, newRegIdUserRequest, newLogRequest, menuManager) {
+angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirecter', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'datesConverter', 'formsManager', 'dishesRequest', 'newRegIdUserRequest', 'newLogRequest', 'menuManager', 'storage', function($scope, redirecter, eatConfig, authManager, appStatus, notifier, datesConverter, formsManager, dishesRequest, newRegIdUserRequest, newLogRequest, menuManager, storage) {
 
     // Dependencies.
     $scope.lang = $.eatLang.lang;
@@ -39,6 +39,13 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
             } else {
                 for (var index in $scope.dishes) {
                     $scope.dishes[index].when = datesConverter.timeToDay(Date.parse($scope.dishes[index].when));
+
+                    // Let's add state to each dish (my dish, booked...).
+                    if (storage.isIn('mydishes', $scope.dishes[index]._id)) {
+                        $scope.dishes[index].icon = 'glyphicon glyphicon-cutlery';
+                    } else if (storage.isIn('mybookedmeals', $scope.dishes[index]._id)) {
+                        $scope.dishes[index].icon = 'glyphicon glyphicon-shopping-cart';
+                    }
                 }
             }
         };

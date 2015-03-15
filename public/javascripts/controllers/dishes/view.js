@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesViewController', ['$scope', 'redirecter', 'appStatus', 'notifier', 'urlParser', 'dishFormatter', 'dishRequest', 'newMealRequest', 'eatConfig', 'authManager', 'newLogRequest', 'menuManager', function($scope, redirecter, appStatus, notifier, urlParser, dishFormatter, dishRequest, newMealRequest, eatConfig, authManager, newLogRequest, menuManager) {
+    .controller('DishesViewController', ['$scope', 'redirecter', 'appStatus', 'notifier', 'urlParser', 'dishFormatter', 'dishRequest', 'newMealRequest', 'eatConfig', 'authManager', 'newLogRequest', 'menuManager', 'storage', function($scope, redirecter, appStatus, notifier, urlParser, dishFormatter, dishRequest, newMealRequest, eatConfig, authManager, newLogRequest, menuManager, storage) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -78,6 +78,10 @@ angular.module('eat-this-one')
         appStatus.waiting('newMeal');
 
         var mealCallback = function(data) {
+
+            // Add the dish to the cached list of my booked meals.
+            storage.add('mybookedmeals', data.dish);
+
             appStatus.completed('newMeal');
             notifier.show($scope.lang.mealbooked, $scope.lang.mealbookedinfo, function() {
                 redirecter.redirect('index.html');
