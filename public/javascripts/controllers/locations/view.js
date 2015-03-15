@@ -89,7 +89,7 @@ angular.module('eat-this-one')
     // Redirects to invite people to the location page.
     $scope.inviteMembers = function() {
         newLogRequest('click', 'location-share', id);
-        redirecter.redirect('location/share.html?id=' + id);
+        redirecter.redirect('locations/share.html?id=' + id);
     };
 
     newLogRequest('view', 'location-view', id);

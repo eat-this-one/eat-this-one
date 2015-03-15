@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesShareController', ['$scope', 'authManager', 'redirecter', 'eatConfig', 'urlParser', 'shareManager', 'newLogRequest', 'menuManager', 'appStatus', function($scope, authManager, redirecter, eatConfig, urlParser, shareManager, newLogRequest, menuManager, appStatus) {
+    .controller('LocationsShareController', ['$scope', 'authManager', 'redirecter', 'eatConfig', 'urlParser', 'shareManager', 'newLogRequest', 'menuManager', 'appStatus', function($scope, authManager, redirecter, eatConfig, urlParser, shareManager, newLogRequest, menuManager, appStatus) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -33,24 +33,23 @@ angular.module('eat-this-one')
     // before all is ready.
     appStatus.waiting('contacts');
 
+    // TODO We will need to change this when we accept more than 1 group as
+    // we should request id param location data.
     var loc = JSON.parse(localStorage.getItem('loc'));
     $scope.infomessage = $scope.lang.messagecontactsinfo + ': "' + loc.name + '"';
 
     // Allow shareManager services to inject a contacts list here.
     $scope.contacts = [];
 
-    newLogRequest('view', 'dishes-share');
+    newLogRequest('view', 'locations-share');
 
     // Initializes the share manager (loads phone contacts if necessary...).
     shareManager.init($scope);
 
     $scope.share = function() {
 
-        // The receiver already knows who is sending the message.
-        var msg = $scope.lang.inviteimcooking + ' ' + urlParser.getParam('dishname') + '. ' +
-             $scope.lang.invitejoindetailsbook + '. ' + $scope.lang.invitegroupcode +
-             ': "' + urlParser.getParam('locationname') + '". ' + eatConfig.downloadAppUrl;
-
+        var msg = $scope.lang.invitejoinmygroup + ' .' + $scope.lang.invitegroupcode +
+             ': "' + loc.name + '". ' + eatConfig.downloadAppUrl;
         shareManager.process($scope, msg);
     };
 }]);

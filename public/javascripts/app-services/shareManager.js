@@ -1,13 +1,10 @@
-angular.module('eat-this-one').factory('shareManager', ['eatConfig', 'appStatus', 'notifier', 'urlParser', 'newLogRequest', function(eatConfig, appStatus, notifier, urlParser, newLogRequest) {
+angular.module('eat-this-one').factory('shareManager', ['eatConfig', 'appStatus', 'notifier', 'newLogRequest', function(eatConfig, appStatus, notifier, newLogRequest) {
 
     return {
 
         init : function($scope) {
 
             document.addEventListener('deviceready', function() {
-
-                // Set the loading here as getting contacts may be slow.
-                appStatus.waiting('contacts');
 
                 function onSuccess(contacts) {
 
@@ -23,7 +20,7 @@ angular.module('eat-this-one').factory('shareManager', ['eatConfig', 'appStatus'
                             if (contactPhones.indexOf(phoneNumber) === -1) {
                                 $scope.contacts.push({
                                     displayName: contacts[i].displayName + ' - ' + phoneNumber,
-                                    mobilePhone: phoneNumber
+                                    mobilePhones: phoneNumber
                                 });
                                 contactPhones.push(phoneNumber);
                             }
@@ -65,7 +62,7 @@ angular.module('eat-this-one').factory('shareManager', ['eatConfig', 'appStatus'
 
         },
 
-        process : function($scope) {
+        process : function($scope, msg) {
 
             appStatus.waiting('selectedContacts');
 
@@ -81,11 +78,6 @@ angular.module('eat-this-one').factory('shareManager', ['eatConfig', 'appStatus'
                 notifier.show($scope.lang.nocontacts, $scope.lang.nocontactsinfo);
                 return false;
             }
-
-            // The receiver already knows who is sending the message.
-            var msg = $scope.lang.imcooking + ' ' + urlParser.getParam('dishname') + '. ' +
-                 $scope.lang.joindetailsbook + '. ' + $scope.lang.groupcode +
-                 ': "' + urlParser.getParam('locationname') + '". ' + eatConfig.downloadAppUrl;
 
             appStatus.completed('selectedContacts');
 

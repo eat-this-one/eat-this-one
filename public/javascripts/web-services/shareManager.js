@@ -1,19 +1,14 @@
-angular.module('eat-this-one').factory('shareManager', ['eatConfig', 'appStatus', 'notifier', 'urlParser', 'newLogRequest', function(eatConfig, appStatus, notifier, urlParser, newLogRequest) {
+angular.module('eat-this-one').factory('shareManager', ['eatConfig', 'appStatus', 'notifier', 'newLogRequest', function(eatConfig, appStatus, notifier, newLogRequest) {
 
     return {
 
         init : function($scope) {
+            appStatus.completed('contacts');
         },
 
-        process : function($scope) {
-
-            // The receiver already knows who is sending the message.
-            var msg = $scope.lang.imcooking + ' ' + urlParser.getParam('dishname') + '. ' +
-                 $scope.lang.joindetailsbook + '. ' + $scope.lang.groupcode +
-                 ': "' + urlParser.getParam('locationname') + '". ' + eatConfig.downloadAppUrl;
-
-
-            window.location.href = 'mailto:?to=&body=' + msg + '&subject=' + $scope.lang.inviteemailsubject;
+        process : function($scope, msg) {
+            window.location.href = 'mailto:?to=&body=' + msg +
+                '&subject=' + $scope.lang.inviteemailsubject;
         }
     };
 }]);
