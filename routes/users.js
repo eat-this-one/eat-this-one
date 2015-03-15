@@ -6,32 +6,30 @@ var EatUser = require('../lib/EatUser.js');
 
 // GET - Users list.
 router.get('/', function(req, res) {
-    // TODO Comment it, there is no use case for it.
-    //res.send("Not supported.");
-    //return;
-    var eat = new Eat(req, res);
-    eat.checkValidToken(function(error) {
-        if (error) {
-            return eat.returnCallback(error);
-        }
-        var eatuser = new EatUser(eat);
-        return eatuser.get();
-    });
+    res.send("Not supported.");
+    return;
+    //var eat = new Eat(req, res);
+    //eat.checkValidToken(function(error) {
+        //if (error) {
+            //return eat.returnCallback(error);
+        //}
+        //var eatuser = new EatUser(eat);
+        //return eatuser.get();
+    //});
 });
 
 // GET - Obtain a specific user.
 router.get('/:id', function(req, res) {
-    // TODO Comment it, there is no use case for it.
-    //res.send("Not supported.");
-    //return;
-    var eat = new Eat(req, res);
-    eat.checkValidToken(function(error) {
-        if (error) {
-            return eat.returnCallback(error);
-        }
-        var eatuser = new EatUser(eat);
-        return eatuser.getById();
-    });
+    res.send("Not supported.");
+    return;
+    //var eat = new Eat(req, res);
+    //eat.checkValidToken(function(error) {
+        //if (error) {
+            //return eat.returnCallback(error);
+        //}
+        //var eatuser = new EatUser(eat);
+        //return eatuser.getById();
+    //});
 });
 
 // POST - Create an user.

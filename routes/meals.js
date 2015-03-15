@@ -9,15 +9,8 @@ var EatMeal = require('../lib/EatMeal.js');
 
 // GET - Meals list.
 router.get('/', function(req, res) {
-
-    var eat = new Eat(req, res);
-    eat.checkValidToken(function(error) {
-        if (error) {
-            return eat.returnCallback(error);
-        }
-        var eatmeal = new EatMeal(eat);
-        return eatmeal.getByUser();
-    });
+    res.send("Not supported.");
+    return;
 });
 
 // POST - Create a meal.
