@@ -52,6 +52,7 @@ describe('Main page', function() {
 
         afterEach(function() {
             sessionManager.cleanSession();
+            localStorage.clear();
         });
 
         it('should display dishes by default', function() {
