@@ -98,6 +98,7 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
         newLogRequest('click', 'signup');
 
         if (!formsManager.validate(['name', 'email'], $scope)) {
+            notifier.show($scope.lang.missingfields, $scope.lang.missingfieldsinfo);
             return;
         }
 

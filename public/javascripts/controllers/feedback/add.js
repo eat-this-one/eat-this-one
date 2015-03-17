@@ -39,6 +39,7 @@ angular.module('eat-this-one')
 
         // Validate the form text forms, the other ones have a default value.
         if (!formsManager.validate(['feedback'], $scope)) {
+            notifier.show($scope.lang.missingfields, $scope.lang.missingfieldsinfo);
             return;
         }
 

@@ -76,6 +76,7 @@ angular.module('eat-this-one')
         newLogRequest('click', 'locationSubscription-add-confirm');
 
         if (!formsManager.validate([$scope.usedfield], $scope)) {
+            notifier.show($scope.lang.missingfields, $scope.lang.missingfieldsinfo);
             return;
         }
 
