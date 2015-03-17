@@ -18,7 +18,7 @@ angular.module('eat-this-one').factory('notifier', ['redirecter', '$mdDialog', f
                 .finally(callback);
         },
 
-        statusBar : function(title, message, type, dishid) {
+        statusBar : function(title, text, type, dishid) {
 
             var msgid = Math.random() * 1000;
 
@@ -26,8 +26,9 @@ angular.module('eat-this-one').factory('notifier', ['redirecter', '$mdDialog', f
                 window.plugin.notification.local.schedule({
                     id : msgid,
                     title : title,
-                    text : message,
+                    text : text,
                     data : { dishid : dishid, type: type},
+                    smallIcon : 'file://images/icon.png'
                 });
 
                 // TODO Not always working.

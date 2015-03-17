@@ -18,7 +18,7 @@ angular.module('eat-this-one').factory('notifier', ['$mdDialog', function($mdDia
                 .finally(callback);
         },
 
-        statusBar : function(title, message, type, dishid) {
+        statusBar : function(title, text, type, dishid) {
             // Not supported by the web interface.
         }
     };
