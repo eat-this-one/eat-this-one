@@ -2,7 +2,7 @@ angular.module('eat-this-one').factory('messagesHandler', ['notifier', function(
 
     return {
         message : function(msgData) {
-            notifier.statusBar('Eat this one', msgData.message, msgData.type, msgData.dishid);
+            notifier.statusBar(msgData.title, msgData.text, msgData.type, msgData.dishid);
         }
     };
 }]);

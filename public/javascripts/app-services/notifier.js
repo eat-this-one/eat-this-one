@@ -23,22 +23,22 @@ angular.module('eat-this-one').factory('notifier', ['redirecter', '$mdDialog', f
             var msgid = Math.random() * 1000;
 
             document.addEventListener('deviceready', function() {
-                window.plugin.notification.local.add({
+                window.plugin.notification.local.schedule({
                     id : msgid,
                     title : title,
-                    message : message,
-                    json : { dishid : dishid, type: type},
+                    text : message,
+                    data : { dishid : dishid, type: type},
                 });
 
                 // TODO Not always working.
                 // Move to the requested page.
-                window.plugin.notification.local.onclick = function(msgid, state, json) {
-                    var dishid = JSON.parse(json).dishid;
+                window.plugin.notification.local.on("click", function(notification) {
+                    var dishid = notification.data.dishid;
                     // TODO We need to log this, but we are having
                     // a circular dependency on sessionManager.
                     //newLogRequest('click', 'notification', dishid);
                     redirecter.redirect('dishes/view.html?id=' + dishid);
-                };
+                });
             });
         }
     };
