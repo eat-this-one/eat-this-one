@@ -1,6 +1,6 @@
 {
   "name": "eat-this-one",
-  "description": "Share your cooking specialties with your colleagues at lunch time! Receive notifications when a colleague cooks a new dish and share your own dishes with them.",
+  "description": "Share cooking specialties with your colleagues at lunch time! Receive notifications when a colleague cooks a new dish and share your own dishes with them. Who cooks today?",
   "version": "0.0.1",
   "engines": {
     "node": "0.10.x"
