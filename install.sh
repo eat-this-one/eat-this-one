@@ -37,11 +37,11 @@ if [ ! -d "public/shared-build" ]; then
     mkdir public/shared-build
 fi
 
+# Create cordova app and add dependencies.
+cordova create dist/app "$packagename" "$appname"
+
 # Build the project to populate public/shared-build and friends.
 grunt build:dev
-
-# Create cordova app and add dependencies.
-cordova create dist/app "$packagename" "$appname" --copy-from=public/shared-build
 
 # App icon.
 ln icon.png dist/app/icon.png

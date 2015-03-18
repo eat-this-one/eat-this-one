@@ -23,7 +23,7 @@ Eat-this-one source code includes both backend, frontend and development tools.
     git clone git://bitbucket.org/eat-this-one.git eat-this-one
     cd eat-this-one
 
-## Download Android SDK
+## (Android) Download Android SDK
 
 Follow the normal procedure to install android SDK (http://developer.android.com/sdk/index.html)
 
@@ -33,6 +33,8 @@ Follow the normal procedure to install android SDK (http://developer.android.com
     * "Google Play APK Expansion Library"
     * "Google Repository"
 * http://developer.android.com/google/gcm/gs.html for google cloud messaging
+
+## (iOS) Download XCode
 
 ## Configure your development environment
 
@@ -64,8 +66,8 @@ Edit development.properties with your own values
     </VirtualHost>
 
 ## Install frontend and backend dependencies
-* **./install.sh**
-* You may need to install previous android sdk APIs as cordova is not always using the latest version
+* **./install.sh android** or **./install.sh ios**
+* (Android) You may need to install previous android sdk APIs as cordova is not always using the latest version
     * If it is the case, run **android sdk** and select the required versions
 * Edit dist/app/config.xml
     * Change whatever info you like
@@ -87,7 +89,7 @@ Edit development.properties with your own values
         * **./install_app.sh** - It also opens adb logcat
 
 To update project dependencies to latests
-* **./update.sh**
+* **./update.sh android** or **./update.sh ios**
 
 # Project structure info
 
