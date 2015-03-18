@@ -36,11 +36,14 @@ router.get('/:id', function(req, res) {
 router.post('/', function(req, res) {
 
     var eat = new Eat(req, res);
+    var eatuser = new EatUser(eat);
 
     if (req.param('provider') === 'regid') {
-        // Authentication based on the registration id.
-        var eatuser = new EatUser(eat);
+        // Authentication based on GCM registration id.
         return eatuser.addUserRegid();
+    } else if (req.param('provider') === 'apntoken') {
+        // Authentication based on APN token.
+        return eatuser.addUserApnToken();
     } else {
         var error = {
             code : 400,

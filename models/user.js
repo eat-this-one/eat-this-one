@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-    gcmregid: { type: String, required: true, unique: true},
+    gcmregid: { type: String, unique: true},
+    apntoken: { type: String, unique: true},
     email: { type: String, required: true},
     name: { type: String, required: true},
     created: { type: Date, required: false, default: Date.now},
