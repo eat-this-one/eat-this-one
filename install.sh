@@ -2,27 +2,54 @@
 
 set -e
 
-# Install global dependencies.
-sudo npm install grunt-cli -g
-sudo npm install express -g
-sudo npm install bower -g
-sudo npm install express-generator -g
-sudo npm install cordova -g
+packagename="com.monllao.david.eatthisone"
+appname="Eat this one!"
+
+if [ -z $1 ]; then
+    echo "Error: We need an argument, android or ios"
+    exit 1
+fi
+
+if [ "$1" == "android" -a "$1" == "ios" ]; then
+    echo "Error: 1 should be android or ios"
+    exit 1
+fi
+
+# Update global dependencies.
+sudo npm install -g grunt-cli
+sudo npm install -g express
+sudo npm install -g bower
+sudo npm install -g express-generator
+sudo npm install -g cordova
+
+# I usually have problems with this...
+npm prune ; npm cache clean ; sudo npm prune ; sudo npm cache clean
 
 # Install project dependencies.
 npm install
 bower install
 
+if [ ! -d "dist" ]; then
+    mkdir -p dist/app
+fi
+
+if [ ! -d "public/shared-build" ]; then
+    mkdir public/shared-build
+fi
+
+# Build the project to populate public/shared-build and friends.
+grunt build:dev
+
 # Create cordova app and add dependencies.
-cordova create dist/app "com.monllao.david.eatthisone" "Eat this one" --copy-from=public/shared-build
+cordova create dist/app "$packagename" "$appname" --copy-from=public/shared-build
 
 # App icon.
 ln icon.png dist/app/icon.png
 
 cd dist/app
 
-# TODO: Other platforms.
-cordova platform add android
+# Only the required platform.
+cordova platform add "$1"
 
 # Install all plugins.
 while read -a plugin; do
