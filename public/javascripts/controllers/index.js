@@ -1,4 +1,6 @@
-angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirecter', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'datesConverter', 'formsManager', 'dishesRequest', 'newRegIdUserRequest', 'newLogRequest', 'menuManager', 'storage', function($scope, redirecter, eatConfig, authManager, appStatus, notifier, datesConverter, formsManager, dishesRequest, newRegIdUserRequest, newLogRequest, menuManager, storage) {
+angular.module('eat-this-one').controller('IndexController',
+    ['$scope', 'redirecter', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'datesConverter', 'formsManager', 'dishesRequest', 'newRegIdUserRequest', 'newApnTokenUserRequest', 'newLogRequest', 'menuManager', 'storage',
+    function($scope, redirecter, eatConfig, authManager, appStatus, notifier, datesConverter, formsManager, dishesRequest, newRegIdUserRequest, newApnTokenUserRequest, newLogRequest, menuManager, storage) {
 
     // Dependencies.
     $scope.lang = $.eatLang.lang;
@@ -103,6 +105,27 @@ angular.module('eat-this-one').controller('IndexController', ['$scope', 'redirec
         }
 
         appStatus.waiting('signup');
-        newRegIdUserRequest($scope);
+        // Even though the requests to GCM or APN are supposed
+        // to be already finished, we need to be completely sure.
+        // Timeout at 3 seconds.
+        var time = 0;
+        setInterval(function() {
+            // Running every 0.2 seconds.
+            if (localStorage.getItem('gcmRegId') !== null) {
+                clearInterval();
+                newRegIdUserRequest($scope);
+            }
+            if (localStorage.getItem('apnToken') !== null) {
+                newApnTokenUserRequest($scope);
+                clearInterval();
+            }
+            if (time > 3000) {
+                // Timeout at 3 seconds and notify that
+                // something went wrong and try again in a while.
+                notifier.show($scope.lang.error, $scope.lang.weird);
+                clearInterval();
+            }
+            time = time + 200;
+        }.bind(this), 200);
     };
 }]);

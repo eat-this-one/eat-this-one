@@ -18,7 +18,7 @@ angular.module('eat-this-one').factory('notifier', ['redirecter', '$mdDialog', f
                 .finally(callback);
         },
 
-        statusBar : function(title, text, type, dishid) {
+        statusBar : function(title, text, dishid) {
 
             var msgid = Math.random() * 1000;
 
@@ -27,7 +27,7 @@ angular.module('eat-this-one').factory('notifier', ['redirecter', '$mdDialog', f
                     id : msgid,
                     title : title,
                     text : text,
-                    data : { dishid : dishid, type: type},
+                    data : { dishid : dishid},
                     smallIcon : 'file://images/icon.png'
                 });
 

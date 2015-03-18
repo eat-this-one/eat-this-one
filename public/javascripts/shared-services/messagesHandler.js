@@ -1,7 +1,7 @@
 angular.module('eat-this-one').factory('messagesHandler', ['notifier', function(notifier) {
 
     return {
-        message : function(msgData) {
+        androidMessage : function(msgData) {
             var message = '';
 
             // TODO i18n here too.
@@ -16,7 +16,12 @@ angular.module('eat-this-one').factory('messagesHandler', ['notifier', function(
                         ' ' + msgData.dish + '. ' + $.eatLang.lang.lnremember;
                     break;
             }
-            notifier.statusBar($.eatLang.lang.sitename, message, msgData.type, msgData.dishid);
+            notifier.statusBar($.eatLang.lang.sitename, message, msgData.dishid);
+        },
+
+        iOSMessage : function(msgData) {
+            // TODO See what this contains and what can we do with it.
+            notifier.statusBar($.eatLang.lang.sitename, msgData.alert, 'FAKE');
         }
     };
 }]);

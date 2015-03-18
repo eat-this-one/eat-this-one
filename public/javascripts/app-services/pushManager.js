@@ -8,7 +8,8 @@ angular.module('eat-this-one')
 
             // Check if the device is already registered.
             if (forceUpdate === false &&
-                    localStorage.getItem('gcmRegId') !== null) {
+                    (localStorage.getItem('gcmRegId') !== null ||
+                    localStorage.getItem('apnToken') !== null)) {
                 return;
             }
 
@@ -45,8 +46,9 @@ angular.module('eat-this-one')
             console.log('Registered in Google Cloud Messaging: ' + result);
         },
 
-        registeredAPN : function(result) {
-            console.log('Registered in Google Cloud Messaging: ' + result);
+        registeredAPN : function(token) {
+            console.log('Registered in APN: ' + token);
+            localStorage.setItem('apnToken', token);
         },
 
         error : function(error) {
@@ -93,20 +95,16 @@ function notificationsHandler(e) {
                     newLogRequest('error', 'gcm-registration', 'no registration id');
                 }
             });
-
             break;
 
         case 'message':
-
             // Delegated to the messages handler.
-            angular.element('#id-body').injector().get('messagesHandler').message(e.payload);
+            angular.element('#id-body').injector().get('messagesHandler').androidMessage(e.payload);
             break;
-
         case 'error':
             newLogRequest('error', 'gcm-error', e.msg);
             console.log('Error: Message can not be received. ' + e.msg);
             break;
-
         default:
             newLogRequest('error', 'gcm-unknown');
             console.log('Error: Unknown event received');
@@ -116,4 +114,5 @@ function notificationsHandler(e) {
 
 function apnNotificationsHandler(e) {
     // TODO Once this is not a crappy prototype.
+    angular.element('#id-body').injector().get('messagesHandler').iOSMessage(e);
 }
