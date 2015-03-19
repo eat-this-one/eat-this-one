@@ -31,7 +31,7 @@ angular.module('eat-this-one')
                 // TODO Test properly as it is just a copy & paste.
                 $window.plugins.pushNotification.register(
                     this.registeredAPN,
-                    this.errorHandler,
+                    this.errorAPNHandler,
                     {
                         "badge":"true",
                         "sound":"true",
@@ -51,9 +51,16 @@ angular.module('eat-this-one')
             localStorage.setItem('apnToken', token);
         },
 
-        error : function(error) {
+        errorHandler : function(error) {
+            newLogRequest('error', 'register-gcm', error);
             console.log('Error, not able to get the registration ID: ' + error);
+        },
+
+        errorAPNHandler : function(error) {
+            newLogRequest('error', 'register-apn', error);
+            console.log('Error, not able to get the APN token: ' + error);
         }
+
     };
 
 }]);
