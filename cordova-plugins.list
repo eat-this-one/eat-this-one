@@ -7,3 +7,4 @@ com.dbaq.cordova.contactsPhoneNumbers https://github.com/dbaq/cordova-plugin-con
 org.apache.cordova.camera org.apache.cordova.camera
 org.apache.cordova.globalization org.apache.cordova.globalization
 org.apache.cordova.device org.apache.cordova.device
+org.apache.cordova.console org.apache.cordova.console
