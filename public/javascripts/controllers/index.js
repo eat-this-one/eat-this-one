@@ -105,27 +105,32 @@ angular.module('eat-this-one').controller('IndexController',
         }
 
         appStatus.waiting('signup');
+
         // Even though the requests to GCM or APN are supposed
-        // to be already finished, we need to be completely sure.
-        // Timeout at 3 seconds.
+        // to be already finished because the user spends some
+        // time filling the form, we need to be completely sure.
         var time = 0;
-        setInterval(function() {
+        var checkPushIdReady = setInterval(function() {
             // Running every 0.2 seconds.
             if (localStorage.getItem('gcmRegId') !== null) {
                 newRegIdUserRequest($scope);
-                clearInterval();
+                return stopInterval();
             }
             if (localStorage.getItem('apnToken') !== null) {
                 newApnTokenUserRequest($scope);
-                clearInterval();
+                return stopInterval();
             }
-            if (time > 3000) {
-                // Timeout at 3 seconds and notify that
+            if (time > 4000) {
+                // Timeout at 4 seconds and notify that
                 // something went wrong and try again in a while.
                 notifier.show($scope.lang.error, $scope.lang.weird);
-                clearInterval();
+                return stopInterval();
             }
             time = time + 200;
         }.bind(this), 200);
+        var stopInterval = function stopInterval() {
+            clearInterval(checkPushIdReady);
+            return true;
+        };
     };
 }]);
