@@ -2,7 +2,7 @@
 
 set -e
 
-packagename="org.eat-this-one.app"
+packagename="org.eatthisone.app"
 appname="Eat this one!"
 
 if [ -z $1 ]; then
@@ -38,7 +38,7 @@ if [ ! -d "public/shared-build" ]; then
 fi
 
 # Create cordova app and add dependencies.
-cordova create dist/app "$packagename$1" "$appname"
+cordova create dist/app "$packagename.$1" "$appname"
 
 # Build the project to populate public/shared-build and friends.
 grunt build:dev
