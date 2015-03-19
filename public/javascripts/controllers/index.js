@@ -112,8 +112,8 @@ angular.module('eat-this-one').controller('IndexController',
         setInterval(function() {
             // Running every 0.2 seconds.
             if (localStorage.getItem('gcmRegId') !== null) {
-                clearInterval();
                 newRegIdUserRequest($scope);
+                clearInterval();
             }
             if (localStorage.getItem('apnToken') !== null) {
                 newApnTokenUserRequest($scope);
