@@ -26,7 +26,7 @@ module.exports = function(grunt) {
                     // * local funcions will fill $. namespace and will be
                     //   required by angular
                     // * The last requirements will be angular and angular-ui
-                    "public/web-build/client.js": [
+                    "public/web-build/client.min.js": [
                         "public/bower_components/jquery/dist/jquery.min.js",
                         "public/bower_components/angular/angular.min.js",
                         "public/bower_components/angular-aria/angular-aria.min.js",
@@ -42,7 +42,7 @@ module.exports = function(grunt) {
                         "public/javascripts/shared-services/**/*.js",
                         "public/javascripts/web-services/**/*.js"
                     ],
-                    "public/app-build/client.js": [
+                    "public/app-build/client.min.js": [
                         "public/bower_components/jquery/dist/jquery.min.js",
                         "public/bower_components/angular/angular.min.js",
                         "public/bower_components/angular-aria/angular-aria.min.js",
@@ -74,7 +74,7 @@ module.exports = function(grunt) {
                     // * local funcions will fill $. namespace and will be
                     //   required by angular
                     // * The last requirements will be angular and angular-ui
-                    "public/web-build/client.js": [
+                    "public/web-build/client.min.js": [
                         "public/bower_components/jquery/dist/jquery.min.js",
                         "public/bower_components/angular/angular.min.js",
                         "public/bower_components/angular-aria/angular-aria.min.js",
@@ -90,7 +90,7 @@ module.exports = function(grunt) {
                         "public/javascripts/shared-services/**/*.js",
                         "public/javascripts/web-services/**/*.js"
                     ],
-                    "public/app-build/client.js": [
+                    "public/app-build/client.min.js": [
                         "public/bower_components/jquery/dist/jquery.min.js",
                         "public/bower_components/angular/angular.min.js",
                         "public/bower_components/angular-aria/angular-aria.min.js",
