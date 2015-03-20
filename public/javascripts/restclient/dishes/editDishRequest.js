@@ -63,27 +63,19 @@ angular.module('eat-this-one')
 
                 // When adding a new dish we always notify the success,
                 // but if this is the first dish the user is adding we
-                // should also give him/her the option to add more colleagues.
+                // should also give him/her the option to invite more people.
                 notifier.show(title, info, function() {
 
-                    var shareArguments = null;
-
-                    // TODO Commented for development purposes.
-                    //if (data.user.dishescount == 1) {
-                    if (1) {
-                        // After adding the first dish we allow people to
-                        // add their contacts to his/her location.
-                        shareArguments = '?dishname=' + data.name +
-                            '&locationname=' + data.loc.name;
-                        redirecter.redirect('dishes/share.html' + shareArguments);
+                    if (data.user.dishescount == 1) {
+                        // After adding the first dish we propose people to
+                        // add their contacts to their location.
+                        redirecter.redirect('dishes/share.html?dishname=' + data.name);
                     } else if (data.nsubscribers <= 1) {
                         // If there are no subscriptors the user needs to contact more
                         // people, otherwise it is not worth to share the dish with nobody.
-                        shareArguments = '?dishname=' + data.name +
-                            '&locationname=' + data.loc.name;
-                        redirecter.redirect('dishes/share.html' + shareArguments);
+                        redirecter.redirect('dishes/share.html?dishname=' + data.name);
                     } else {
-                        // TODO Extra confirm to let the user choose if
+                        // TODO Maybe an extra confirm to let the user choose if
                         // he/she wants to add more colleagues.
                         redirecter.redirect('index.html');
                     }

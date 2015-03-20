@@ -64,7 +64,7 @@ $.eatLang.en = {
     mealbookedinfo : 'Thanks for booking the meal. The chef has been notified.',
     menu : 'Menu',
     message : 'Message',
-    messagecontactsinfo : 'The more people you share the food with, the better, invite them to join your group',
+    messagecontactsinfo : 'The more people you share the food with, the better; invite them to join your group with this code:',
     missingfields : 'Before continuing',
     missingfieldsinfo : 'Some fields need you attention.',
     mymeals : 'My meals',

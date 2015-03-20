@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('LocationsShareController', ['$scope', 'authManager', 'redirecter', 'eatConfig', 'urlParser', 'shareManager', 'newLogRequest', 'menuManager', 'appStatus', function($scope, authManager, redirecter, eatConfig, urlParser, shareManager, newLogRequest, menuManager, appStatus) {
+    .controller('LocationsShareController', ['$scope', 'authManager', 'redirecter', 'eatConfig', 'shareManager', 'newLogRequest', 'menuManager', 'appStatus', function($scope, authManager, redirecter, eatConfig, shareManager, newLogRequest, menuManager, appStatus) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -36,7 +36,7 @@ angular.module('eat-this-one')
     // TODO We will need to change this when we accept more than 1 group as
     // we should request id param location data.
     var loc = JSON.parse(localStorage.getItem('loc'));
-    $scope.infomessage = $scope.lang.messagecontactsinfo + ': "' + loc.name + '"';
+    $scope.infomessage = $scope.lang.messagecontactsinfo + ' "' + loc.code + '"';
 
     // Allow shareManager services to inject a contacts list here.
     $scope.contacts = [];
