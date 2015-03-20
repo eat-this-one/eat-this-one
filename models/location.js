@@ -9,6 +9,7 @@ var LocationSchema = new Schema({
         ref: 'User'
     },
     name: { type: String, required: true, unique: true},
+    code:  { type: String, required: true, unique: true},
     created: { type: Date, default: Date.now}
 });
 
