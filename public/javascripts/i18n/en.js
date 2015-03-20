@@ -15,6 +15,7 @@ $.eatLang.en = {
     deleteduser : 'The user does not exist anymore',
     dish : 'Dish',
     dishadded : 'Dish added',
+    dishaddedfirstinvites : 'Now you can invite people to join your group as it is the first dish you added',
     dishaddednomembersinfo : 'There are no other members in your group! Add the people you want to share the dish with',
     dishaddednotifiedinfo : 'All group members have been notified',
     dishdescription : 'Description',

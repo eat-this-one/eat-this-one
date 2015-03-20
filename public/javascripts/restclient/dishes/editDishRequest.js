@@ -42,6 +42,11 @@ angular.module('eat-this-one')
                     info = $scope.lang.dishaddednomembersinfo + '.';
                 } else {
                     info = $scope.lang.dishaddednotifiedinfo + '.';
+                    // If it is the first dish the user adds we let him know
+                    // that it will be redirected to invited more people.
+                    if (data.user.dishescount === 1) {
+                        info = info + ' ' + $scope.lang.dishaddedfirstinvites + '.';
+                    }
                 }
             } else {
                 // PUT.
@@ -66,11 +71,9 @@ angular.module('eat-this-one')
                 // should also give him/her the option to invite more people.
                 notifier.show(title, info, function() {
 
-                    if (data.user.dishescount == 1) {
+                    if (data.user.dishescount == 1 || data.nsubscribers <= 1) {
                         // After adding the first dish we propose people to
                         // add their contacts to their location.
-                        redirecter.redirect('dishes/share.html?dishname=' + data.name);
-                    } else if (data.nsubscribers <= 1) {
                         // If there are no subscriptors the user needs to contact more
                         // people, otherwise it is not worth to share the dish with nobody.
                         redirecter.redirect('dishes/share.html?dishname=' + data.name);
