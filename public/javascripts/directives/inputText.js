@@ -46,7 +46,12 @@ angular.module('eat-this-one').directive('eatInputText', ['$mdToast', 'formsMana
                         );
                     }
                 };
-                input.on('focus', showToast);
+
+                // We only want toast if the user is new, considering
+                // new a user that never added a dish.
+                if (localStorage.getItem('notNewbie') === null) {
+                    input.on('focus', showToast);
+                }
             }
 
         },

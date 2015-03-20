@@ -29,6 +29,11 @@ angular.module('eat-this-one')
             // Add the dish to the cached list of my dishes.
             storage.add('mydishes', data._id);
 
+            if (localStorage.getItem('notNewbie') === null) {
+                // Now the user is not a newbie anymore.
+                localStorage.setItem('notNewbie', true);
+            }
+
             var title = '';
             var info = '';
             if (statusCode == 201) {
