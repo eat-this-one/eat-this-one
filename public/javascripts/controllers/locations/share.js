@@ -36,7 +36,8 @@ angular.module('eat-this-one')
     // TODO We will need to change this when we accept more than 1 group as
     // we should request id param location data.
     var loc = JSON.parse(localStorage.getItem('loc'));
-    $scope.infomessage = $scope.lang.messagecontactsinfo + ' "' + loc.code + '"';
+    $scope.infomessage = $scope.lang.messagecontactsinfo + ' ';
+    $scope.code = loc.code;
 
     // Allow shareManager services to inject a contacts list here.
     $scope.contacts = [];
