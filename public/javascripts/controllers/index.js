@@ -1,6 +1,6 @@
 angular.module('eat-this-one').controller('IndexController',
-    ['$scope', 'redirecter', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'datesConverter', 'formsManager', 'dishesRequest', 'newRegIdUserRequest', 'newApnTokenUserRequest', 'newLogRequest', 'menuManager', 'storage',
-    function($scope, redirecter, eatConfig, authManager, appStatus, notifier, datesConverter, formsManager, dishesRequest, newRegIdUserRequest, newApnTokenUserRequest, newLogRequest, menuManager, storage) {
+    ['$scope', 'redirecter', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'datesConverter', 'formsManager', 'dishesRequest', 'newRegIdUserRequest', 'newApnTokenUserRequest', 'newLogRequest', 'menuManager', 'storage', 'imgManager',
+    function($scope, redirecter, eatConfig, authManager, appStatus, notifier, datesConverter, formsManager, dishesRequest, newRegIdUserRequest, newApnTokenUserRequest, newLogRequest, menuManager, storage, imgManager) {
 
     // Dependencies.
     $scope.lang = $.eatLang.lang;
@@ -17,7 +17,6 @@ angular.module('eat-this-one').controller('IndexController',
         menuManager.locationViewItem(),
         menuManager.feedbackItem()
     ];
-
 
     $scope.dishes = [];
     $scope.showNoDishes = false;
@@ -40,6 +39,8 @@ angular.module('eat-this-one').controller('IndexController',
             } else {
                 for (var index in $scope.dishes) {
                     $scope.dishes[index].when = datesConverter.timeToDay(Date.parse($scope.dishes[index].when));
+
+                    imgManager.fillDishSrc($scope.dishes[index]);
 
                     // Let's add state to each dish (my dish, booked...).
                     if (storage.isIn('mydishes', $scope.dishes[index]._id)) {

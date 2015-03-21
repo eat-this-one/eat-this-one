@@ -26,8 +26,8 @@ block logic
                     md-card
                         md-card-content
                             md-item-content(ng-click='redirectToDish(dish._id)')
-                                div
-                                    img(ng-src='images/default.svg', class='face', src='images/default.svg')
+                                div(class='md-tile-left')
+                                    img(ng-src='{{dish.imgSrc}}', class='thumb-photo')
                                 div(class='md-tile-content')
                                     h3 {{dish.name}} - {{dish.when}}
                                     h4 {{dish.description}}

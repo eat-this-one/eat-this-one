@@ -32,7 +32,7 @@ angular.module('eat-this-one').directive('eatPhoto', ['eatConfig', 'newLogReques
 
             scope.capturePhoto = function() {
                 navigator.camera.getPicture(scope.onPictureSuccess, scope.onCapturePhotoFail, {
-                    quality: 70,
+                    quality: 90,
                     targetWidth: 512,
                     destinationType: Camera.DestinationType.DATA_URL,
                     saveToPhotoAlbum: true,
@@ -43,6 +43,7 @@ angular.module('eat-this-one').directive('eatPhoto', ['eatConfig', 'newLogReques
 
             scope.selectImage = function() {
                 navigator.camera.getPicture(scope.onPictureSuccess, scope.onSelectImageFail, {
+                    quality: 90,
                     targetWidth: 512,
                     destinationType: Camera.DestinationType.DATA_URL,
                     sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
