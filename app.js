@@ -35,6 +35,7 @@ var dishes = require('./routes/dishes');
 var meals = require('./routes/meals');
 var logs = require('./routes/logs');
 var feedback = require('./routes/feedback');
+var photos = require('./routes/photos');
 
 app.use(favicon());
 
@@ -86,6 +87,7 @@ app.use('/api/dishes', dishes);
 app.use('/api/meals', meals);
 app.use('/api/logs', logs);
 app.use('/api/feedback', feedback);
+app.use('/api/photos', photos);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
