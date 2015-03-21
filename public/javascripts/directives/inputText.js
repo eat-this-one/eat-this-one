@@ -41,15 +41,15 @@ angular.module('eat-this-one').directive('eatInputText', ['$mdToast', 'formsMana
                         $mdToast.show(
                             $mdToast.simple()
                                 .content(scope.element.placeholder)
-                                .position('right top')
+                                .position('bottom right')
                                 .hideDelay(delay)
                         );
                     }
                 };
 
-                // We only want toast if the user is new, considering
+                // We only want tips if the user is new, considering
                 // new a user that never added a dish.
-                if (localStorage.getItem('notNewbie') === null) {
+                if (localStorage.getItem('disableTips') === null) {
                     input.on('focus', showToast);
                 }
             }

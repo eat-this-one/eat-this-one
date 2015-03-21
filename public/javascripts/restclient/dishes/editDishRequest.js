@@ -29,9 +29,9 @@ angular.module('eat-this-one')
             // Add the dish to the cached list of my dishes.
             storage.add('mydishes', data._id);
 
-            if (localStorage.getItem('notNewbie') === null) {
-                // Now the user is not a newbie anymore.
-                localStorage.setItem('notNewbie', true);
+            if (localStorage.getItem('disableTips') === null) {
+                // We disable the tips once the user added the first dish.
+                localStorage.setItem('disableTips', true);
             }
 
             var title = '';
