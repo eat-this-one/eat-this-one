@@ -22,23 +22,11 @@ angular.module('eat-this-one').factory('menuManager', ['$mdSidenav', 'newLogRequ
 
         locationViewItem : function() {
 
-            var item = {
-                icon : 'glyphicon glyphicon-home',
+            return {
+                name : this.lang.ranking,
+                icon : 'glyphicon glyphicon-king',
                 callback : 'locationViewCallback'
             };
-
-            // If the user does not have a location
-            // provide a link to set it up.
-            var loc = localStorage.getItem('loc');
-            if (loc === null) {
-                item.name = this.lang.setmygroup;
-            } else {
-                loc = JSON.parse(loc);
-                item.name = loc.name;
-            }
-            item.name = item.name + ' ' + this.lang.users;
-
-            return item;
         },
 
         locationViewCallback : function() {

@@ -1,7 +1,7 @@
 angular.module('eat-this-one')
     .controller('LocationsViewController',
-        ['$scope', 'authManager', 'redirecter', 'appStatus', 'notifier', 'eatConfig', 'newLogRequest', 'menuManager', 'urlParser', 'locationsRequest', function(
-            $scope, authManager, redirecter, appStatus, notifier, eatConfig, newLogRequest, menuManager, urlParser, locationsRequest) {
+        ['$scope', '$filter', 'authManager', 'redirecter', 'appStatus', 'notifier', 'eatConfig', 'newLogRequest', 'menuManager', 'urlParser', 'locationsRequest', function(
+            $scope, $filter, authManager, redirecter, appStatus, notifier, eatConfig, newLogRequest, menuManager, urlParser, locationsRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -51,7 +51,35 @@ angular.module('eat-this-one')
 
         // If you can see the members you are one of them.
         if (typeof locData.members !== "undefined") {
+
+            // Order them by points.
+            locData.members = $filter('orderBy')(locData.members, '-user.points');
+
+            var lastUserPoints = null;
+            var lastUserRanking = null;
+            var nextUserRanking = 1;
+            for(var i in locData.members) {
+                if (lastUserPoints === null) {
+                    locData.members[i].user.icon = 'king';
+                    locData.members[i].user.ranking = 1;
+                } else if (locData.members[i].user.points === lastUserPoints) {
+                    locData.members[i].user.icon = locData.members[i-1].user.icon;
+                    locData.members[i].user.ranking = locData.members[i-1].user.ranking;
+                } else {
+                    locData.members[i].user.icon = 'user';
+                    locData.members[i].user.ranking = nextUserRanking;
+                }
+                nextUserRanking++;
+
+                lastUserPoints = locData.members[i].user.points;
+                // TODO Change this along with the ng-repeat, it's 5am and I'm sleepy...
+                locData.members[i].user.stars = [];
+                for (var n = 0; n < locData.members[i].user.points; n++) {
+                    locData.members[i].user.stars.push(n);
+                }
+            }
             $scope.members = locData.members;
+
             $scope.showMembers = true;
             $scope.actionIcons = [
                 {

@@ -15,6 +15,11 @@ block logic
                     md-card-content
                         md-item-content
                             div
-                                span(class='glyphicon glyphicon-user', aria-hidden='true')
+                                span(class='badge ranking') {{member.user.ranking}}
+                                &nbsp;&nbsp;
+                                span(class='glyphicon glyphicon-{{member.user.icon}} ranking', aria-hidden='true')
                             div(class='md-tile-content')
                                 h3 {{member.user.name}}
+                                h4
+                                    //- We should change this and avoid using ng-repeat.
+                                    span(ng-repeat='star in member.user.stars', class='glyphicon glyphicon-star')

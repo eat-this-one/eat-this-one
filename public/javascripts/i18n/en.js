@@ -84,6 +84,7 @@ $.eatLang.en = {
     open : 'Open',
     photo : 'Photo',
     portions : 'Number of portions you want',
+    ranking : 'Ranking',
     refresh : 'Refresh',
     save : 'Save',
     selectimage : 'Select image',
