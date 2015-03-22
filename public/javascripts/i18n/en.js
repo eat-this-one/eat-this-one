@@ -25,6 +25,7 @@ $.eatLang.en = {
     dishname : 'Dish name',
     dishnameexample : 'e.g. Paella',
     editdish : 'Edit dish',
+    editprofile : 'Edit profile',
     email : 'Email',
     emailexample : 'e.g. john.cobra@gmail.com',
     error : 'Error',

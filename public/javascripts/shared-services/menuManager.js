@@ -57,6 +57,20 @@ angular.module('eat-this-one').factory('menuManager', ['$mdSidenav', 'newLogRequ
             redirecter.redirect('index.html');
         },
 
+        editProfileItem : function() {
+            return {
+                name : this.lang.editprofile,
+                icon : 'glyphicon glyphicon-user',
+                callback : 'editProfileCallback'
+            };
+
+        },
+
+        editProfileCallback : function() {
+            newLogRequest('click', 'user-edit');
+            redirecter.redirect('users/edit.html');
+        },
+
         feedbackItem : function() {
             return {
                 name : this.lang.feedback,

@@ -1,6 +1,6 @@
 angular.module('eat-this-one').controller('IndexController',
-    ['$scope', 'redirecter', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'datesConverter', 'formsManager', 'dishesRequest', 'newRegIdUserRequest', 'newApnTokenUserRequest', 'newLogRequest', 'menuManager', 'storage', 'imgManager',
-    function($scope, redirecter, eatConfig, authManager, appStatus, notifier, datesConverter, formsManager, dishesRequest, newRegIdUserRequest, newApnTokenUserRequest, newLogRequest, menuManager, storage, imgManager) {
+    ['$scope', 'redirecter', 'eatConfig', 'authManager', 'appStatus', 'notifier', 'datesConverter', 'formsManager', 'dishesRequest', 'editRegIdUserRequest', 'editApnTokenUserRequest', 'newLogRequest', 'menuManager', 'storage', 'imgManager',
+    function($scope, redirecter, eatConfig, authManager, appStatus, notifier, datesConverter, formsManager, dishesRequest, editRegIdUserRequest, editApnTokenUserRequest, newLogRequest, menuManager, storage, imgManager) {
 
     // Dependencies.
     $scope.lang = $.eatLang.lang;
@@ -13,6 +13,7 @@ angular.module('eat-this-one').controller('IndexController',
     $scope.pageTitle = $scope.lang.sitename;
     $scope.menuItems = [
         menuManager.dishAddItem(),
+        menuManager.editProfileItem(),
         menuManager.dishesListItem(),
         menuManager.locationViewItem(),
         menuManager.feedbackItem()
@@ -114,11 +115,21 @@ angular.module('eat-this-one').controller('IndexController',
         var checkPushIdReady = setInterval(function() {
             // Running every 0.2 seconds.
             if (localStorage.getItem('gcmRegId') !== null) {
-                newRegIdUserRequest($scope);
+                editRegIdUserRequest(
+                    $scope,
+                    'location-subscriptions/edit.html',
+                    'created',
+                    'create-account'
+                );
                 return stopInterval();
             }
             if (localStorage.getItem('apnToken') !== null) {
-                newApnTokenUserRequest($scope);
+                editApnTokenUserRequest(
+                    $scope,
+                    'location-subscriptions/edit.html',
+                    'created',
+                    'create-account'
+                );
                 return stopInterval();
             }
             if (time > 4000) {

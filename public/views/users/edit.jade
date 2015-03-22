@@ -1,0 +1,12 @@
+extends ../layout
+
+block configuration
+    - var controllerName = "UsersEditController"
+
+block base
+    base(href='../')
+
+block logic
+    form(role='form')
+        eat-input-text(element='name')
+        eat-input-text(element='email')
