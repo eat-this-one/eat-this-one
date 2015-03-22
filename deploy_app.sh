@@ -12,9 +12,6 @@ Run deploy_app.sh with a second argument after confirming it :)"
     exit 0
 fi
 
-# Push last changes to backend server (NO -f HERE!).
-git push dokku master
-
 # Build the app to dist/app compressing JS.
 # TODO Include version bumps.
 grunt build:prod
@@ -22,6 +19,9 @@ grunt build:prod
 # The SSH key should be set.
 scp -r dist/app/platforms/android/ant-build/CordovaApp-debug-unaligned.apk \
     root@eat-this-one.com:/var/www/html/android.apk
+
+# Push last changes to backend server (NO -f HERE!).
+git push dokku master
 
 echo "
 -------------------------------------------------------------------------------
