@@ -76,7 +76,7 @@ angular.module('eat-this-one')
                 // should also give him/her the option to invite more people.
                 notifier.show(title, info, function() {
 
-                    if (data.user.dishescount == 1 || data.nsubscribers <= 1) {
+                    if (data.user.dishescount === 1 || data.nsubscribers <= 1) {
                         // After adding the first dish we propose people to
                         // add their contacts to their location.
                         // If there are no subscriptors the user needs to contact more
