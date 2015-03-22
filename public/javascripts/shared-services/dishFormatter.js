@@ -22,12 +22,13 @@ angular.module('eat-this-one').factory('dishFormatter', ['notifier', 'datesConve
 
         // The photo is not required so it may not be there.
         if ($scope.dish.photo) {
-            var smallimageCard = $('#id-smallimage-card');
-            var smallimage = $('#id-smallimage');
-            if (smallimage) {
-                smallimageCard.css('display', 'block');
+            var dishImgCard = $('#id-dish-img-card');
+            var dishImg = $('#id-dish-img');
+            if (dishImg) {
+                dishImgCard.removeClass('hidden');
+                dishImgCard.css('display', 'block');
                 // Image already returns prefixed with ...jpeg:base64;.
-                smallimage.prop('src', $scope.dish.photo);
+                dishImg.prop('src', $scope.dish.photo);
             }
         }
 

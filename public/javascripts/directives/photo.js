@@ -11,8 +11,9 @@ angular.module('eat-this-one').directive('eatPhoto', ['eatConfig', 'newLogReques
             scope.lang = $.eatLang.lang;
 
             scope.onPictureSuccess = function(imageData) {
-                $('#id-smallimage-card').css('display', 'block');
-                $('#id-smallimage').prop('src', "data:image/jpeg;base64," + imageData);
+                $('#id-dish-img-card').removeClass('hidden');
+                $('#id-dish-img-card').css('display', 'block');
+                $('#id-dish-img').prop('src', "data:image/jpeg;base64," + imageData);
                 $('#id-photobtn').css('display', 'none');
                 $('#id-imagebtn').css('display', 'none');
 

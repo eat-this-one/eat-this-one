@@ -51,6 +51,13 @@ angular.module('eat-this-one')
                     }
                 );
 
+                navigator.globalization.getLocaleName(
+                    function(locale) {
+                        //$.eatLocale
+                    },
+                    function() {
+                    }
+                );
             });
 
             // Show info to the user about the new version if required.

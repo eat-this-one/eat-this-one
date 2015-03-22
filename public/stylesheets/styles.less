@@ -26,6 +26,31 @@ footer {
     padding: 80px 16px 16px 16px;
 }
 
+.button-icon {
+    margin-right: 5px;
+}
+
+.button-group button {
+    margin: 0 5px 0 5px;
+}
+
+.menu-item {
+    min-width: 100%;
+    padding: 12px 6px 12px 6px;
+    text-align: left;
+}
+
+.big-icon {
+    font-size: 160%;
+    margin-right: 10px;
+}
+
+.info-text {
+    text-align: center;
+    margin: auto;
+    margin: 20px 10px 20px 10px;
+}
+
 .contacts-list {
     margin: 10px 0 10px 0;
 }
@@ -52,11 +77,6 @@ footer {
     padding-right: 5px;
 }
 
-.dish-img {
-    width: 60%;
-    padding-bottom: 10px;
-}
-
 .dish-useful-info {
     color: red;
     margin-top: 5px;
@@ -72,46 +92,40 @@ footer {
     bottom: 16px;
 }
 
-.small-photo-card {
-    display: none;
-}
-
-.small-photo {
+.dish-edit-img {
     width: 50%;
     margin: 16px;
+    border-radius: 25px;
+}
+
+.dish-view-img {
+    width: 70%;
+    padding-bottom: 10px;
+    border-radius: 25px;
+}
+
+.thumb-container {
+    margin: 10px 0 10px 0;
+    position: relative;
+    width: 40px;
+    height: 50px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+    border-radius: 10px;
 }
 
 .thumb-photo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    height: auto;
     text-align: center;
-    border-radius: 10px;
-    max-width: 40px;
-    width: auto;
-    margin: 10px 0 10px 0;
-}
-
-.button-icon {
-    margin-right: 5px;
-}
-
-.button-group button {
-    margin: 0 5px 0 5px;
-}
-
-.menu-item {
-    min-width: 100%;
-    padding: 12px 6px 12px 6px;
-    text-align: left;
-}
-
-.big-icon {
-    font-size: 160%;
-    margin-right: 10px;
-}
-
-.info-text {
-    text-align: center;
-    margin: auto;
-    margin: 20px 10px 20px 10px;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
 }
 
 .badge {
