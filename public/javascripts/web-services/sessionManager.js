@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('sessionManager', ['authManager', 'eatConfig', 'pushManager', 'updateManager', function(authManager, eatConfig, pushManager, updateManager) {
+    .factory('sessionManager', ['authManager', 'eatConfig', 'pushManager', 'updateManager', 'localisationManager', function(authManager, eatConfig, pushManager, updateManager, localisationManager) {
 
     return {
 
@@ -23,18 +23,12 @@ angular.module('eat-this-one')
                 authManager.authenticate(user._id);
             }
 
-            // TODO: Load here user data.
-
-            // We want to access strings through $.eatLang.lang.
-            var userLang = navigator.language || navigator.userLanguage;
-            if (typeof $.eatLang[userLang] !== 'undefined') {
-                $.eatLang.lang = $.eatLang[userLang.substring(0, 2)];
-            } else {
-                $.eatLang.lang = $.eatLang[eatConfig.defaultLang];
-            }
+            localisationManager.setLanguage();
 
             // Creates fake registration id.
             pushManager.register(updatedApp);
+
+            localisationManager.setCountry();
 
             // Show info to the user about the new version if required.
             if (updatedApp === true && this.getUser() !== null) {
