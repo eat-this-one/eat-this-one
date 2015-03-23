@@ -28,3 +28,5 @@ block logic
                     div(class='dish-field')
                         b {{lang.expecteddonation}}
                         {{dish.donation}}
+        md-card(ng-if='showReminder')
+            md-card-content(class='dish-useful-info') {{lang.reminder}}: {{dish.nbookedmeals}}

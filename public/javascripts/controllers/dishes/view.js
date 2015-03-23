@@ -21,6 +21,9 @@ angular.module('eat-this-one')
         $scope.showToggleMenu = true;
     }
 
+    // Only the chef will see it and if there are bookings.
+    $scope.showReminder = false;
+
     $scope.dish = {};
 
     // This string contains useful info for the user
@@ -66,6 +69,10 @@ angular.module('eat-this-one')
                     callback : 'editDish'
                 }
             ];
+
+            if ($scope.dish.nbookedmeals > 0) {
+                $scope.showReminder = true;
+            }
         }
     };
     dishRequest($scope, dishCallback, id);

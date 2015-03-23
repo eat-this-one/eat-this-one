@@ -76,6 +76,7 @@ $.eatLang.en = {
     photo : 'Photo',
     ranking : 'Ranking',
     refresh : 'Refresh',
+    reminder : 'Hey chef! Remember that this dish already has bookings',
     save : 'Save',
     selectimage : 'Select image',
     setgroupname : 'Set group name',

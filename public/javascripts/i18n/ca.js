@@ -76,6 +76,7 @@ $.eatLang.en = {
     photo : 'Foto',
     ranking : 'Ranking',
     refresh : 'Refrescar',
+    reminder : 'Hey xef! Recorda que aquest plat ja té reserves',
     save : 'Desar',
     selectimage : 'Seleccionar imatge',
     setgroupname : 'Nom del grup',
