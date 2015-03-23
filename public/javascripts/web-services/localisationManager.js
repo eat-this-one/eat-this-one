@@ -2,13 +2,27 @@ angular.module('eat-this-one').factory('localisationManager', ['eatConfig', func
 
     return {
 
-        defaultCountry : 'AU',
-
         supportedCountries : {
             AU : 'Australia',
             ES : 'España',
-            GB : 'Great Britain',
+            GB : 'United Kingdom',
+            IE : 'Ireland',
             US : 'United States'
+        },
+
+        defaultCountry : 'AU',
+
+        getCountriesOptions : function() {
+            var options = [];
+            for (var code in this.supportedCountries) {
+                if (this.supportedCountries.hasOwnProperty(code)) {
+                    options.push({
+                        value: code,
+                        text: this.supportedCountries[code]
+                    });
+                }
+            }
+            return options;
         },
 
         setLanguage : function() {

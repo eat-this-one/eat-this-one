@@ -1,5 +1,6 @@
 angular.module('eat-this-one')
-    .controller('LocationSubscriptionsEditController', ['$scope', '$http', 'redirecter', 'appStatus', 'eatConfig', 'authManager', 'notifier', 'formsManager', 'newLocationRequest', 'newLocationSubscriptionRequest', 'locationSubscriptionsRequest', 'newLogRequest', 'locationsRequest', 'menuManager', function($scope, $http, redirecter, appStatus, eatConfig, authManager, notifier, formsManager, newLocationRequest, newLocationSubscriptionRequest, locationSubscriptionsRequest, newLogRequest, locationsRequest, menuManager) {
+    .controller('LocationSubscriptionsEditController', ['$scope', '$http', 'redirecter', 'appStatus', 'eatConfig', 'authManager', 'notifier', 'formsManager', 'newLocationRequest', 'newLocationSubscriptionRequest', 'locationSubscriptionsRequest', 'newLogRequest', 'locationsRequest', 'menuManager', 'localisationManager',
+    function($scope, $http, redirecter, appStatus, eatConfig, authManager, notifier, formsManager, newLocationRequest, newLocationSubscriptionRequest, locationSubscriptionsRequest, newLogRequest, locationsRequest, menuManager, localisationManager) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -44,6 +45,15 @@ angular.module('eat-this-one')
         infodelay: 2000,
         validation: ['required', 'text'],
         value: ''
+    };
+    $scope.country = {
+        name: 'country',
+        label: $scope.lang.country,
+        placeholder: $scope.lang.countryexample,
+        validation: ['required', 'text'],
+        value: localStorage.getItem('country'),
+        options : localisationManager.getCountriesOptions()
+
     };
 
     // We will redirect to home if the user already have a location subscription.
@@ -161,7 +171,7 @@ angular.module('eat-this-one')
                         redirecter.redirect('index.html');
                     });
                 };
-                newLocationRequest($scope, $scope.newgroup.value, locationCallback, errorCallback);
+                newLocationRequest($scope, $scope.newgroup.value, $scope.country.value, locationCallback, errorCallback);
             };
             locationsRequest($scope, {name: $scope.newgroup.value}, locExistsCallback, noLocationCallback);
         }

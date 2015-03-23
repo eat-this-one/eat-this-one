@@ -1,0 +1,4 @@
+md-input-container(flex)
+    label(for='id-{{element.name}}') {{element.label}}
+    md-select(id='id-{{element.name}}', ng-model='element.value', placeholder='{{element.placeholder}}')
+        md-option(ng-repeat='option in element.options', value='{{option.value}}') {{option.text}}

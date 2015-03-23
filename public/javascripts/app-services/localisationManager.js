@@ -7,8 +7,22 @@ angular.module('eat-this-one').factory('localisationManager', ['eatConfig', func
         supportedCountries : {
             AU : 'Australia',
             ES : 'España',
-            GB : 'Great Britain',
+            GB : 'United Kingdom',
+            IE : 'Ireland',
             US : 'United States'
+        },
+
+        getCountriesOptions : function() {
+            var options = [];
+            for (var code in this.supportedCountries) {
+                if (this.supportedCountries.hasOwnProperty(code)) {
+                    options.push({
+                        value: code,
+                        text: this.supportedCountries[code]
+                    });
+                }
+            }
+            return options;
         },
 
         setCountry : function() {

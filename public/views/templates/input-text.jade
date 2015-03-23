@@ -1,4 +1,4 @@
 // Uses public/javascript/directives/input-text.js
 md-input-container(flex)
-    label() {{element.label}}
+    label(for='id-{{element.name}}') {{element.label}}
     input(name='{{element.name}}', id='id-{{element.name}}', ng-model='element.value', ng-disabled='element.disabled')
