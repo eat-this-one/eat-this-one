@@ -36,9 +36,6 @@ angular.module('eat-this-one').factory('localisationManager', ['eatConfig', 'sta
             // All cordova calls should be inside a deviceready listener.
             document.addEventListener('deviceready', function() {
 
-                // Register the app to receive and send notifications.
-                pushManager.register(updatedApp);
-
                 navigator.globalization.getPreferredLanguage(
                     function(language) {
                         var shortLang = language.value.substring(0, 2);
