@@ -1,28 +1,17 @@
-angular.module('eat-this-one').factory('localisationManager', ['eatConfig', function(eatConfig) {
+angular.module('eat-this-one').factory('localisationManager', ['eatConfig', 'statics', function(eatConfig, statics) {
 
     return {
 
-        supportedCountries : {
-            AU : 'Australia',
-            ES : 'España',
-            GB : 'United Kingdom',
-            IE : 'Ireland',
-            US : 'United States'
-        },
-
-        defaultCountry : 'AU',
-
-        getCountriesOptions : function() {
-            var options = [];
-            for (var code in this.supportedCountries) {
-                if (this.supportedCountries.hasOwnProperty(code)) {
-                    options.push({
-                        value: code,
-                        text: this.supportedCountries[code]
-                    });
-                }
+        setCountry : function() {
+            var locale = navigator.language || navigator.userLanguage;
+            console.log('Detected browser locale: ' + locale);
+            var country = locale.substring(3, 5);
+            if (statics.countries.hasOwnProperty(country)) {
+                localStorage.setItem('country', country);
+            } else {
+                // The default one.
+                localStorage.setItem('country', statics.defaultCountry);
             }
-            return options;
         },
 
         setLanguage : function() {
@@ -33,18 +22,7 @@ angular.module('eat-this-one').factory('localisationManager', ['eatConfig', func
             } else {
                 $.eatLang.lang = $.eatLang[eatConfig.defaultLang];
             }
-        },
-
-        setCountry : function() {
-            var locale = navigator.language || navigator.userLanguage;
-            console.log('Detected browser locale: ' + locale);
-            var country = locale.substring(3, 5);
-            if (this.supportedCountries.hasOwnProperty(country)) {
-                localStorage.setItem('country', country);
-            } else {
-                // The default one.
-                localStorage.setItem('country', this.defaultCountry);
-            }
         }
+
     };
 }]);

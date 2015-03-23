@@ -1,4 +1,4 @@
-angular.module('eat-this-one').factory('dishFormatter', ['notifier', 'datesConverter', function(notifier, datesConverter) {
+angular.module('eat-this-one').factory('dishFormatter', ['notifier', 'datesConverter', 'statics', function(notifier, datesConverter, statics) {
 
     return function($scope, dishData) {
 
@@ -48,6 +48,13 @@ angular.module('eat-this-one').factory('dishFormatter', ['notifier', 'datesConve
             } else {
                 // No text if more than one portion.
             }
+        }
+
+        // Format the donation (currency or i18n string.
+        if (!isNaN($scope.dish.donation)) {
+            $scope.dish.donation = statics.displayCurrency($scope.dish.donation);
+        } else {
+            $scope.dish.donation = $.eatLang.lang[$scope.dish.donation];
         }
 
         // If the user already booked the dish this is more useful than any other info.

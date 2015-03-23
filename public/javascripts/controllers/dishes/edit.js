@@ -1,5 +1,6 @@
 angular.module('eat-this-one')
-    .controller('DishesEditController', ['$scope', 'redirecter', 'appStatus', 'urlParser', 'notifier', 'dishFormatter', 'dishRequest', 'editDishRequest', 'eatConfig', 'authManager', 'datesConverter', 'formsManager', 'newLogRequest', 'menuManager', function($scope, redirecter, appStatus, urlParser, notifier, dishFormatter, dishRequest, editDishRequest, eatConfig, authManager, datesConverter, formsManager, newLogRequest, menuManager) {
+    .controller('DishesEditController', ['$scope', 'redirecter', 'appStatus', 'urlParser', 'notifier', 'dishFormatter', 'dishRequest', 'editDishRequest', 'eatConfig', 'authManager', 'datesConverter', 'formsManager', 'newLogRequest', 'menuManager', 'statics',
+    function($scope, redirecter, appStatus, urlParser, notifier, dishFormatter, dishRequest, editDishRequest, eatConfig, authManager, datesConverter, formsManager, newLogRequest, menuManager, statics) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -81,13 +82,15 @@ angular.module('eat-this-one')
         options: [
             {text : $scope.lang.open, value : 'open', btnstyle: 'btn-success active'},
             {text : $scope.lang.nothing, value : 'nothing', btnstyle: 'btn-success'},
-            {text : 1, value : '1', btnstyle: 'btn-warning'},
-            {text : 2, value : '2', btnstyle: 'btn-warning'},
-            {text : 3, value : '3', btnstyle: 'btn-warning'},
-            {text : 4, value : '4', btnstyle: 'btn-warning'},
-            {text : 5, value : '5', btnstyle: 'btn-warning'}
         ]
     };
+    // Fill up donations with country-dependant values.
+    var donationOptions = statics.getDonationOptions();
+    for(var i in donationOptions) {
+        donationOptions[i].btnstyle = 'btn-warning';
+        console.log(donationOptions[i]);
+        $scope.donation.options.push(donationOptions[i]);
+    }
 
     // For updates.
     var id = urlParser.getParam('id');

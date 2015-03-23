@@ -1,35 +1,12 @@
-angular.module('eat-this-one').factory('localisationManager', ['eatConfig', function(eatConfig) {
+angular.module('eat-this-one').factory('localisationManager', ['eatConfig', 'statics', function(eatConfig, statics) {
 
     return {
-
-        defaultCountry : 'AU',
-
-        supportedCountries : {
-            AU : 'Australia',
-            ES : 'España',
-            GB : 'United Kingdom',
-            IE : 'Ireland',
-            US : 'United States'
-        },
-
-        getCountriesOptions : function() {
-            var options = [];
-            for (var code in this.supportedCountries) {
-                if (this.supportedCountries.hasOwnProperty(code)) {
-                    options.push({
-                        value: code,
-                        text: this.supportedCountries[code]
-                    });
-                }
-            }
-            return options;
-        },
 
         setCountry : function() {
 
             // We set the default one so we will always have a country value.
             if (localStorage.getItem('country') === null) {
-                localStorage.setItem('country', 'AU');
+                localStorage.setItem('country', statics.defaultCountry);
             }
 
             // All cordova calls should be inside a deviceready listener.
@@ -39,7 +16,7 @@ angular.module('eat-this-one').factory('localisationManager', ['eatConfig', func
                     function(locale) {
                         // Always overwrite.
                         var country = locale.value.substring(3, 5);
-                        if (this.supportedCountries.hasOwnProperty(country)) {
+                        if (statics.countries.hasOwnProperty(country)) {
                             localStorage.setItem('country', country);
                         }
                     }.bind(this),

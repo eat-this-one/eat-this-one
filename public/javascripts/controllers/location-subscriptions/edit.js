@@ -1,6 +1,6 @@
 angular.module('eat-this-one')
-    .controller('LocationSubscriptionsEditController', ['$scope', '$http', 'redirecter', 'appStatus', 'eatConfig', 'authManager', 'notifier', 'formsManager', 'newLocationRequest', 'newLocationSubscriptionRequest', 'locationSubscriptionsRequest', 'newLogRequest', 'locationsRequest', 'menuManager', 'localisationManager',
-    function($scope, $http, redirecter, appStatus, eatConfig, authManager, notifier, formsManager, newLocationRequest, newLocationSubscriptionRequest, locationSubscriptionsRequest, newLogRequest, locationsRequest, menuManager, localisationManager) {
+    .controller('LocationSubscriptionsEditController', ['$scope', '$http', 'redirecter', 'appStatus', 'eatConfig', 'authManager', 'notifier', 'formsManager', 'newLocationRequest', 'newLocationSubscriptionRequest', 'locationSubscriptionsRequest', 'newLogRequest', 'locationsRequest', 'menuManager', 'statics',
+    function($scope, $http, redirecter, appStatus, eatConfig, authManager, notifier, formsManager, newLocationRequest, newLocationSubscriptionRequest, locationSubscriptionsRequest, newLogRequest, locationsRequest, menuManager, statics) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -52,7 +52,7 @@ angular.module('eat-this-one')
         placeholder: $scope.lang.countryexample,
         validation: ['required', 'text'],
         value: localStorage.getItem('country'),
-        options : localisationManager.getCountriesOptions()
+        options : statics.getCountriesOptions()
 
     };
 
