@@ -10,6 +10,7 @@ var LocationSchema = new Schema({
     },
     name: { type: String, required: true, unique: true},
     code:  { type: String, required: true, unique: true},
+    country: { type: String, required: true},
     created: { type: Date, default: Date.now}
 });
 
