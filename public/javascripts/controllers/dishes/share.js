@@ -20,8 +20,7 @@ angular.module('eat-this-one')
         menuManager.dishAddItem(),
         menuManager.editProfileItem(),
         menuManager.dishesListItem(),
-        menuManager.locationViewItem(),
-        menuManager.feedbackItem()
+        menuManager.locationViewItem()
     ];
 
     $scope.showToggleMenu = false;

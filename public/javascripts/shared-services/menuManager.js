@@ -69,19 +69,6 @@ angular.module('eat-this-one').factory('menuManager', ['$mdSidenav', 'newLogRequ
         editProfileCallback : function() {
             newLogRequest('click', 'user-edit');
             redirecter.redirect('users/edit.html');
-        },
-
-        feedbackItem : function() {
-            return {
-                name : this.lang.feedback,
-                icon : 'glyphicon glyphicon-send',
-                callback : 'feedbackCallback'
-            };
-        },
-
-        feedbackCallback : function() {
-            newLogRequest('click', 'feedback-add');
-            redirecter.redirect('feedback/add.html');
         }
     };
 }]);

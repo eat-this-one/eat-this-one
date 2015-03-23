@@ -32,8 +32,6 @@ $.eatLang.en = {
     error : 'Error',
     errornocontacts : 'No s\'ha pogut obtenir la teva llista de contactes',
     expecteddonation : 'Donació',
-    feedback : 'Suggeriments',
-    feedbackaddedinfo : 'Gràcies pels teus comentaris.',
     groupparticipants : 'Participants',
     insertgroupcode : 'Codi del grup',
     inviteemailsubject : 'He cuinat un plat que m\'agradaria compartir amb tu',
