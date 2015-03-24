@@ -1,4 +1,3 @@
-de.appplant.cordova.plugin.local-notification de.appplant.cordova.plugin.local-notification
 nl.x-services.plugins.socialsharing https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git
 com.phonegap.plugins.PushPlugin https://github.com/phonegap-build/PushPlugin.git
 org.apache.cordova.dialogs https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git
