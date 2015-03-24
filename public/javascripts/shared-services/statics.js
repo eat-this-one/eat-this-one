@@ -6,6 +6,7 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
             AU : {
                 name : 'Australia',
                 currency : '$',
+                defaultLanguage : 'en',
                 donationOptions : [
                     { text: 1, value: '1'},
                     { text: 2, value: '2'},
@@ -17,6 +18,7 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
             ES : {
                 name: 'España',
                 currency : '&#8364;',
+                defaultLanguage : 'es',
                 donationOptions : [
                     { text: 1, value: '1'},
                     { text: 2, value: '2'},
@@ -28,6 +30,7 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
             GB : {
                 name: 'United Kingdom',
                 currency : '&#8356;',
+                defaultLanguage : 'en',
                 donationOptions : [
                     { text: 1, value: '1'},
                     { text: 2, value: '2'},
@@ -39,6 +42,7 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
             IE : {
                 name: 'Ireland',
                 currency : '&#8364;',
+                defaultLanguage : 'en',
                 donationOptions : [
                     { text: 1, value: '1'},
                     { text: 2, value: '2'},
@@ -50,6 +54,7 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
             US : {
                 name: 'United States',
                 currency : '$',
+                defaultLanguage : 'en',
                 donationOptions : [
                     { text: 1, value: '1'},
                     { text: 2, value: '2'},
@@ -64,7 +69,7 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
 
         displayCurrency : function(value) {
             var loc = JSON.parse(localStorage.getItem('loc'));
-            return $filter('currency')(value, this.countries[loc.country].currency);
+            return $filter('currency')(value, this.countries[loc.country].currency, 0);
         },
 
         getDonationOptions : function() {
@@ -88,6 +93,11 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
                 }
             }
             return options;
+        },
+
+        getLocationLanguage : function() {
+            var country = JSON.parse(localStorage.getItem('loc')).country;
+            return this.countries[country].defaultLanguage;
         }
 
     };

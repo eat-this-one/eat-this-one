@@ -98,7 +98,7 @@ angular.module('eat-this-one')
             newLogRequest('error', 'meals-add', errorMsg);
             notifier.show($scope.lang.error, $scope.lang.weird);
         };
-        newMealRequest($scope, {dishid: id}, mealCallback, errorCallback);
+        newMealRequest($scope, {dishid: id}, $scope.dish.name, mealCallback, errorCallback);
 
         newLogRequest('click', 'meals-add', id);
     };

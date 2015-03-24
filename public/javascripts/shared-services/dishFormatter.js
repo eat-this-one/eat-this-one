@@ -50,7 +50,7 @@ angular.module('eat-this-one').factory('dishFormatter', ['notifier', 'datesConve
             }
         }
 
-        // Format the donation (currency or i18n string.
+        // Format the donation (currency or i18n string).
         if (!isNaN($scope.dish.donation)) {
             $scope.dish.donation = statics.displayCurrency($scope.dish.donation);
         } else {

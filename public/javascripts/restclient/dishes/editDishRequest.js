@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('editDishRequest', ['redirecter', '$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', 'storage', 'newLogRequest', function(redirecter, $http, appStatus, notifier, eatConfig, sessionManager, storage, newLogRequest) {
+    .factory('editDishRequest', ['redirecter', '$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', 'storage', 'newLogRequest', 'statics', function(redirecter, $http, appStatus, notifier, eatConfig, sessionManager, storage, newLogRequest, statics) {
 
     // Not using callbacks as it would be hardly reusable.
     return function($scope, dish) {
@@ -16,6 +16,14 @@ angular.module('eat-this-one')
 
         // Adding the session token to the request.
         dish.token = sessionManager.getToken();
+
+        // Here we use the group country to determine
+        // the default group language, which all group
+        // members are supposed to understand.
+        var locLang = statics.getLocationLanguage();
+        dish.message = $.eatLang[locLang].lnchef + ' ' +
+            sessionManager.getUser().name +
+            ' ' + $.eatLang[locLang].lncooked + ' ' + dish.name + '!';
 
         $http({
             method : method,

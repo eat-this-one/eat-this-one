@@ -39,7 +39,8 @@ angular.module('eat-this-one').factory('formsManager', function() {
                         case 'text':
                             // Only triggers an error if there is content.
                             if (fields[field].value && fields[field].value.length > 0) {
-                                var textexpression = new RegExp(/^[A-Za-z0-9-+_=".',;\s]*$/);
+                                // Including accents.
+                                var textexpression = new RegExp(/^[A-Za-z\u00C0-\u017F0-9-+_=".',;!?\s]*$/);
                                 if (!textexpression.test(fields[field].value)) {
                                     errors.push(fields[field].name);
                                     fieldHasErrors = true;

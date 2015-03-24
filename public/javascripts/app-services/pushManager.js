@@ -65,61 +65,89 @@ angular.module('eat-this-one')
 
 }]);
 
+// TODO: Ok, the redirection to the specific dish seems that is
+// not working and it used to work, we should fix this.
 function notificationsHandler(e) {
+    // All cordova calls should be inside a deviceready listener.
+    document.addEventListener('deviceready', function() {
 
-    switch(e.event) {
+        // We wait for the body to be ready.
+        var bodyscope = angular.element('#id-body');
+        bodyscope.ready(function() {
 
-        // Storing the registration id.
-        case 'registered':
+            // We inject the service here as we are out of angular init process.
+            var newLogRequest = bodyscope.injector().get('newLogRequest');
 
-            var bodyscope = angular.element('#id-body');
-            bodyscope.ready(function() {
-                // We inject the service here as we are out of angular init process.
-                var newLogRequest = bodyscope.injector().get('newLogRequest');
+            switch(e.event) {
 
                 // Storing the registration id.
-                if (e.regid.length > 0) {
+                case 'registered':
 
-                    var previousGcmRegId = localStorage.getItem('gcmRegId');
+                    // Storing the registration id.
+                    if (e.regid.length > 0) {
 
-                    if (previousGcmRegId === null || previousGcmRegId === false || previousGcmRegId === '') {
-                        // Store it if there was nothing before.
-                        localStorage.setItem('gcmRegId', e.regid);
-                        newLogRequest('create', 'gcm-registration', e.regid);
-                    } else if (previousGcmRegId != e.regid) {
-                        // We also check that the current one is different.
-                        localStorage.setItem('gcmRegId', e.regid);
-                        newLogRequest('update', 'gcm-registration', e.regid);
+                        var previousGcmRegId = localStorage.getItem('gcmRegId');
 
-                        // We also update the backend.
-                        var updateRegIdRequest = bodyscope.injector().get('updateRegIdRequest');
-                        updateRegIdRequest(e.regid);
+                        if (previousGcmRegId === null ||
+                                previousGcmRegId === false ||
+                                previousGcmRegId === '') {
+                            // Store it if there was nothing before.
+                            localStorage.setItem('gcmRegId', e.regid);
+                            newLogRequest('create', 'gcm-registration', e.regid);
+                        } else if (previousGcmRegId != e.regid) {
+                            // We also check that the current one is different.
+                            localStorage.setItem('gcmRegId', e.regid);
+                            newLogRequest('update', 'gcm-registration', e.regid);
+
+                            // We also update the backend.
+                            var updateRegIdRequest = bodyscope.injector().get('updateRegIdRequest');
+                            updateRegIdRequest(e.regid);
+                        } else {
+                            // Let's not log this.
+                        }
                     } else {
-                        newLogRequest('nothing', 'gcm-registration', e.regid);
+                        newLogRequest('error', 'gcm-registration', 'no registration id');
                     }
+                    break;
 
-                } else {
-                    newLogRequest('error', 'gcm-registration', 'no registration id');
-                }
-            });
-            break;
-
-        case 'message':
-            // Delegated to the messages handler.
-            angular.element('#id-body').injector().get('messagesHandler').androidMessage(e.payload);
-            break;
-        case 'error':
-            newLogRequest('error', 'gcm-error', e.msg);
-            console.log('Error: Message can not be received. ' + e.msg);
-            break;
-        default:
-            newLogRequest('error', 'gcm-unknown');
-            console.log('Error: Unknown event received');
-            break;
-    }
+                case 'message':
+                    var dishid = e.payload.dishid;
+                    bodyscope.injector().get('redirecter')
+                        .redirect('dishes/view.html?id=' + dishid);
+                    newLogRequest('click', 'gcm-notification',
+                        e.payload.type + '-' + dishid);
+                    break;
+                case 'error':
+                    newLogRequest('error', 'gcm-error', e.msg);
+                    console.log('Error: Message can not be received. ' + e.msg);
+                    break;
+                default:
+                    newLogRequest('error', 'gcm-unknown');
+                    console.log('Error: Unknown event received');
+                    break;
+            }
+        });
+    });
 }
 
+// TODO Check that this works.
 function apnNotificationsHandler(e) {
-    // TODO Once this is not a crappy prototype.
-    angular.element('#id-body').injector().get('messagesHandler').iOSMessage(e);
+
+    // All cordova calls should be inside a deviceready listener.
+    document.addEventListener('deviceready', function() {
+
+        // We wait for the body to be ready.
+        var bodyscope = angular.element('#id-body');
+        bodyscope.ready(function() {
+
+            // We inject the service here as we are out of angular init process.
+            var newLogRequest = bodyscope.injector().get('newLogRequest');
+
+            var dishid = e.payload.dishid;
+            bodyscope.injector().get('redirecter')
+                .redirect('dishes/view.html?id=' + dishid);
+            newLogRequest('click', 'apn-notification',
+                e.payload.type + '-' + dishid);
+        });
+    });
 }

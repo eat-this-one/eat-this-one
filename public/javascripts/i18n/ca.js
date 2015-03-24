@@ -1,4 +1,4 @@
-$.eatLang.en = {
+$.eatLang.ca = {
 
     adddish : 'Afegir plat',
     addmeal : 'Dinar reservat!',
