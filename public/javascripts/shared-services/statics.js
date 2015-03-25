@@ -9,9 +9,7 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
                 defaultLanguage : 'en',
                 donationOptions : [
                     { text: 1, value: '1'},
-                    { text: 2, value: '2'},
                     { text: 3, value: '3'},
-                    { text: 4, value: '4'},
                     { text: 5, value: '5'}
                 ]
             },
@@ -21,9 +19,7 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
                 defaultLanguage : 'es',
                 donationOptions : [
                     { text: 1, value: '1'},
-                    { text: 2, value: '2'},
                     { text: 3, value: '3'},
-                    { text: 4, value: '4'},
                     { text: 5, value: '5'}
                 ]
             },
@@ -33,9 +29,7 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
                 defaultLanguage : 'en',
                 donationOptions : [
                     { text: 1, value: '1'},
-                    { text: 2, value: '2'},
                     { text: 3, value: '3'},
-                    { text: 4, value: '4'},
                     { text: 5, value: '5'}
                 ]
             },
@@ -45,9 +39,7 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
                 defaultLanguage : 'en',
                 donationOptions : [
                     { text: 1, value: '1'},
-                    { text: 2, value: '2'},
                     { text: 3, value: '3'},
-                    { text: 4, value: '4'},
                     { text: 5, value: '5'}
                 ]
             },
@@ -57,9 +49,7 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
                 defaultLanguage : 'en',
                 donationOptions : [
                     { text: 1, value: '1'},
-                    { text: 2, value: '2'},
                     { text: 3, value: '3'},
-                    { text: 4, value: '4'},
                     { text: 5, value: '5'}
                 ]
             }
@@ -77,7 +67,7 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
 
             var options = this.countries[loc.country].donationOptions;
             for (var i in options) {
-                options[i].text = $filter('currency')(options[i].text, this.countries[loc.country].currency);
+                options[i].text = $filter('currency')(options[i].text, this.countries[loc.country].currency, 0);
             }
             return options;
         },
