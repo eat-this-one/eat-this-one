@@ -17,7 +17,7 @@ fi
 grunt build:prod
 
 # The SSH key should be set.
-scp -r dist/app/platforms/android/ant-build/CordovaApp-debug-unaligned.apk \
+scp -r dist/app/platforms/android/ant-build/MainActivity-debug-unaligned.apk \
     root@eat-this-one.com:/var/www/html/android.apk
 
 # Push last changes to backend server (NO -f HERE!).
