@@ -26,7 +26,7 @@ angular.module('eat-this-one')
             localisationManager.setLanguage();
 
             // Creates fake registration id.
-            pushManager.register(updatedApp);
+            pushManager.register();
 
             localisationManager.setCountry();
 

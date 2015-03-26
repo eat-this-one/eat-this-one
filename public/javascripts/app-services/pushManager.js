@@ -4,14 +4,7 @@ angular.module('eat-this-one')
     return {
 
         // Here we register which functions will handle the notifications.
-        register : function(forceUpdate) {
-
-            // Check if the device is already registered.
-            if (forceUpdate === false &&
-                    (localStorage.getItem('gcmRegId') !== null ||
-                    localStorage.getItem('apnToken') !== null)) {
-                return;
-            }
+        register : function() {
 
             if (device.platform == 'android' ||
                     device.platform == 'Android' ||
@@ -28,7 +21,6 @@ angular.module('eat-this-one')
 
             } else {
 
-                // TODO Test properly as it is just a copy & paste.
                 $window.plugins.pushNotification.register(
                     this.registeredAPN,
                     this.errorAPNHandler,
@@ -65,8 +57,6 @@ angular.module('eat-this-one')
 
 }]);
 
-// TODO: Ok, the redirection to the specific dish seems that is
-// not working and it used to work, we should fix this.
 function notificationsHandler(e) {
     // All cordova calls should be inside a deviceready listener.
     document.addEventListener('deviceready', function() {

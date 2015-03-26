@@ -29,7 +29,7 @@ angular.module('eat-this-one')
 
             document.addEventListener('deviceready', function() {
                 // Register the app to receive and send notifications.
-                pushManager.register(updatedApp);
+                pushManager.register();
             });
 
             localisationManager.setCountry();

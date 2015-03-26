@@ -3,10 +3,9 @@ angular.module('eat-this-one')
 
     return {
 
-        register : function(forceUpdate) {
+        register : function() {
 
-            if (forceUpdate !== true &&
-                    localStorage.getItem('gcmRegId') !== null) {
+            if (localStorage.getItem('gcmRegId') !== null) {
                 return;
             }
 
@@ -16,9 +15,7 @@ angular.module('eat-this-one')
             var randomNumber = Math.random() + new Date().getTime();
             localStorage.setItem('gcmRegId', randomNumber);
 
-            if (forceUpdate) {
-                updateRegistration(randomNumber);
-            }
+            updateRegistration(randomNumber);
         }
     };
 }]);
