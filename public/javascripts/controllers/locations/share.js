@@ -50,7 +50,7 @@ angular.module('eat-this-one')
     $scope.share = function() {
 
         var msg = $scope.lang.invitejoinmygroup + ' .' + $scope.lang.invitegroupcode +
-             ': "' + loc.name + '". ' + eatConfig.downloadAppUrl;
+             ': "' + loc.code + '". ' + eatConfig.downloadAppUrl;
         shareManager.process($scope, msg);
     };
 }]);
