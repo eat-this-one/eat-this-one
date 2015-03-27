@@ -10,7 +10,7 @@ block logic
 
     div(ng-if='!auth.isAuthenticated()')
         div(id='id-authenticate', ng-if='!auth.isAuthenticated()')
-            form(role='form')
+            form(role='form' id='id-page-form')
                 eat-input-text(element='name')
                 eat-input-text(element='email')
                 md-button(ng-click='signup()', class='md-primary')

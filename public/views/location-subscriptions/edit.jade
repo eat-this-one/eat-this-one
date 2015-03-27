@@ -9,7 +9,7 @@ block base
 block logic
     div(class='info-text') {{lang.joingroupinfo}}
 
-    form(role='form')
+    form(role='form' id='id-page-form')
         md-radio-group(ng-model='usedfield')
             md-radio-button(value='joingroup', class='md-primary') {{lang.joingroup}}
             md-radio-button(value='newgroup', class='md-primary') {{lang.newgroup}}

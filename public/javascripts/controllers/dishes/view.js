@@ -57,7 +57,7 @@ angular.module('eat-this-one')
             $scope.actionIcons = [
                 {
                     name : $scope.lang.addmeal,
-                    icon : 'glyphicon glyphicon-bookmark',
+                    icon : 'glyphicon glyphicon-pushpin',
                     callback : 'addMeal'
                 }
             ];

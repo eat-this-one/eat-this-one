@@ -50,7 +50,7 @@ html
 
                         //- Action buttons. The controller sets them.
                         div(ng-repeat='actionIcon in actionIcons')
-                            md-button(ng-click='redirectAction(this, actionIcon.callback)', ng-if='showToggleMenu', aria-label='{{actionIcon.name}}', class='md-primary md-fab no-box-shadow')
+                            md-button(ng-click='redirectAction(this, actionIcon.callback)', ng-if='showToggleMenu', aria-label='{{actionIcon.name}}', class='md-primary md-fab no-box-shadow', form='id-page-form')
                                 span(class='{{actionIcon.icon}}', aria-hidden='true')
 
                 //- Delegated to the specific view logic.
