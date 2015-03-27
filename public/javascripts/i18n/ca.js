@@ -68,7 +68,7 @@ $.eatLang.ca = {
     newgroup : 'Vull create un grup nou',
     newgroupexample : 'Selecciona un nom pel grup, després podràs invitar als teus companys',
     nportions : 'Porcions disponibles',
-    nocontacts : 'Contactes',
+    nocontacts : 'Ey!',
     nocontactsinfo : 'No has seleccionat cap contacte',
     nothing : 'No res',
     nodishes : 'No hi ha plats per reservar en els pròxims dies. Per què no afegeixes tu el primer?',

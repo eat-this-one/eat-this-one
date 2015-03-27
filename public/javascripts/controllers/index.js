@@ -11,12 +11,7 @@ angular.module('eat-this-one').controller('IndexController',
 
     // Define header.
     $scope.pageTitle = $scope.lang.sitename;
-    $scope.menuItems = [
-        menuManager.dishAddItem(),
-        menuManager.editProfileItem(),
-        menuManager.dishesListItem(),
-        menuManager.locationViewItem()
-    ];
+    $scope.menuItems = menuManager.getDefaultItems();
 
     $scope.dishes = [];
     $scope.showNoDishes = false;

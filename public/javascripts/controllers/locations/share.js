@@ -16,12 +16,7 @@ angular.module('eat-this-one')
             callback : 'share'
         }
     ];
-    $scope.menuItems = [
-        menuManager.dishAddItem(),
-        menuManager.editProfileItem(),
-        menuManager.dishesListItem(),
-        menuManager.locationViewItem()
-    ];
+    $scope.menuItems = menuManager.getDefaultItems();
 
     $scope.showToggleMenu = false;
     if ($scope.auth.isAuthenticated()) {

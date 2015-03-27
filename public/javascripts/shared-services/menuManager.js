@@ -7,6 +7,15 @@ angular.module('eat-this-one').factory('menuManager', ['$mdSidenav', 'newLogRequ
             $mdSidenav('menu').toggle();
         },
 
+        getDefaultItems : function() {
+            return [
+                this.dishAddItem(),
+                this.dishesListItem(),
+                this.locationViewItem(),
+                this.editProfileItem()
+            ];
+        },
+
         dishAddItem : function() {
             return {
                 name : this.lang.adddish,

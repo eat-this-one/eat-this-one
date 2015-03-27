@@ -9,12 +9,7 @@ angular.module('eat-this-one')
 
     // Define header.
     $scope.pageTitle = $scope.lang.dish;
-    $scope.menuItems = [
-        menuManager.dishAddItem(),
-        menuManager.editProfileItem(),
-        menuManager.dishesListItem(),
-        menuManager.locationViewItem()
-    ];
+    $scope.menuItems = menuManager.getDefaultItems();
 
     $scope.showToggleMenu = false;
     if ($scope.auth.isAuthenticated()) {
