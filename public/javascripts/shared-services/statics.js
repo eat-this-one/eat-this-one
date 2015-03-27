@@ -64,6 +64,9 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
 
         getDonationOptions : function() {
             var loc = JSON.parse(localStorage.getItem('loc'));
+            if (loc === null) {
+                return [];
+            }
 
             var options = this.countries[loc.country].donationOptions;
             for (var i in options) {

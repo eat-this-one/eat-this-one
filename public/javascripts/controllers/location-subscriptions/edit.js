@@ -22,6 +22,10 @@ angular.module('eat-this-one')
         $scope.showToggleMenu = true;
     }
 
+    if (!$scope.auth.isAuthenticated()) {
+        redirected.redirect('index.html');
+    }
+
     // By default to join a group.
     $scope.usedfield = 'joingroup';
 
@@ -53,7 +57,6 @@ angular.module('eat-this-one')
         validation: ['required', 'text'],
         value: localStorage.getItem('country'),
         options : statics.getCountriesOptions()
-
     };
 
     // We will redirect to home if the user already have a location subscription.
