@@ -24,7 +24,7 @@ html
             //- The user menu. Only available when the controller set icons on it.
             md-sidenav(ng-if='showToggleMenu && menuItems', class='md-sidenav-left sidenav-short', md-component-id='menu')
                 md-toolbar
-                    h1(class='md-toolbar-tools') {{lang.menu}}
+                    span(class='md-toolbar-tools') {{lang.menu}}
                 md-list(role='list', layout='column', layout-fill)
                     md-item(ng-repeat='item in menuItems', role='listitem')
                         md-button(ng-click='redirectMenuItem(this, item.callback)', class='menu-item', aria-label='{{item.name}}')

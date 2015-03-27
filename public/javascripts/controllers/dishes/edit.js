@@ -87,7 +87,6 @@ angular.module('eat-this-one')
     var donationOptions = statics.getDonationOptions();
     for(var i in donationOptions) {
         donationOptions[i].btnstyle = 'btn-warning';
-        console.log(donationOptions[i]);
         $scope.donation.options.push(donationOptions[i]);
     }
 
