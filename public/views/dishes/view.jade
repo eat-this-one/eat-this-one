@@ -12,11 +12,11 @@ block logic
         div(class='dish-useful-info')
             h3 {{dishusefulinfotext}}
         md-card
+            img(ng-if='dish.photo', src='{{dish.photo}}')
             md-card-content
+                h2(class='md-title') {{dish.name}}
                 div(class='dish-info')
-                    div(ng-if='dish.photo', class='dish-field')
-                        img(class='dish-view-img', src='{{dish.photo}}')
-                    div(class='dish-field')
+                    div(class='dish-field', ng-if='dish.description')
                         b {{lang.dishdescription}}
                         {{dish.description}}
                     div(class='dish-field')
@@ -28,5 +28,11 @@ block logic
                     div(class='dish-field')
                         b {{lang.expecteddonation}}
                         {{dish.donation}}
-        md-card(ng-if='showReminder')
-            md-card-content(class='dish-useful-info') {{lang.reminder}}: {{dish.nbookedmeals}}
+        md-card(ng-if='showBookedMeals')
+            md-card-content
+                h2(class='md-title') {{lang.bookedmeals}}
+                md-item-content(ng-repeat='meal in meals')
+                    div
+                        span(class='glyphicon glyphicon-user', aria-hidden='true')
+                    div(class='md-tile-content')
+                        h3 {{meal.user.name}}

@@ -8,8 +8,7 @@ block base
 
 block logic
     div(class='users-list')
-        h3(ng-show='showMembers') {{lang.groupparticipants}}
-        md-list
+        md-list(ng-show='showMembers')
             md-item(ng-repeat='member in members', role='listitem')
                 md-card
                     md-card-content

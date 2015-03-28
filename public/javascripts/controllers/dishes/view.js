@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('DishesViewController', ['$scope', 'redirecter', 'appStatus', 'notifier', 'urlParser', 'dishFormatter', 'dishRequest', 'newMealRequest', 'eatConfig', 'authManager', 'newLogRequest', 'menuManager', 'storage', function($scope, redirecter, appStatus, notifier, urlParser, dishFormatter, dishRequest, newMealRequest, eatConfig, authManager, newLogRequest, menuManager, storage) {
+    .controller('DishesViewController', ['$scope', 'redirecter', 'appStatus', 'notifier', 'urlParser', 'dishFormatter', 'dishRequest', 'newMealRequest', 'mealsRequest', 'eatConfig', 'authManager', 'newLogRequest', 'menuManager', 'storage', function($scope, redirecter, appStatus, notifier, urlParser, dishFormatter, dishRequest, newMealRequest, mealsRequest, eatConfig, authManager, newLogRequest, menuManager, storage) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -17,7 +17,7 @@ angular.module('eat-this-one')
     }
 
     // Only the chef will see it and if there are bookings.
-    $scope.showReminder = false;
+    $scope.showBookedMeals = false;
 
     $scope.dish = {};
 
@@ -45,7 +45,6 @@ angular.module('eat-this-one')
     appStatus.waiting('dishRequest');
     var dishCallback = function(dishData) {
         dishFormatter($scope, dishData);
-        appStatus.completed('dishRequest');
 
         // Fill the actions items.
         if ($scope.userCanBook()) {
@@ -56,6 +55,7 @@ angular.module('eat-this-one')
                     callback : 'addMeal'
                 }
             ];
+            appStatus.completed('dishRequest');
         } else if ($scope.auth.isUser($scope.dish.user._id)) {
             $scope.actionIcons = [
                 {
@@ -66,9 +66,22 @@ angular.module('eat-this-one')
             ];
 
             if ($scope.dish.nbookedmeals > 0) {
-                $scope.showReminder = true;
+                // Here we delay the status completed until the meals request finishes.
+                mealsRequest($scope, $scope.dish._id, mealsCallback);
+            } else {
+                appStatus.completed('dishRequest');
             }
+        } else {
+            appStatus.completed('dishRequest');
         }
+    };
+    // This will be called if the user is the chef.
+    var mealsCallback = function mealsCallback(mealsData) {
+        if (mealsData.length > 0) {
+            $scope.meals = mealsData;
+        }
+        $scope.showBookedMeals = true;
+        appStatus.completed('dishRequest');
     };
     dishRequest($scope, dishCallback, id);
 
