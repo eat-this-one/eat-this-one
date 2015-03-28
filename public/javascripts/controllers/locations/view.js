@@ -10,7 +10,7 @@ angular.module('eat-this-one')
     $scope.menu = menuManager;
 
     // Define header (the title will be replaced later by the location name).
-    $scope.pageTitle = $scope.lang.location;
+    $scope.pageTitle = $scope.lang.ranking;
     $scope.menuItems = menuManager.getDefaultItems();
 
     $scope.showToggleMenu = false;
@@ -42,7 +42,7 @@ angular.module('eat-this-one')
         // Fetching by id we should have just one.
         var locData = locations[0];
 
-        $scope.pageTitle = locData.name;
+        $scope.pageTitle = $scope.pageTitle + ' - ' + locData.name;
 
         // If you can see the members you are one of them.
         if (typeof locData.members !== "undefined") {
