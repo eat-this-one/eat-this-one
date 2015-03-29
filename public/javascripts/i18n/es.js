@@ -71,7 +71,7 @@ $.eatLang.es = {
     nocontacts : 'Hey!',
     nocontactsinfo : 'No has seleccionado ningún contacto',
     nothing : 'Nada',
-    nodishes : 'No hay platos para reservar los próximos días. ¿Por qué no añades tu el primero?',
+    nodishes : 'No hay platos para reservar en los próximos días. ¿Por qué no añades tu el primero?',
     open : 'Abierta',
     photo : 'Foto',
     ranking : 'Ranking',

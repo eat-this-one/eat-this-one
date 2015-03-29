@@ -23,7 +23,7 @@ angular.module('eat-this-one')
     }
 
     if (!$scope.auth.isAuthenticated()) {
-        redirected.redirect('index.html');
+        redirecter.redirect('index.html');
     }
 
     // By default to join a group.
