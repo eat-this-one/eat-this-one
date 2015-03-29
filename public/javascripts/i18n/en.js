@@ -91,6 +91,7 @@ $.eatLang.en = {
     usernameexample : 'e.g. John Cobra',
     users : 'users',
     weird : 'There is no internet connection, try it later',
+    welcome : 'Welcome',
     when : 'When',
     whereexample : 'e.g. Moodle Pty Ltd',
     wrongcode : 'Wrong code',

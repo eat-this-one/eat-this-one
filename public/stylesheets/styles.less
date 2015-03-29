@@ -26,6 +26,10 @@ footer {
     padding: 80px 16px 16px 16px;
 }
 
+md-content.md-default-theme {
+    background-color: inherit;
+}
+
 .button-icon {
     margin-right: 5px;
 }
@@ -121,4 +125,34 @@ footer {
 
 .ranking {
     font-size: 140%;
+}
+
+.splash-icon {
+    position: fixed;
+    bottom: 15%;
+    left:50%;
+    width: 40%;
+    height: auto;
+    margin: 0 0 0 -20%;
+}
+
+.splash-background {
+    background-color: #ffffff;
+    background: rgba(0, 0, 0, 0) url(images/intro.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    transition: background-color 1s;
+}
+.splash-background:hover {
+    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.6)
+}
+
+.splash-background:before {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background-color: inherit;
+    content: ' ';
 }

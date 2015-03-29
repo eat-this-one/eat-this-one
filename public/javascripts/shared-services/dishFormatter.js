@@ -5,7 +5,7 @@ angular.module('eat-this-one').factory('dishFormatter', ['notifier', 'datesConve
         $scope.dish = dishData;
 
         // Nice when format.
-        $scope.dish.when = datesConverter.timeToDay(Date.parse($scope.dish.when));
+        $scope.dish.when = datesConverter.timeToDayString(Date.parse($scope.dish.when));
 
         // Fill form values if they exist.
         var fields = ['name', 'description', 'when', 'nportions', 'donation'];

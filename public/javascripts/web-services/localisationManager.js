@@ -3,9 +3,10 @@ angular.module('eat-this-one').factory('localisationManager', ['eatConfig', 'sta
     return {
 
         setCountry : function() {
+
             var locale = navigator.language || navigator.userLanguage;
-            console.log('Detected browser locale: ' + locale);
             var country = locale.substring(3, 5);
+
             if (statics.countries.hasOwnProperty(country)) {
                 localStorage.setItem('country', country);
             } else {
@@ -15,13 +16,20 @@ angular.module('eat-this-one').factory('localisationManager', ['eatConfig', 'sta
         },
 
         setLanguage : function() {
+
+            if (localStorage.getItem('language') === null) {
+                localStorage.setItem('language', eatConfig.defaultLang);
+            }
+            $.eatLang.lang = $.eatLang[localStorage.getItem('language')];
+
             // We want to access strings through $.eatLang.lang.
             var userLang = navigator.language || navigator.userLanguage;
-            if (typeof $.eatLang[userLang] !== 'undefined') {
-                $.eatLang.lang = $.eatLang[userLang.substring(0, 2)];
-            } else {
-                $.eatLang.lang = $.eatLang[eatConfig.defaultLang];
+            var lang = userLang.substring(0, 2);
+            if (typeof $.eatLang[lang] === 'undefined') {
+                lang = localStorage.getItem('language');
             }
+            $.eatLang.lang = $.eatLang[lang];
+            localStorage.setItem('language', lang);
         }
 
     };

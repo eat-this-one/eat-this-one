@@ -43,6 +43,18 @@ angular.module('eat-this-one').factory('datesConverter', function() {
             return day;
         },
 
+        timeToDayString : function(timestamp) {
+            var day = this.timeToDay(timestamp);
+
+            if (day === 'today' ||
+                    day === 'tomorrow' ||
+                    day === 'aftertomorrow') {
+                day = $.eatLang.lang[day];
+            }
+
+            return day;
+        },
+
         /**
          * Converts a day to a timestamp (miliseconds).
          *

@@ -33,7 +33,7 @@ angular.module('eat-this-one').controller('IndexController',
                 $scope.showNoDishes = true;
             } else {
                 for (var index in $scope.dishes) {
-                    $scope.dishes[index].when = datesConverter.timeToDay(Date.parse($scope.dishes[index].when));
+                    $scope.dishes[index].when = datesConverter.timeToDayString(Date.parse($scope.dishes[index].when));
 
                     imgManager.fillDishSrc($scope.dishes[index]);
 
@@ -73,6 +73,24 @@ angular.module('eat-this-one').controller('IndexController',
     }
 
     newLogRequest('view', 'index');
+
+    // To determine what to show to the user.
+    if ($scope.auth.isAuthenticated()) {
+        $scope.display = 'dishes';
+    } else if (localStorage.getItem('splashpassed') === null) {
+        $scope.display = 'splash';
+        $scope.pageTitle = $scope.lang.welcome;
+        $('#id-body').addClass('splash-background');
+    } else {
+        $scope.display = 'login';
+    }
+
+    // To start up the app.
+    $scope.toLogin = function() {
+        localStorage.setItem('splashpassed', true);
+        newLogRequest('click', 'splash-continue');
+        redirecter.redirect('index.html');
+    };
 
     // Its only purpose is to store the log.
     $scope.dishClicked = function(dishid) {

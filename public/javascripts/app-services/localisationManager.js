@@ -31,24 +31,29 @@ angular.module('eat-this-one').factory('localisationManager', ['eatConfig', 'sta
 
         setLanguage : function() {
 
-            $.eatLang.lang = $.eatLang[eatConfig.defaultLang];
+            if (localStorage.getItem('language') === null) {
+                localStorage.setItem('language', eatConfig.defaultLang);
+            }
+
+            var storedLang = $.eatLang[localStorage.getItem('language')];
+            $.eatLang.lang = storedLang;
 
             // All cordova calls should be inside a deviceready listener.
             document.addEventListener('deviceready', function() {
 
                 navigator.globalization.getPreferredLanguage(
                     function(language) {
-                        var shortLang = language.value.substring(0, 2);
-                        if (typeof $.eatLang[shortLang] !== 'undefined') {
-                            $.eatLang.lang = $.eatLang[shortLang];
-                        } else {
-                            // We default to 'en' if any problem.
-                            $.eatLang.lang = $.eatLang[eatConfig.defaultLang];
+                        var lang = language.value.substring(0, 2);
+                        if (typeof $.eatLang[lang] === 'undefined') {
+                            // We default to the language we already got.
+                            lang = storedLang;
                         }
+                        $.eatLang.lang = $.eatLang[lang];
+                        localStorage.setItem('language', lang);
                     },
                     function() {
                         // We default to 'en' if any problem.
-                        $.eatLang.lang = $.eatLang[eatConfig.defaultLang];
+                        $.eatLang.lang = $.eatLang[storedLang];
 
                         // TODO Here we can not add a newLogRequest circular reference.
                         console.log('Error getting preferred language');

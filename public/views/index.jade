@@ -8,8 +8,11 @@ block logic
     md-button(class='add-dish-button', ng-click='addDish()', ng-if='showToggleMenu', aria-label='lang.adddish', class='md-primary md-fab no-box-shadow')
         span(class='glyphicon glyphicon-cutlery', aria-hidden='true')
 
-    div(ng-if='!auth.isAuthenticated()')
-        div(id='id-authenticate', ng-if='!auth.isAuthenticated()')
+    div(ng-if='display === "splash"', class='md-content')
+        img(class='splash-icon', ng-click='toLogin()', src='images/icon.png')
+
+    div(ng-if='display === "login"')
+        div(id='id-authenticate')
             form(role='form' id='id-page-form')
                 eat-input-text(element='name')
                 eat-input-text(element='email')
@@ -17,7 +20,7 @@ block logic
                     span(class='glyphicon glyphicon-user button-icon', aria-hidden='true')
                     {{lang.signin}}
 
-    div(ng-if='auth.isAuthenticated()')
+    div(ng-if='display === "dishes"')
         div(class='dishes-list')
             div(ng-show='showNoDishes')
                 p {{lang.nodishes}}
