@@ -44,7 +44,9 @@ cordova create dist/app "$packagename.$1" "$appname"
 grunt build:dev
 
 # App icon.
-ln icon.png dist/app/icon.png
+ln icons/icon.png dist/app/icon.png
+ln icons/icon-ios.png dist/app/icon-ios.png
+ln icons/splash.png dist/app/splash.png
 
 cd dist/app
 

@@ -72,6 +72,8 @@ Edit development.properties with your own values
 * Edit dist/app/config.xml
     * Change whatever info you like
     * Add **<icon src="icon.png" />** under **<widget>** node
+    * Add **<icon platform="ios" src="icon-ios.png" />** under **<widget>** node
+    * Add **<splash src="splash.png" />** under **<widget>** node
 
 # Development
 
