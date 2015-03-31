@@ -79,7 +79,7 @@ $.eatLang.en = {
     save : 'Save',
     selectimage : 'Select image',
     setgroupname : 'Set group name',
-    signin : 'Sign in',
+    signup : 'Sign up',
     sitename : 'Eat this one!',
     thanks : 'Thanks',
     today : 'Today',

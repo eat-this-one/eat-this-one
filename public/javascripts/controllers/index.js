@@ -83,6 +83,7 @@ angular.module('eat-this-one').controller('IndexController',
         $('#id-body').addClass('splash-background');
     } else {
         $scope.display = 'login';
+        $scope.pageTitle = $scope.lang.signup;
     }
 
     // To start up the app.

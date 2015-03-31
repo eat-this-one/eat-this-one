@@ -79,7 +79,7 @@ $.eatLang.ca = {
     save : 'Desar',
     selectimage : 'Seleccionar imatge',
     setgroupname : 'Nom del grup',
-    signin : 'Crear compte',
+    signup : 'Crear compte',
     sitename : 'Eat this one!',
     thanks : 'Gràcies',
     today : 'Avui',
