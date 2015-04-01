@@ -240,9 +240,14 @@ module.exports = function(grunt) {
             }
         },
 
+        // Skip adjoining classes check because angular-material does not allow us
+        // do it properly.
         csslint : {
             strict : {
-                src : ['public/stylesheets/*.less']
+                src : ['public/stylesheets/*.less'],
+                options : {
+                    "adjoining-classes" : false
+                }
             }
         },
 
