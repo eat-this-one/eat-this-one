@@ -9,7 +9,6 @@ block logic
         span(class='glyphicon glyphicon-cutlery', aria-hidden='true')
 
     div(ng-if='display === "splash"', class='md-content')
-        span(class='splash-text') {{lang.sitename}}
         img(class='splash-icon', ng-click='toLogin()', src='images/icon.png')
 
     div(ng-if='display === "login"')
