@@ -51,7 +51,7 @@ ln icons/splash.png dist/app/splash.png
 cd dist/app
 
 # Adding icons.
-sed -i 's#</widget>#    <icon src="icon.png" />\
+sed -i '' 's#</widget>#    <icon src="icon.png" />\
     <platform name="ios">\
         <icon src="icon-ios.png" />\
         <splash src="splash.png" />\
