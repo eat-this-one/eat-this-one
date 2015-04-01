@@ -65,7 +65,7 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
             },
             ES : {
                 name: 'España',
-                currency : '&#8364;',
+                currency : '€',
                 defaultLanguage : 'es',
                 donationOptions : [
                     { text: 1, value: '1'},
@@ -75,7 +75,7 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
             },
             GB : {
                 name: 'United Kingdom',
-                currency : '&#8356;',
+                currency : '£',
                 defaultLanguage : 'en',
                 donationOptions : [
                     { text: 1, value: '1'},
@@ -85,7 +85,7 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
             },
             IE : {
                 name: 'Ireland',
-                currency : '&#8364;',
+                currency : '€',
                 defaultLanguage : 'en',
                 donationOptions : [
                     { text: 1, value: '1'},
