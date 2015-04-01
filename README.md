@@ -71,10 +71,6 @@ Edit development.properties with your own values
     * If it is the case, run **android sdk** and select the required versions
 * Edit dist/app/config.xml
     * Change whatever info you like
-    * Add the following under **<widget>**
-        <icon src="icon.png" />
-        <icon platform="ios" src="icon-ios.png" />
-        <splash src="splash.png" />
 
 # Development
 
