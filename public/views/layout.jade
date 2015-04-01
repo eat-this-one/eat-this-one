@@ -33,7 +33,7 @@ html
                             span(class='md-inline-list-icon-label', aria-hidden='true') {{item.name}}
 
             //- Main content container.
-            md-content
+            div
 
                 //- Page heading
                 md-toolbar(class='navbar-fixed-top')
@@ -54,7 +54,7 @@ html
                                 span(class='{{actionIcon.icon}}', aria-hidden='true')
 
                 //- Delegated to the specific view logic.
-                md-content(id='id-contents', class='main-content')
+                div(id='id-contents', class='main-content')
                     //- Delegated to the extension.
                     block logic
 
