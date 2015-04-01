@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .factory('pushManager', ['$window', 'eatConfig', 'newLogRequest', function($window, eatConfig, newLogRequest) {
+    .factory('pushManager', ['$window', 'eatConfig', function($window, eatConfig) {
 
     return {
 
@@ -40,17 +40,22 @@ angular.module('eat-this-one')
 
         registeredAPN : function(token) {
             console.log('Registered in APN: ' + token);
+            // We updated it as we may have a random one.
             localStorage.setItem('apnToken', token);
         },
 
         errorHandler : function(error) {
-            newLogRequest('error', 'register-gcm', error);
             console.log('Error, not able to get the registration ID: ' + error);
+            // Generating a random one, it would be later replaced on update.
+            var randomNumber = Math.random() + new Date().getTime();
+            localStorage.setItem('gcmRegId', randomNumber);
         },
 
         errorAPNHandler : function(error) {
-            newLogRequest('error', 'register-apn', error);
             console.log('Error, not able to get the APN token: ' + error);
+            // Generating a random one, it would be later replaced on update.
+            var randomNumber = Math.random() + new Date().getTime();
+            localStorage.setItem('apnToken', randomNumber);
         }
 
     };
