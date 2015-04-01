@@ -43,12 +43,22 @@ cordova create dist/app "$packagename.$1" "$appname"
 # Build the project to populate public/shared-build and friends.
 grunt build:dev
 
-# App icon.
+# App icons.
 ln icons/icon.png dist/app/icon.png
 ln icons/icon-ios.png dist/app/icon-ios.png
 ln icons/splash.png dist/app/splash.png
 
 cd dist/app
+
+# Adding icons.
+sed -i 's#</widget>#    <icon src="icon.png" />\
+    <platform name="ios">\
+        <icon src="icon-ios.png" />\
+        <splash src="splash.png" />\
+    </platform>\
+</widget>#g' config.xml
+
+# TODO Set description and author (sed with multiline).
 
 # Only the required platform.
 cordova platform add "$1"
