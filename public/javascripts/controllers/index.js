@@ -41,7 +41,7 @@ angular.module('eat-this-one').controller('IndexController',
                     if (storage.isIn('mydishes', $scope.dishes[index]._id)) {
                         $scope.dishes[index].icon = 'glyphicon glyphicon-cutlery';
                     } else if (storage.isIn('mybookedmeals', $scope.dishes[index]._id)) {
-                        $scope.dishes[index].icon = 'glyphicon glyphicon-pushpin';
+                        $scope.dishes[index].icon = 'glyphicon glyphicon-star';
                     }
                 }
             }
