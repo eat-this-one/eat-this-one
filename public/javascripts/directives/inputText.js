@@ -41,7 +41,7 @@ angular.module('eat-this-one').directive('eatInputText', ['$mdToast', 'formsMana
                         $mdToast.show(
                             $mdToast.simple()
                                 .content(scope.element.placeholder)
-                                .position('bottom right')
+                                .position('top right')
                                 .hideDelay(delay)
                         );
                     }
