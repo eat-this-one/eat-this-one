@@ -13,7 +13,6 @@ $.eatLang.en = {
     chef : 'Chef',
     continue : 'Continue',
     country : 'Country',
-    countryexample : 'Select your country',
     deleteduser : 'The user does not exist anymore',
     dish : 'Dish',
     dishadded : 'Dish added',

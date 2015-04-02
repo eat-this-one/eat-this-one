@@ -53,7 +53,6 @@ angular.module('eat-this-one')
     $scope.country = {
         name: 'country',
         label: $scope.lang.country,
-        placeholder: $scope.lang.countryexample,
         validation: ['required', 'text'],
         value: localStorage.getItem('country'),
         options : statics.getCountriesOptions()

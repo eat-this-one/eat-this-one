@@ -13,7 +13,6 @@ $.eatLang.ca = {
     chef : 'Xef',
     continue : 'Continua',
     country : 'País',
-    countryexample : 'Selecciona el teu país',
     deleteduser : 'L\'usuari ja no existeix',
     dish : 'Plat',
     dishadded : 'Plat afegit',

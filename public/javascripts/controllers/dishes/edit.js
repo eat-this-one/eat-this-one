@@ -49,7 +49,6 @@ angular.module('eat-this-one')
     $scope.when = {
         name: 'when',
         label: $scope.lang.when,
-        placeholder: $scope.lang.when,
         value: 'tomorrow',
         options: [
             {text: $scope.lang.today, value: 'today', btnstyle: 'btn-warning'},
