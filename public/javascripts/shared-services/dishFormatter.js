@@ -4,8 +4,9 @@ angular.module('eat-this-one').factory('dishFormatter', ['notifier', 'datesConve
 
         $scope.dish = dishData;
 
-        // Nice when format.
-        $scope.dish.when = datesConverter.timeToDayString(Date.parse($scope.dish.when));
+        // We need both the i18n day string and the today/tomorrow/aftertomorrow selected option.
+        var i18nwhen = datesConverter.timeToDayString(Date.parse($scope.dish.when));
+        $scope.dish.when = datesConverter.timeToDay(Date.parse($scope.dish.when));
 
         // Fill form values if they exist.
         var fields = ['name', 'description', 'when', 'nportions', 'donation'];
@@ -14,6 +15,9 @@ angular.module('eat-this-one').factory('dishFormatter', ['notifier', 'datesConve
                 $scope[fields[fieldName]].value = $scope.dish[fields[fieldName]];
             }
         }
+
+        // Now, after setting values to the fields, we can set a nice format to dish.when.
+        $scope.dish.when = i18nwhen;
 
         // Chef name requires special treatment.
         if ($scope.dish.user.name === 'deleted') {
