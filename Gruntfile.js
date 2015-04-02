@@ -240,13 +240,15 @@ module.exports = function(grunt) {
             }
         },
 
-        // Skip adjoining classes check because angular-material does not allow us
+        // - Skip adjoining classes check because angular-material does not allow us
         // do it properly.
+        // - Skip outline-none as this is a mobile app and there is no tab here.
         csslint : {
             strict : {
                 src : ['public/stylesheets/*.less'],
                 options : {
-                    "adjoining-classes" : false
+                    "adjoining-classes" : false,
+                    "outline-none" : false
                 }
             }
         },
