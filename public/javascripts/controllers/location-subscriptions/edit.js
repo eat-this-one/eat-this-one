@@ -161,8 +161,7 @@ angular.module('eat-this-one')
                     // Cache the location.
                     localStorage.setItem('loc', JSON.stringify(data));
 
-                    var msg = $scope.lang.locationcreatedinfo + "<br/><br/>" + $scope.lang.joinedgroupinfo;
-                    notifier.show($scope.lang.locationcreated, msg, function() {
+                    notifier.show($scope.lang.locationcreated, $scope.lang.locationcreatedinfo, function() {
                         redirecter.redirect('index.html');
                     });
                 };

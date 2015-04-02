@@ -70,7 +70,7 @@ angular.module('eat-this-one')
 
             // Adding more info if unlimited was selected.
             if (data.nportions === 0) {
-                info += "\n\n" + $scope.lang.unlimitedselected;
+                info += " " + $scope.lang.unlimitedselected;
             }
 
             // If it is a dish edit we just redirect the user to index.

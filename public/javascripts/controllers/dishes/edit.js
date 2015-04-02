@@ -59,7 +59,7 @@ angular.module('eat-this-one')
     $scope.nportions = {
         name: 'nportions',
         label: $scope.lang.nportions,
-        value: 0,
+        value: 3,
         options: [
             {text : 1, value : 1, btnstyle: 'btn-info'},
             {text : 2, value : 2, btnstyle: 'btn-info'},
