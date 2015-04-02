@@ -8,7 +8,7 @@ angular.module('eat-this-one')
     $scope.menu = menuManager;
 
     // Define header.
-    $scope.pageTitle = $scope.lang.location;
+    $scope.pageTitle = $scope.lang.setgroup;
     $scope.actionIcons = [
         {
             name : $scope.lang.continue,
@@ -52,7 +52,7 @@ angular.module('eat-this-one')
     };
     $scope.country = {
         name: 'country',
-        label: $scope.lang.country,
+        label: $scope.lang.setcountry,
         validation: ['required', 'text'],
         value: localStorage.getItem('country'),
         options : statics.getCountriesOptions()
@@ -119,7 +119,7 @@ angular.module('eat-this-one')
                     // Cache the location.
                     localStorage.setItem('loc', JSON.stringify(data));
 
-                    notifier.show($scope.lang.joined, $scope.lang.joinedgroupinfo, function() {
+                    notifier.show($scope.lang.welcome, $scope.lang.joinedgroupinfo, function() {
                         redirecter.redirect('index.html');
                     });
                 };
@@ -161,7 +161,7 @@ angular.module('eat-this-one')
                     // Cache the location.
                     localStorage.setItem('loc', JSON.stringify(data));
 
-                    var msg = $scope.lang.locationcreatedinfo + "\n\n" + $scope.lang.joinedgroupinfo;
+                    var msg = $scope.lang.locationcreatedinfo + "<br/><br/>" + $scope.lang.joinedgroupinfo;
                     notifier.show($scope.lang.locationcreated, msg, function() {
                         redirecter.redirect('index.html');
                     });

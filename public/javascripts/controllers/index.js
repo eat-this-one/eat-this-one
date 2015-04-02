@@ -10,7 +10,7 @@ angular.module('eat-this-one').controller('IndexController',
     $scope.menu = menuManager;
 
     // Define header.
-    $scope.pageTitle = $scope.lang.sitename;
+    $scope.pageTitle = $scope.lang.dishes;
     $scope.menuItems = menuManager.getDefaultItems();
 
     $scope.dishes = [];
@@ -79,11 +79,11 @@ angular.module('eat-this-one').controller('IndexController',
         $scope.display = 'dishes';
     } else if (localStorage.getItem('splashpassed') === null) {
         $scope.display = 'splash';
-        $scope.pageTitle = $scope.lang.welcome;
+        $scope.pageTitle = $scope.lang.sitename;
         $('#id-body').addClass('splash-background');
     } else {
         $scope.display = 'login';
-        $scope.pageTitle = $scope.lang.signup;
+        $scope.pageTitle = $scope.lang.welcome;
     }
 
     // To start up the app.
