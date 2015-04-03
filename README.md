@@ -18,6 +18,11 @@ Eat-this-one source code includes both backend, frontend and development tools.
     sudo apt-get install git-core mongodb ant
     git user.name '$PROJECT_AUTHOR_NAME'
     git user.email '$PROJECT_AUTHOR_EMAIL'
+    sudo npm install -g grunt-cli
+    sudo npm install -g express
+    sudo npm install -g bower
+    sudo npm install -g express-generator
+    sudo npm install -g cordova
 
 ## Download source code
     git clone git://bitbucket.org/eat-this-one.git eat-this-one

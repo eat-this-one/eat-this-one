@@ -1,5 +1,11 @@
 #!/bin/bash
 
+##
+# Be careful, after running this all should
+# be properly tested or we will break a lot
+# of stuff.
+##
+
 set -e
 
 if [ -z $1 ]; then
@@ -11,12 +17,7 @@ if [ "$1" != "android" -a "$1" != "ios" ]; then
     echo "Error: 1 should be android or ios"
 fi
 
-# Update global dependencies.
-sudo npm update grunt-cli -g
-sudo npm update express -g
-sudo npm update bower -g
-sudo npm update express-generator -g
-sudo npm update cordova -g
+# Global dependencies are not updated by this any more.
 
 # I usually have problems with this...
 npm prune ; npm cache clean ; sudo npm prune ; sudo npm cache clean

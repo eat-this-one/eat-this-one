@@ -4,23 +4,27 @@ set -e
 
 packagename="org.eatthisone.app"
 appname="Eat this one!"
+author="David Monllao Olive"
+email="support@eat-this-one.com"
+website="http://www.eat-this-one.com"
+description="Share cooking specialties with your colleagues or classmates at lunch time."
 
 if [ -z $1 ]; then
     echo "Error: We need an argument, android or ios"
     exit 1
 fi
 
-if [ "$1" == "android" -a "$1" == "ios" ]; then
-    echo "Error: 1 should be android or ios"
+if [ "$1" != "android" -a "$1" != "ios" ]; then
+    echo "Error: \$1 should be android or ios"
     exit 1
 fi
 
-# Update global dependencies.
-sudo npm install -g grunt-cli
-sudo npm install -g express
-sudo npm install -g bower
-sudo npm install -g express-generator
-sudo npm install -g cordova
+# Grrrrr.
+if [ "$1" == "ios" ]; then
+    sedcmd="sed -i ''"
+else
+    sedcmd="sed -i"
+fi
 
 # I usually have problems with this...
 npm prune ; npm cache clean ; sudo npm prune ; sudo npm cache clean
@@ -50,16 +54,27 @@ ln icons/splash.png dist/app/splash.png
 
 cd dist/app
 
-# Adding icons.
-sed -i '' 's#</widget>#
+# Setting the app config.
+# - Icons
+# - Set minimum supported versions (Android API 14 & IOS 6)
+# - No zoom
+${sedcmd} 's#</widget>#\
     <icon src="icon.png" />\
     <platform name="ios">\
         <icon src="icon-ios.png" />\
         <splash src="splash.png" />\
+        <preference name="EnableViewportScale" value="true"/>\
     </platform>\
-</widget>#g' config.xml
+    <preference name="android-minSdkVersion" value="14" />\
+    <preference name="deployment-target" value="6.0" />\
+    <preference name="Fullscreen" value="true" />\
+</widget>#' config.xml
 
-# TODO Set description and author (sed with multiline).
+# Set description, author...
+${sedcmd} "s#<author.*>#<author email=\"$email\" href=\"$website\">#" config.xml
+${sedcmd} "s#Apache Cordova Team#$author#" config.xml
+${sedcmd} "s#A sample Apache Cordova application that responds to the deviceready event.#$description#" \
+config.xml
 
 # Only the required platform.
 cordova platform add "$1"
