@@ -39,9 +39,9 @@ angular.module('eat-this-one').controller('IndexController',
 
                     // Let's add state to each dish (my dish, booked...).
                     if (storage.isIn('mydishes', $scope.dishes[index]._id)) {
-                        $scope.dishes[index].icon = 'glyphicon glyphicon-cutlery';
+                        $scope.dishes[index].icon = 'glyphicon glyphicon-tag';
                     } else if (storage.isIn('mybookedmeals', $scope.dishes[index]._id)) {
-                        $scope.dishes[index].icon = 'glyphicon glyphicon-star';
+                        $scope.dishes[index].icon = 'glyphicon glyphicon-cutlery';
                     }
                 }
             }

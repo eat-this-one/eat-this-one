@@ -19,7 +19,7 @@ angular.module('eat-this-one').factory('menuManager', ['$mdSidenav', 'newLogRequ
         dishAddItem : function() {
             return {
                 name : this.lang.adddish,
-                icon : 'glyphicon glyphicon-cutlery',
+                icon : 'glyphicon glyphicon-plus',
                 callback : 'dishAddCallback'
             };
         },
