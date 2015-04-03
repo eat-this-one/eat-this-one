@@ -107,10 +107,17 @@ function notificationsHandler(e) {
 
                 case 'message':
                     var dishid = e.payload.dishid;
-                    bodyscope.injector().get('redirecter')
-                        .redirect('dishes/view.html?id=' + dishid);
-                    newLogRequest('click', 'gcm-notification',
-                        e.payload.type + '-' + dishid);
+                    if (dishid !== null) {
+                        bodyscope.injector().get('redirecter')
+                            .redirect('dishes/view.html?id=' + dishid);
+                        newLogRequest('click', 'gcm-notification',
+                            e.payload.type + '-' + dishid);
+                    } else {
+                        bodyscope.injector().get('redirecter')
+                            .redirect('dishes/index.html');
+                        newLogRequest('click', 'gcm-notification',
+                            e.payload.type);
+                    }
                     break;
                 case 'error':
                     newLogRequest('error', 'gcm-error', e.msg);
@@ -139,10 +146,17 @@ function apnNotificationsHandler(e) {
             var newLogRequest = bodyscope.injector().get('newLogRequest');
 
             var dishid = e.payload.dishid;
-            bodyscope.injector().get('redirecter')
-                .redirect('dishes/view.html?id=' + dishid);
-            newLogRequest('click', 'apn-notification',
-                e.payload.type + '-' + dishid);
+            if (dishid !== null) {
+                bodyscope.injector().get('redirecter')
+                    .redirect('dishes/view.html?id=' + dishid);
+                newLogRequest('click', 'apn-notification',
+                    e.payload.type + '-' + dishid);
+            } else {
+                bodyscope.injector().get('redirecter')
+                    .redirect('dishes/index.html');
+                newLogRequest('click', 'apn-notification',
+                    e.payload.type);
+            }
         });
     });
 }
