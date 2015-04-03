@@ -1,7 +1,7 @@
 angular.module('eat-this-one')
     .controller('LocationsViewController',
-        ['$scope', '$filter', 'authManager', 'redirecter', 'appStatus', 'notifier', 'eatConfig', 'newLogRequest', 'menuManager', 'urlParser', 'locationsRequest', function(
-            $scope, $filter, authManager, redirecter, appStatus, notifier, eatConfig, newLogRequest, menuManager, urlParser, locationsRequest) {
+        ['$scope', '$filter', 'authManager', 'redirecter', 'appStatus', 'notifier', 'eatConfig', 'newLogRequest', 'menuManager', 'urlParser', 'locationsRequest', 'userManager', function(
+            $scope, $filter, authManager, redirecter, appStatus, notifier, eatConfig, newLogRequest, menuManager, urlParser, locationsRequest, userManager) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -74,6 +74,11 @@ angular.module('eat-this-one')
                 }
             }
             $scope.members = locData.members;
+
+            // Try to get gravatar pictures.
+            for (var m = 0; m < $scope.members.length; m++) {
+                userManager.loadPicture($scope.members[m].user);
+            }
 
             $scope.showMembers = true;
             $scope.actionIcons = [

@@ -15,8 +15,9 @@ block logic
                         md-item-content
                             div
                                 span(class='badge ranking') {{member.user.ranking}}
-                                &nbsp;&nbsp;
-                                span(class='glyphicon glyphicon-{{member.user.icon}} ranking', aria-hidden='true')
+                                span(ng-if='member.user.icon', class='glyphicon glyphicon-{{member.user.icon}} ranking', aria-hidden='true')
+                                div(ng-if='member.user.picture', class='user-thumb-container')
+                                    img(src='{{member.user.picture}}', class='thumb-photo', aria-hidden='true')
                             div(class='md-tile-content')
                                 h3 {{member.user.name}}
                                 h4

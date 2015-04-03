@@ -113,3 +113,6 @@ To update project dependencies to latests
     * Models in **models/*.js**
     * Routes in **routes/*.js**
     * Libs in **lib/*.js**
+
+# Thanks
+* http://glyphicons.com
