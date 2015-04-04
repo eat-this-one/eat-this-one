@@ -46,6 +46,7 @@ $.eatLang.es = {
     lnbooked : 'ha reservado',
     lnchef : 'El chef',
     lncooked : 'ha cocinado',
+    lnjoined : 'se ha unido a tu grupo!',
     lnremember : 'Acuerdate!',
     loading : 'Cargando',
     locationcreated : 'Bienvenido',

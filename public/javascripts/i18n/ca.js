@@ -46,6 +46,7 @@ $.eatLang.ca = {
     lnbooked : 'ha reservat',
     lnchef : 'El xef',
     lncooked : 'ha cuinat',
+    lnjoined : 's\'ha unit al teu group!',
     lnremember : 'Enrecorda\'t-en!',
     loading : 'Carregant',
     locationcreated : 'Benvingut',

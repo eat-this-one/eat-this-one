@@ -46,6 +46,7 @@ $.eatLang.en = {
     lnbooked : 'booked',
     lnchef : 'Chef',
     lncooked : 'cooked',
+    lnjoined : 'joined your group!',
     lnremember : 'Remember it!',
     loading : 'Loading',
     location : 'Group',

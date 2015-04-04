@@ -106,18 +106,17 @@ function notificationsHandler(e) {
                     break;
 
                 case 'message':
-                    var dishid = e.payload.dishid;
-                    if (dishid !== null) {
-                        bodyscope.injector().get('redirecter')
-                            .redirect('dishes/view.html?id=' + dishid);
-                        newLogRequest('click', 'gcm-notification',
-                            e.payload.type + '-' + dishid);
+
+                    var objectid = e.payload.objectid;
+                    var url = e.payload.url;
+                    if (objectid !== null) {
+                        newLogRequest('click', 'apn-notification',
+                            e.payload.type + '-' + objectid);
                     } else {
-                        bodyscope.injector().get('redirecter')
-                            .redirect('dishes/index.html');
-                        newLogRequest('click', 'gcm-notification',
+                        newLogRequest('click', 'apn-notification',
                             e.payload.type);
                     }
+                    bodyscope.injector().get('redirecter').redirect(url);
                     break;
                 case 'error':
                     newLogRequest('error', 'gcm-error', e.msg);
@@ -132,7 +131,7 @@ function notificationsHandler(e) {
     });
 }
 
-// TODO Check that this works.
+// TODO Check that this works, not sure about the payload....
 function apnNotificationsHandler(e) {
 
     // All cordova calls should be inside a deviceready listener.
@@ -145,15 +144,16 @@ function apnNotificationsHandler(e) {
             // We inject the service here as we are out of angular init process.
             var newLogRequest = bodyscope.injector().get('newLogRequest');
 
-            var dishid = e.payload.dishid;
-            if (dishid !== null) {
+            var objectid = e.payload.objectid;
+            var url = e.payload.url;
+            if (objectid !== null) {
                 bodyscope.injector().get('redirecter')
-                    .redirect('dishes/view.html?id=' + dishid);
+                    .redirect(url);
                 newLogRequest('click', 'apn-notification',
-                    e.payload.type + '-' + dishid);
+                    e.payload.type + '-' + objectid);
             } else {
                 bodyscope.injector().get('redirecter')
-                    .redirect('dishes/index.html');
+                    .redirect(url);
                 newLogRequest('click', 'apn-notification',
                     e.payload.type);
             }
