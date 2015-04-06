@@ -103,6 +103,16 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
                     { text: 50, value: '50'}
                 ]
             },
+            NZ : {
+                name: 'New Zealand',
+                currency : '$',
+                defaultLanguage : 'en',
+                donationOptions : [
+                    { text: 1, value: '1'},
+                    { text: 3, value: '3'},
+                    { text: 5, value: '5'}
+                ]
+            },
             PE : {
                 name: 'Perú',
                 currency : 'S/.',
