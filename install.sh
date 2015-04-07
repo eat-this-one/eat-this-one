@@ -7,6 +7,7 @@ appname="Eat this one!"
 author="David Monllao Olive"
 email="support@eat-this-one.com"
 website="http://www.eat-this-one.com"
+backend="https://eat-this-one.com"
 description="Share cooking specialties with your colleagues or classmates at lunch time."
 
 if [ -z $1 ]; then
@@ -75,6 +76,10 @@ ${sedcmd} "s#<author.*>#<author email=\"$email\" href=\"$website\">#" config.xml
 ${sedcmd} "s#Apache Cordova Team#$author#" config.xml
 ${sedcmd} "s#A sample Apache Cordova application that responds to the deviceready event.#$description#" \
 config.xml
+${sedcmd} 's#<access.*>#\
+    <access origin="'$backend'" />\
+    <access origin="http://gravatar.com" />\
+    <access origin="https://gravatar.com" />#' config.xml
 
 # Only the required platform.
 cordova platform add "$1"
