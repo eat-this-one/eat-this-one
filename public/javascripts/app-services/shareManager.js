@@ -79,6 +79,7 @@ angular.module('eat-this-one').factory('shareManager', ['eatConfig', 'appStatus'
 
             // The user should explicitly press 'Skip'.
             if (phonesArray.length === 0) {
+                newLogRequest('click', 'share-contacts', 'nobody');
                 appStatus.completed('selectedContacts');
                 notifier.show($scope.lang.nocontacts, $scope.lang.nocontactsinfo);
                 return false;
@@ -88,7 +89,7 @@ angular.module('eat-this-one').factory('shareManager', ['eatConfig', 'appStatus'
 
             var phonesStr = phonesArray.join(',');
 
-            newLogRequest('click', 'share-contacts', phonesStr);
+            newLogRequest('click', 'share-contacts', phonesArray.length + ' contacts');
 
             // Open sms app.
             window.plugins.socialsharing.shareViaSMS(msg, phonesStr);
