@@ -1,5 +1,5 @@
 // AngularJS app declaration.
-angular.module('eat-this-one', ['ngMaterial', 'angular-md5']);
+angular.module('eat-this-one', ['ngMaterial', 'ngTouch', 'angular-md5']);
 
 // Inits i18n object.
 $.eatLang = {};
