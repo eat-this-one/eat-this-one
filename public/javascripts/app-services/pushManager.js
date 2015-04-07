@@ -62,6 +62,28 @@ angular.module('eat-this-one')
 
 }]);
 
+function notificationRedirectUser(bodyscope, payload, prefix) {
+
+    var newLogRequest = bodyscope.injector().get('newLogRequest');
+    var redirecter = bodyscope.injector().get('redirecter');
+
+    var url = payload.url;
+    if (typeof url === "undefined") {
+        url = 'index.html';
+    }
+
+    var objectid = payload.objectid;
+    if (objectid !== null &&
+            typeof objectid !== "undefined" &&
+            objectid !== false) {
+        newLogRequest('click', prefix + '-notification', payload.type + '-' + objectid);
+        redirecter.redirect(url);
+    } else {
+        newLogRequest('click', prefix + '-notification', payload.type);
+        redirecter.redirect(url);
+    }
+}
+
 function notificationsHandler(e) {
     // All cordova calls should be inside a deviceready listener.
     document.addEventListener('deviceready', function() {
@@ -106,17 +128,7 @@ function notificationsHandler(e) {
                     break;
 
                 case 'message':
-
-                    var objectid = e.payload.objectid;
-                    var url = e.payload.url;
-                    if (objectid !== null) {
-                        newLogRequest('click', 'apn-notification',
-                            e.payload.type + '-' + objectid);
-                    } else {
-                        newLogRequest('click', 'apn-notification',
-                            e.payload.type);
-                    }
-                    bodyscope.injector().get('redirecter').redirect(url);
+                    notificationRedirectUser(bodyscope, e.payload, 'gcm');
                     break;
                 case 'error':
                     newLogRequest('error', 'gcm-error', e.msg);
@@ -131,7 +143,6 @@ function notificationsHandler(e) {
     });
 }
 
-// TODO Check that this works, not sure about the payload....
 function apnNotificationsHandler(e) {
 
     // All cordova calls should be inside a deviceready listener.
@@ -140,23 +151,7 @@ function apnNotificationsHandler(e) {
         // We wait for the body to be ready.
         var bodyscope = angular.element('#id-body');
         bodyscope.ready(function() {
-
-            // We inject the service here as we are out of angular init process.
-            var newLogRequest = bodyscope.injector().get('newLogRequest');
-
-            var objectid = e.payload.objectid;
-            var url = e.payload.url;
-            if (objectid !== null) {
-                bodyscope.injector().get('redirecter')
-                    .redirect(url);
-                newLogRequest('click', 'apn-notification',
-                    e.payload.type + '-' + objectid);
-            } else {
-                bodyscope.injector().get('redirecter')
-                    .redirect(url);
-                newLogRequest('click', 'apn-notification',
-                    e.payload.type);
-            }
+            notificationRedirectUser(bodyscope, e.payload, 'apn');
         });
     });
 }
