@@ -38,6 +38,7 @@ angular.module('eat-this-one').directive('eatPhoto', ['eatConfig', 'newLogReques
                     destinationType: Camera.DestinationType.DATA_URL,
                     saveToPhotoAlbum: true,
                     encodingType: Camera.EncodingType.JPEG,
+                    correctOrientation: true,
                     allowEdit: false
                 });
             };
@@ -49,6 +50,7 @@ angular.module('eat-this-one').directive('eatPhoto', ['eatConfig', 'newLogReques
                     destinationType: Camera.DestinationType.DATA_URL,
                     sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                     mediaType: Camera.MediaType.PICTURE,
+                    correctOrientation: true,
                     allowEdit: false
                 });
             };
