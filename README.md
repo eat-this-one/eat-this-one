@@ -1,5 +1,4 @@
-# Eat-this-one
-Eat-this-one source code includes both backend, frontend and development tools.
+Eat this one! source code. This repository includes both backend, frontend mobile apps and development scripts.
 
 * Backend
     * NodeJS (server)
@@ -25,7 +24,7 @@ Eat-this-one source code includes both backend, frontend and development tools.
     sudo npm install -g cordova
 
 ## Download source code
-    git clone git://bitbucket.org/eat-this-one.git eat-this-one
+    git clone git://github.com/eat-this-one/eat-this-one.git
     cd eat-this-one
 
 ## (Android) Download Android SDK
@@ -38,8 +37,13 @@ Follow the normal procedure to install android SDK (http://developer.android.com
     * "Google Play APK Expansion Library"
     * "Google Repository"
 * http://developer.android.com/google/gcm/gs.html for google cloud messaging
+* Set up your android development tools path
+    cp development.properties.dist development.properties
+* Edit development.properties with your own values
 
 ## (iOS) Download XCode
+
+You can follow http://cordova.apache.org/docs/en/4.0.0/guide_platforms_ios_index.md.html#iOS%20Platform%20Guide
 
 ## Configure your development environment
 
@@ -54,11 +58,6 @@ Edit config_backend.json with your own values
 Edit config_frontend.js with your own values
 
 Consider that you will need to access the backend through the app; you can use the IP rather than localhost (http://developer.android.com/tools/devices/emulator.html#networkaddresses)
-
-### Set your android development tools path
-    cp development.properties.dist development.properties
-
-Edit development.properties with your own values
 
 ### Create a virtual host to point to your dist/web
     <VirtualHost YOURHOSTNAME:80>
@@ -112,7 +111,26 @@ To update project dependencies to latests
 * **Backend app (JS - node)**
     * Models in **models/*.js**
     * Routes in **routes/*.js**
-    * Libs in **lib/*.js**
+    * Other modules in **lib/*.js**
 
-# Thanks
-* http://glyphicons.com
+# Thanks & third party code
+* Frontend
+    * AngularJS - https://angularjs.org/
+    * Karma - http://karma-runner.github.io/
+    * Grunt - http://gruntjs.com/
+    * Cordova - https://cordova.apache.org/
+    * Jade - jade-lang.com
+    * Less - http://lesscss.org/
+    * Bower - http://bower.io/
+    * JQuery - https://jquery.com/
+    * Bootstrap - http://getbootstrap.com/css/
+    * Glyphicons - http://glyphicons.com/
+* Backend
+    * NodeJS - https://nodejs.org/
+    * ExpressJS - http://expressjs.com/
+    * MongoDB - https://www.mongodb.org/
+    * Mongoose - http://mongoosejs.com/
+    * Dokku - https://github.com/progrium/dokku
+* And third party code listed in:
+    * https://github.com/eat-this-one/eat-this-one/blob/master/package.json
+    * https://github.com/eat-this-one/eat-this-one/blob/master/bower.json
