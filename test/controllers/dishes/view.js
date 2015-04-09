@@ -22,6 +22,7 @@ describe('View dish page', function() {
         _id : 'asd',
         userid : 'notimportant',
         name : 'Empty Location',
+        country : 'AU',
         created : new Date()
     };
 

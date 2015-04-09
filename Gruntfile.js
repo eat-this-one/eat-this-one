@@ -174,9 +174,7 @@ module.exports = function(grunt) {
                     nospawn : true
                 }
             },
-            // JS Changes triggers karma unit tests and behaviour tests.
-            // TODO Add behaviour tests
-            // TODO Run JS tests!!
+            // JS Changes triggers tests.
             dev_js_frontend : {
                 files : [ "public/javascripts/**/*.js", "config_frontend.js" ],
                 tasks : [ "jshint:frontend", "uglify:dev", "copy:build" ],
@@ -191,7 +189,7 @@ module.exports = function(grunt) {
                     nospawn : true
                 }
             },
-            // Jade changes compiles HTML and only triggers behaviour tests.
+            // Jade changes compiles HTML.
             dev_html : {
                 files : [ "public/views/**/*.jade" ],
                 tasks : [ "jade", "copy:build" ],
@@ -333,7 +331,7 @@ module.exports = function(grunt) {
     grunt.registerTask("build:prod", [ "clean:build", "copy:resources", "uglify:prod", "less", "cssmin", "csslint", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]);
 
     // While developing monitor the changes.
-    grunt.registerTask("run:dev", [ "build:dev", "karma", "concurrent" ]);
+    grunt.registerTask("run:dev", [ "build:dev", "concurrent" ]);
 
     // Dependencies.
     grunt.loadNpmTasks("grunt-contrib-uglify");

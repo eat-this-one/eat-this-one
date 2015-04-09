@@ -27,7 +27,9 @@ function updateRegistration(regid) {
 
     var bodyscope = angular.element('#id-body');
     bodyscope.ready(function() {
-        var updateRegIdRequest = bodyscope.injector().get('updateRegIdRequest');
-        updateRegIdRequest(regid);
+        if (typeof bodyscope.injector() !== "undefined") {
+            var updateRegIdRequest = bodyscope.injector().get('updateRegIdRequest');
+            updateRegIdRequest(regid);
+        }
     });
 }
