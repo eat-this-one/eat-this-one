@@ -31,9 +31,17 @@ angular.module('eat-this-one').directive('eatPhoto', ['eatConfig', 'newLogReques
                 console.log('Error selecting the image: ' + message);
             };
 
+            // We reach memory limits in iOS.
+            var quality = 50;
+            document.addEventListener("deviceready", function onDeviceReady() {
+                if (device.platform.toLowerCase() === "ios") {
+                    quality = 10;
+                }
+            }, false);
+
             scope.capturePhoto = function() {
                 navigator.camera.getPicture(scope.onPictureSuccess, scope.onCapturePhotoFail, {
-                    quality: 50,
+                    quality: quality,
                     targetWidth: 512,
                     destinationType: Camera.DestinationType.DATA_URL,
                     saveToPhotoAlbum: true,
@@ -45,7 +53,6 @@ angular.module('eat-this-one').directive('eatPhoto', ['eatConfig', 'newLogReques
 
             scope.selectImage = function() {
                 navigator.camera.getPicture(scope.onPictureSuccess, scope.onSelectImageFail, {
-                    quality: 50,
                     targetWidth: 512,
                     destinationType: Camera.DestinationType.DATA_URL,
                     sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
