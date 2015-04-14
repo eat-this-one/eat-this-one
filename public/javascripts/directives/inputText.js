@@ -13,11 +13,19 @@ angular.module('eat-this-one').directive('eatInputText', ['$mdToast', 'formsMana
             fields[scope.element.name] = scope.element;
 
             // To validate the form.
-            var validateForm = function() {
+            var validateForm = function(e) {
                 formsManager.validate([scope.element.name], fields);
             };
             input.on('keyup', validateForm);
             input.on('change', validateForm);
+
+            // iOS virtual keyboard bug. http://getbootstrap.com/getting-started/#virtual-keyboards
+            input.on('focus', function(e) {
+                angular.element('.navbar-fixed-top').css('position', 'absolute');
+            });
+            input.on('blur', function(e) {
+                angular.element('.navbar-fixed-top').css('position', 'fixed');
+            });
 
             // Only if a placeholder is set.
             if (typeof scope.element.placeholder !== "undefined" &&
