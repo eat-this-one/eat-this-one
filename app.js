@@ -1,6 +1,5 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('static-favicon');
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -35,8 +34,6 @@ var dishes = require('./routes/dishes');
 var meals = require('./routes/meals');
 var logs = require('./routes/logs');
 var photos = require('./routes/photos');
-
-app.use(favicon());
 
 // Store the time (human-friendly) the server started.
 nconf.set('startedtime', moment().format('YYYYMMDDHHmmss'));
