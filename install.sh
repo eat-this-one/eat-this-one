@@ -49,22 +49,33 @@ cordova create dist/app "$packagename.$1" "$appname"
 grunt build:dev
 
 # App icons.
-ln icons/icon.png dist/app/icon.png
-ln icons/icon-ios.png dist/app/icon-ios.png
-ln icons/splash.png dist/app/splash.png
+if [ ! -d "dist/app/res" ]; then
+    mkdir -p dist/app/res
+fi
+ln icons/* dist/app/res
 
 cd dist/app
 
 # Setting the app config.
-# - Icons
+# - Icons & splash
 # - Set minimum supported versions (Android API 14 & IOS 6)
 # - No zoom
 ${sedcmd} 's#</widget>#\
-    <icon src="icon.png" />\
+    <icon src="res/icon-android.png" />\
     <platform name="ios">\
-        <icon src="icon-ios.png" />\
-        <splash src="splash.png" />\
+        <icon src="res/icon-ios.png" />\
+        <splash src="res/splash-ios.png" />\
         <preference name="EnableViewportScale" value="true"/>\
+    </platform>\
+    <platform name="android">\
+        <icon src="res/icon-android.png" density="ldpi" />\
+        <icon src="res/icon-android.png" density="mdpi" />\
+        <icon src="res/icon-android.png" density="hdpi" />\
+        <icon src="res/icon-android.png" density="xhdpi" />\
+        <splash src="res/land-android.png" density="land-hdpi"/>\
+        <splash src="res/land-android.png" density="land-ldpi"/>\
+        <splash src="res/land-android.png" density="land-mdpi"/>\
+        <splash src="res/land-android.png" density="land-xhdpi"/>\
     </platform>\
     <preference name="android-minSdkVersion" value="14" />\
     <preference name="deployment-target" value="6.0" />\
@@ -82,6 +93,12 @@ ${sedcmd} 's#<access.*>#\
 
 # Only the required platform.
 cordova platform add "$1"
+
+# Copy manually iOS resources.
+cp res/icon-ios.png platforms/ios/Eat\ this\ one\!/Resources/icons/icon.png
+cp res/splash-ios.png platforms/ios/Eat\ this\ one\!/Resources/splash/Default~iphone.png
+cp res/splash-ios.png platforms/ios/Eat\ this\ one\!/Resources/splash/Default-Portrait~ipad.png
+cp res/land-android.png platforms/ios/Eat\ this\ one\!/Resources/splash/Default-Landscape~ipad.png
 
 # Install all plugins.
 while read -a plugin; do
