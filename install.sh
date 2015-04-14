@@ -78,8 +78,7 @@ ${sedcmd} "s#A sample Apache Cordova application that responds to the deviceread
 config.xml
 ${sedcmd} 's#<access.*>#\
     <access origin="'$backend'" />\
-    <access origin="http://s.gravatar.com" />\
-    <access origin="https://s.gravatar.com" />#' config.xml
+    <access origin="http://*.gravatar.com" />#' config.xml
 
 # Only the required platform.
 cordova platform add "$1"
