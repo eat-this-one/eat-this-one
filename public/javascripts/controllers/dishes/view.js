@@ -60,7 +60,7 @@ angular.module('eat-this-one')
             $scope.actionIcons = [
                 {
                     name : $scope.lang.editdish,
-                    icon : 'glyphicon glyphicon-cog',
+                    icon : 'glyphicon glyphicon-pencil',
                     callback : 'editDish'
                 }
             ];

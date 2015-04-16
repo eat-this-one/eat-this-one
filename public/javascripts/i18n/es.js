@@ -21,7 +21,7 @@ $.eatLang.es = {
     dishdescription : 'Descripción',
     dishdescriptionexample : 'ej: Espaguetis a la carbonara, no apto para celíacos',
     dishedited : 'Cambios guardados',
-    dishes : 'Listado de platos',
+    dishes : 'Platos',
     dishname : 'Nombre del plato',
     dishnameexample : 'ej: Paella',
     editdish : 'Editar plato',

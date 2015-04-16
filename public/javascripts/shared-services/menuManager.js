@@ -9,24 +9,10 @@ angular.module('eat-this-one').factory('menuManager', ['$mdSidenav', 'newLogRequ
 
         getDefaultItems : function() {
             return [
-                this.dishAddItem(),
                 this.dishesListItem(),
                 this.locationViewItem(),
                 this.editProfileItem()
             ];
-        },
-
-        dishAddItem : function() {
-            return {
-                name : this.lang.adddish,
-                icon : 'glyphicon glyphicon-plus',
-                callback : 'dishAddCallback'
-            };
-        },
-
-        dishAddCallback : function() {
-            newLogRequest('click', 'dishes-add');
-            redirecter.redirect('dishes/edit.html');
         },
 
         locationViewItem : function() {
