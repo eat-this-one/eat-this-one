@@ -22,6 +22,7 @@ Eat this one! source code. This repository includes both backend, frontend mobil
     sudo npm install -g bower
     sudo npm install -g express-generator
     sudo npm install -g cordova
+    sudo npm install -g mocha
 
 ## Download source code
     git clone git://github.com/eat-this-one/eat-this-one.git
@@ -50,7 +51,8 @@ You can follow http://cordova.apache.org/docs/en/4.0.0/guide_platforms_ios_index
 ### Configure your backend.
     cp config_backend.json.dist config_backend.json
 
-Edit config_backend.json with your own values
+Edit config_backend.json with your own values. If you are developing you only need to set LOGS_DIR. to set
+these values in production environments you can use environment vars.
 
 ### Configure your frontend pointing to the backend URL if it is different than the default one.
     cp config_frontend.js.dist config_frontend.js

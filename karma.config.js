@@ -10,14 +10,15 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['requirejs', 'jasmine'],
 
 
     // list of files / patterns to load in the browser
     files: [
         'dist/web/client.min.js',
         'public/bower_components/angular-mocks/angular-mocks.js',
-        'test/**/*.js'
+        'test/controllers/**/*.js',
+        'test/services/**/*.js'
     ],
 
 
@@ -31,7 +32,6 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-    
     },
 
 

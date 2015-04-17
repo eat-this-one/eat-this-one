@@ -1,6 +1,17 @@
 
 module.exports = function(grunt) {
 
+    var get_config_backend = function() {
+        var config = grunt.file.readJSON('config_backend.json');
+
+        // Prevent data loss.
+        if (config.MONGO_URI !== "mongodb://localhost:27017/eat-this-one") {
+            throw "Error: config_backend.json data can only be used in dev servers.";
+        }
+
+        return config;
+    };
+
     grunt.initConfig({
 
         pkg: grunt.file.readJSON("package.json"),
@@ -198,9 +209,16 @@ module.exports = function(grunt) {
                 }
             },
             // test/ changes only triggers tests.
-            test_js : {
-                files : [ "test/**/*.js" ],
+            test_frontend_js : {
+                files : [ "test/services/**/*.js", "test/controllers/**/*.js" ],
                 tasks : [ "karma:unit:run" ],
+                options : {
+                    nospawn : true
+                }
+            },
+            test_backend_js : {
+                files : [ "test/backend/**/*.js" ],
+                tasks : [ "shell:backend_tests" ],
                 options : {
                     nospawn : true
                 }
@@ -319,6 +337,9 @@ module.exports = function(grunt) {
         shell : {
             deploy_app : {
                 command: 'cd dist/app ; cordova run --device'
+            },
+            backend_tests : {
+                command: 'mongo ' + get_config_backend().MONGO_URI.substr(10) + ' --eval "db.dropDatabase()" ; mocha test/backend/ --recursive'
             }
         }
 
@@ -331,7 +352,7 @@ module.exports = function(grunt) {
     grunt.registerTask("build:prod", [ "clean:build", "copy:resources", "uglify:prod", "less", "cssmin", "csslint", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]);
 
     // While developing monitor the changes.
-    grunt.registerTask("run:dev", [ "build:dev", "concurrent" ]);
+    grunt.registerTask("run:dev", [ "build:dev", "karma:unit:start", "concurrent" ]);
 
     // Dependencies.
     grunt.loadNpmTasks("grunt-contrib-uglify");
