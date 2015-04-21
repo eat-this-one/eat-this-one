@@ -7,7 +7,7 @@ var nconf = require('nconf');
 // To pass vars between chained tests.
 nconf.use('memory');
 
-describe('EatGroup & EatGroupMembership', function() {
+describe('EatGroup & EatGroupMember', function() {
 
     // We need this to support multiple requests per it().
     // All it() with more than one request should call requestDone()
@@ -41,7 +41,7 @@ describe('EatGroup & EatGroupMembership', function() {
             localDone = done;
 
             request('http://localhost:3000')
-                .post('/api/locations')
+                .post('/api/groups')
                 .send({
                     name: 'Test group user 1',
                     country: 'GB',
@@ -58,7 +58,7 @@ describe('EatGroup & EatGroupMembership', function() {
 
 
             request('http://localhost:3000')
-                .post('/api/locations')
+                .post('/api/groups')
                 .send({
                     name: 'Test group user 3',
                     country: 'GB',
@@ -78,9 +78,9 @@ describe('EatGroup & EatGroupMembership', function() {
         it('should allow other users to join', function(done) {
 
             request('http://localhost:3000')
-                .post('/api/location-subscriptions')
+                .post('/api/group-members')
                 .send({
-                    locationid : JSON.parse(nconf.get('user1Group'))._id,
+                    groupid : JSON.parse(nconf.get('user1Group'))._id,
                     token: nconf.get('user2Token'),
                     message: 'User 2 joined (will not be sent through localhost)'
                 })
@@ -94,7 +94,7 @@ describe('EatGroup & EatGroupMembership', function() {
             localDone = done;
 
             request('http://localhost:3000')
-                .get('/api/locations')
+                .get('/api/groups')
                 .send({
                     id : JSON.parse(nconf.get('user1Group'))._id,
                     token: nconf.get('user1Token')
@@ -110,7 +110,7 @@ describe('EatGroup & EatGroupMembership', function() {
 
             // Members than joined can also check the group users.
             request('http://localhost:3000')
-                .get('/api/locations')
+                .get('/api/groups')
                 .send({
                     id : JSON.parse(nconf.get('user1Group'))._id,
                     token: nconf.get('user2Token')
@@ -125,7 +125,7 @@ describe('EatGroup & EatGroupMembership', function() {
                 });
 
             request('http://localhost:3000')
-                .get('/api/locations')
+                .get('/api/groups')
                 .send({
                     id : JSON.parse(nconf.get('user3Group'))._id,
                     token: nconf.get('user3Token')
@@ -147,7 +147,7 @@ describe('EatGroup & EatGroupMembership', function() {
             localDone = done;
 
             request('http://localhost:3000')
-                .get('/api/locations')
+                .get('/api/groups')
                 .send({
                     id : JSON.parse(nconf.get('user1Group'))._id,
                     token: nconf.get('user3Token')
@@ -164,7 +164,7 @@ describe('EatGroup & EatGroupMembership', function() {
 
 
             request('http://localhost:3000')
-                .get('/api/locations')
+                .get('/api/groups')
                 .send({
                     id : JSON.parse(nconf.get('user3Group'))._id,
                     token: nconf.get('user1Token')
@@ -184,20 +184,20 @@ describe('EatGroup & EatGroupMembership', function() {
         it('should not allow duplicated group names', function(done) {
 
             request('http://localhost:3000')
-                .post('/api/locations')
+                .post('/api/groups')
                 .send({
                     name: 'Test group user 1',
                     country: 'AU',
                     token: nconf.get('user2Token')
                 })
-                .expect(400, 'Location already exists', done);
+                .expect(400, 'Group already exists', done);
 
         });
 
         it('should block unauthorized users to create new groups', function(done) {
 
             request('http://localhost:3000')
-                .post('/api/locations')
+                .post('/api/groups')
                 .send({
                     name: 'Fake token group',
                     country: 'GB',
@@ -209,7 +209,7 @@ describe('EatGroup & EatGroupMembership', function() {
         it('should block users that are already members of a group to create another group', function(done) {
 
             request('http://localhost:3000')
-                .post('/api/locations')
+                .post('/api/groups')
                 .send({
                     name: 'Another user 1 group',
                     country: 'AU',
@@ -222,9 +222,9 @@ describe('EatGroup & EatGroupMembership', function() {
         it('should block users that are already members of a group to join another group', function(done) {
 
             request('http://localhost:3000')
-                .post('/api/location-subscriptions')
+                .post('/api/group-members')
                 .send({
-                    locationid : JSON.parse(nconf.get('user1Group'))._id,
+                    groupid : JSON.parse(nconf.get('user1Group'))._id,
                     token: nconf.get('user3Token'),
                     message: 'User 3 is already member of another group'
                 })

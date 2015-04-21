@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 var Eat = require('../lib/Eat.js');
-var EatLocation = require('../lib/EatLocation.js');
+var EatGroup = require('../lib/EatGroup.js');
 
-// GET - Locations list.
+// GET - Groups list.
 router.get('/', function(req, res) {
 
     var eat = new Eat(req, res);
@@ -12,12 +12,12 @@ router.get('/', function(req, res) {
         if (error) {
             return eat.returnCallback(error);
         }
-        var loc = new EatLocation(eat);
-        return loc.get();
+        var group = new EatGroup(eat);
+        return group.get();
     });
 });
 
-// POST - Create a location.
+// POST - Create a group.
 router.post('/', function(req, res) {
 
     var eat = new Eat(req, res);
@@ -25,8 +25,8 @@ router.post('/', function(req, res) {
         if (error) {
             return eat.returnCallback(error);
         }
-        var loc = new EatLocation(eat);
-        return loc.add();
+        var group = new EatGroup(eat);
+        return group.add();
     });
 });
 

@@ -46,7 +46,7 @@ describe('EatMeal', function() {
                     message: 'I will not be send from localhost',
                     token: nconf.get('user3Token')
                 })
-                .expect(401, 'Not subscribed to this location', done);
+                .expect(401, 'You are not a member of this group', done);
 
 
         });

@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 var Eat = require('../lib/Eat.js');
-var EatLocationSubscription = require('../lib/EatLocationSubscription.js');
+var EatGroupMember = require('../lib/EatGroupMember.js');
 
-// GET - Location subscriptions list.
+// GET - Group members list.
 router.get('/', function(req, res) {
 
     var eat = new Eat(req, res);
@@ -12,12 +12,12 @@ router.get('/', function(req, res) {
         if (error) {
             return eat.returnCallback(error);
         }
-        var locSubscription = new EatLocationSubscription(eat);
-        return locSubscription.get();
+        var groupMember = new EatGroupMember(eat);
+        return groupMember.get();
     });
 });
 
-// POST - Create a location subscription.
+// POST - Create a group membership.
 router.post('/', function(req, res) {
 
     var eat = new Eat(req, res);
@@ -25,8 +25,8 @@ router.post('/', function(req, res) {
         if (error) {
             return eat.returnCallback(error);
         }
-        var locSubscription = new EatLocationSubscription(eat);
-        return locSubscription.add();
+        var groupMember = new EatGroupMember(eat);
+        return groupMember.add();
     });
 
 });

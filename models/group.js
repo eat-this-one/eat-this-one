@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var LocationSchema = new Schema({
+var GroupSchema = new Schema({
     user : {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -15,5 +15,5 @@ var LocationSchema = new Schema({
 });
 
 // Export the model and the entity structure.
-module.exports.schema = LocationSchema;
-module.exports.model = mongoose.model('Location', LocationSchema);
+module.exports.schema = GroupSchema;
+module.exports.model = mongoose.model('Group', GroupSchema);

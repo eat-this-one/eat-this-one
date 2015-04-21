@@ -8,11 +8,11 @@ var DishSchema = new Schema({
         index: true,
         ref: 'User'
     },
-    loc: {
+    group: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         index: true,
-        ref: 'Location'
+        ref: 'Group'
     },
     photoid: {
         type: mongoose.Schema.Types.ObjectId,

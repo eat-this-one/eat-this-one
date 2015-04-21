@@ -28,8 +28,8 @@ var app = express();
 // Routes to components.
 var index = require('./routes/index');
 var users = require('./routes/users');
-var locations = require('./routes/locations');
-var locationSubscriptions = require('./routes/locationSubscriptions');
+var groups = require('./routes/groups');
+var groupmembers = require('./routes/groupmembers');
 var dishes = require('./routes/dishes');
 var meals = require('./routes/meals');
 var logs = require('./routes/logs');
@@ -77,8 +77,8 @@ app.options('*', function(req, res) {
 
 app.use('/api', index);
 app.use('/api/users', users);
-app.use('/api/locations', locations);
-app.use('/api/location-subscriptions', locationSubscriptions);
+app.use('/api/groups', groups);
+app.use('/api/group-members', groupmembers);
 app.use('/api/dishes', dishes);
 app.use('/api/meals', meals);
 app.use('/api/logs', logs);

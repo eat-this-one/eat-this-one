@@ -53,7 +53,7 @@ describe('EatDish', function() {
                 .send({
                     name: 'Dish 1 user 1',
                     description: 'Dish description',
-                    locationid: JSON.parse(nconf.get('user1Group'))._id,
+                    groupid: JSON.parse(nconf.get('user1Group'))._id,
                     nportions: 2,
                     donation: 'open',
                     when: today,
@@ -72,7 +72,7 @@ describe('EatDish', function() {
                 .post('/api/dishes')
                 .send({
                     name: 'Dish 2 user 1',
-                    locationid: JSON.parse(nconf.get('user1Group'))._id,
+                    groupid: JSON.parse(nconf.get('user1Group'))._id,
                     nportions: 2,
                     donation: 'open',
                     when: today,
@@ -85,7 +85,7 @@ describe('EatDish', function() {
                 .send({
                     name: 'Dish 3 user 1',
                     description: 'Dish description',
-                    locationid: JSON.parse(nconf.get('user1Group'))._id,
+                    groupid: JSON.parse(nconf.get('user1Group'))._id,
                     nportions: 0,
                     donation: 'open',
                     when: today,
@@ -98,7 +98,7 @@ describe('EatDish', function() {
                 .send({
                     name: 'Dish 4 user 1',
                     description: 'Dish description',
-                    locationid: JSON.parse(nconf.get('user1Group'))._id,
+                    groupid: JSON.parse(nconf.get('user1Group'))._id,
                     nportions: 2,
                     donation: '3',
                     when: today,
@@ -117,7 +117,7 @@ describe('EatDish', function() {
                 .post('/api/dishes')
                 .send({
                     name: 'No valid nportions',
-                    locationid: JSON.parse(nconf.get('user1Group'))._id,
+                    groupid: JSON.parse(nconf.get('user1Group'))._id,
                     nportions: 'asd',
                     donation: '3',
                     when: today,
@@ -128,7 +128,7 @@ describe('EatDish', function() {
             request('http://localhost:3000')
                 .post('/api/dishes')
                 .send({
-                    name: 'No location id',
+                    name: 'No group id',
                     nportions: 2,
                     donation: '3',
                     when: today,
@@ -162,20 +162,20 @@ describe('EatDish', function() {
                 .send({
                     name: 'Dish 3 user 1',
                     description: 'Dish description',
-                    locationid: JSON.parse(nconf.get('user3Group'))._id,
+                    groupid: JSON.parse(nconf.get('user3Group'))._id,
                     nportions: 0,
                     donation: 'open',
                     when: today,
                     token: nconf.get('user1Token')
                 })
-                .expect(401, 'Not subscribed to this location', requestDone);
+                .expect(401, 'You are not a member of this group', requestDone);
 
             request('http://localhost:3000')
                 .post('/api/dishes')
                 .send({
                     name: 'Dish 3 user 1',
                     description: 'Dish description',
-                    locationid: JSON.parse(nconf.get('user3Group'))._id,
+                    groupid: JSON.parse(nconf.get('user3Group'))._id,
                     nportions: 0,
                     donation: 'open',
                     when: today,
@@ -196,7 +196,7 @@ describe('EatDish', function() {
                 .send({
                     name: 'Dish 1 user 1 edited',
                     description: 'Dish description',
-                    locationid: JSON.parse(nconf.get('user1Group'))._id,
+                    groupid: JSON.parse(nconf.get('user1Group'))._id,
                     nportions: 4,
                     donation: 'nothing',
                     when: today,
@@ -222,7 +222,7 @@ describe('EatDish', function() {
                 .put('/api/dishes/' + JSON.parse(nconf.get('user1Dish'))._id)
                 .send({
                     name: 'Someone else is editing this??',
-                    locationid: JSON.parse(nconf.get('user1Group'))._id,
+                    groupid: JSON.parse(nconf.get('user1Group'))._id,
                     nportions: 4,
                     donation: 'nothing',
                     when: today,
@@ -241,7 +241,7 @@ describe('EatDish', function() {
                 .put('/api/dishes/' + JSON.parse(nconf.get('user1Dish'))._id)
                 .send({
                     name: 'Wrong nportions value',
-                    locationid: JSON.parse(nconf.get('user1Group'))._id,
+                    groupid: JSON.parse(nconf.get('user1Group'))._id,
                     nportions: '12sda3',
                     donation: 'nothing',
                     when: today,
@@ -253,7 +253,7 @@ describe('EatDish', function() {
                 .put('/api/dishes/' + JSON.parse(nconf.get('user1Dish'))._id)
                 .send({
                     name: 'No nportions value',
-                    locationid: JSON.parse(nconf.get('user1Group'))._id,
+                    groupid: JSON.parse(nconf.get('user1Group'))._id,
                     donation: 'nothing',
                     when: today,
                     token: nconf.get('user1Token')
@@ -263,8 +263,8 @@ describe('EatDish', function() {
             request('http://localhost:3000')
                 .put('/api/dishes/' + JSON.parse(nconf.get('user1Dish'))._id)
                 .send({
-                    name: 'Wrong locationid value',
-                    locationid: JSON.parse(nconf.get('user1Dish'))._id,
+                    name: 'Wrong groupid value',
+                    groupid: JSON.parse(nconf.get('user1Dish'))._id,
                     nportions: 4,
                     donation: 'nothing',
                     when: 'today',
@@ -276,7 +276,7 @@ describe('EatDish', function() {
                 .put('/api/dishes/' + JSON.parse(nconf.get('user1Dish'))._id)
                 .send({
                     description: 'No name',
-                    locationid: JSON.parse(nconf.get('user1Group'))._id,
+                    groupid: JSON.parse(nconf.get('user1Group'))._id,
                     nportions: '12sda3',
                     donation: 'nothing',
                     when: today,
