@@ -28,9 +28,9 @@ angular.module('eat-this-one')
     // before all is ready.
     appStatus.waiting('contacts');
 
-    var loc = JSON.parse(localStorage.getItem('loc'));
+    var group = JSON.parse(localStorage.getItem('group'));
     $scope.infomessage = $scope.lang.messagecontactsinfo + ' ';
-    $scope.code = loc.code;
+    $scope.code = group.code;
 
     // Allow shareManager services to inject a contacts list here.
     $scope.contacts = [];
@@ -45,7 +45,7 @@ angular.module('eat-this-one')
         // The receiver already knows who is sending the message.
         var msg = $scope.lang.inviteimcooking + ' ' + urlParser.getParam('dishname') + '. ' +
              $scope.lang.invitejoindetailsbook + '. ' + $scope.lang.invitegroupcode +
-             ': "' + loc.code + '". ' + eatConfig.downloadAppUrl;
+             ': "' + group.code + '". ' + eatConfig.downloadAppUrl;
 
         shareManager.process($scope, msg);
     };

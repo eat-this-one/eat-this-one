@@ -10,32 +10,32 @@ angular.module('eat-this-one').factory('menuManager', ['$mdSidenav', 'newLogRequ
         getDefaultItems : function() {
             return [
                 this.dishesListItem(),
-                this.locationViewItem(),
+                this.groupViewItem(),
                 this.editProfileItem()
             ];
         },
 
-        locationViewItem : function() {
+        groupViewItem : function() {
 
             return {
                 name : this.lang.ranking,
                 icon : 'glyphicon glyphicon-king',
-                callback : 'locationViewCallback'
+                callback : 'groupViewCallback'
             };
         },
 
-        locationViewCallback : function() {
+        groupViewCallback : function() {
             var url = null;
 
-            var loc = localStorage.getItem('loc');
-            if (loc === null) {
-                url = 'location-subscriptions/edit.html';
+            var group = localStorage.getItem('group');
+            if (group === null) {
+                url = 'group-members/edit.html';
             } else {
-                loc = JSON.parse(loc);
-                url = 'locations/view.html?id=' + loc._id;
+                group = JSON.parse(group);
+                url = 'groups/view.html?id=' + group._id;
             }
 
-            newLogRequest('click', 'location-view');
+            newLogRequest('click', 'group-view');
             redirecter.redirect(url);
         },
 

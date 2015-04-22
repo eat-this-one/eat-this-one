@@ -6,7 +6,7 @@ angular.module('eat-this-one')
         // Adding the session token to the request.
         meal.token = sessionManager.getToken();
 
-        var locLang = statics.getLocationLanguage();
+        var locLang = statics.getGroupLanguage();
         meal.message = sessionManager.getUser().name + ' ' +
             $.eatLang[locLang].lnbooked + ' ' +
             dishname + '. ' + $.eatLang[locLang].lnremember;

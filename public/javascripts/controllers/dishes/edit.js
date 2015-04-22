@@ -42,8 +42,8 @@ angular.module('eat-this-one')
         validation: ['text'],
         value: ''
     };
-    $scope.locationid = {
-        name: 'locationid',
+    $scope.groupid = {
+        name: 'groupid',
         value: '',
     };
     $scope.when = {
@@ -87,20 +87,20 @@ angular.module('eat-this-one')
     // For updates.
     var id = urlParser.getParam('id');
 
-    // We only support having one location subscription.
-    // No security issues on having the location in localStorage
-    // as the locations info is public.
-    var loc = localStorage.getItem('loc');
-    if (loc === null) {
-        newLogRequest('redirected', 'locationSubscriptions-add', 'index');
-        redirecter.redirect('location-subscriptions/edit.html');
+    // We only support having one group membership.
+    // No security issues on having the group in localStorage
+    // as the groups info is public.
+    var group = localStorage.getItem('group');
+    if (group === null) {
+        newLogRequest('redirected', 'groupMembers-add', 'index');
+        redirecter.redirect('group-members/edit.html');
     }
-    var locationInstance = JSON.parse(loc);
-    if (typeof locationInstance._id === 'undefined') {
-        newLogRequest('redirected', 'locationSubscriptions-add', 'index');
-        redirecter.redirect('location-subscriptions/edit.html');
+    var groupInstance = JSON.parse(group);
+    if (typeof groupInstance._id === 'undefined') {
+        newLogRequest('redirected', 'groupMembers-add', 'index');
+        redirecter.redirect('group-members/edit.html');
     }
-    $scope.locationid.value = locationInstance._id;
+    $scope.groupid.value = groupInstance._id;
 
     // Load the dish info.
     if (id) {
@@ -125,7 +125,7 @@ angular.module('eat-this-one')
 
         // Dish obj cleaning delegated to backend.
         var fields = [
-            'name', 'description', 'locationid',
+            'name', 'description', 'groupid',
             'nportions', 'donation'];
 
         var dish = {};

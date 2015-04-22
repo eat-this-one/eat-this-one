@@ -18,18 +18,18 @@ describe('View dish page', function() {
         token : 'tokenuser2'
     };
 
-    var userLoc = {
+    var userGroup = {
         _id : 'asd',
         userid : 'notimportant',
-        name : 'Empty Location',
+        name : 'Empty Group',
         country : 'AU',
         created : new Date()
     };
 
     var userDish = {
-        _id : '111', userid : 'user1', locationid : 'asd', name : 'Dish 1',
+        _id : '111', userid : 'user1', groupid : 'asd', name : 'Dish 1',
         description : 'desc dish 1', when : new Date(), nportions : 3, donation : 0,
-        booked : false, nbookedmeals : 2, loc : userLoc, user : user1
+        booked : false, nbookedmeals : 2, group : userGroup, user : user1
     };
 
     var mockUserDishRequest = function($scope, dishCallback, id) {
@@ -37,9 +37,9 @@ describe('View dish page', function() {
     };
 
     var anotherUserDish = {
-        _id : '222', userid : 'user2', locationid : 'asd', name : 'Dish 2',
+        _id : '222', userid : 'user2', groupid : 'asd', name : 'Dish 2',
         description : 'desc dish 2', when : new Date(), nportions : 3, donation : 0,
-        booked : false, nbookedmeals : 2, loc : userLoc, user : user2
+        booked : false, nbookedmeals : 2, group : userGroup, user : user2
     };
 
     var mockAnotherUserDishRequest = function($scope, dishCallback, id) {
@@ -47,9 +47,9 @@ describe('View dish page', function() {
     };
 
     var alreadyBookedDish = {
-        _id : '333', userid : 'user2', locationid : 'asd', name : 'Dish 3',
+        _id : '333', userid : 'user2', groupid : 'asd', name : 'Dish 3',
         description : 'desc dish 3', when : new Date(), nportions : 3, donation : 0,
-        booked : true, nbookedmeals : 1, loc : userLoc, user : user2
+        booked : true, nbookedmeals : 1, group : userGroup, user : user2
     };
 
     var mockAlreadyBookedDishRequest = function($scope, dishCallback, id) {
@@ -57,9 +57,9 @@ describe('View dish page', function() {
     };
 
     var noRemainingPortionsDish = {
-        _id : '444', userid : 'user2', locationid : 'asd', name : 'Dish 4',
+        _id : '444', userid : 'user2', groupid : 'asd', name : 'Dish 4',
         description : 'desc dish 4', when : new Date(), nportions : 3, donation : 0,
-        booked : false, nbookedmeals : 3, loc : userLoc, user : user2
+        booked : false, nbookedmeals : 3, group : userGroup, user : user2
     };
 
     var mockNoRemainingPortionsDishRequest = function($scope, dishCallback, id) {
@@ -67,9 +67,9 @@ describe('View dish page', function() {
     };
 
     var unlimitedPortionsDish = {
-        _id : '555', userid : 'user2', locationid : 'asd', name : 'Dish 5',
+        _id : '555', userid : 'user2', groupid : 'asd', name : 'Dish 5',
         description : 'desc dish 5', when : new Date(), nportions : 0, donation : 0,
-        booked : false, nbookedmeals : 3, loc : userLoc, user : user2
+        booked : false, nbookedmeals : 3, group : userGroup, user : user2
     };
 
     var mockUnlimitedPortionsDishRequest = function($scope, dishCallback, id) {
@@ -98,7 +98,7 @@ describe('View dish page', function() {
         beforeEach(function() {
             authManager.authenticate(user1._id);
             sessionManager.setUser(user1);
-            localStorage.setItem('loc', JSON.stringify(userLoc));
+            localStorage.setItem('group', JSON.stringify(userGroup));
             $scope = {};
         });
 

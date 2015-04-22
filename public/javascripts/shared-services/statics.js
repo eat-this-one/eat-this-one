@@ -148,19 +148,19 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
         defaultCountry : 'AU',
 
         displayCurrency : function(value) {
-            var loc = JSON.parse(localStorage.getItem('loc'));
-            return $filter('currency')(value, this.countries[loc.country].currency, 0);
+            var group = JSON.parse(localStorage.getItem('group'));
+            return $filter('currency')(value, this.countries[group.country].currency, 0);
         },
 
         getDonationOptions : function() {
-            var loc = JSON.parse(localStorage.getItem('loc'));
-            if (loc === null) {
+            var group = JSON.parse(localStorage.getItem('group'));
+            if (group === null) {
                 return [];
             }
 
-            var options = this.countries[loc.country].donationOptions;
+            var options = this.countries[group.country].donationOptions;
             for (var i in options) {
-                options[i].text = $filter('currency')(options[i].text, this.countries[loc.country].currency, 0);
+                options[i].text = $filter('currency')(options[i].text, this.countries[group.country].currency, 0);
             }
             return options;
         },
@@ -178,8 +178,8 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
             return options;
         },
 
-        getLocationLanguage : function() {
-            var country = JSON.parse(localStorage.getItem('loc')).country;
+        getGroupLanguage : function() {
+            var country = JSON.parse(localStorage.getItem('group')).country;
             return this.countries[country].defaultLanguage;
         }
 

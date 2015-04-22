@@ -11,19 +11,19 @@ describe('Main page', function() {
         token : 'tokenuser1'
     };
 
-    var loc = {
+    var group = {
         id : 'asd',
         userid : 'notimportant',
-        name : 'Empty Location',
+        name : 'Empty Group',
         created : new Date()
     };
 
     var dishesList = [
         {
-            _id : '111', userid : 'notimportant', locationid : 'asd', name : 'Dish 1',
+            _id : '111', userid : 'notimportant', groupid : 'asd', name : 'Dish 1',
             description : 'desc dish 1', when : new Date(), nportions : 2, donation : 3
         },{
-            _id : '222', userid : 'notimportant', locationid : 'asd', name : 'Dish 2',
+            _id : '222', userid : 'notimportant', groupid : 'asd', name : 'Dish 2',
             description : 'desc dish 2', when : new Date(), nportions : 0, donation : 0
         }
     ];
@@ -69,7 +69,7 @@ describe('Main page', function() {
 
             authManager.authenticate(user1.id);
             sessionManager.setUser(user1);
-            localStorage.setItem('loc', JSON.stringify(loc));
+            localStorage.setItem('group', JSON.stringify(group));
 
             $scope = {};
             controller = $controller('IndexController', { $scope: $scope, dishesRequest: mockNoDishesRequest });
@@ -83,7 +83,7 @@ describe('Main page', function() {
 
             authManager.authenticate(user1.id);
             sessionManager.setUser(user1);
-            localStorage.setItem('loc', JSON.stringify(loc));
+            localStorage.setItem('group', JSON.stringify(group));
 
             $scope = {};
             controller = $controller('IndexController', { $scope: $scope, dishesRequest: mockDishesRequest });

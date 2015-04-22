@@ -130,7 +130,7 @@ angular.module('eat-this-one').controller('IndexController',
             if (localStorage.getItem('gcmRegId') !== null) {
                 editRegIdUserRequest(
                     $scope,
-                    'location-subscriptions/edit.html',
+                    'group-members/edit.html',
                     'created',
                     'create-account'
                 );
@@ -139,7 +139,7 @@ angular.module('eat-this-one').controller('IndexController',
             if (localStorage.getItem('apnToken') !== null) {
                 editApnTokenUserRequest(
                     $scope,
-                    'location-subscriptions/edit.html',
+                    'group-members/edit.html',
                     'created',
                     'create-account'
                 );

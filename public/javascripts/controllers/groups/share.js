@@ -1,5 +1,5 @@
 angular.module('eat-this-one')
-    .controller('LocationsShareController', ['$scope', 'authManager', 'redirecter', 'eatConfig', 'shareManager', 'newLogRequest', 'menuManager', 'appStatus', function($scope, authManager, redirecter, eatConfig, shareManager, newLogRequest, menuManager, appStatus) {
+    .controller('GroupsShareController', ['$scope', 'authManager', 'redirecter', 'eatConfig', 'shareManager', 'newLogRequest', 'menuManager', 'appStatus', function($scope, authManager, redirecter, eatConfig, shareManager, newLogRequest, menuManager, appStatus) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -29,15 +29,15 @@ angular.module('eat-this-one')
     appStatus.waiting('contacts');
 
     // TODO We will need to change this when we accept more than 1 group as
-    // we should request id param location data.
-    var loc = JSON.parse(localStorage.getItem('loc'));
+    // we should request id param group data.
+    var group = JSON.parse(localStorage.getItem('group'));
     $scope.infomessage = $scope.lang.messagecontactsinfo + ' ';
-    $scope.code = loc.code;
+    $scope.code = group.code;
 
     // Allow shareManager services to inject a contacts list here.
     $scope.contacts = [];
 
-    newLogRequest('view', 'locations-share');
+    newLogRequest('view', 'groups-share');
 
     // Initializes the share manager (loads phone contacts if necessary...).
     shareManager.init($scope);
@@ -45,7 +45,7 @@ angular.module('eat-this-one')
     $scope.share = function() {
 
         var msg = $scope.lang.invitejoinmygroup + ' .' + $scope.lang.invitegroupcode +
-             ': "' + loc.code + '". ' + eatConfig.downloadAppUrl;
+             ': "' + group.code + '". ' + eatConfig.downloadAppUrl;
         shareManager.process($scope, msg);
     };
 }]);

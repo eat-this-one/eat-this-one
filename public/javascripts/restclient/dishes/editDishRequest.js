@@ -20,7 +20,7 @@ angular.module('eat-this-one')
         // Here we use the group country to determine
         // the default group language, which all group
         // members are supposed to understand.
-        var locLang = statics.getLocationLanguage();
+        var locLang = statics.getGroupLanguage();
         dish.message = $.eatLang[locLang].lnchef + ' ' +
             sessionManager.getUser().name +
             ' ' + $.eatLang[locLang].lncooked + ' ' + dish.name + '!';
@@ -50,8 +50,8 @@ angular.module('eat-this-one')
 
                 title = $scope.lang.dishadded;
 
-                // The current user will be subscribed, so more than 1.
-                if (data.nsubscribers <= 1) {
+                // The current user will be a member, so more than 1.
+                if (data.nmembers <= 1) {
                     info = $scope.lang.dishaddednomembersinfo + '.';
                 } else {
                     info = $scope.lang.dishaddednotifiedinfo + '.';
@@ -84,10 +84,10 @@ angular.module('eat-this-one')
                 // should also give him/her the option to invite more people.
                 notifier.show(title, info, function() {
 
-                    if (data.user.dishescount === 1 || data.nsubscribers <= 1) {
+                    if (data.user.dishescount === 1 || data.nmembers <= 1) {
                         // After adding the first dish we propose people to
-                        // add their contacts to their location.
-                        // If there are no subscriptors the user needs to contact more
+                        // add their contacts to their group.
+                        // If there are no members the user needs to contact more
                         // people, otherwise it is not worth to share the dish with nobody.
                         redirecter.redirect('dishes/share.html?dishname=' + data.name);
                     } else {
