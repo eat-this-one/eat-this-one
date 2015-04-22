@@ -5,7 +5,7 @@ block configuration
 block logic
 
     //- Its position is fixed so it does not really matter where we add it.
-    md-button(class='add-dish-button', ng-click='addDish()', ng-if='showToggleMenu', aria-label='lang.adddish', class='md-primary md-fab no-box-shadow')
+    md-button(id='id-add-dish', class='add-dish-button', ng-click='addDish()', ng-if='showToggleMenu', aria-label='lang.adddish', class='md-primary md-fab no-box-shadow')
         span(class='glyphicon glyphicon-plus', aria-hidden='true')
 
     div(ng-if='display === "splash"', class='md-content')
@@ -16,7 +16,7 @@ block logic
             form(role='form' id='id-page-form')
                 eat-input-text(element='name')
                 eat-input-text(element='email')
-                md-button(ng-click='signup()', class='md-primary')
+                md-button(id='id-signup', ng-click='signup()', class='md-primary')
                     span(class='glyphicon glyphicon-user button-icon', aria-hidden='true')
                     {{lang.signup}}
 

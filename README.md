@@ -42,16 +42,16 @@ Follow the normal procedure to install android SDK (http://developer.android.com
     cp development.properties.dist development.properties
 * Edit development.properties with your own values
 
-## (iOS) Download XCode
+## (iOS) Download and install XCode
 
-You can follow http://cordova.apache.org/docs/en/4.0.0/guide_platforms_ios_index.md.html#iOS%20Platform%20Guide
+Follow the normal procedure (http://cordova.apache.org/docs/en/4.0.0/guide_platforms_ios_index.md.html#iOS%20Platform%20Guide)
 
 ## Configure your development environment
 
 ### Configure your backend.
     cp config_backend.json.dist config_backend.json
 
-Edit config_backend.json with your own values. If you are developing you only need to set LOGS_DIR. to set
+Edit config_backend.json with your own values. For non-production you only need to set LOGS_DIR. To set
 these values in production environments you can use environment vars.
 
 ### Configure your frontend pointing to the backend URL if it is different than the default one.
@@ -61,17 +61,7 @@ Edit config_frontend.js with your own values
 
 Consider that you will need to access the backend through the app; you can use the IP rather than localhost (http://developer.android.com/tools/devices/emulator.html#networkaddresses)
 
-### Create a virtual host to point to your dist/web
-    <VirtualHost YOURHOSTNAME:80>
-        DocumentRoot "/your/path/to/eat-this-one/dist/web"
-        ServerName YOURHOSTNAME
-        <Directory "/your/path/to/eat-this-one/dist/web">
-            AllowOverride All
-            Order Allow,Deny
-        </Directory>
-    </VirtualHost>
-
-## Install frontend and backend dependencies
+## Install dependencies
 * **./install.sh android** or **./install.sh ios**
 * (Android) You may need to install previous android sdk APIs as cordova is not always using the latest version
     * If it is the case, run **android sdk** and select the required versions
@@ -80,11 +70,11 @@ Consider that you will need to access the backend through the app; you can use t
 
 # Development
 
-* Start development monitoring changes
-    * **./init_development.sh**
+* Start development servers.
+    * **./init_development.sh** (it starts development servers and rebuild + restarts them if there are changes that requires it)
 * Browse the web environment
-    * http://YOURHOSTNAME
-* Backend server URL (IP better than localhost to deploy app in mobile)
+    * http://localhost:8000
+* Backend server URL (as commented above, IP better than localhost to deploy app in mobile)
     * http://YOURIP:3000
 * Install the app to your mobile
     * Android
@@ -92,11 +82,16 @@ Consider that you will need to access the backend through the app; you can use t
         * Plug-in your android device (USB) to your computer
         * Allow your computer to debug your device (you will be asked for it if required)
         * **./install_app.sh** - It also opens adb logcat
+    * iOS
+        * Start XCode
+        * Set up your development team
+        * Register your device for testing
+        * For more info: https://cordova.apache.org/docs/en/4.0.0/guide_platforms_ios_index.md.html#iOS%20Platform%20Guide
 
-To update project dependencies to latests
+To update project dependencies to latest upstream versions:
 * **./update.sh android** or **./update.sh ios**
 
-# Project structure info
+# Project code structure
 
 * **Styles (CSS - less)**
     * In **public/stylesheet/**
