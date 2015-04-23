@@ -26,6 +26,7 @@ npm prune ; npm cache clean ; sudo npm prune ; sudo npm cache clean
 # if package.json has been updated.
 npm update
 npm install
+node node_modules/protractor/bin/webdriver-manager update
 bower update
 bower install
 

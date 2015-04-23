@@ -31,8 +31,9 @@ fi
 npm prune ; npm cache clean ; sudo npm prune ; sudo npm cache clean
 
 # Install project dependencies.
-npm install
 bower install
+npm install
+node node_modules/protractor/bin/webdriver-manager update
 
 if [ ! -d "dist" ]; then
     mkdir -p dist/app

@@ -7,9 +7,6 @@
   },
   "main": "./app.js",
   "private": true,
-  "scripts": {
-    "install": "node node_modules/protractor/bin/webdriver-manager update"
-  },
   "dependencies": {
     "body-parser": "~1.0",
     "cookie-parser": "~1.0",
