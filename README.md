@@ -1,10 +1,12 @@
-Eat this one! source code. This repository includes both backend, frontend mobile apps and development scripts.
+[Eat this one!](http://www.eat-this-one.com) source code. An app to Share cooking specialties with your colleagues or classmates at lunch time.
+
+This repository includes both backend, frontend mobile apps and development scripts.
 
 * Backend
     * NodeJS (server)
     * MongoDB (persistence)
 
-* Frontend
+* Frontend (android and ios through cordova)
     * AngularJS (HTML - JS bindings)
     * Jade (HTML)
     * Bootstrap & less (CSS)
@@ -13,10 +15,10 @@ Eat this one! source code. This repository includes both backend, frontend mobil
 # Installation
 
 ## System dependencies
-    sudo apt-get install gcc make build-essential
-    sudo apt-get install git-core mongodb ant
     git user.name '$PROJECT_AUTHOR_NAME'
     git user.email '$PROJECT_AUTHOR_EMAIL'
+    sudo apt-get install gcc make build-essential
+    sudo apt-get install git-core mongodb ant
     sudo npm install -g grunt-cli
     sudo npm install -g express
     sudo npm install -g bower
@@ -62,7 +64,9 @@ Edit config_frontend.js with your own values
 Consider that you will need to access the backend through the app; you can use the IP rather than localhost (http://developer.android.com/tools/devices/emulator.html#networkaddresses)
 
 ## Install dependencies
-* **./install.sh android** or **./install.sh ios**
+    ./install.sh android
+    or
+    ./install.sh ios
 * (Android) You may need to install previous android sdk APIs as cordova is not always using the latest version
     * If it is the case, run **android sdk** and select the required versions
 * Edit dist/app/config.xml
