@@ -15,7 +15,7 @@ test/*
 public/*
 
 # Config.
-karma.config.js
+karma.conf.js
 
 # Dist versions.
 dist/*
