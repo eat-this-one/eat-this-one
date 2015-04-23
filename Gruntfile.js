@@ -180,7 +180,7 @@ module.exports = function(grunt) {
             // Less changes compiles CSS.
             dev_css : {
                 files : [ "public/stylesheets/**/*.less" ],
-                tasks : [ "csslint", "less", "cssmin", "copy:build" ],
+                tasks : [ "less", "csslint", "cssmin", "copy:build" ],
                 options : {
                     nospawn : true
                 }
@@ -303,7 +303,7 @@ module.exports = function(grunt) {
         // - Skip outline-none as this is a mobile app and there is no tab here.
         csslint : {
             strict : {
-                src : ['public/stylesheets/*.less'],
+                src : ['public/shared-build/styles.css'],
                 options : {
                     "adjoining-classes" : false,
                     "outline-none" : false
@@ -383,10 +383,10 @@ module.exports = function(grunt) {
     });
 
     // Uncompressed JS.
-    grunt.registerTask("build:dev", [ "clean:build", "copy:resources", "uglify:dev", "less", "cssmin", "csslint", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]);
+    grunt.registerTask("build:dev", [ "clean:build", "copy:resources", "uglify:dev", "less", "csslint", "cssmin", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]);
 
     // All compressed + linting before production.
-    grunt.registerTask("build:prod", [ "clean:build", "copy:resources", "uglify:prod", "less", "cssmin", "csslint", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]);
+    grunt.registerTask("build:prod", [ "clean:build", "copy:resources", "uglify:prod", "less", "csslint", "cssmin", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]);
 
     // While developing monitor the changes.
     grunt.registerTask("run:dev", [ "build:dev", "connect:server", "karma:unit:start", "concurrent" ]);
