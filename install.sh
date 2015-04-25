@@ -28,7 +28,7 @@ else
 fi
 
 # I usually have problems with this...
-npm prune ; npm cache clean ; sudo npm prune ; sudo npm cache clean
+npm prune ; npm cache clean
 
 # Install project dependencies.
 bower install

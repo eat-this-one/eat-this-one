@@ -1,6 +1,6 @@
-[Eat this one!](http://www.eat-this-one.com) source code. An app to Share cooking specialties with your colleagues or classmates at lunch time.
+[Eat this one!](http://www.eat-this-one.com) is an app to share cooking specialties with your colleagues or classmates at lunch time.
 
-This repository includes both backend, frontend mobile apps and development scripts.
+This repository includes both the backend, the frontend mobile apps and development scripts.
 
 * Backend
     * NodeJS (server)

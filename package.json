@@ -2,22 +2,36 @@
   "name": "eat-this-one",
   "description": "Share cooking specialties with your colleagues or classmates at lunch time! Who cooks today?",
   "version": "0.0.1",
+  "license": "GPL-3.0",
+  "homepage": "http://www.eat-this-one.com",
+  "author": {
+    "name": "David Monllao Olive",
+    "email": "david.monllao@gmail.com",
+    "url": "http://about.me/DavidMonllao"
+  },
+  "bugs": {
+    "url": "https://github.com/eat-this-one/eat-this-one",
+    "email": "support@eat-this-one.com"
+  },
   "engines": {
     "node": "0.10.x"
   },
-  "main": "./app.js",
+  "main": "bin/www",
+  "scripts": {
+    "start": "node bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eat-this-one/eat-this-one.git"
+  },
   "private": true,
   "dependencies": {
     "body-parser": "~1.0",
-    "cookie-parser": "~1.0",
-    "crypto": "0.0.3",
     "debug": "~0.7",
     "express": "~4.8",
     "mongoose": "~3.8",
     "morgan": "~1.5",
     "nconf": "~0.7",
-    "request": "^2.40",
-    "static-favicon": "~1.0",
     "node-gcm": "~0.9",
     "validator": "~3.30.0",
     "winston": "~0.9.0",
