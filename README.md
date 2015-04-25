@@ -1,4 +1,4 @@
-# Eat this one!
+# Eat this one! [![Build Status](https://travis-ci.org/eat-this-one/eat-this-one.svg?branch=master)](https://travis-ci.org/eat-this-one/eat-this-one) [![Code Climate](https://codeclimate.com/github/eat-this-one/eat-this-one/badges/gpa.svg)](https://codeclimate.com/github/eat-this-one/eat-this-one)
 
 [Eat this one!](http://www.eat-this-one.com) is a mobile app to share cooking specialties with your colleagues or classmates at lunch time.
 
@@ -39,7 +39,6 @@ Follow the normal procedure http://cordova.apache.org/docs/en/4.0.0/guide_platfo
     // Depending on whether you want to test using an android device or an ios device.
     grunt install:android
     grunt install:ios
-
 
 
 This will install all dependencies, create the cordova project adding the specified platform and build the current codebase.
@@ -98,7 +97,7 @@ In case you have problems accessing the backend from the mobile http://developer
 
     npm test
 
-This only runs backend tests. There are frontend unit tests and e2e tests but only run when editing them.
+This runs all backend tests (mocha). There are frontend unit tests and e2e tests (protractor) they run automatically when editing test files.
 
 # Project code structure
 

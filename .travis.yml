@@ -1,0 +1,13 @@
+language: node_js
+notifications:
+  email:
+    on_success: change
+    on_failure: change
+node_js:
+  - "0.10"
+before_install:
+  - npm install -g grunt-cli
+  - npm install -g mocha
+  - cp config/backend.json.dist config/backend.json
+services:
+  - mongodb
