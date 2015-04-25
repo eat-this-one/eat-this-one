@@ -13,7 +13,7 @@ nconf.argv().env().file({file: path.join(__dirname, '/config_backend.json')});
 // Check that the required configuration is present.
 var requiredConfig = ['MONGO_URI'];
 requiredConfig.forEach(function(key) {
-    if (nconf.get(key) == null && process.env[key] == null) {
+    if (nconf.get(key) === null && process.env[key] === "undefined") {
         throw new Error(key + ' is not defined. Ensure that you set it in an ENV var or in config.json');
     }
 });
@@ -55,6 +55,14 @@ app.use(bodyParser.json({
 }));
 
 app.use(bodyParser.urlencoded());
+
+// Set the process name to pkill it if required.
+process.title = 'eat-this-one';
+
+// A SIGINT is a valid code to exit.
+process.on("SIGINT", function() {
+    process.exit();
+});
 
 // Response headers.
 app.use('/api', function(req, res, next) {

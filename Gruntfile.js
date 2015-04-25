@@ -12,6 +12,44 @@ module.exports = function(grunt) {
         return config;
     };
 
+    var get_frontend_js_min = function() {
+        return [
+            "public/bower_components/jquery/dist/jquery.min.js",
+            "public/bower_components/angular/angular.min.js",
+            "public/bower_components/angular-aria/angular-aria.min.js",
+            "public/bower_components/angular-animate/angular-animate.min.js",
+            "public/bower_components/angular-material/angular-material.min.js",
+            "public/bower_components/angular-md5/angular-md5.min.js",
+            "public/bower_components/angular-touch/angular-touch.min.js",
+            "public/javascripts/bootstrap.js",
+            "config_frontend.js",
+            "public/javascripts/i18n/**/*.js",
+            "public/javascripts/controllers/**/*.js" ,
+            "public/javascripts/directives/**/*.js" ,
+            "public/javascripts/restclient/**/*.js" ,
+            "public/javascripts/shared-services/**/*.js",
+        ];
+    };
+
+    var get_frontend_js_dev = function() {
+        return [
+            "public/bower_components/jquery/dist/jquery.js",
+            "public/bower_components/angular/angular.js",
+            "public/bower_components/angular-aria/angular-aria.js",
+            "public/bower_components/angular-animate/angular-animate.js",
+            "public/bower_components/angular-material/angular-material.js",
+            "public/bower_components/angular-md5/angular-md5.js",
+            "public/bower_components/angular-touch/angular-touch.js",
+            "public/javascripts/bootstrap.js",
+            "config_frontend.js",
+            "public/javascripts/i18n/**/*.js",
+            "public/javascripts/controllers/**/*.js" ,
+            "public/javascripts/directives/**/*.js" ,
+            "public/javascripts/restclient/**/*.js" ,
+            "public/javascripts/shared-services/**/*.js"
+        ];
+    };
+
     grunt.initConfig({
 
         pkg: grunt.file.readJSON("package.json"),
@@ -37,40 +75,12 @@ module.exports = function(grunt) {
                     // * local funcions will fill $. namespace and will be
                     //   required by angular
                     // * The last requirements will be angular and angular-ui
-                    "public/web-build/client.min.js": [
-                        "public/bower_components/jquery/dist/jquery.js",
-                        "public/bower_components/angular/angular.js",
-                        "public/bower_components/angular-aria/angular-aria.js",
-                        "public/bower_components/angular-animate/angular-animate.js",
-                        "public/bower_components/angular-material/angular-material.js",
-                        "public/bower_components/angular-md5/angular-md5.js",
-                        "public/bower_components/angular-touch/angular-touch.js",
-                        "public/javascripts/bootstrap.js",
-                        "config_frontend.js",
-                        "public/javascripts/i18n/**/*.js",
-                        "public/javascripts/controllers/**/*.js" ,
-                        "public/javascripts/directives/**/*.js" ,
-                        "public/javascripts/restclient/**/*.js" ,
-                        "public/javascripts/shared-services/**/*.js",
+                    "public/web-build/client.min.js": get_frontend_js_dev().concat([
                         "public/javascripts/web-services/**/*.js"
-                    ],
-                    "public/app-build/client.min.js": [
-                        "public/bower_components/jquery/dist/jquery.js",
-                        "public/bower_components/angular/angular.js",
-                        "public/bower_components/angular-aria/angular-aria.js",
-                        "public/bower_components/angular-animate/angular-animate.js",
-                        "public/bower_components/angular-material/angular-material.js",
-                        "public/bower_components/angular-md5/angular-md5.js",
-                        "public/bower_components/angular-touch/angular-touch.js",
-                        "public/javascripts/bootstrap.js",
-                        "config_frontend.js",
-                        "public/javascripts/i18n/**/*.js",
-                        "public/javascripts/controllers/**/*.js" ,
-                        "public/javascripts/directives/**/*.js" ,
-                        "public/javascripts/restclient/**/*.js" ,
-                        "public/javascripts/shared-services/**/*.js",
+                    ]),
+                    "public/app-build/client.min.js": get_frontend_js_dev().concat([
                         "public/javascripts/app-services/**/*.js"
-                    ]
+                    ])
                 }
             },
             prod: {
@@ -87,47 +97,19 @@ module.exports = function(grunt) {
                     // * local funcions will fill $. namespace and will be
                     //   required by angular
                     // * The last requirements will be angular and angular-ui
-                    "public/web-build/client.min.js": [
-                        "public/bower_components/jquery/dist/jquery.min.js",
-                        "public/bower_components/angular/angular.min.js",
-                        "public/bower_components/angular-aria/angular-aria.min.js",
-                        "public/bower_components/angular-animate/angular-animate.min.js",
-                        "public/bower_components/angular-material/angular-material.min.js",
-                        "public/bower_components/angular-md5/angular-md5.min.js",
-                        "public/bower_components/angular-touch/angular-touch.min.js",
-                        "public/javascripts/bootstrap.js",
-                        "config_frontend.js",
-                        "public/javascripts/i18n/**/*.js",
-                        "public/javascripts/controllers/**/*.js" ,
-                        "public/javascripts/directives/**/*.js" ,
-                        "public/javascripts/restclient/**/*.js" ,
-                        "public/javascripts/shared-services/**/*.js",
+                    "public/web-build/client.min.js": get_frontend_js_min().concat([
                         "public/javascripts/web-services/**/*.js"
-                    ],
-                    "public/app-build/client.min.js": [
-                        "public/bower_components/jquery/dist/jquery.min.js",
-                        "public/bower_components/angular/angular.min.js",
-                        "public/bower_components/angular-aria/angular-aria.min.js",
-                        "public/bower_components/angular-animate/angular-animate.min.js",
-                        "public/bower_components/angular-material/angular-material.min.js",
-                        "public/bower_components/angular-md5/angular-md5.min.js",
-                        "public/bower_components/angular-touch/angular-touch.min.js",
-                        "public/javascripts/bootstrap.js",
-                        "config_frontend.js",
-                        "public/javascripts/i18n/**/*.js",
-                        "public/javascripts/controllers/**/*.js" ,
-                        "public/javascripts/directives/**/*.js" ,
-                        "public/javascripts/restclient/**/*.js" ,
-                        "public/javascripts/shared-services/**/*.js",
+                    ]),
+                    "public/app-build/client.min.js": get_frontend_js_min().concat([
                         "public/javascripts/app-services/**/*.js"
-                    ]
+                    ])
                 }
             }
         },
 
         // JS Quality.
         jshint : {
-            backend : [ "lib/**/*.js", "routes/*.js", "models/*.js", "appjs" ],
+            backend : [ "lib/**/*.js", "routes/*.js", "models/*.js", "app.js" ],
             frontend : [
                 "public/javascripts/i18n/en.js",
                 "public/javascripts/bootstrap.js",
@@ -385,8 +367,11 @@ module.exports = function(grunt) {
     // Uncompressed JS.
     grunt.registerTask("build:dev", [ "clean:build", "copy:resources", "uglify:dev", "less", "csslint", "cssmin", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]);
 
-    // All compressed + linting before production.
+    // All compressed.
     grunt.registerTask("build:prod", [ "clean:build", "copy:resources", "uglify:prod", "less", "csslint", "cssmin", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]);
+
+    // Test backend (frontend depends on browsers and stuff).
+    grunt.registerTask("build:test", [ "build:dev", "shell:reset_db", "shell:backend_tests"]);
 
     // While developing monitor the changes.
     grunt.registerTask("run:dev", [ "build:dev", "connect:server", "karma:unit:start", "concurrent" ]);
