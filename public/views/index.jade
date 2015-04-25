@@ -17,8 +17,7 @@ block logic
                 eat-input-text(element='name')
                 eat-input-text(element='email')
                 md-button(id='id-signup', ng-click='signup()', class='md-primary')
-                    span(class='glyphicon glyphicon-user button-icon', aria-hidden='true')
-                    {{lang.signup}}
+                    span(class='glyphicon glyphicon-user button-icon', aria-hidden='true') {{lang.signup}}
 
     div(ng-if='display === "dishes"')
         div(class='dishes-list')

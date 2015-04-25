@@ -18,16 +18,16 @@ block logic
                 div(class='dish-info')
                     div(class='dish-field', ng-if='dish.description')
                         b {{lang.dishdescription}}
-                        {{dish.description}}
+                        span {{dish.description}}
                     div(class='dish-field')
                         b {{lang.chef}}
-                        {{dish.user.name}}
+                        span {{dish.user.name}}
                     div(class='dish-field')
                         b {{lang.when}}
-                        {{dish.when}}
+                        span {{dish.when}}
                     div(class='dish-field')
                         b {{lang.expecteddonation}}
-                        {{dish.donation}}
+                        span {{dish.donation}}
         md-card(ng-if='showBookedMeals')
             md-card-content
                 h2(class='md-title') {{lang.bookedmeals}}
