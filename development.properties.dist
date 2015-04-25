@@ -1,8 +1,0 @@
-##
-# These values will be used by init_development.sh to start the adb server and grunt run:dev
-#
-# Copy this file to development.properties and edit with your own values.
-##
-
-# Path to Android development tools.
-ADT_PATH='/absolute/path/to/adt-bundle-linux'

@@ -15,6 +15,8 @@ test/*
 public/*
 
 # Config.
+Grunt.js
+protractor.conf.js
 karma.conf.js
 
 # Dist versions.

@@ -2,13 +2,8 @@
 
 set -e
 
-packagename="org.eatthisone.app"
-appname="Eat this one!"
-author="David Monllao Olive"
-email="support@eat-this-one.com"
-website="http://www.eat-this-one.com"
-backend="https://eat-this-one.com"
-description="Share cooking specialties with your colleagues or classmates at lunch time."
+# Include mobile app vars.
+. development.properties
 
 if [ -z $1 ]; then
     echo "Error: We need an argument, android or ios"
@@ -44,7 +39,7 @@ if [ ! -d "public/shared-build" ]; then
 fi
 
 # Create cordova app and add dependencies.
-cordova create dist/app "$packagename.$1" "$appname"
+cordova create dist/app "$PACKAGENAME.$1" "$appname"
 
 # Build the project to populate public/shared-build and friends.
 grunt build:dev
@@ -104,13 +99,14 @@ ${sedcmd} 's#</widget>#\
 </widget>#' config.xml
 
 # Set description, author...
-${sedcmd} "s#<author.*>#<author email=\"$email\" href=\"$website\">#" config.xml
-${sedcmd} "s#Apache Cordova Team#$author#" config.xml
-${sedcmd} "s#A sample Apache Cordova application that responds to the deviceready event.#$description#" \
+${sedcmd} "s#<author.*>#<author email=\"$AUTHOR_EMAIL\" href=\"$AUTHOR_WEBSITE\">#" config.xml
+${sedcmd} "s#Apache Cordova Team#$AUTHOR_NAME#" config.xml
+${sedcmd} "s#A sample Apache Cordova application that responds to the deviceready event.#$DESCRIPTION#" \
 config.xml
 ${sedcmd} 's#<access.*>#\
-    <access origin="'$backend'" />\
-    <access origin="http://*.gravatar.com" />#' config.xml
+    <access origin="'$BACKEND_URL'" />\
+    <access origin="http://*.gravatar.com" />#\
+    <access origin="https://*.gravatar.com" />#' config.xml
 
 # Only the required platform.
 cordova platform add "$1"

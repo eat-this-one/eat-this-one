@@ -9,7 +9,6 @@ public/bower_components/
 # Config-dependant files.
 /config_backend.json
 /config_frontend.js
-/development.properties
 
 # Compiled packages.
 /public/shared-build/
