@@ -357,8 +357,8 @@ module.exports = function(grunt) {
                 command: 'mongo ' + getConfigBackend().MONGO_URI.substr(10) + ' --eval "db.dropDatabase()"'
             },
             // Runs the mobile app in the currently plugged android device.
-            install_app : {
-                command: 'cd dist/app ; cordova run --device'
+            install_android : {
+                command: 'bin/install-android.sh'
             },
             // Updates to the specified version and pushes changes to github and eat-this-one.com.
             release : {
@@ -380,16 +380,16 @@ module.exports = function(grunt) {
 
     // While developing monitor the changes.
     grunt.registerTask(
-        "run:dev",
+        "dev",
         "Starts development mode. Watches for changes building minified CSS, minified JS and HTML from Jade templates, running CSSlint and JSHint. Tests automatically run when there are changes on them.",
         [ "build:dev", "connect:server", "karma:unit:start", "concurrent" ]
     );
 
     // Alias for shell:deploy_app.
     grunt.registerTask(
-        "run:frontend:android",
+        "run:android",
         "Runs the current build in the currently plugged android device.",
-        ["shell:install_app"]
+        ["shell:install_android"]
     );
 
     // Uncompressed JS.
@@ -427,7 +427,7 @@ module.exports = function(grunt) {
         }
     );
 
-    grunt.registerTask("default", ["run:dev"]);
+    grunt.registerTask("default", ["dev"]);
 
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-less");
