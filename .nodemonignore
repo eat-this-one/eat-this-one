@@ -1,23 +1,16 @@
-# IDE stuff.
+backend-logs
 *.swp
 *.swx
-
-# Git.
 .git
-
-# Tests.
 test/*
-
-# Readme's.
 *.md
-
-# Client stuff.
 public/*
-
-# Config.
 Grunt.js
 protractor.conf.js
 karma.conf.js
-
-# Dist versions.
 dist/*
+bin/*.sh
+icons/
+.gitignore
+bower.json
+.bowerrc

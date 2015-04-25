@@ -6,5 +6,5 @@
     "GCM_API_KEY": "YOURAPIEY",
     "APN_KEY_PATH" : "/path/to/pem/file",
     "APN_CERT_PATH" : "/path/to/pem/file",
-    "LOGS_DIR": "/path/to/logs/dir"
+    "LOGS_DIR": "backend-logs"
 }

@@ -20,7 +20,7 @@ fi
 # Global dependencies are not updated by this any more.
 
 # I usually have problems with this...
-npm prune ; npm cache clean ; sudo npm prune ; sudo npm cache clean
+npm prune ; npm cache clean
 
 # Update project dependencies and install new packages
 # if package.json has been updated.
@@ -40,3 +40,6 @@ while read -a plugin; do
     cordova plugin rm ${plugin[0]}
     cordova plugin add ${plugin[1]}
 done < ../../cordova-plugins.list
+
+# Update generated apps.
+grunt build:dev

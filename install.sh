@@ -3,7 +3,20 @@
 set -e
 
 # Include mobile app vars.
-. development.properties
+if [ ! -f "config/project.properties" ]; then
+    cp config/project.properties.dist config/project.properties
+fi
+
+# Load the config.
+. config/project.properties
+
+# Copy the dist config files.
+if [ ! -f "config/frontend.js" ]; then
+    cp config/frontend.js.dist config/frontend.js
+fi
+if [ ! -f "config/backend.js" ]; then
+    cp config/backend.json.dist config/backend.json
+fi
 
 if [ -z $1 ]; then
     echo "Error: We need an argument, android or ios"
@@ -13,6 +26,14 @@ fi
 if [ "$1" != "android" -a "$1" != "ios" ]; then
     echo "Error: \$1 should be android or ios"
     exit 1
+fi
+
+# Checking that the SDK is installed.
+if [ "$1" == "android" ]; then
+    if [ -z "$ANDROID_HOME" ]; then
+        echo "Error: You must install Android SDK and ANDROID_HOME env var set be set before you can continue."
+        exit 1
+    fi
 fi
 
 # Grrrrr.
@@ -52,8 +73,9 @@ ln icons/* dist/app/res
 
 cd dist/app
 
-# I'm tired of dealing with ios resources not reading the
-# filter or picking the wrong icon.
+# TODO I'm tired of dealing with ios resources not reading the
+# filter or picking the wrong icon. Fix this at some point in a
+# probably unexisting future.
 if [ "$1" == "ios" ]; then
     ${sedcmd} 's#</widget>#\
     <icon src="res/icon-ios.png" />\
@@ -115,3 +137,6 @@ cordova platform add "$1"
 while read -a plugin; do
     cordova plugin add ${plugin[1]}
 done < ../../cordova-plugins.list
+
+# Build again so we are ready to deploy apps.
+grunt build:dev

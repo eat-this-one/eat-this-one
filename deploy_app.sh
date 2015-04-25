@@ -5,7 +5,7 @@ set -e
 if [ -z $1 ]; then
     echo "
 HEY YOU! REMEMBER TO:
-- Point config_frontend.js to the production server
+- Point config/frontend.js to the production server
 - Add information in updateManager about the new version cool features
 - Change the version if required (look the current one and increment it).
 

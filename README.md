@@ -1,120 +1,122 @@
-[Eat this one!](http://www.eat-this-one.com) is an app to share cooking specialties with your colleagues or classmates at lunch time.
+# Eat this one!
 
-This repository includes both the backend, the frontend mobile apps and development scripts.
+[Eat this one!](http://www.eat-this-one.com) is a mobile app to share cooking specialties with your colleagues or classmates at lunch time.
 
-* Backend
-    * NodeJS (server)
-    * MongoDB (persistence)
+This repository includes:
 
-* Frontend (android and ios through cordova)
-    * AngularJS (HTML - JS bindings)
-    * Jade (HTML)
-    * Bootstrap & less (CSS)
-    * jQuery (JS)
+* An ExpressJS REST API backed by MongoDB
+* An AngularJS frontend compiled to Android and iOS apps using cordova
+* Grunt tasks for development, testing and deployment.
 
 # Installation
-
-## System dependencies
-    git user.name '$PROJECT_AUTHOR_NAME'
-    git user.email '$PROJECT_AUTHOR_EMAIL'
-    sudo apt-get install gcc make build-essential
-    sudo apt-get install git-core mongodb ant
-    sudo npm install -g grunt-cli
-    sudo npm install -g express
-    sudo npm install -g bower
-    sudo npm install -g express-generator
-    sudo npm install -g cordova
-    sudo npm install -g mocha
-
-## Download source code
     git clone git://github.com/eat-this-one/eat-this-one.git
     cd eat-this-one
 
-## (Android) Download Android SDK
+## System dependencies
+    npm install -g grunt-cli
+    npm install -g bower
+    npm install -g cordova
+    npm install -g mocha
+    npm install -g ios-deploy
 
-Follow the normal procedure to install android SDK (http://developer.android.com/sdk/index.html)
+You only need ios-deploy package if you are interested in using the iOS emulator.
 
-* Add adt-bundle-linux/sdk/platform-tools and adt-bundle-linux/sdk/tools to $PATH
-* Run **android sdk** and install:
-    * "Google Play services"
-    * "Google Play APK Expansion Library"
-    * "Google Repository"
-* http://developer.android.com/google/gcm/gs.html for google cloud messaging
-* Set up your android development tools path
-    cp development.properties.dist development.properties
-* Edit development.properties with your own values
+## (Android) Android SDK
 
-## (iOS) Download and install XCode
+Follow the normal procedure to install the Android SDK; Android Studio is not required. http://developer.android.com/sdk/index.html
 
-Follow the normal procedure (http://cordova.apache.org/docs/en/4.0.0/guide_platforms_ios_index.md.html#iOS%20Platform%20Guide)
+Also http://developer.android.com/google/gcm/gs.html for Google Cloud Messaging.
 
-## Configure your development environment
+## (iOS) XCode
 
-### Configure your backend.
-    cp config_backend.json.dist config_backend.json
-
-Edit config_backend.json with your own values. For non-production you only need to set LOGS_DIR. To set
-these values in production environments you can use environment vars.
-
-### Configure your frontend pointing to the backend URL if it is different than the default one.
-    cp config_frontend.js.dist config_frontend.js
-
-Edit config_frontend.js with your own values
-
-Consider that you will need to access the backend through the app; you can use the IP rather than localhost (http://developer.android.com/tools/devices/emulator.html#networkaddresses)
+Follow the normal procedure http://cordova.apache.org/docs/en/4.0.0/guide_platforms_ios_index.md.html#iOS%20Platform%20Guide
 
 ## Install dependencies
-    ./install.sh android
-    or
-    ./install.sh ios
+
+    grunt install:android
+    grunt install:ios
+
+This will run **npm install**, **bower install**, create the cordova project adding the specified platform and build the current codebase.
+
+### Tips
+
+* Note that, if you want to run the app in your mobile, you can set your IP or hostname in config/frontend.js.
 * (Android) You may need to install previous android sdk APIs as cordova is not always using the latest version
     * If it is the case, run **android sdk** and select the required versions
-* Edit dist/app/config.xml
-    * Change whatever info you like
+
 
 # Development
 
-* Start development servers.
-    * **./init_development.sh** (it starts development servers and rebuild + restarts them if there are changes that requires it)
-* Browse the web environment
-    * http://localhost:8000
-* Backend server URL (as commented above, IP better than localhost to deploy app in mobile)
-    * http://YOURIP:3000
-* Install the app to your mobile
-    * Android
-        * Turn on your device debugging options
-        * Plug-in your android device (USB) to your computer
-        * Allow your computer to debug your device (you will be asked for it if required)
-        * **./install_app.sh** - It also opens adb logcat
-    * iOS
-        * Start XCode
-        * Set up your development team
-        * Register your device for testing
-        * For more info: https://cordova.apache.org/docs/en/4.0.0/guide_platforms_ios_index.md.html#iOS%20Platform%20Guide
+### Start development servers.
+    grunt
+
+### Browse the web environment
+    http://localhost:8000
+
+### Backend server URL
+    http://localhost:3000
+As commented above, IP better than localhost to deploy app in mobile.
+
+### Install the app on the emulator
+    grunt run:android:emulator
+    grunt run:ios:emulator
+
+This is basically running **cordova emulate android** and **cordova emulate ios** in dist/app directory.
+
+### Install the app on your mobile
+
+##### Android
+    grunt run:android:device
+
+It starts the adb server, installs the current build and outputs the device log.
+
+In case you have problems accessing the backend from the mobile http://developer.android.com/tools/devices/emulator.html#networkaddresses
+
+##### iOS
+* Start XCode
+* Set up your development team & register your testing device
+* For more info: https://cordova.apache.org/docs/en/4.0.0/guide_platforms_ios_index.md.html#iOS%20Platform%20Guide
+
+### Other commands
+    grunt --help
 
 To update project dependencies to latest upstream versions:
 * **./update.sh android** or **./update.sh ios**
 
+
 # Project code structure
 
-* **Styles (CSS - less)**
-    * In **public/stylesheet/**
-
-* **Views (HTML - Jade)**
-    * In **public/views/**
+* **Backend app (JS - Node)**
+    * Models
+        [models/*.js](https://github.com/eat-this-one/eat-this-one/blob/master/models)
+    * Routes
+        [routes/*.js](https://github.com/eat-this-one/eat-this-one/blob/master/routes)
+    * Other modules
+        [lib/*.js](https://github.com/eat-this-one/eat-this-one/blob/master/lib)
 
 * **Frontend app (JS - AngularJS)**
-    * Controllers in **public/javascripts/controllers/**
-    * AngularJS directives in **public/javascripts/directives/**
-    * All shared code between web and mobile apps should go in **public/javascripts/shared-services/**
-    * Cordova plugins uses should go to **public/javascripts/app-services/SERVICENAME.js** and a **public/javascripts/web-services/SERVICENAME.js** service should implement the same interface so the app can work on both mobile and web browser.
+    * Controllers
+        [public/javascripts/controllers/*.js](https://github.com/eat-this-one/eat-this-one/blob/master/public/javascripts/controllers)
+    * AngularJS directives
+        [public/javascripts/directives/*.js](https://github.com/eat-this-one/eat-this-one/blob/master/public/javascripts/directives)
+    * AngularJS services
+        * If they make use of cordova plugins
+            * [public/javascripts/app-services/*.js](https://github.com/eat-this-one/eat-this-one/blob/master/public/javascripts/app-services)
+            * [public/javascripts/web-services/*.js](https://github.com/eat-this-one/eat-this-one/blob/master/public/javascripts/web-services)
+        * Otherwise
+            * [public/javascripts/shared-services/*.js](https://github.com/eat-this-one/eat-this-one/blob/master/public/javascripts/shared-services)
 
-* **Backend app (JS - node)**
-    * Models in **models/*.js**
-    * Routes in **routes/*.js**
-    * Other modules in **lib/*.js**
+* **Styles (CSS)**
+    [public/stylesheet/*.less](https://github.com/eat-this-one/eat-this-one/blob/master/public/stylesheets)
 
-# Thanks & third party code
+* **Views (HTML)**
+    [public/views/*.jade](https://github.com/eat-this-one/eat-this-one/blob/master/public/views)
+
+
+# Thanks
+
+## Third party code
+
 * Frontend
     * AngularJS - https://angularjs.org/
     * Karma - http://karma-runner.github.io/
@@ -132,6 +134,6 @@ To update project dependencies to latest upstream versions:
     * MongoDB - https://www.mongodb.org/
     * Mongoose - http://mongoosejs.com/
     * Dokku - https://github.com/progrium/dokku
-* And third party code listed in:
+* And other third party code listed in:
     * https://github.com/eat-this-one/eat-this-one/blob/master/package.json
     * https://github.com/eat-this-one/eat-this-one/blob/master/bower.json

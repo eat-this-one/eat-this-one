@@ -3,5 +3,5 @@ angular.module('eat-this-one').constant('eatConfig', {
     backendUrl : 'http://localhost:3000/api',
     downloadAppUrl : 'http://eat-this-one.com',
     defaultLang : 'en',
-    gcmSenderId : 'YOURSENDERID',
+    gcmSenderId : 'GCMSENDERID',
 });

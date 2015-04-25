@@ -8,7 +8,7 @@ var fs = require('fs');
 var moment = require('moment');
 
 // Load config file.
-nconf.argv().env().file({file: path.join(__dirname, '/config_backend.json')});
+nconf.argv().env().file({file: path.join(__dirname, '/config/backend.json')});
 
 // Check that the required configuration is present.
 var requiredConfig = ['MONGO_URI'];
@@ -37,9 +37,19 @@ var photos = require('./routes/photos');
 // Store the time (human-friendly) the server started.
 nconf.set('startedtime', moment().format('YYYYMMDDHHmmss'));
 
+// Create the backend logs dir if it does not exist.
+var logsDir = nconf.get('LOGS_DIR');
+try {
+    // We can accept a sync call here when initialising the app.
+    fs.mkdirSync(logsDir, 0755);
+} catch (e) {
+    if (e.code !== 'EEXIST') {
+        throw e;
+    }
+}
 // Log requests to a file.
 var accessLogStream = fs.createWriteStream(
-    nconf.get('LOGS_DIR') + '/access.' + nconf.get('startedtime') + '.log',
+    logsDir + '/access.' + nconf.get('startedtime') + '.log',
     {
         flags: 'a'
     }

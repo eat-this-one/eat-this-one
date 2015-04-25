@@ -1,5 +1,6 @@
 angular.module('eat-this-one').directive('eatPhoto', ['eatConfig', 'newLogRequest', function(eatConfig, newLogRequest) {
 
+    // TODO: This should be a service as it is not working in web.
     return {
         restrict: 'E',
         scope: {

@@ -2,11 +2,11 @@
 module.exports = function(grunt) {
 
     var getConfigBackend = function() {
-        var config = grunt.file.readJSON('config_backend.json');
+        var config = grunt.file.readJSON('config/backend.json');
 
         // Prevent data loss.
         if (config.MONGO_URI !== "mongodb://localhost:27017/eat-this-one") {
-            throw "Error: config_backend.json data can only be used in dev servers.";
+            throw "Error: config/backend.json data can only be used in dev servers.";
         }
 
         return config;
@@ -22,7 +22,7 @@ module.exports = function(grunt) {
             "public/bower_components/angular-md5/angular-md5.min.js",
             "public/bower_components/angular-touch/angular-touch.min.js",
             "public/javascripts/bootstrap.js",
-            "config_frontend.js",
+            "config/frontend.js",
             "public/javascripts/i18n/**/*.js",
             "public/javascripts/controllers/**/*.js" ,
             "public/javascripts/directives/**/*.js" ,
@@ -41,7 +41,7 @@ module.exports = function(grunt) {
             "public/bower_components/angular-md5/angular-md5.js",
             "public/bower_components/angular-touch/angular-touch.js",
             "public/javascripts/bootstrap.js",
-            "config_frontend.js",
+            "config/frontend.js",
             "public/javascripts/i18n/**/*.js",
             "public/javascripts/controllers/**/*.js" ,
             "public/javascripts/directives/**/*.js" ,
@@ -156,7 +156,7 @@ module.exports = function(grunt) {
             },
             // JS frontend changes -> JSHint + minification.
             dev_js_frontend : {
-                files : [ "public/javascripts/**/*.js", "config_frontend.js" ],
+                files : [ "public/javascripts/**/*.js", "config/frontend.js" ],
                 tasks : [ "jshint:frontend", "uglify:dev", "copy:build" ],
                 options : {
                     nospawn : true
@@ -164,7 +164,7 @@ module.exports = function(grunt) {
             },
             // JS backend changes -> JSHint.
             dev_js_backend : {
-                files : [ "lib/**/*.js", "routes/*.js", "models/*.js", "config_backend.js" ],
+                files : [ "lib/**/*.js", "routes/*.js", "models/*.js", "config/backend.js" ],
                 tasks : [ "jshint:backend" ],
                 options : {
                     nospawn : true
@@ -357,8 +357,15 @@ module.exports = function(grunt) {
                 command: 'mongo ' + getConfigBackend().MONGO_URI.substr(10) + ' --eval "db.dropDatabase()"'
             },
             // Runs the mobile app in the currently plugged android device.
-            install_android : {
+            device_android : {
                 command: 'bin/install-android.sh'
+            },
+            // Runs the mobile app in the android emulator.
+            emulator_android : {
+                command: 'cd dist/app ; cordova emulate android'
+            },
+            emulator_ios : {
+                command: 'cd dist/app ; cordova emulate ios'
             },
             // Updates to the specified version and pushes changes to github and eat-this-one.com.
             release : {
@@ -387,9 +394,23 @@ module.exports = function(grunt) {
 
     // Alias for shell:deploy_app.
     grunt.registerTask(
-        "run:android",
+        "run:android:device",
         "Runs the current build in the currently plugged android device.",
-        ["shell:install_android"]
+        ["shell:device_android"]
+    );
+
+    // Alias for shell:emulator_android.
+    grunt.registerTask(
+        "run:android:emulator",
+        "Runs the current build in the Android emulator",
+        ["shell:emulator_android"]
+    );
+
+    // Alias for shell:deploy_emulator_android.
+    grunt.registerTask(
+        "run:ios:emulator",
+        "Runs the current build in the iOS emulator.",
+        ["shell:emulator_ios"]
     );
 
     // Uncompressed JS.

@@ -1,7 +1,3 @@
-##
-# These values are used to generate the mobile app.
-##
-
 PACKAGENAME="org.eatthisone.app"
 APPNAME="Eat this one!"
 AUTHOR_NAME="David Monllao Olive"
