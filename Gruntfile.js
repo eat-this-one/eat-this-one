@@ -1,7 +1,7 @@
 
 module.exports = function(grunt) {
 
-    var get_config_backend = function() {
+    var getConfigBackend = function() {
         var config = grunt.file.readJSON('config_backend.json');
 
         // Prevent data loss.
@@ -12,7 +12,7 @@ module.exports = function(grunt) {
         return config;
     };
 
-    var get_frontend_js_min = function() {
+    var getFrontendJsMin = function() {
         return [
             "public/bower_components/jquery/dist/jquery.min.js",
             "public/bower_components/angular/angular.min.js",
@@ -31,7 +31,7 @@ module.exports = function(grunt) {
         ];
     };
 
-    var get_frontend_js_dev = function() {
+    var getFrontendJsDev = function() {
         return [
             "public/bower_components/jquery/dist/jquery.js",
             "public/bower_components/angular/angular.js",
@@ -54,11 +54,12 @@ module.exports = function(grunt) {
 
         pkg: grunt.file.readJSON("package.json"),
 
+        // These are the directories to clean as we will rebuild everything overwriting them.
         clean: {
             build: [ "public/web-build", "public/app-build", "public/shared-build", "dist/web", "dist/app/www" ]
         },
 
-        // Minifies all JS into a single JS file.
+        // Minifies all JS files into a single JS file.
         // Behavious changes during development as we don't want to compress, just merge into a single JS file.
         uglify: {
             dev: {
@@ -68,17 +69,10 @@ module.exports = function(grunt) {
                     mangle: false,
                 },
                 files: {
-                    // List of JS files to include.
-                    //
-                    // The order is important:
-                    // * jQuery is the first requirement as it defines $
-                    // * local funcions will fill $. namespace and will be
-                    //   required by angular
-                    // * The last requirements will be angular and angular-ui
-                    "public/web-build/client.min.js": get_frontend_js_dev().concat([
+                    "public/web-build/client.min.js": getFrontendJsDev().concat([
                         "public/javascripts/web-services/**/*.js"
                     ]),
-                    "public/app-build/client.min.js": get_frontend_js_dev().concat([
+                    "public/app-build/client.min.js": getFrontendJsDev().concat([
                         "public/javascripts/app-services/**/*.js"
                     ])
                 }
@@ -90,17 +84,10 @@ module.exports = function(grunt) {
                     mangle: true,
                 },
                 files: {
-                    // List of JS files to include.
-                    //
-                    // The order is important:
-                    // * jQuery is the first requirement as it defines $
-                    // * local funcions will fill $. namespace and will be
-                    //   required by angular
-                    // * The last requirements will be angular and angular-ui
-                    "public/web-build/client.min.js": get_frontend_js_min().concat([
+                    "public/web-build/client.min.js": getFrontendJsMin().concat([
                         "public/javascripts/web-services/**/*.js"
                     ]),
-                    "public/app-build/client.min.js": get_frontend_js_min().concat([
+                    "public/app-build/client.min.js": getFrontendJsMin().concat([
                         "public/javascripts/app-services/**/*.js"
                     ])
                 }
@@ -122,7 +109,7 @@ module.exports = function(grunt) {
             ]
         },
 
-        // Less compiles to CSS all the .less files.
+        // Less compiles to CSS all the .less files (cssmin will minify them).
         less: {
             development: {
                 options: {
@@ -159,7 +146,7 @@ module.exports = function(grunt) {
 
         watch: {
 
-            // Less changes compiles CSS.
+            // Less changes -> compile CSS.
             dev_css : {
                 files : [ "public/stylesheets/**/*.less" ],
                 tasks : [ "less", "csslint", "cssmin", "copy:build" ],
@@ -167,7 +154,7 @@ module.exports = function(grunt) {
                     nospawn : true
                 }
             },
-            // JS Changes triggers tests.
+            // JS frontend changes -> JSHint + minification.
             dev_js_frontend : {
                 files : [ "public/javascripts/**/*.js", "config_frontend.js" ],
                 tasks : [ "jshint:frontend", "uglify:dev", "copy:build" ],
@@ -175,6 +162,7 @@ module.exports = function(grunt) {
                     nospawn : true
                 }
             },
+            // JS backend changes -> JSHint.
             dev_js_backend : {
                 files : [ "lib/**/*.js", "routes/*.js", "models/*.js", "config_backend.js" ],
                 tasks : [ "jshint:backend" ],
@@ -182,7 +170,7 @@ module.exports = function(grunt) {
                     nospawn : true
                 }
             },
-            // Jade changes compiles HTML.
+            // Jade changes -> compile HTML.
             dev_html : {
                 files : [ "public/views/**/*.jade" ],
                 tasks : [ "jade", "copy:build" ],
@@ -190,7 +178,7 @@ module.exports = function(grunt) {
                     nospawn : true
                 }
             },
-            // Frontend unit tests.
+            // Frontend unit tests changes -> run them.
             test_frontend_unit_js : {
                 files : [ "test/services/**/*.js", "test/controllers/**/*.js" ],
                 tasks : [ "karma:unit:run" ],
@@ -198,7 +186,7 @@ module.exports = function(grunt) {
                     nospawn : true
                 }
             },
-            // Frontend e2e tests.
+            // Frontend e2e tests changes -> run them.
             test_frontend_e2e_js : {
                 files : [ "test/e2e/**/*.js" ],
                 tasks : [ "shell:reset_db", "protractor" ],
@@ -206,7 +194,7 @@ module.exports = function(grunt) {
                     nospawn : true
                 }
             },
-            // Backedn tests.
+            // Backend tests changes -> run them.
             test_backend_js : {
                 files : [ "test/backend/**/*.js" ],
                 tasks : [ "shell:reset_db", "shell:backend_tests" ],
@@ -216,6 +204,7 @@ module.exports = function(grunt) {
             }
         },
 
+        // Starts the frontend web app in localhost:8000.
         connect: {
             server: {
                 options: {
@@ -227,8 +216,10 @@ module.exports = function(grunt) {
             }
         },
 
-        // nodemon executes app.js again if there are changes
-        // @see nodemon.json for what files are ignored.
+        /**
+         * Controlles node executing restarting the server if changes are detected.
+         * @see .nodemonignore For ignored files.
+         */
         nodemon: {
             dev: {
                 options: {
@@ -237,7 +228,10 @@ module.exports = function(grunt) {
             }
         },
 
-
+        /**
+         * Runs unit tests.
+         * @see karma.conf.js for more info.
+         */
         karma : {
             unit : {
                 configFile : 'karma.conf.js',
@@ -245,7 +239,10 @@ module.exports = function(grunt) {
             }
         },
 
-
+        /**
+         * Runs e2e tests.
+         * @see protractor.conf.js for more info.
+         */
         protractor: {
             options: {
                 configFile: "protractor.conf.js",
@@ -259,7 +256,7 @@ module.exports = function(grunt) {
             run: {}
         },
 
-        // nodemon and watch can watch in parallel.
+        // Nodemon and watch can watch in parallel.
         concurrent: {
             dev: ["nodemon", "watch"],
             options: {
@@ -280,9 +277,13 @@ module.exports = function(grunt) {
             }
         },
 
-        // - Skip adjoining classes check because angular-material does not allow us
-        // do it properly.
-        // - Skip outline-none as this is a mobile app and there is no tab here.
+        /**
+         * Checks CSS rules.
+         *
+         * - Skip adjoining classes. angular-material does not allow us
+         *   do it properly.
+         * - Skip outline-none. This is a mobile app and there is no tab here.
+         */
         csslint : {
             strict : {
                 src : ['public/shared-build/styles.css'],
@@ -320,7 +321,7 @@ module.exports = function(grunt) {
                     }
                 ]
             },
-            // Copies the static resources, they will not change during dev.
+            // Copies the static resources, they rarely change during development.
             resources : {
                 files : [
                     {
@@ -349,14 +350,27 @@ module.exports = function(grunt) {
             }
         },
 
-        // Runs shell commands.
+        // Other commands that runs through CLI.
         shell : {
+            // Reset the local backend database. Useful for testing.
             reset_db : {
-                command: 'mongo ' + get_config_backend().MONGO_URI.substr(10) + ' --eval "db.dropDatabase()"'
+                command: 'mongo ' + getConfigBackend().MONGO_URI.substr(10) + ' --eval "db.dropDatabase()"'
             },
-            deploy_app : {
+            // Runs the mobile app in the currently plugged android device.
+            install_app : {
                 command: 'cd dist/app ; cordova run --device'
             },
+            // Updates to the specified version and pushes changes to github and eat-this-one.com.
+            release : {
+                command: function(version) {
+                    var clicommand = 'bin/release.sh ';
+                    if (typeof version !== "undefined") {
+                        clicommand = clicommand + version;
+                    }
+                    return clicommand;
+                }
+            },
+            // Runs backend tests using mocha.
             backend_tests : {
                 command:  'mocha test/backend/ --recursive'
             }
@@ -364,19 +378,57 @@ module.exports = function(grunt) {
 
     });
 
+    // While developing monitor the changes.
+    grunt.registerTask(
+        "run:dev",
+        "Starts development mode. Watches for changes building minified CSS, minified JS and HTML from Jade templates, running CSSlint and JSHint. Tests automatically run when there are changes on them.",
+        [ "build:dev", "connect:server", "karma:unit:start", "concurrent" ]
+    );
+
+    // Alias for shell:deploy_app.
+    grunt.registerTask(
+        "run:frontend:android",
+        "Runs the current build in the currently plugged android device.",
+        ["shell:install_app"]
+    );
+
     // Uncompressed JS.
-    grunt.registerTask("build:dev", [ "clean:build", "copy:resources", "uglify:dev", "less", "csslint", "cssmin", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]);
+    grunt.registerTask(
+        "build:dev",
+        "Builds frontend development versions. Both mobile app and web for testing.",
+        [ "clean:build", "copy:resources", "uglify:dev", "less", "csslint", "cssmin", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]
+    );
 
     // All compressed.
-    grunt.registerTask("build:prod", [ "clean:build", "copy:resources", "uglify:prod", "less", "csslint", "cssmin", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]);
+    grunt.registerTask(
+        "build:prod",
+        "Builds frontend production versions. Both mobile app and web although only app is meant to be deployed.",
+        [ "clean:build", "copy:resources", "uglify:prod", "less", "csslint", "cssmin", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]
+    );
 
     // Test backend (frontend depends on browsers and stuff).
-    grunt.registerTask("build:test", [ "build:dev", "shell:reset_db", "shell:backend_tests"]);
+    grunt.registerTask(
+        "build:test",
+        "Executes backend tests. Note that it requires the backend server to be running (npm start)",
+        [ "build:dev", "shell:reset_db", "shell:backend_tests"]
+    );
 
-    // While developing monitor the changes.
-    grunt.registerTask("run:dev", [ "build:dev", "connect:server", "karma:unit:start", "concurrent" ]);
+    // Deploys backend to eat-this-one.com public server.
+    grunt.registerTask(
+        "release",
+        "Deploys the backend to eat-this-one.com public server and updates package.json and bower.json with the specified version. (It will not probably work for you).",
+        function(version) {
+            // Custom alias as version is a var.
+            if (typeof version !== "undefined") {
+                grunt.task.run('shell:release:' + version);
+            } else {
+                grunt.task.run('shell:release');
+            }
+        }
+    );
 
-    // Dependencies.
+    grunt.registerTask("default", ["run:dev"]);
+
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-less");
     grunt.loadNpmTasks("grunt-nodemon");
