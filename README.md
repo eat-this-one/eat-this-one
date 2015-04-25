@@ -33,10 +33,16 @@ Follow the normal procedure http://cordova.apache.org/docs/en/4.0.0/guide_platfo
 
 ### Install dependencies
 
+    // Install node dependencies including the local grunt.
+    npm install
+
+    // Depending on whether you want to test using an android device or an ios device.
     grunt install:android
     grunt install:ios
 
-This will run **npm install**, **bower install**, create the cordova project adding the specified platform and build the current codebase.
+
+
+This will install all dependencies, create the cordova project adding the specified platform and build the current codebase.
 
 Later on you can use **grunt update** to update the project dependencies.
 
@@ -89,7 +95,10 @@ In case you have problems accessing the backend from the mobile http://developer
     grunt --help
 
 # Test
+
     npm test
+
+This only runs backend tests. There are frontend unit tests and e2e tests but only run when editing them.
 
 # Project code structure
 
