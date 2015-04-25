@@ -12,7 +12,7 @@ This repository includes:
     git clone git://github.com/eat-this-one/eat-this-one.git
     cd eat-this-one
 
-## System dependencies
+### System dependencies
     npm install -g grunt-cli
     npm install -g bower
     npm install -g cordova
@@ -21,22 +21,24 @@ This repository includes:
 
 You only need ios-deploy package if you are interested in using the iOS emulator.
 
-## (Android) Android SDK
+### (Android) Android SDK
 
 Follow the normal procedure to install the Android SDK; Android Studio is not required. http://developer.android.com/sdk/index.html
 
 Also http://developer.android.com/google/gcm/gs.html for Google Cloud Messaging.
 
-## (iOS) XCode
+### (iOS) XCode
 
 Follow the normal procedure http://cordova.apache.org/docs/en/4.0.0/guide_platforms_ios_index.md.html#iOS%20Platform%20Guide
 
-## Install dependencies
+### Install dependencies
 
     grunt install:android
     grunt install:ios
 
 This will run **npm install**, **bower install**, create the cordova project adding the specified platform and build the current codebase.
+
+Later on you can use **grunt update** to update the project dependencies.
 
 ### Tips
 
@@ -44,18 +46,24 @@ This will run **npm install**, **bower install**, create the cordova project add
 * (Android) You may need to install previous android sdk APIs as cordova is not always using the latest version
     * If it is the case, run **android sdk** and select the required versions
 
-
 # Development
 
-### Start development servers.
     grunt
+
+The default task is an alias of **grunt dev** task which starts the backend server and watches for codebase changes:
+
+* Runs JSHint and restarts the backend server if required
+* Runs JSHint, minifies and concatenates frontend JS files
+* Runs CSSLint and compiles less to CSS and minifies it
+* Compiles Jade templates to HTML files
+* Runs tests if you modify them
 
 ### Browse the web environment
     http://localhost:8000
 
 ### Backend server URL
     http://localhost:3000
-As commented above, IP better than localhost to deploy app in mobile.
+As commented above, the hostname or the IP might be better than localhost to test in mobile.
 
 ### Install the app on the emulator
     grunt run:android:emulator
@@ -80,9 +88,8 @@ In case you have problems accessing the backend from the mobile http://developer
 ### Other commands
     grunt --help
 
-To update project dependencies to latest upstream versions:
-* **./update.sh android** or **./update.sh ios**
-
+# Test
+    npm test
 
 # Project code structure
 

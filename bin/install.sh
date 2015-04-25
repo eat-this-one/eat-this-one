@@ -28,6 +28,12 @@ if [ "$1" != "android" -a "$1" != "ios" ]; then
     exit 1
 fi
 
+# We only allow 1 platform to be installed.
+if [ -f "dist/app/config.xml" ]; then
+    echo "Error: Already installed."
+    exit 1
+fi
+
 # Checking that the SDK is installed.
 if [ "$1" == "android" ]; then
     if [ -z "$ANDROID_HOME" ]; then
@@ -36,15 +42,12 @@ if [ "$1" == "android" ]; then
     fi
 fi
 
-# Grrrrr.
-if [ "$1" == "ios" ]; then
+unamestr=`uname`
+if [ "$unamestr" == "Darwin" ]; then
     sedcmd="sed -i ''"
 else
     sedcmd="sed -i"
 fi
-
-# I usually have problems with this...
-npm prune ; npm cache clean
 
 # Install project dependencies.
 bower install
@@ -60,7 +63,7 @@ if [ ! -d "public/shared-build" ]; then
 fi
 
 # Create cordova app and add dependencies.
-cordova create dist/app "$PACKAGENAME.$1" "$appname"
+cordova create dist/app "$PACKAGENAME.$1" "$APPNAME"
 
 # Build the project to populate public/shared-build and friends.
 grunt build:dev
@@ -127,7 +130,7 @@ ${sedcmd} "s#A sample Apache Cordova application that responds to the deviceread
 config.xml
 ${sedcmd} 's#<access.*>#\
     <access origin="'$BACKEND_URL'" />\
-    <access origin="http://*.gravatar.com" />#\
+    <access origin="http://*.gravatar.com" />\
     <access origin="https://*.gravatar.com" />#' config.xml
 
 # Only the required platform.

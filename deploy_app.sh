@@ -25,7 +25,8 @@ if [ "$1" != "android" -a "$1" != "ios" ]; then
 fi
 
 # Grrrrr.
-if [ "$1" == "ios" ]; then
+unamestr=`uname`
+if [ "$unamestr" == "Darwin" ]; then
     sedcmd="sed -i ''"
 else
     sedcmd="sed -i"

@@ -8,32 +8,24 @@
 
 set -e
 
-if [ -z $1 ]; then
-    echo "Error: We need an argument, android or ios"
+if [ ! -f "dist/app/config.xml" ]; then
+    echo "Error: You need to install before updating something."
     exit 1
 fi
 
-if [ "$1" != "android" -a "$1" != "ios" ]; then
-    echo "Error: 1 should be android or ios"
-fi
-
-# Global dependencies are not updated by this any more.
-
-# I usually have problems with this...
-npm prune ; npm cache clean
-
 # Update project dependencies and install new packages
 # if package.json has been updated.
+bower update
+bower install
 npm update
 npm install
 node node_modules/protractor/bin/webdriver-manager update
-bower update
-bower install
 
 cd dist/app
 
-# Only the required platform.
-cordova platform update "$1"
+# There is no need to ask again for the platform, just try
+# to update both of them.
+cordova platform update android || cordova platform update ios
 
 # Update all plugins.
 while read -a plugin; do

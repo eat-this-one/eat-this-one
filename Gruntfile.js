@@ -356,9 +356,19 @@ module.exports = function(grunt) {
             reset_db : {
                 command: 'mongo ' + getConfigBackend().MONGO_URI.substr(10) + ' --eval "db.dropDatabase()"'
             },
+            // Install.
+            install : {
+                command: function(platform) {
+                    return 'bin/install.sh ' + platform;
+                }
+            },
+            // Updates dependencies.
+            update_dependencies : {
+                command: 'bin/update-dependencies.sh'
+            },
             // Runs the mobile app in the currently plugged android device.
             device_android : {
-                command: 'bin/install-android.sh'
+                command: 'bin/install-device-android.sh'
             },
             // Runs the mobile app in the android emulator.
             emulator_android : {
@@ -384,6 +394,25 @@ module.exports = function(grunt) {
         }
 
     });
+
+    grunt.registerTask(
+        "install:android",
+        "Installs all dependencies, creates an Android cordova project and builds the current code.",
+        [ "shell:install:android" ]
+    );
+
+    grunt.registerTask(
+        "install:ios",
+        "Installs all dependencies, creates an iOS cordova project and builds the current code.",
+        [ "shell:install:ios" ]
+    );
+
+    // Updates dependencies.
+    grunt.registerTask(
+        "update",
+        "Updates project dependencies to their latest versions.",
+        [ "shell:update_dependencies"]
+    );
 
     // While developing monitor the changes.
     grunt.registerTask(
