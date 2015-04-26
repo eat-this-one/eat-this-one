@@ -5,6 +5,7 @@ set -e
 if [ -z $1 ]; then
     echo "
 HEY YOU! BEFORE RUNNING THIS AGAIN REMEMBER TO:
+# This is meant to be run by me (David) :) as it is using the origin and dokku remotes I use to push to production
 # Ensure you pulled the latest changes from the repo
 # Run all tests and ensure they are passing
 # Clean the kitchen and commit everthing
@@ -48,17 +49,24 @@ if [ -z $version ]; then
     exit 1
 fi
 
+# These are bundled in the package.
 ${sedcmd} "s#version *: *'\(.*\)'#version: '$versionCode'#" config/frontend.js.dist
-${sedcmd} "s#version *: *'\(.*\)'#version: '$versionCode'#" config/frontend.js
 ${sedcmd} "s#\"version\" *: *\"\(.*\)\"#\"version\": \"$version\"#" package.json
 ${sedcmd} "s#\"version\" *: *\"\(.*\)\"#\"version\": \"$version\"#" bower.json
-${sedcmd} "s#version=\"\(.*\)\" xmlns#version=\"$version\" android-versionCode=\"$versionCode\" xmlns#" dist/app/config.xml
+
+# These two might not be there as they are generated.
+if [ -f "config/frontend.js" ]; then
+    ${sedcmd} "s#version *: *'\(.*\)'#version: '$versionCode'#" config/frontend.js
+fi
+if [ -f "dist/app/config.xml" ]; then
+    ${sedcmd} "s#version=\"\(.*\)\" xmlns#version=\"$version\" android-versionCode=\"$versionCode\" xmlns#" dist/app/config.xml
+fi
 
 versionupdated=""
 
 # Commit these changes.
-git commit package.json bower.json -m "Release $version"
-git tag -a "v$version" -m "Release $version"
+git commit package.json bower.json config/frontend.js.dist -m "Release $version"
+git tag -a "v$version" -m "Release v$version"
 git push origin "v$version" master
 
 # Push last changes to backend server (NO -f HERE!).
@@ -67,8 +75,8 @@ git push dokku master
 echo "
 -------------------------------------------------------------------------------
 DONE!
-- Backend updated to latest master
-- Version updated in package.json, bower.json, config/frontend.js, config/frontend.js.dist and dist/app/config.xml
+- Backend public server updated to v$version
+- Version updated in package.json, bower.json, config/frontend.js (also in config/frontend.js.dist and dist/app/config.xml if required)
 - Tag v$version released
 - Public repo master HEAD updated
 "
