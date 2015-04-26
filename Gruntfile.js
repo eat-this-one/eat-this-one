@@ -390,6 +390,16 @@ module.exports = function(grunt) {
             // Runs backend tests using mocha.
             backend_tests : {
                 command:  'mocha test/backend/ --recursive'
+            },
+            // Signs the Android mobile app.
+            sign_android : {
+                command: function(keystore) {
+                    var clicommand = 'bin/sign-android.sh ';
+                    if (typeof keystore !== "undefined") {
+                        clicommand = clicommand + keystore;
+                    }
+                    return clicommand;
+                }
             }
         }
 
@@ -473,6 +483,18 @@ module.exports = function(grunt) {
                 grunt.task.run('shell:release:' + version);
             } else {
                 grunt.task.run('shell:release');
+            }
+        }
+    );
+
+    grunt.registerTask(
+        "sign:android",
+        "Signs the current build",
+        function(keystore) {
+            if (typeof keystore !== "undefined") {
+                grunt.task.run('shell:sign_android:' + keystore);
+            } else {
+                grunt.task.run('shell:sign_android');
             }
         }
     );

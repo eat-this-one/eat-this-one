@@ -4,8 +4,8 @@ set -e
 
 if [ -z $1 ]; then
     echo "
-HEY YOU! BEFORE RUNNING THIS AGAIN REMEMBER TO:
-# This is meant to be run by me (David) :) as it is using the origin and dokku remotes I use to push to production
+HEY YOU! BEFORE RUNNING THIS AGAIN:
+# This script is used to push to production. You don't probably need to use this.
 # Ensure you pulled the latest changes from the repo
 # Run all tests and ensure they are passing
 # Clean the kitchen and commit everthing
@@ -22,6 +22,9 @@ if [ "$unamestr" == "Darwin" ]; then
 else
     sedcmd="sed -i"
 fi
+
+git remote show | grep dokku || \
+    echo "Error: This script is used to push to production. If you don't have a dokku remote I doubt you should be running this." ; exit 1
 
 if [ ! -z $1 ]; then
 
