@@ -137,7 +137,7 @@ This runs all backend tests (mocha). There are frontend unit tests and e2e tests
     * Karma - http://karma-runner.github.io/
     * Grunt - http://gruntjs.com/
     * Cordova - https://cordova.apache.org/
-    * Jade - jade-lang.com
+    * Jade - http://jade-lang.com/
     * Less - http://lesscss.org/
     * Bower - http://bower.io/
     * JQuery - https://jquery.com/
