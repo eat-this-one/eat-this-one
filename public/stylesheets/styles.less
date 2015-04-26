@@ -168,19 +168,39 @@ footer {
     }
 }
 
+@-moz-keyframes animatedBackground {
+    to { background-position: 100% 0; }
+}
+@-o-keyframes animatedBackground {
+    to { background-position: 100% 0; }
+}
+@-webkit-keyframes animatedBackground {
+    to {
+        background-position: 100% 0;
+        background-color: #ffffff;
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+}
+@keyframes animatedBackground {
+    to {
+        background-position: 100% 0;
+        background-color: #ffffff;
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+}
+
 .splash-background {
+    background: url('images/intro.jpg') no-repeat left center fixed;
     background-color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.3);
-    background: url(images/intro.jpg) no-repeat center center fixed;
+    background-color: rgba(255, 255, 255, 1);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    transition: background-color 1s;
-}
-.splash-background:hover {
-    background-color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.8)
+    -moz-animation: animatedBackground 8s ease-out 0.5s forwards;
+    -o-animation: animatedBackground 8s ease-out 0.5s forwards;
+    -webkit-animation: animatedBackground 8s ease-out 0.5s forwards;
+    animation: animatedBackground 8s ease-out 0.5s forwards;
 }
 
 .splash-background:before {

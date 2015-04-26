@@ -16,6 +16,18 @@ angular.module('eat-this-one').controller('IndexController',
     $scope.dishes = [];
     $scope.showNoDishes = false;
 
+    // To determine what to show to the user.
+    if ($scope.auth.isAuthenticated()) {
+        $scope.display = 'dishes';
+    } else if (localStorage.getItem('splashpassed') === null) {
+        $scope.display = 'splash';
+        $scope.pageTitle = $scope.lang.sitename;
+        $('#id-body').addClass('splash-background');
+    } else {
+        $scope.display = 'login';
+        $scope.pageTitle = $scope.lang.welcome;
+    }
+
     $scope.showToggleMenu = false;
     if ($scope.auth.isAuthenticated()) {
         // Getting the list of dishes.
@@ -73,18 +85,6 @@ angular.module('eat-this-one').controller('IndexController',
     }
 
     newLogRequest('view', 'index');
-
-    // To determine what to show to the user.
-    if ($scope.auth.isAuthenticated()) {
-        $scope.display = 'dishes';
-    } else if (localStorage.getItem('splashpassed') === null) {
-        $scope.display = 'splash';
-        $scope.pageTitle = $scope.lang.sitename;
-        $('#id-body').addClass('splash-background');
-    } else {
-        $scope.display = 'login';
-        $scope.pageTitle = $scope.lang.welcome;
-    }
 
     // To start up the app.
     $scope.toLogin = function() {
