@@ -62,14 +62,15 @@ if [ -f "dist/app/config.xml" ]; then
     ${sedcmd} "s#version=\"\(.*\)\" xmlns#version=\"$version\" android-versionCode=\"$versionCode\" xmlns#" dist/app/config.xml
 fi
 
-versionupdated=""
+# If there are version changes commit them and create a new tag in the repo.
+git commit package.json bower.json config/frontend.js.dist -m "Release $version" && \
+git tag -a "v$version" -m "Release v$version" && \
+git push origin "v$version"
 
-# Commit these changes.
-git commit package.json bower.json config/frontend.js.dist -m "Release $version"
-git tag -a "v$version" -m "Release v$version"
-git push origin "v$version" master
+# Push latest changes to the public server.
+git push origin master
 
-# Push last changes to backend server (NO -f HERE!).
+# Push latest changes to backend server (NO -f HERE!).
 git push dokku master
 
 echo "
