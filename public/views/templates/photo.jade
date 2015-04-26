@@ -1,8 +1,10 @@
 div(class='form-group')
     div(id='id-photo', class='button-group')
         md-button(id='id-photobtn', class='md-raised photo-button', ng-click='capturePhoto()')
-            span(class='glyphicon glyphicon-camera button-icon', aria-hidden='true') {{lang.capturephoto}}
+            span(class='glyphicon glyphicon-camera button-icon', aria-hidden='true')
+            | {{lang.capturephoto}}
         md-button(id='id-imagebtn', class='md-raised photo-button', ng-click='selectImage()')
-            span(class='glyphicon glyphicon-picture button-icon', aria-hidden='true') {{lang.selectimage}}
+            span(class='glyphicon glyphicon-picture button-icon', aria-hidden='true')
+            | {{lang.selectimage}}
         md-card(id="id-dish-img-card", class='hidden')
             img(id='id-dish-img', src='')
