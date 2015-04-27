@@ -114,13 +114,11 @@ else
     </widget>#' config.xml
 
 fi
-# Setting the app config.
-# - Set minimum supported versions. Android API 16 (no PushPlugin GET_ACCOUNTS permission) & IOS 6.
-# - No zoom
+# Setting minimum supported versions. Android API 16 (no PushPlugin GET_ACCOUNTS permission) & IOS 6.
 ${sedcmd} 's#</widget>#\
     <preference name="android-minSdkVersion" value="16" />\
     <preference name="deployment-target" value="6.0" />\
-    <preference name="Fullscreen" value="true" />\
+    <preference name="Fullscreen" value="false" />\
 </widget>#' config.xml
 
 # Set description, author...
