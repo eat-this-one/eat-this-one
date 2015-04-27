@@ -40,12 +40,13 @@ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $1 $apkfile eat
 # In the project root.
 zipalign -v 4 $apkfile Eat-This-One.apk
 
-scp -r Eat-This-One.apk root@eat-this-one.com:/var/www/html/android.apk
 
 echo "
 Done!
 - Current codebase built
 - Android app generated, signed and compressed.
+
+Now you can scp -r Eat-This-One.apk root@eat-this-one.com:/var/www/html/android.apk
 "
 
 exit 0
