@@ -12,7 +12,7 @@ HEY YOU! BEFORE RUNNING THIS AGAIN:
 # Check that config/frontend.js is pointing to https://eat-this-one.com/api backend
 # You already ran grunt release:X.Y.Z to push changes to the repo
 
-Once done, run 'grunt sign:/path/to/key.key'.
+Once done, run 'grunt sign:android:/path/to/key.key'.
 "
     exit 1
 fi
@@ -22,8 +22,8 @@ if [ ! -f "dist/app/config.xml" ]; then
     exit 1
 fi
 
-git remote show | grep dokku || \
-    echo "Error: This script is used to sign the android app. If you don't have a dokku remote I doubt you should be running this." ; exit 1
+git remote show | grep dokku > /dev/null || \
+    (echo "Error: This script is used to sign the android app. If you don't have a dokku remote I doubt you should be running this." ; exit 1)
 
 
 # Ensure the last www build is the production one.

@@ -61,7 +61,7 @@ app.use(morgan('dev'));
 
 // Increasing request size as the image comes with the dish data.
 app.use(bodyParser.json({
-    limit : '3mb'
+    limit : '7mb'
 }));
 
 app.use(bodyParser.urlencoded());

@@ -23,8 +23,8 @@ else
     sedcmd="sed -i"
 fi
 
-git remote show | grep dokku || \
-    echo "Error: This script is used to push to production. If you don't have a dokku remote I doubt you should be running this." ; exit 1
+git remote show | grep dokku > /dev/null || \
+    (echo "Error: This script is used to push to production. If you don't have a dokku remote I doubt you should be running this." ; exit 1)
 
 if [ ! -z $1 ]; then
 
@@ -70,7 +70,7 @@ git commit package.json bower.json config/frontend.js.dist -m "Release $version"
 git tag -a "v$version" -m "Release v$version" && \
 git push origin "v$version"
 
-# Push latest changes to the public server.
+# Push latest changes to the public server (NO -f HERE!).
 git push origin master
 
 # Push latest changes to backend server (NO -f HERE!).
@@ -81,7 +81,7 @@ echo "
 DONE!
 - Backend public server updated to v$version
 - Version updated in package.json, bower.json, config/frontend.js (also in config/frontend.js.dist and dist/app/config.xml if required)
-- Tag v$version released
+- Tag v$version released if it didn't exist before
 - Public repo master HEAD updated
 "
 exit 0
