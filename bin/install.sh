@@ -2,22 +2,6 @@
 
 set -e
 
-# Include mobile app vars.
-if [ ! -f "config/project.properties" ]; then
-    cp config/project.properties.dist config/project.properties
-fi
-
-# Load the config.
-. config/project.properties
-
-# Copy the dist config files.
-if [ ! -f "config/frontend.js" ]; then
-    cp config/frontend.js.dist config/frontend.js
-fi
-if [ ! -f "config/backend.js" ]; then
-    cp config/backend.json.dist config/backend.json
-fi
-
 if [ -z $1 ]; then
     echo "Error: We need an argument, android or ios"
     exit 1
@@ -40,6 +24,22 @@ if [ "$1" == "android" ]; then
         echo "Error: You must install Android SDK and ANDROID_HOME env var set be set before you can continue."
         exit 1
     fi
+fi
+
+# Include mobile app vars.
+if [ ! -f "config/project.properties" ]; then
+    cp config/project.properties.dist config/project.properties
+fi
+
+# Load the config.
+. config/project.properties
+
+# Copy the dist config files.
+if [ ! -f "config/frontend.js" ]; then
+    cp config/frontend.js.dist config/frontend.js
+fi
+if [ ! -f "config/backend.js" ]; then
+    cp config/backend.json.dist config/backend.json
 fi
 
 unamestr=`uname`

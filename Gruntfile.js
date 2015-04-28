@@ -354,7 +354,9 @@ module.exports = function(grunt) {
         shell : {
             // Reset the local backend database. Useful for testing.
             reset_db : {
-                command: 'mongo ' + getConfigBackend().MONGO_URI.substr(10) + ' --eval "db.dropDatabase()"'
+                command: function() {
+                    return 'mongo ' + getConfigBackend().MONGO_URI.substr(10) + ' --eval "db.dropDatabase()"';
+                }
             },
             // Install.
             install : {
