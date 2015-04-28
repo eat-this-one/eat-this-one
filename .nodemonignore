@@ -1,6 +1,7 @@
 backend-logs
 *.swp
 *.swx
+.DS_Store
 .git
 test/*
 *.md

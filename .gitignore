@@ -1,18 +1,12 @@
-# Dependencies.
 node_modules/
 public/bower_components/
-
-# Vim files.
 *.swp
 *.swx
-
-# Config-dependant files.
+.DS_Store
 config/backend.json
 config/frontend.js
 config/project.properties
 backend-logs/
-
-# Compiled packages.
 /public/shared-build/
 /public/web-build/
 /public/app-build/
