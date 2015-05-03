@@ -139,11 +139,11 @@ ${sedcmd} 's#</widget>#\
     <preference name="Fullscreen" value="false" />\
 </widget>#' config.xml
 
-# Set description, author...
+# Sets version, description, author...
+${sedcmd} "s#<widget id=\"$PACKAGENAME.$1\" version=\"0.0.1\"#<widget id=\"$PACKAGENAME.$1\" version=\"$VERSION\"#" config.xml
 ${sedcmd} "s#<author.*>#<author email=\"$AUTHOR_EMAIL\" href=\"$AUTHOR_WEBSITE\">#" config.xml
 ${sedcmd} "s#Apache Cordova Team#$AUTHOR_NAME#" config.xml
-${sedcmd} "s#A sample Apache Cordova application that responds to the deviceready event.#$DESCRIPTION#" \
-config.xml
+${sedcmd} "s#A sample Apache Cordova application that responds to the deviceready event.#$DESCRIPTION#" config.xml
 ${sedcmd} 's#<access.*>#\
     <access origin="'$BACKEND_URL'" />\
     <access origin="http://*.gravatar.com" />\

@@ -53,16 +53,20 @@ if [ -z $version ]; then
 fi
 
 # These are bundled in the package.
+${sedcmd} "s#VERSION=\"\(.*\)\"#VERSION=\"$version\"#" config/project.properties.dist
 ${sedcmd} "s#version *: *'\(.*\)'#version: '$versionCode'#" config/frontend.js.dist
 ${sedcmd} "s#\"version\" *: *\"\(.*\)\"#\"version\": \"$version\"#" package.json
 ${sedcmd} "s#\"version\" *: *\"\(.*\)\"#\"version\": \"$version\"#" bower.json
 
-# These two might not be there as they are generated.
+# These might not be there as they are generated.
 if [ -f "config/frontend.js" ]; then
     ${sedcmd} "s#version *: *'\(.*\)'#version: '$versionCode'#" config/frontend.js
 fi
 if [ -f "dist/app/config.xml" ]; then
     ${sedcmd} "s#version=\"\(.*\)\" xmlns#version=\"$version\" android-versionCode=\"$versionCode\" xmlns#" dist/app/config.xml
+fi
+if [ -f "config/project.properties" ]; then
+    ${sedcmd} "s#VERSION=\"\(.*\)\"#VERSION=\"$version\"#" config/project.properties
 fi
 
 # If there are version changes commit them and create a new tag in the repo.

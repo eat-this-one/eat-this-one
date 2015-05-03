@@ -9,6 +9,7 @@ HEY YOU! BEFORE RUNNING THIS AGAIN:
 # Ensure you pulled the latest changes from the repo
 # Run all tests and ensure they are passing
 # Clean the kitchen and commit everthing
+# Ensure config/frontend.js GCM sender id is correctly set
 # Check that config/frontend.js is pointing to https://eat-this-one.com/api backend
 # You already ran grunt release:X.Y.Z to push changes to the repo
 

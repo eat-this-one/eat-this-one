@@ -1,4 +1,5 @@
 PACKAGENAME="org.eatthisone.app"
+VERSION="0.0.2"
 APPNAME="Eat this one"
 AUTHOR_NAME="David Monllao Olive"
 AUTHOR_EMAIL="support@eat-this-one.com"
