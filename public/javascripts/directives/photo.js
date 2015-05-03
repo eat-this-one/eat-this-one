@@ -32,18 +32,20 @@ angular.module('eat-this-one').directive('eatPhoto', ['eatConfig', 'newLogReques
                 console.log('Error selecting the image: ' + message);
             };
 
-            // We reach memory limits in iOS.
             var quality = 50;
+            var size = 512;
             document.addEventListener("deviceready", function onDeviceReady() {
                 if (device.platform.toLowerCase() === "ios") {
+                    // We reach memory limits in iOS.
                     quality = 10;
+                    size = 256;
                 }
             }, false);
 
             scope.capturePhoto = function() {
                 navigator.camera.getPicture(scope.onPictureSuccess, scope.onCapturePhotoFail, {
                     quality: quality,
-                    targetWidth: 256,
+                    targetWidth: size,
                     destinationType: Camera.DestinationType.DATA_URL,
                     saveToPhotoAlbum: true,
                     encodingType: Camera.EncodingType.JPEG,
