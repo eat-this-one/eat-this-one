@@ -1,4 +1,4 @@
-$.eatLang.en = {
+$.eatLang.fr = {
 
     adddish : 'Ajouter un repas',
     addmeal : 'Résever un repas !',

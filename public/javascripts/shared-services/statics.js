@@ -23,6 +23,16 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
                     { text: 5, value: '5'}
                 ]
             },
+            BE : {
+                name: 'Belgique',
+                currency : '€',
+                defaultLanguage : 'fr',
+                donationOptions : [
+                    { text: 1, value: '1'},
+                    { text: 3, value: '3'},
+                    { text: 5, value: '5'}
+                ]
+            },
             CA : {
                 name: 'Canada',
                 currency : '$',
@@ -31,6 +41,16 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
                     { text: 1, value: '1'},
                     { text: 3, value: '3'},
                     { text: 5, value: '5'}
+                ]
+            },
+            CH : {
+                name: 'Suisse',
+                currency : 'CHF',
+                defaultLanguage : 'fr',
+                donationOptions : [
+                    { text: 3, value: '3'},
+                    { text: 5, value: '5'},
+                    { text: 10, value: '10'}
                 ]
             },
             CL : {
@@ -67,6 +87,16 @@ angular.module('eat-this-one').factory('statics', ['$filter', function($filter) 
                 name: 'España',
                 currency : '€',
                 defaultLanguage : 'es',
+                donationOptions : [
+                    { text: 1, value: '1'},
+                    { text: 3, value: '3'},
+                    { text: 5, value: '5'}
+                ]
+            },
+            FR : {
+                name: 'France',
+                currency : '€',
+                defaultLanguage : 'fr',
                 donationOptions : [
                     { text: 1, value: '1'},
                     { text: 3, value: '3'},

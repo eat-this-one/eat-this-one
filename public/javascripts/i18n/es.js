@@ -43,7 +43,7 @@ $.eatLang.es = {
     invitejoindetailsbook : 'Unete a mi grupo de "Eat this one" para ver los detalles y reservar una porción',
     invitejoinmygroup : 'Hola, unete a mi grupo de "Eat this one" para compartir comidas a la hora de comer',
     invitepeople : 'Invitar gente',
-    joinedgroupinfo : 'Recibirás notificaciones cuando otros miembros añadan nuevos platos o cuando reserven tus platos.',
+    joinedgroupinfo : 'Recibirás notificaciones cuando otros miembros añadan nuevos platos o cuando reserven los tuyos.',
     joingroup : 'He recibido una invitación para unirme a un grupo',
     joingroupexample : 'Introduce el código del grupo (está en el mensaje que has recibido)',
     lastportion : 'Última porción!',
