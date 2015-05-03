@@ -12,7 +12,7 @@ angular.module('eat-this-one')
     $scope.actionIcons = [
         {
             name : $scope.lang.message,
-            icon : 'glyphicon glyphicon-comment',
+            icon : 'glyphicon glyphicon-send',
             callback : 'share'
         }
     ];
