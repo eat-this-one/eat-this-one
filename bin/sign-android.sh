@@ -12,6 +12,7 @@ HEY YOU! BEFORE RUNNING THIS AGAIN:
 # Ensure config/frontend.js GCM sender id is correctly set
 # Check that config/frontend.js is pointing to https://eat-this-one.com/api backend
 # You already ran grunt release:X.Y.Z to push changes to the repo
+# Delete any previous Eat-This-One.apk file in the root directory
 
 Once done, run 'grunt sign:android:/path/to/key.key'.
 "
