@@ -70,7 +70,7 @@ if [ -f "config/project.properties" ]; then
 fi
 
 # If there are version changes commit them and create a new tag in the repo.
-git commit package.json bower.json config/frontend.js.dist -m "Release $version" && \
+git commit package.json bower.json config/frontend.js.dist config/project.properties.dist -m "Release $version" && \
 git tag -a "v$version" -m "Release v$version" && \
 git push origin "v$version"
 
@@ -84,7 +84,8 @@ echo "
 -------------------------------------------------------------------------------
 DONE!
 - Backend public server updated to v$version
-- Version updated in package.json, bower.json, config/frontend.js (also in config/frontend.js.dist and dist/app/config.xml if required)
+- Version updated in package.json, bower.json, config/frontend.js, config/project.properties.dist
+  (also in config/frontend.js.dist, config/project.properties and dist/app/config.xml if required)
 - Tag v$version released if it didn't exist before
 - Public repo master HEAD updated
 "
