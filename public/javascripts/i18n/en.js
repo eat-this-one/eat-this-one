@@ -59,7 +59,7 @@ $.eatLang.en = {
     message : 'Message',
     messagecontactsinfo : 'The more people you share the food with, the better; invite them to join your group with this code:',
     missingfields : 'Hey!',
-    missingfieldsinfo : 'Some fields need you attention.',
+    missingfieldsinfo : 'Some fields need your attention.',
     name : 'Name',
     newgroup : 'I want to create a new group',
     newgroupexample : 'Set the group name, you can later invite people to join',
