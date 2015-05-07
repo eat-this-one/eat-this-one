@@ -9,5 +9,6 @@ before_install:
   - npm install -g grunt-cli
   - npm install -g mocha
   - cp config/backend.json.dist config/backend.json
+  - cp config/frontend.js.dist config/frontend.js
 services:
   - mongodb

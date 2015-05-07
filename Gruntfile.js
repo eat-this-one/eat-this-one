@@ -2,14 +2,24 @@
 module.exports = function(grunt) {
 
     var getConfigBackend = function() {
-        var config = grunt.file.readJSON('config/backend.json');
+
+        var configBackend = grunt.file.readJSON('config/backend.json');
+        var configFrontend = grunt.file.read('config/frontend.js');
 
         // Prevent data loss.
-        if (config.MONGO_URI !== "mongodb://localhost:27017/eat-this-one") {
-            throw "Error: config/backend.json data can only be used in dev servers.";
+        if (configBackend.MONGO_URI !== "mongodb://localhost:27017/eat-this-one") {
+            grunt.fail.fatal("config/backend.json data can only be used in dev servers.", 1);
+            return;
         }
 
-        return config;
+        // When running e2e tests we should check that the frontend
+        // points to the local backend.
+        if (/\n[^\/]*backendUrl\s*:\s*'http:\/\/localhost:3000\/api',/.test(configFrontend) === false) {
+            grunt.fail.fatal("config/frontend.js should point to the default local backend: http://localhost:3000/api", 1);
+            return;
+        }
+
+        return configBackend;
     };
 
     var getFrontendJsMin = function() {

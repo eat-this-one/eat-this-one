@@ -9,8 +9,8 @@ block base
 block logic
     form(role='form' id='id-page-form')
         md-radio-group(ng-model='usedfield')
-            md-radio-button(value='joingroup', class='md-primary') {{lang.joingroup}}
-            md-radio-button(value='newgroup', class='md-primary') {{lang.newgroup}}
+            md-radio-button(id='id-radio-joingroup', value='joingroup', class='md-primary') {{lang.joingroup}}
+            md-radio-button(id='id-radio-newgroup', value='newgroup', class='md-primary') {{lang.newgroup}}
         eat-input-text(element='joingroup', ng-show='usedfield === "joingroup"')
         eat-input-text(element='newgroup', ng-show='usedfield === "newgroup"')
         eat-select(element='country', ng-show='usedfield === "newgroup"')
