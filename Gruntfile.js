@@ -189,7 +189,7 @@ module.exports = function(grunt) {
             // Frontend e2e tests changes -> run them.
             test_frontend_e2e_js : {
                 files : [ "test/e2e/**/*.js" ],
-                tasks : [ "shell:reset_db", "protractor" ],
+                tasks : [ "shell:reset_db", "protractor:run" ],
                 options : {
                     nospawn : true
                 }
