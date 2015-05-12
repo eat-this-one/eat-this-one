@@ -145,7 +145,7 @@ angular.module('eat-this-one').controller('IndexController',
                 );
                 return stopInterval();
             }
-            if (time > 4000) {
+            if (time > 8000) {
                 // Timeout at 4 seconds and notify that
                 // something went wrong and try again in a while.
                 notifier.show($scope.lang.error, $scope.lang.weird);
