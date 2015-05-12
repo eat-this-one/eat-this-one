@@ -7,19 +7,19 @@ var mongoose = require('mongoose');
 var fs = require('fs');
 var moment = require('moment');
 
-// Load config file.
+// Give preference to env than to the config file.
 nconf.argv().env().file({file: path.join(__dirname, '/config/backend.json')});
 
 // Check that the required configuration is present.
-var requiredConfig = ['MONGO_URI'];
+var requiredConfig = ['MONGO_URI', 'LOGS_DIR'];
 requiredConfig.forEach(function(key) {
-    if (nconf.get(key) === null && process.env[key] === "undefined") {
+    if (nconf.get(key) === null) {
         throw new Error(key + ' is not defined. Ensure that you set it in an ENV var or in config.json');
     }
 });
 
 // Persistence layer connection.
-mongoose.connect(process.env.MONGO_URI || nconf.get('MONGO_URI'));
+mongoose.connect(nconf.get('MONGO_URI'));
 
 // Init the app.
 var app = express();
