@@ -382,6 +382,10 @@ module.exports = function(grunt) {
             device_android : {
                 command: 'bin/install-device-android.sh'
             },
+            // Runs the mobile app in the currently plugged ios device.
+            device_ios : {
+                command: 'cd dist/app ; cordova build --device && ios-deploy -d -b platforms/ios/build/device/Eat\ this\ one.app'
+            },
             // Runs the mobile app in the android emulator.
             emulator_android : {
                 command: 'cd dist/app ; cordova emulate android'
@@ -448,6 +452,12 @@ module.exports = function(grunt) {
         "run:android:device",
         "Runs the current build in the currently plugged android device.",
         ["shell:device_android"]
+    );
+
+    grunt.registerTask(
+        "run:ios:device",
+        "Runs the current build in the currently plugged ios device",
+        ["shell:device_ios"]
     );
 
     // Alias for shell:emulator_android.
