@@ -11,7 +11,7 @@ HEY YOU! BEFORE RUNNING THIS AGAIN:
 # Clean the kitchen and commit everthing
 # Copy or increase the version (look the current one in package.json and increment it).
 
-Once done, run 'grunt release:X.Y.Z', where X.Y.Z is the version number.
+Once done, run 'grunt release:XX.YY.ZZ', where XX.YY.ZZ is the version number.
 "
     exit 1
 fi
@@ -30,19 +30,22 @@ if [ ! -z $1 ]; then
 
     version=$1
 
-    # Clean the points and leading zeros.
-    versionCode=${version//.}
-    versionCode=$(echo $versionCode | sed 's/^0*//')
-
-    # Check the strings length.
-    if [ "${#version}" -ne "5" ]; then
-        echo "Error: Check version value. Should be something like 2.3.1"
+    if [[ ! $version =~ ^[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}$ ]]; then
+        echo "Error: Check version value. Should be something like 2.13.10"
         exit 1
     fi
 
+    # We should convert 1 digit parts to 2 digits.
+    versionCode=$(echo $version | sed 's/\.\([0-9]\)\./\.0\1\./g')
+    versionCode=$(echo $versionCode | sed 's/\.\([0-9]\)$/\.0\1/g')
+
+    # Remove dots and cleaning leading zeros.
+    versionCode=${versionCode//.}
+    versionCode=$(echo $versionCode | sed 's/^0*//')
+
     # Check that versionCode is an integer.
     if [[ ! $versionCode =~ ^-?[0-9]+$ ]]; then
-        echo "Error: Check version value. Should be something like 3.4.5"
+        echo "Error: Check version value. Should be something like 2.13.10. It has not been converted to an int correctly"
         exit 1
     fi
 fi
