@@ -55,13 +55,10 @@ angular.module('eat-this-one')
             var nextUserRanking = 1;
             for(var i in groupData.members) {
                 if (lastUserPoints === null) {
-                    groupData.members[i].user.icon = 'king';
                     groupData.members[i].user.ranking = 1;
                 } else if (groupData.members[i].user.points === lastUserPoints) {
-                    groupData.members[i].user.icon = groupData.members[i-1].user.icon;
                     groupData.members[i].user.ranking = groupData.members[i-1].user.ranking;
                 } else {
-                    groupData.members[i].user.icon = 'user';
                     groupData.members[i].user.ranking = nextUserRanking;
                 }
                 nextUserRanking++;

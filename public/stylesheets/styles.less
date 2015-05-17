@@ -26,10 +26,6 @@ footer {
     position: absolute;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
 
@@ -116,6 +112,7 @@ footer {
 .user-thumb-container {
     display: inline-block;
     margin-left: 3px;
+    margin-right: 10px;
     position: relative;
     width: 30px;
     height: 30px;
@@ -131,17 +128,24 @@ footer {
     width: 100%;
     height: auto;
     text-align: center;
-    -webkit-transform: translate(-50%,-50%);
-    -moz-transform: translate(-50%,-50%);
-    -o-transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
 }
 
 .ranking {
     font-size: 140%;
     margin-left: 10px;
+    margin-right: 10px;
     top: 4px;
+}
+
+.group-user {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.stars {
+    margin-left: 10px;
+    vertical-align: text-top;
 }
 
 .splash-text {
@@ -168,19 +172,6 @@ footer {
     }
 }
 
-@-moz-keyframes animatedBackground {
-    to { background-position: 100% 0; }
-}
-@-o-keyframes animatedBackground {
-    to { background-position: 100% 0; }
-}
-@-webkit-keyframes animatedBackground {
-    to {
-        background-position: 100% 0;
-        background-color: #ffffff;
-        background-color: rgba(255, 255, 255, 0.3);
-    }
-}
 @keyframes animatedBackground {
     to {
         background-position: 100% 0;
@@ -193,13 +184,7 @@ footer {
     background: url('images/intro.jpg') no-repeat left center fixed;
     background-color: #ffffff;
     background-color: rgba(255, 255, 255, 1);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
-    -moz-animation: animatedBackground 8s ease-out 0.5s forwards;
-    -o-animation: animatedBackground 8s ease-out 0.5s forwards;
-    -webkit-animation: animatedBackground 8s ease-out 0.5s forwards;
     animation: animatedBackground 8s ease-out 0.5s forwards;
 }
 

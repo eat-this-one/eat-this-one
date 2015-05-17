@@ -40,17 +40,15 @@ html
                     div(class='md-toolbar-tools no-toolbar-padding')
 
                         //- The menu is only available when the controller specifies it.
-                        div(class='md-tile-left')
-                            md-button(ng-click='menu.toggle()', ng-if='showToggleMenu && menuItems', aria-label='{{lang.menu}}', class='md-primary md-fab no-box-shadow')
-                                span(class='glyphicon glyphicon-menu-hamburger', aria-hidden='true')
-                        div(class='md-tile-content')
-                            span
-                                b {{pageTitle}}
-                            span(flex)
+                        md-button(ng-click='menu.toggle()', ng-if='showToggleMenu && menuItems', aria-label='{{lang.menu}}', class='md-primary md-fab no-box-shadow')
+                            span(class='glyphicon glyphicon-menu-hamburger', aria-hidden='true')
+                        h2
+                            b {{pageTitle}}
+                        span(flex)
 
                         //- Action buttons. The controller sets them.
                         div(ng-repeat='actionIcon in actionIcons')
-                            md-button(ng-click='redirectAction(this, actionIcon.callback)', ng-if='showToggleMenu', aria-label='{{actionIcon.name}}', class='md-primary md-fab no-box-shadow', form='id-page-form')
+                            md-button(ng-click='redirectAction(this, actionIcon.callback)', ng-if='showToggleMenu', aria-label='{{actionIcon.name}}', class='md-primary md-fab no-box-shadow md-icon-button', form='id-page-form')
                                 span(class='{{actionIcon.icon}}', aria-hidden='true')
 
                 //- Delegated to the specific view logic.

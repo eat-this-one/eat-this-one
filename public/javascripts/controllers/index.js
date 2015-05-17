@@ -93,11 +93,6 @@ angular.module('eat-this-one').controller('IndexController',
         redirecter.redirect('index.html');
     };
 
-    // Its only purpose is to store the log.
-    $scope.dishClicked = function(dishid) {
-        newLogRequest('click', 'dishes-view', dishid);
-    };
-
     // Redirects to the selected dish.
     $scope.redirectToDish = function(dishid) {
         newLogRequest('click', 'dishes-view', dishid);
