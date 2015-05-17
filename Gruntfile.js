@@ -133,6 +133,45 @@ module.exports = function(grunt) {
             }
         },
 
+        // Autoprefixes CSS with vendor stuff.
+        autoprefixer: {
+            development: {
+                src: 'public/shared-build/styles.css',
+                dest: 'public/shared-build/styles.css'
+            }
+        },
+
+        /**
+         * Checks CSS rules.
+         *
+         * - Skip adjoining classes. angular-material does not allow us
+         *   do it properly.
+         * - Skip outline-none. This is a mobile app and there is no tab here.
+         */
+        csslint : {
+            strict : {
+                src : ['public/shared-build/styles.css'],
+                options : {
+                    "adjoining-classes" : false,
+                    "outline-none" : false,
+                    "compatible-vendor-prefixes" : false
+                }
+            }
+        },
+
+        // Joins all CSS files into 1.
+        cssmin : {
+            minify : {
+                files : {
+                    'public/shared-build/styles.css' : [
+                        'public/bower_components/bootstrap/dist/css/bootstrap.min.css',
+                        'public/bower_components/angular-material/angular-material.min.css',
+                        'public/shared-build/styles.css'
+                    ]
+                }
+            }
+        },
+
         // Compiles Jade files to .html.
         jade : {
             options : {
@@ -159,7 +198,7 @@ module.exports = function(grunt) {
             // Less changes -> compile CSS.
             dev_css : {
                 files : [ "public/stylesheets/**/*.less" ],
-                tasks : [ "less", "csslint", "cssmin", "copy:build" ],
+                tasks : [ "less", "csslint", "cssmin", "autoprefixer", "copy:build" ],
                 options : {
                     nospawn : true
                 }
@@ -271,36 +310,6 @@ module.exports = function(grunt) {
             dev: ["nodemon", "watch"],
             options: {
                 logConcurrentOutput: true
-            }
-        },
-
-        // Joins all CSS files into 1.
-        cssmin : {
-            minify : {
-                files : {
-                    'public/shared-build/styles.css' : [
-                        'public/bower_components/bootstrap/dist/css/bootstrap.min.css',
-                        'public/bower_components/angular-material/angular-material.min.css',
-                        'public/shared-build/styles.css'
-                    ]
-                }
-            }
-        },
-
-        /**
-         * Checks CSS rules.
-         *
-         * - Skip adjoining classes. angular-material does not allow us
-         *   do it properly.
-         * - Skip outline-none. This is a mobile app and there is no tab here.
-         */
-        csslint : {
-            strict : {
-                src : ['public/shared-build/styles.css'],
-                options : {
-                    "adjoining-classes" : false,
-                    "outline-none" : false
-                }
             }
         },
 
@@ -478,14 +487,14 @@ module.exports = function(grunt) {
     grunt.registerTask(
         "build:dev",
         "Builds frontend development versions. Both mobile app and web for testing.",
-        [ "clean:build", "copy:resources", "uglify:dev", "less", "csslint", "cssmin", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]
+        [ "clean:build", "copy:resources", "uglify:dev", "less", "csslint", "cssmin", "autoprefixer", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]
     );
 
     // All compressed.
     grunt.registerTask(
         "build:prod",
         "Builds frontend production versions. Both mobile app and web although only app is meant to be deployed.",
-        [ "clean:build", "copy:resources", "uglify:prod", "less", "csslint", "cssmin", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]
+        [ "clean:build", "copy:resources", "uglify:prod", "less", "csslint", "cssmin", "autoprefixer", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]
     );
 
     // Test backend (frontend depends on browsers and stuff).
@@ -535,6 +544,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks("grunt-karma");
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-protractor-runner');
