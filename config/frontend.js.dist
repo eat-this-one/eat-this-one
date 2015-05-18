@@ -1,5 +1,5 @@
 angular.module('eat-this-one').constant('eatConfig', {
-    version: '5',
+    version: '6',
     backendUrl : 'http://localhost:3000/api',
     downloadAppUrl : 'http://eat-this-one.com',
     defaultLang : 'en',
