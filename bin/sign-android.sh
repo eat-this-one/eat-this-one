@@ -12,7 +12,7 @@ HEY YOU! BEFORE RUNNING THIS AGAIN:
 # Ensure config/frontend.js GCM sender id is correctly set
 # Check that config/frontend.js is pointing to https://eat-this-one.com/api backend
 # You already ran grunt release:X.Y.Z to push changes to the repo
-# Delete any previous Eat-This-One.apk file in the root directory
+# Delete any previous Eat-This-One-x86.apk and Eat-This-One-ARMv7.apk file in the root directory
 
 Once done, run 'grunt sign:android:/path/to/key.key'.
 "
@@ -41,7 +41,7 @@ apkfile=dist/app/platforms/android/build/outputs/apk/android-x86-release-unsigne
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $1 $apkfile eat-this-one-key
 zipalign -v 4 $apkfile Eat-This-One-x86.apk
 
-apkfile=dist/app/platforms/android/build/outputs/apk/android-ARMv7-release-unsigned.apk
+apkfile=dist/app/platforms/android/build/outputs/apk/android-armv7-release-unsigned.apk
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $1 $apkfile eat-this-one-key
 zipalign -v 4 $apkfile Eat-This-One-ARMv7.apk
 
