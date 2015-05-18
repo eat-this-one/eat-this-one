@@ -36,21 +36,19 @@ cd dist/app
 cordova build android --release
 cd ../../
 
-apkfile=dist/app/platforms/android/ant-build/MainActivity-release-unsigned.apk
+# Store x86 and ARMv7 versions in the project root.
+apkfile=dist/app/platforms/android/build/outputs/apk/android-x86-release-unsigned.apk
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $1 $apkfile eat-this-one-key
+zipalign -v 4 $apkfile Eat-This-One-x86.apk
 
-# In the project root.
-zipalign -v 4 $apkfile Eat-This-One.apk
-
+apkfile=dist/app/platforms/android/build/outputs/apk/android-ARMv7-release-unsigned.apk
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $1 $apkfile eat-this-one-key
+zipalign -v 4 $apkfile Eat-This-One-ARMv7.apk
 
 echo "
 Done!
 - Current codebase built
-- Android app generated, signed and compressed.
-
-Now you can scp -r Eat-This-One.apk root@eat-this-one.com:/var/www/html/android.apk
+- Android apps (ARMv7 and x86) generated, signed and compressed.
 "
 
 exit 0
-
-
