@@ -33,7 +33,7 @@ grunt build:prod
 
 # Returning to the project root directory, as the keystore file was specified from there.
 cd dist/app
-cordova build android --release
+cordova build android --release -- --minSdkVersion=16
 cd ../../
 
 # Store x86 and ARMv7 versions in the project root.
