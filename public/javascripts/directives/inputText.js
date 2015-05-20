@@ -46,12 +46,14 @@ angular.module('eat-this-one').directive('eatInputText', ['$mdToast', 'formsMana
                             delay = scope.element.infodelay;
                         }
 
-                        $mdToast.show(
-                            $mdToast.simple()
-                                .content(scope.element.placeholder)
-                                .position('top right')
-                                .hideDelay(delay)
-                        );
+                        setTimeout(function() {
+                            $mdToast.show(
+                                $mdToast.simple()
+                                    .content(scope.element.placeholder)
+                                    .position('top right')
+                                    .hideDelay(delay)
+                            );
+                        }, 500);
                     }
                 };
 
