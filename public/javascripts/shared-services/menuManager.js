@@ -18,8 +18,8 @@ angular.module('eat-this-one').factory('menuManager', ['$mdSidenav', 'newLogRequ
         groupViewItem : function() {
 
             return {
-                name : this.lang.ranking,
-                icon : 'glyphicon glyphicon-king',
+                name : this.lang.participants,
+                icon : 'glyphicon glyphicon-home',
                 callback : 'groupViewCallback'
             };
         },

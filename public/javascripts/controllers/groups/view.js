@@ -10,7 +10,7 @@ angular.module('eat-this-one')
     $scope.menu = menuManager;
 
     // Define header (the title will be replaced later by the group name).
-    $scope.pageTitle = $scope.lang.ranking;
+    $scope.pageTitle = $scope.lang.participants;
     $scope.menuItems = menuManager.getDefaultItems();
 
     $scope.showToggleMenu = false;

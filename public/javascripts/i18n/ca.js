@@ -69,7 +69,7 @@ $.eatLang.ca = {
     nothing : 'No res',
     nodishes : 'No hi ha plats per reservar en els pròxims dies. Per què no afegeixes tu el primer?',
     open : 'Oberta',
-    ranking : 'Ranking',
+    participants : 'Participants',
     refresh : 'Refrescar',
     save : 'Desar',
     selectimage : 'Galeria d\'imatges',

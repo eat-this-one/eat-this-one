@@ -69,7 +69,7 @@ $.eatLang.en = {
     nothing : 'Nothing',
     nodishes : 'No meals to book in the next days yet. Why don\'t you add the first one?',
     open : 'Open',
-    ranking : 'Ranking',
+    participants : 'Participants',
     refresh : 'Refresh',
     save : 'Save',
     selectimage : 'Photos gallery',

@@ -69,7 +69,7 @@ $.eatLang.fr = {
     nothing : 'Rien',
     nodishes : 'Il n\'y a pas encore de repas à réserver dans les prochains jours. Pourquoi n\'ajouteriez-vous pas le premier ?',
     open : 'Ouvrir',
-    ranking : 'Classement',
+    participants : 'Participants',
     refresh : 'Rafraichir',
     save : 'Sauvegarder',
     selectimage : 'Gallerie photos',

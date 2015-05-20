@@ -10,7 +10,7 @@ block logic
     div(class='users-list')
         md-list-item(ng-show='showMembers', ng-repeat='member in members')
             div
-                span(class='badge ranking') {{member.user.ranking}}
+                span(class='badge participants') {{member.user.ranking}}
                 div(ng-if='member.user.picture', class='user-thumb-container')
                     img(src='{{member.user.picture}}', class='thumb-photo', aria-hidden='true')
             div
