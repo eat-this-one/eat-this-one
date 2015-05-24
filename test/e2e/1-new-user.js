@@ -13,7 +13,7 @@ describe('Eat this one', function() {
         // There is an animation here.
         browser.sleep(1000);
 
-        var dialogContent = element(by.css('md-dialog md-content p'));
+        var dialogContent = element(by.css('md-dialog md-dialog-content p'));
 
         // No fields filled.
         element(by.css('#id-signup')).click();
