@@ -393,7 +393,7 @@ module.exports = function(grunt) {
             },
             // Runs the mobile app in the currently plugged ios device.
             device_ios : {
-                command: 'cd dist/app ; cordova build --device && ios-deploy -d -b platforms/ios/build/device/Eat\ this\ one.app'
+                command: 'cd dist/app ; cordova build --device && ios-deploy -d -b "platforms/ios/build/device/Eat\ this\ one.app"'
             },
             // Runs the mobile app in the android emulator.
             emulator_android : {
