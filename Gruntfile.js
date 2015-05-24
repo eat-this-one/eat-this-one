@@ -198,7 +198,7 @@ module.exports = function(grunt) {
             // Less changes -> compile CSS.
             dev_css : {
                 files : [ "public/stylesheets/**/*.less" ],
-                tasks : [ "less", "csslint", "cssmin", "autoprefixer", "copy:build" ],
+                tasks : [ "less", "csslint","autoprefixer",  "cssmin", "copy:build" ],
                 options : {
                     nospawn : true
                 }
@@ -487,14 +487,14 @@ module.exports = function(grunt) {
     grunt.registerTask(
         "build:dev",
         "Builds frontend development versions. Both mobile app and web for testing.",
-        [ "clean:build", "copy:resources", "uglify:dev", "less", "csslint", "cssmin", "autoprefixer", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]
+        [ "clean:build", "copy:resources", "uglify:dev", "less", "csslint", "autoprefixer", "cssmin", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]
     );
 
     // All compressed.
     grunt.registerTask(
         "build:prod",
         "Builds frontend production versions. Both mobile app and web although only app is meant to be deployed.",
-        [ "clean:build", "copy:resources", "uglify:prod", "less", "csslint", "cssmin", "autoprefixer", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]
+        [ "clean:build", "copy:resources", "uglify:prod", "less", "csslint", "autoprefixer", "cssmin", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]
     );
 
     // Test backend (frontend depends on browsers and stuff).
