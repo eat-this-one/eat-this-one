@@ -55,6 +55,10 @@ describe('EatUser', function() {
                     }
                     // We store the token for later use.
                     nconf.set('user1Token', JSON.parse(res.text).token);
+
+                    // We also store the id as we want to update it later.
+                    nconf.set('user1Id', JSON.parse(res.text)._id);
+
                     requestDone();
                 });
 
@@ -73,6 +77,10 @@ describe('EatUser', function() {
                     }
                     // We store the token for later use.
                     nconf.set('user2Token', JSON.parse(res.text).token);
+
+                    // We also store the id as we want to update it later.
+                    nconf.set('user2Id', JSON.parse(res.text)._id);
+
                     requestDone();
                 });
 
@@ -196,6 +204,45 @@ describe('EatUser', function() {
                     assert.equal(res.body.apntoken, '123sda1231231231231');
                     requestDone();
                 });
+        });
+
+        it('should update a user gcmregid or apntoken based on the token', function(done) {
+
+            nrequests = 2;
+            localDone = done;
+
+            request('http://localhost:3000')
+                .put('/api/users/' + nconf.get('user1Id'))
+                .send({
+                    provider: 'regid',
+                    token: nconf.get('user1Token'),
+                    gcmregid : '123sda1231231231231updatedgcm'
+                })
+                .expect(200)
+                .end(function(err, res) {
+                    if (err) {
+                        return requestDone(err);
+                    }
+                    assert.equal(res.body.gcmregid, '123sda1231231231231updatedgcm');
+                    requestDone();
+                });
+
+            request('http://localhost:3000')
+                .put('/api/users/' + nconf.get('user2Id'))
+                .send({
+                    provider: 'apntoken',
+                    token: nconf.get('user2Token'),
+                    apntoken : '123sda1231231231231updatedapn'
+                })
+                .expect(200)
+                .end(function(err, res) {
+                    if (err) {
+                        return requestDone(err);
+                    }
+                    assert.equal(res.body.apntoken, '123sda1231231231231updatedapn');
+                    requestDone();
+                });
+
         });
 
     });

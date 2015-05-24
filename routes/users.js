@@ -8,28 +8,12 @@ var EatUser = require('../lib/EatUser.js');
 router.get('/', function(req, res) {
     res.send("Not supported.");
     return;
-    //var eat = new Eat(req, res);
-    //eat.checkValidToken(function(error) {
-        //if (error) {
-            //return eat.returnCallback(error);
-        //}
-        //var eatuser = new EatUser(eat);
-        //return eatuser.get();
-    //});
 });
 
 // GET - Obtain a specific user.
 router.get('/:id', function(req, res) {
     res.send("Not supported.");
     return;
-    //var eat = new Eat(req, res);
-    //eat.checkValidToken(function(error) {
-        //if (error) {
-            //return eat.returnCallback(error);
-        //}
-        //var eatuser = new EatUser(eat);
-        //return eatuser.getById();
-    //});
 });
 
 // POST - Create an user.
@@ -66,6 +50,16 @@ router.put('/:id', function(req, res) {
             }
             var eatuser = new EatUser(eat);
             return eatuser.updateRegid();
+        });
+
+    } else if (req.param('provider') === 'apntoken') {
+
+        eat.checkValidToken(function(error) {
+            if (error) {
+                return eat.returnCallback(error);
+            }
+            var eatuser = new EatUser(eat);
+            return eatuser.updateApntoken();
         });
 
     } else {
