@@ -32,7 +32,7 @@ $.eatLang.ca = {
     errornocontacts : 'No s\'ha pogut obtenir la teva llista de contactes',
     expecteddonation : 'Donació',
     groupcreated : 'Benvingut',
-    groupcreatedinfo : 'És hora de compartir plats! Invita als teus companys al teu grup, pots fer-ho pel Ranking (enllaç al menú) o quan afegeixis el teu primer plat.',
+    groupcreatedinfo : 'És hora de compartir plats! Invita als teus companys al teu grup, pots fer-ho a Participants (enllaç al menú) o quan afegeixis el teu primer plat.',
     groupexists : 'Nom de grup ocupat',
     groupexistsinfo : 'Seleccionar un altre nom de grup, aquest ja està ocupat.',
     groupnoexists : 'El grup no existeix',

@@ -32,7 +32,7 @@ $.eatLang.es = {
     errornocontacts : 'No se ha podido obtener tu lista de contactos',
     expecteddonation : 'Donación',
     groupcreated : 'Bienvenido',
-    groupcreatedinfo : 'Es hora de compartir platos! Invita a tus compañeros a tu grupo, puedes hacerlo a través del Ranking (enlace en el menú) o cuando añadas tu primer plato.',
+    groupcreatedinfo : 'Es hora de compartir platos! Invita a tus compañeros a tu grupo, puedes hacerlo en Participantes (enlace en el menú) o cuando añadas tu primer plato.',
     groupexists : 'Nombre de grupo ocupado',
     groupexistsinfo : 'Seleccionar otro nombre de grupo, este ya esta ocupado.',
     groupnoexists : 'El grupo no existe',

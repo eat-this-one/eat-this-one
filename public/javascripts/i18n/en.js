@@ -32,7 +32,7 @@ $.eatLang.en = {
     errornocontacts : 'The list of your contacts can not be obtained',
     expecteddonation : 'Expected donation',
     groupcreated : 'Welcome',
-    groupcreatedinfo : 'Time to share dishes! Invite people to your group, you can do it though the Ranking (link in the menu) or after adding your first dish.',
+    groupcreatedinfo : 'Time to share dishes! Invite people to your group, you can do it though Participants (link in the menu) or after adding your first dish.',
     groupexists : 'Group name already used',
     groupexistsinfo : 'Select another group name. This one is already used.',
     groupnoexists : 'The group does not exist',
