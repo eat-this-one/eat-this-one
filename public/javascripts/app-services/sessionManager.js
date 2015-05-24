@@ -46,6 +46,8 @@ angular.module('eat-this-one')
             localStorage.setItem('token', userData.token);
             // The pwd should not come from the backend.
             delete userData.token;
+            delete userData.gcmregid;
+            delete userData.apntoken;
             localStorage.setItem('user', JSON.stringify(userData));
         },
 

@@ -39,9 +39,22 @@ angular.module('eat-this-one')
         },
 
         registeredAPN : function(token) {
-            console.log('Registered in APN: ' + token);
-            // We updated it as we may have a random one.
-            localStorage.setItem('apnToken', token);
+
+            // We always update it if it is different.
+            if (token != localStorage.getItem('apnToken')) {
+                console.log('Registered in APN: ' + token);
+
+                localStorage.setItem('apnToken', token);
+                if (localStorage.getItem('usingFakeApnToken') !== null) {
+                    localStorage.removeItem('usingFakeApnToken');
+                }
+
+                var bodyscope = angular.element('#id-body');
+                bodyscope.ready(function() {
+                    var updateApnTokenRequest = bodyscope.injector().get('updateApnTokenRequest');
+                    updateApnTokenRequest();
+                });
+            }
         },
 
         errorHandler : function(error) {
@@ -56,6 +69,7 @@ angular.module('eat-this-one')
             // Generating a random one, it would be later replaced on update.
             var randomNumber = Math.random() + new Date().getTime();
             localStorage.setItem('apnToken', randomNumber);
+            localStorage.setItem('usingFakeApnToken', true);
         }
 
     };
@@ -118,7 +132,7 @@ function notificationsHandler(e) {
 
                             // We also update the backend.
                             var updateRegIdRequest = bodyscope.injector().get('updateRegIdRequest');
-                            updateRegIdRequest(e.regid);
+                            updateRegIdRequest();
                         } else {
                             // Let's not log this.
                         }

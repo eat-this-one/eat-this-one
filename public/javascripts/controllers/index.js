@@ -140,10 +140,25 @@ angular.module('eat-this-one').controller('IndexController',
                 );
                 return stopInterval();
             }
-            if (time > 8000) {
-                // Timeout at 4 seconds and notify that
-                // something went wrong and try again in a while.
-                notifier.show($scope.lang.error, $scope.lang.weird);
+            if (time > 4000) {
+                // Some reports of pushplugin callback not being executed
+                // when user selects to not allow push notifications:
+                // https://github.com/phonegap-build/PushPlugin/issues/433
+                // https://github.com/phonegap-build/PushPlugin/issues/162
+                //
+                // The app, without push notifications is not that useful but
+                // it should still work so we generate a random identifier.
+                //
+                // Later, when the user enables it we will update this value.
+                var randomNumber = Math.random() + new Date().getTime();
+                localStorage.setItem('usingFakeApnToken', true);
+                localStorage.setItem('apnToken', randomNumber);
+                editApnTokenUserRequest(
+                    $scope,
+                    'group-members/edit.html',
+                    'created',
+                    'create-account'
+                );
                 return stopInterval();
             }
             time = time + 200;

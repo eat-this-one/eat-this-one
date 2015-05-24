@@ -1,10 +1,10 @@
 angular.module('eat-this-one')
-    .factory('updateRegIdRequest', ['$http', 'eatConfig', 'sessionManager', 'newLogRequest', function($http, eatConfig, sessionManager, newLogRequest) {
+    .factory('updateApnTokenRequest', ['$http', 'eatConfig', 'sessionManager', 'newLogRequest', function($http, eatConfig, sessionManager, newLogRequest) {
 
     return function() {
 
-        // We need to check that there is a user because on the app
-        // when we set the registration id we don't now if the user
+        // We need to check that there is a user because on the app,
+        // when we set the apn token we don't now if the user
         // is already set or not.
         var user = sessionManager.getUser();
         if (user === null) {
@@ -12,9 +12,9 @@ angular.module('eat-this-one')
         }
 
         var requestData = {
-            provider : 'regid',
+            provider : 'apntoken',
             token : sessionManager.getToken(),
-            gcmregid : localStorage.getItem('gcmRegId')
+            apntoken : localStorage.getItem('apnToken')
         };
 
         $http({
@@ -26,7 +26,7 @@ angular.module('eat-this-one')
             // We do nothing here.
         })
         .error(function(data, errorStatus, errorMsg) {
-            newLogRequest('error', 'update-regid-token', errorMsg);
+            newLogRequest('error', 'update-apn-token', errorMsg);
         });
     };
 
