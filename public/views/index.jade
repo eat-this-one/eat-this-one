@@ -27,5 +27,4 @@ block logic
             md-list-item(ng-show='!showNoDishes', ng-repeat='dish in dishes', ng-click='redirectToDish(dish._id)', role='listitem')
                 img(ng-src='{{dish.imgSrc}}', class='md-avatar')
                 p {{dish.name}} - {{dish.when}}
-                div(ng-if='dish.icon', class='md-icon-button')
-                    span(class='{{dish.icon}}')
+                span(class='label label-warning') {{dish.status}}

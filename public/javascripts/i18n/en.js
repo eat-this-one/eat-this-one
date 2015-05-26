@@ -36,6 +36,8 @@ $.eatLang.en = {
     groupexists : 'Group name already used',
     groupexistsinfo : 'Select another group name. This one is already used.',
     groupnoexists : 'The group does not exist',
+    icook : 'I cook',
+    ibooked : 'I booked it',
     insertgroupcode : 'Group code',
     inviteemailsubject : 'I\'ve cooked a dish I\'d like to share with you',
     invitegroupcode : 'The group code is',
