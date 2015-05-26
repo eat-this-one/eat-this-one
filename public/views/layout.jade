@@ -22,7 +22,7 @@ html
         div(id="id-main", ng-controller='#{controllerName}')
 
             //- The user menu. Only available when the controller set icons on it.
-            md-sidenav(ng-if='showToggleMenu && menuItems', class='md-sidenav-left sidenav-short', md-component-id='menu')
+            md-sidenav(ng-if='showToggleMenu && menuItems', class='md-sidenav-left sidenav-short', md-component-id='menu', md-swipe-left='menu.close()')
                 md-toolbar
                     span(class='md-toolbar-tools') {{lang.menu}}
                 md-list(role='list', layout='column', layout-fill)
