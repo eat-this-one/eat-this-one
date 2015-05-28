@@ -21,7 +21,7 @@ $.eatLang.fr = {
     dishdescription : 'Description',
     dishdescriptionexample : 'e.g. Quiche lorraine, sans gluten',
     dishedited : 'Plat modifié',
-    dishes : 'Plats',
+    dishes : 'Liste de plats',
     dishname : 'Nom du plat',
     dishnameexample : 'e.g. Quiche lorraine',
     editdish : 'Modifier le plat',

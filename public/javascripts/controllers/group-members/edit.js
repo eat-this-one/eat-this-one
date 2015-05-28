@@ -78,7 +78,7 @@ angular.module('eat-this-one')
     };
     var errorCallback = function(data, errorStatus, errorMsg) {
         appStatus.completed('groupMembersRequest');
-        // No memberships expected.
+        // No memberships expected although in theory it will return an empty array.
     };
     groupMembersRequest($scope, groupMembersCallback, errorCallback);
 

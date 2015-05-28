@@ -1,5 +1,4 @@
 $.eatLang.es = {
-
     adddish : 'Añadir plato',
     addmeal : 'Comida reservada!',
     aftertomorrow : 'Pasado mañana',
@@ -21,7 +20,7 @@ $.eatLang.es = {
     dishdescription : 'Descripción',
     dishdescriptionexample : 'ej: Espaguetis a la carbonara, no apto para celíacos',
     dishedited : 'Cambios guardados',
-    dishes : 'Platos',
+    dishes : 'Listado de platos',
     dishname : 'Nombre del plato',
     dishnameexample : 'ej: Paella',
     editdish : 'Editar plato',

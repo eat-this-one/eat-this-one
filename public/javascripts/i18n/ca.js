@@ -21,7 +21,7 @@ $.eatLang.ca = {
     dishdescription : 'Descripció',
     dishdescriptionexample : 'ex: Spaguetis a la carbonara, no apte per celíacs',
     dishedited : 'Canvis guardats',
-    dishes : 'Plats',
+    dishes : 'Llistat de plats',
     dishname : 'Nom del plat',
     dishnameexample : 'ex: Paella',
     editdish : 'Editar plat',
