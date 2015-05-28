@@ -11,6 +11,7 @@ angular.module('eat-this-one')
     $scope.pageTitle = $scope.lang.dish;
     $scope.menuItems = menuManager.getDefaultItems();
 
+    $scope.showTip = false;
     $scope.showToggleMenu = false;
     if ($scope.auth.isAuthenticated()) {
         $scope.showToggleMenu = true;
@@ -56,6 +57,11 @@ angular.module('eat-this-one')
                 }
             ];
             appStatus.completed('dishRequest');
+
+            // After loading the dish, if it is the first time that the user tries
+            // to book a dish we display the tooltip/s.
+            notifier.showTooltip($scope, 'tipBook', $scope.lang.tipbook);
+
         } else if ($scope.auth.isUser($scope.dish.user._id)) {
             $scope.actionIcons = [
                 {
@@ -70,6 +76,10 @@ angular.module('eat-this-one')
                 mealsRequest($scope, $scope.dish._id, mealsCallback);
             } else {
                 appStatus.completed('dishRequest');
+
+                // After loading the dish, if it is the first time that the user tries
+                // to book a dish we display the tooltip/s.
+                notifier.showTooltip($scope, 'tipEditDish', $scope.lang.tipeditdish);
             }
         } else {
             appStatus.completed('dishRequest');

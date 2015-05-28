@@ -7,6 +7,7 @@ block logic
     //- Its position is fixed so it does not really matter where we add it.
     md-button(id='id-add-dish', class='add-dish-button', ng-click='addDish()', ng-if='showToggleMenu', aria-label='lang.adddish', class='md-primary md-fab no-box-shadow')
         span(class='glyphicon glyphicon-plus', aria-hidden='true')
+        md-tooltip(ng-if='actionInfo', md-visible='showTip', md-direction='top') {{actionInfo}}
 
     div(ng-if='display === "splash"', class='md-content')
         img(class='splash-icon', ng-click='toLogin()', src='images/icon.png')

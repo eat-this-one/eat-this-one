@@ -15,6 +15,7 @@ angular.module('eat-this-one').controller('IndexController',
 
     $scope.dishes = [];
     $scope.showNoDishes = false;
+    $scope.showTip = false;
 
     // To determine what to show to the user.
     if ($scope.auth.isAuthenticated()) {
@@ -40,6 +41,9 @@ angular.module('eat-this-one').controller('IndexController',
 
             $scope.dishes = dishesData;
             appStatus.completed('dishesRequest');
+
+            // After loading the index the first time we display the tooltip/s.
+            notifier.showTooltip($scope, 'tipIndex', $scope.lang.tipadddish);
 
             if ($scope.dishes.length === 0) {
                 $scope.showNoDishes = true;

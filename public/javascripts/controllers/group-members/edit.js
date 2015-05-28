@@ -17,6 +17,7 @@ angular.module('eat-this-one')
         }
     ];
 
+    $scope.showTip = false;
     $scope.showToggleMenu = false;
     if ($scope.auth.isAuthenticated()) {
         $scope.showToggleMenu = true;
@@ -64,6 +65,9 @@ angular.module('eat-this-one')
 
         appStatus.completed('groupMembersRequest');
 
+        // After loading the page the first time we display the tooltip/s.
+        notifier.showTooltip($scope, 'tipGroup', $scope.lang.tipcontinue);
+
         // Just one group membership per user.
         if (data.length > 0) {
 
@@ -79,6 +83,7 @@ angular.module('eat-this-one')
     var errorCallback = function(data, errorStatus, errorMsg) {
         appStatus.completed('groupMembersRequest');
         // No memberships expected although in theory it will return an empty array.
+        newLogRequest('error', 'group-members', errorMsg);
     };
     groupMembersRequest($scope, groupMembersCallback, errorCallback);
 

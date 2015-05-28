@@ -13,6 +13,7 @@ angular.module('eat-this-one')
     $scope.pageTitle = $scope.lang.participants;
     $scope.menuItems = menuManager.getDefaultItems();
 
+    $scope.showTip = false;
     $scope.showToggleMenu = false;
     if ($scope.auth.isAuthenticated()) {
         $scope.showToggleMenu = true;
@@ -87,6 +88,10 @@ angular.module('eat-this-one')
             ];
         }
         appStatus.completed('groupsRequest');
+
+        // After loading the dish, if it is the first time that the user tries
+        // to book a dish we display the tooltip/s.
+        notifier.showTooltip($scope, 'tipInvite', $scope.lang.tipinvite);
     };
 
     var errorCallback = function(data, errorStatus, errorMsg) {
