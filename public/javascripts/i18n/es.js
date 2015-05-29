@@ -11,7 +11,6 @@ $.eatLang.es = {
     capturephoto : 'Hacer foto',
     chef : 'Chef',
     confirmadddish : 'Guardamos el plato y notificamos a los miembros del grupo?',
-    confirmation : 'Confirmación',
     confirmbook : 'Quieres reservar el plato? Se notificará al chef.',
     continue : 'Continua',
     deleteduser : 'El usuario ya no existe',

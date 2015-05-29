@@ -99,7 +99,7 @@ angular.module('eat-this-one')
 
     $scope.addMeal = function() {
 
-        notifier.showConfirm($scope.lang.confirmation, $scope.lang.confirmbook, function() {
+        notifier.showConfirm($scope.lang.confirmbook, function() {
 
             appStatus.waiting('newMeal');
 

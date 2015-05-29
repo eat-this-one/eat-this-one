@@ -11,7 +11,6 @@ $.eatLang.ca = {
     capturephoto : 'Fer foto',
     chef : 'Xef',
     confirmadddish : 'Desem el plat i notifiquem als membres del grup?',
-    confirmation : 'Confirmació',
     confirmbook : 'Vols reservar el plat? Es notificarà al chef.',
     continue : 'Continua',
     deleteduser : 'L\'usuari ja no existeix',

@@ -11,7 +11,6 @@ $.eatLang.fr = {
     capturephoto : 'Prendre une photo',
     chef : 'Chef',
     confirmadddish : 'Vous souhaitez adjouter le repas et notifier les membres du groupe?',
-    confirmation : 'Confirmation',
     confirmbook : 'Vous souhaitez réserver le repas? Le chef sera notifié',
     continue : 'Continuer',
     deleteduser : 'L\'utilisateur n\'existe plus',

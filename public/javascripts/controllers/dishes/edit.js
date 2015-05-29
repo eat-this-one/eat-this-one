@@ -138,7 +138,7 @@ angular.module('eat-this-one')
 
         // If we are adding the dish we should let the user confirm.
         if (!id) {
-            notifier.showConfirm($scope.lang.confirmation, $scope.lang.confirmadddish, $scope.finallySave, dish);
+            notifier.showConfirm($scope.lang.confirmadddish, $scope.finallySave, dish);
         } else {
             $scope.finallySave(dish);
         }

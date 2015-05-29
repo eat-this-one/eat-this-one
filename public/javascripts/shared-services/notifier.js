@@ -18,14 +18,13 @@ angular.module('eat-this-one').factory('notifier', ['$mdDialog', function($mdDia
                 .finally(callback);
         },
 
-        showConfirm : function showConfirm(title, msg, callback, args) {
+        showConfirm : function showConfirm(msg, callback, args) {
 
             dialog = $mdDialog.confirm()
-                .title(title)
                 .content(msg)
                 .ok($.eatLang.lang.sure)
                 .cancel($.eatLang.lang.notyet)
-                .ariaLabel(title);
+                .ariaLabel(msg);
             $mdDialog.show(dialog).then(function() {
                 callback(args);
             });
