@@ -123,11 +123,6 @@ angular.module('eat-this-one')
 
     $scope.save = function() {
 
-        // Dish obj cleaning delegated to backend.
-        var fields = [
-            'name', 'description', 'groupid',
-            'nportions', 'donation'];
-
         var dish = {};
 
         // Validate the form text forms, the other ones have a default value.
@@ -140,6 +135,21 @@ angular.module('eat-this-one')
         if (id) {
             dish.id = id;
         }
+
+        // If we are adding the dish we should let the user confirm.
+        if (!id) {
+            notifier.showConfirm($scope.lang.confirmation, $scope.lang.confirmadddish, $scope.finallySave, dish);
+        } else {
+            $scope.finallySave(dish);
+        }
+    };
+
+    $scope.finallySave = function(dish) {
+
+        // Dish obj cleaning delegated to backend.
+        var fields = [
+            'name', 'description', 'groupid',
+            'nportions', 'donation'];
 
         fields.forEach(function(field) {
             dish[field] = $scope[field].value;

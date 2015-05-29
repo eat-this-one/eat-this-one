@@ -99,26 +99,26 @@ angular.module('eat-this-one')
 
     $scope.addMeal = function() {
 
-        appStatus.waiting('newMeal');
+        notifier.showConfirm($scope.lang.confirmation, $scope.lang.confirmbook, function() {
 
-        var mealCallback = function(data) {
+            appStatus.waiting('newMeal');
 
-            // Add the dish to the cached list of my booked meals.
-            storage.add('mybookedmeals', data.dish);
+            var mealCallback = function(data) {
 
-            appStatus.completed('newMeal');
-            notifier.show($scope.lang.mealbooked, $scope.lang.mealbookedinfo, function() {
+                // Add the dish to the cached list of my booked meals.
+                storage.add('mybookedmeals', data.dish);
+                newLogRequest('redirected', 'dishes-view', 'index');
                 redirecter.redirect('index.html');
-            });
-        };
-        var errorCallback = function(data, errorStatus, errorMsg) {
-            appStatus.completed('newMeal');
-            newLogRequest('error', 'meals-add', errorMsg);
-            notifier.show($scope.lang.error, $scope.lang.weird);
-        };
-        newMealRequest($scope, {dishid: id}, $scope.dish.name, mealCallback, errorCallback);
+            };
+            var errorCallback = function(data, errorStatus, errorMsg) {
+                appStatus.completed('newMeal');
+                newLogRequest('error', 'meals-add', errorMsg);
+                notifier.show($scope.lang.error, $scope.lang.weird);
+            };
+            newMealRequest($scope, {dishid: id}, $scope.dish.name, mealCallback, errorCallback);
 
-        newLogRequest('click', 'meals-add', id);
+            newLogRequest('click', 'meals-add', id);
+        });
     };
 
     // Redirects to edit dish.

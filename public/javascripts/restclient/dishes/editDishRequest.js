@@ -32,8 +32,6 @@ angular.module('eat-this-one')
 
         }).success(function(data, statusCode) {
 
-            appStatus.completed('editDishRequest');
-
             // Add the dish to the cached list of my dishes.
             storage.add('mydishes', data._id);
 
@@ -53,19 +51,14 @@ angular.module('eat-this-one')
                 // The current user will be a member, so more than 1.
                 if (data.nmembers <= 1) {
                     info = $scope.lang.dishaddednomembersinfo + '.';
-                } else {
-                    info = $scope.lang.dishaddednotifiedinfo + '.';
+                } else if (data.user.dishescount === 1) {
                     // If it is the first dish the user adds we let him know
                     // that it will be redirected to invited more people.
-                    if (data.user.dishescount === 1) {
-                        info = info + ' ' + $scope.lang.dishaddedfirstinvites + '.';
-                    }
+                    info = $scope.lang.dishaddedfirstinvites + '.';
                 }
             } else {
                 // PUT.
                 newLogRequest('updated', 'dish', data._id);
-
-                title = $scope.lang.dishedited + '.';
             }
 
             // Adding more info if unlimited was selected.
@@ -79,11 +72,7 @@ angular.module('eat-this-one')
 
             } else if (statusCode == 201) {
 
-                // When adding a new dish we always notify the success,
-                // but if this is the first dish the user is adding we
-                // should also give him/her the option to invite more people.
-                notifier.show(title, info, function() {
-
+                var redirectUser = function() {
                     if (data.user.dishescount === 1 || data.nmembers <= 1) {
                         // After adding the first dish we propose people to
                         // add their contacts to their group.
@@ -95,7 +84,16 @@ angular.module('eat-this-one')
                         // he/she wants to add more colleagues.
                         redirecter.redirect('index.html');
                     }
-                });
+                };
+
+                // Only if there is something to report.
+                if (!info) {
+                    redirectUser(data);
+                } else {
+                    // We set it completed when there is no redirection.
+                    appStatus.completed('editDishRequest');
+                    notifier.show(title, info, redirectUser);
+                }
             }
 
         }).error(function(data, errorStatus, errorMsg) {
