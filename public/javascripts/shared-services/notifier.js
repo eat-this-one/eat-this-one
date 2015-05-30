@@ -56,8 +56,11 @@ angular.module('eat-this-one').factory('notifier', ['$mdDialog', function($mdDia
                 setTimeout(function() {
                     $scope.showTip = false;
                     $scope.$apply();
-                    // Also unset this so it does not appear again when clicked.
-                    $scope.actionInfo = false;
+                    // Also unset this so it does not appear again when clicked
+                    // including timeout to finish the tooltip animation.
+                    setTimeout(function() {
+                        $scope.actionInfo = false;
+                    }, 1000);
                 }, 3000);
                 localStorage.setItem(storageKey, true);
             }
