@@ -121,6 +121,9 @@ angular.module('eat-this-one')
         return (id);
     };
 
+    // After loading the page the first time we see this page.
+    notifier.showTooltip($scope, 'tipAddDish', $scope.lang.tipsubmit);
+
     $scope.save = function() {
 
         var dish = {};

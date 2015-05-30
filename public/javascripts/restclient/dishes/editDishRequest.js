@@ -1,5 +1,6 @@
 angular.module('eat-this-one')
-    .factory('editDishRequest', ['redirecter', '$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', 'storage', 'newLogRequest', 'statics', function(redirecter, $http, appStatus, notifier, eatConfig, sessionManager, storage, newLogRequest, statics) {
+    .factory('editDishRequest', ['redirecter', '$http', 'appStatus', 'notifier', 'eatConfig', 'sessionManager', 'storage', 'newLogRequest', 'statics', 'shareManager',
+    function(redirecter, $http, appStatus, notifier, eatConfig, sessionManager, storage, newLogRequest, statics, shareManager) {
 
     // Not using callbacks as it would be hardly reusable.
     return function($scope, dish) {
@@ -72,27 +73,22 @@ angular.module('eat-this-one')
 
             } else if (statusCode == 201) {
 
-                var redirectUser = function() {
-                    if (data.user.dishescount === 1 || data.nmembers <= 1) {
-                        // After adding the first dish we propose people to
-                        // add their contacts to their group.
-                        // If there are no members the user needs to contact more
-                        // people, otherwise it is not worth to share the dish with nobody.
-                        redirecter.redirect('dishes/share.html?dishname=' + data.name);
-                    } else {
-                        // TODO Maybe an extra confirm to let the user choose if
-                        // he/she wants to add more colleagues.
-                        redirecter.redirect('index.html');
-                    }
-                };
-
                 // Only if there is something to report.
                 if (!info) {
-                    redirectUser(data);
+                    redirecter.redirect('index.html');
                 } else {
                     // We set it completed when there is no redirection.
-                    appStatus.completed('editDishRequest');
-                    notifier.show(title, info, redirectUser);
+                    var group = JSON.parse(localStorage.getItem('group'));
+                    var msg = $scope.lang.invitejoinmygroup + ' .' + $scope.lang.invitegroupcode +
+                         ': "' + group.code + '". ' + eatConfig.downloadAppUrl;
+                    shareManager.share(msg);
+
+                    // Give some time to share plugin to start as otherwise the user
+                    // may accept the alert before share appears.
+                    setTimeout(function() {
+                        appStatus.completed('editDishRequest');
+                        notifier.show(title, info, redirecter.redirect);
+                    }, 300);
                 }
             }
 

@@ -1,7 +1,7 @@
 angular.module('eat-this-one')
     .controller('GroupsViewController',
-        ['$scope', '$filter', '$mdDialog', 'authManager', 'redirecter', 'appStatus', 'notifier', 'eatConfig', 'newLogRequest', 'menuManager', 'urlParser', 'groupsRequest', 'userManager', 'datesConverter', function(
-            $scope, $filter, $mdDialog, authManager, redirecter, appStatus, notifier, eatConfig, newLogRequest, menuManager, urlParser, groupsRequest, userManager, datesConverter) {
+        ['$scope', '$filter', '$mdDialog', 'authManager', 'redirecter', 'appStatus', 'notifier', 'eatConfig', 'newLogRequest', 'menuManager', 'urlParser', 'groupsRequest', 'userManager', 'datesConverter', 'shareManager', function(
+            $scope, $filter, $mdDialog, authManager, redirecter, appStatus, notifier, eatConfig, newLogRequest, menuManager, urlParser, groupsRequest, userManager, datesConverter, shareManager) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -81,9 +81,9 @@ angular.module('eat-this-one')
             $scope.showMembers = true;
             $scope.actionIcons = [
                 {
-                    name : $scope.lang.invitepeople,
-                    icon : 'glyphicon glyphicon-plus',
-                    callback : 'inviteMembers'
+                    name : $scope.lang.sharegroup,
+                    icon : 'glyphicon glyphicon-share-alt',
+                    callback : 'shareGroup'
                 }
             ];
         }
@@ -91,7 +91,7 @@ angular.module('eat-this-one')
 
         // After loading the dish, if it is the first time that the user tries
         // to book a dish we display the tooltip/s.
-        notifier.showTooltip($scope, 'tipInvite', $scope.lang.tipinvite);
+        notifier.showTooltip($scope, 'tipShare', $scope.lang.tipshare);
     };
 
     var errorCallback = function(data, errorStatus, errorMsg) {
@@ -116,10 +116,11 @@ angular.module('eat-this-one')
     // is not a member we will only return the group data, not members.
     groupsRequest($scope, {id: id}, groupCallback, errorCallback);
 
-    // Redirects to invite people to the group page.
-    $scope.inviteMembers = function() {
-        newLogRequest('click', 'group-share', id);
-        redirecter.redirect('groups/share.html?id=' + id);
+    // Opens share plugin.
+    $scope.shareGroup = function() {
+        var msg = $scope.lang.invitejoinmygroup + ' .' + $scope.lang.invitegroupcode +
+             ': "' + group.code + '". ' + eatConfig.downloadAppUrl;
+        shareManager.share(msg);
     };
 
     // Opens a dialog with user info.

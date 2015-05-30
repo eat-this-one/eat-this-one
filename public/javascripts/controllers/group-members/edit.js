@@ -65,9 +65,6 @@ angular.module('eat-this-one')
 
         appStatus.completed('groupMembersRequest');
 
-        // After loading the page the first time we display the tooltip/s.
-        notifier.showTooltip($scope, 'tipGroup', $scope.lang.tipcontinue);
-
         // Just one group membership per user.
         if (data.length > 0) {
 
@@ -79,6 +76,9 @@ angular.module('eat-this-one')
                 redirecter.redirect('index.html');
             });
         }
+
+        // After loading the page the first time we display the tooltip/s.
+        notifier.showTooltip($scope, 'tipGroup', $scope.lang.tipcontinue);
     };
     var errorCallback = function(data, errorStatus, errorMsg) {
         appStatus.completed('groupMembersRequest');
