@@ -1,7 +1,7 @@
 angular.module('eat-this-one')
     .controller('GroupsViewController',
-        ['$scope', '$filter', 'authManager', 'redirecter', 'appStatus', 'notifier', 'eatConfig', 'newLogRequest', 'menuManager', 'urlParser', 'groupsRequest', 'userManager', function(
-            $scope, $filter, authManager, redirecter, appStatus, notifier, eatConfig, newLogRequest, menuManager, urlParser, groupsRequest, userManager) {
+        ['$scope', '$filter', '$mdDialog', 'authManager', 'redirecter', 'appStatus', 'notifier', 'eatConfig', 'newLogRequest', 'menuManager', 'urlParser', 'groupsRequest', 'userManager', 'datesConverter', function(
+            $scope, $filter, $mdDialog, authManager, redirecter, appStatus, notifier, eatConfig, newLogRequest, menuManager, urlParser, groupsRequest, userManager, datesConverter) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -120,6 +120,15 @@ angular.module('eat-this-one')
     $scope.inviteMembers = function() {
         newLogRequest('click', 'group-share', id);
         redirecter.redirect('groups/share.html?id=' + id);
+    };
+
+    // Opens a dialog with user info.
+    $scope.showMemberInfo = function(membership) {
+        userDialog = $mdDialog.alert()
+            .title(membership.user.name)
+            .content($scope.lang.membersince + ' ' + datesConverter.toLocalDate(membership.created))
+            .ok($scope.lang.close);
+        $mdDialog.show(userDialog);
     };
 
     newLogRequest('view', 'group-view', id);

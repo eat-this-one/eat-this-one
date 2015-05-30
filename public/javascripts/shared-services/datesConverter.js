@@ -76,6 +76,11 @@ angular.module('eat-this-one').factory('datesConverter', function() {
             }
 
             return timestamp;
+        },
+
+        toLocalDate : function(mongoTime) {
+            var date = new Date(mongoTime);
+            return date.toLocaleDateString();
         }
     };
 });

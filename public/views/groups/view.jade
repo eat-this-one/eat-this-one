@@ -8,7 +8,7 @@ block base
 
 block logic
     div(class='users-list')
-        md-list-item(ng-show='showMembers', ng-repeat='member in members')
+        md-list-item(ng-show='showMembers', ng-repeat='member in members', ng-click='showMemberInfo(member)', role='listitem')
             div
                 span(class='badge participants') {{member.user.ranking}}
                 div(ng-if='member.user.picture', class='user-thumb-container')
