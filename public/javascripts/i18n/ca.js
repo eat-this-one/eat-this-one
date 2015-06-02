@@ -41,7 +41,7 @@ $.eatLang.ca = {
     insertgroupcode : 'Codi del grup',
     inviteemailsubject : 'He cuinat un plat que m\'agradaria compartir amb tu',
     invitegroupcode : 'El codi del grup és',
-    invitenew : 'Convida companys',
+    invitenew : 'Convida',
     inviteimcooking : 'Hola, estic cuinant',
     invitejoindetailsbook : 'Uneix-te al meu grup a http://eat-this-one.com per veure els detalls i reservar una porció',
     invitejoinmygroup : 'Hola, uneix-te al meu grup a http://eat-this-one.com per compartir menjar a l\'hora de dinar',

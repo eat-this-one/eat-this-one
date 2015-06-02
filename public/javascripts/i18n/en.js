@@ -41,7 +41,7 @@ $.eatLang.en = {
     insertgroupcode : 'Group code',
     inviteemailsubject : 'I\'ve cooked a dish I\'d like to share with you',
     invitegroupcode : 'The group code is',
-    invitenew : 'Invite colleagues',
+    invitenew : 'Invite',
     inviteimcooking : 'Hi, I\'m cooking',
     invitejoindetailsbook : 'Join my http://eat-this-one.com group to see the details and book a portion',
     invitejoinmygroup : 'Hi, join my http://eat-this-one.com group to share food at lunch time',
