@@ -66,7 +66,7 @@ if [ -f "config/frontend.js" ]; then
     ${sedcmd} "s#version *: *'\(.*\)'#version: '$versionCode'#" config/frontend.js
 fi
 if [ -f "dist/app/config.xml" ]; then
-    ${sedcmd} "s#version=\"\(.*\)\" xmlns#version=\"$version\" android-versionCode=\"$versionCode\" xmlns#" dist/app/config.xml
+    ${sedcmd} "s#version=\"\(.*\)\" xmlns=#version=\"$version\" android-versionCode=\"$versionCode\" xmlns=#" dist/app/config.xml
 fi
 if [ -f "config/project.properties" ]; then
     ${sedcmd} "s#VERSION=\"\(.*\)\"#VERSION=\"$version\"#" config/project.properties
