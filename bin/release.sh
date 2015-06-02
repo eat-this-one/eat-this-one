@@ -7,11 +7,11 @@ if [ -z $1 ]; then
 HEY YOU! BEFORE RUNNING THIS AGAIN:
 # This script is used to push to production. You don't probably need to use this.
 # Ensure you pulled the latest changes from the repo
-# Run all tests and ensure they are passing
+# Run grunt build:test and ensure all is passing
 # Clean the kitchen and commit everthing
 # Copy or increase the version (look the current one in package.json and increment it).
 
-Once done, run 'grunt release:XX.YY.ZZ', where XX.YY.ZZ is the version number.
+Once done, run 'grunt release:X.Y.Z', where X.Y.Z is the version number (each point accepts 2 digits).
 "
     exit 1
 fi

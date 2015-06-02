@@ -97,7 +97,11 @@ In case you have problems accessing the backend from the mobile http://developer
 
     npm test
 
-This runs all backend tests (mocha). There are frontend unit tests and e2e tests (protractor) they run automatically when editing test files.
+This runs all backend tests (mocha).
+
+    grunt build:test
+
+This runs all tests, including frontend unit tests and e2e tests (protractor) they also run automatically when editing test files.
 
 # Project code structure
 

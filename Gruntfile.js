@@ -497,9 +497,16 @@ module.exports = function(grunt) {
         [ "clean:build", "copy:resources", "uglify:prod", "less", "csslint", "autoprefixer", "cssmin", "jshint:backend", "jshint:frontend", "jade:compile", "copy:build" ]
     );
 
-    // Test backend (frontend depends on browsers and stuff).
+    // Test everything.
     grunt.registerTask(
         "build:test",
+        "Executes all tests before a release. Note that it requires the backend server to be running (npm start)",
+        [ "build:dev", "connect:server", "karma:unit:start", "shell:reset_db", "shell:backend_tests", "shell:reset_db", "protractor:run", "karma:unit:run"]
+    );
+
+    // Test backend (frontend depends on browsers and stuff).
+    grunt.registerTask(
+        "build:test:backend",
         "Executes backend tests. Note that it requires the backend server to be running (npm start)",
         [ "build:dev", "shell:reset_db", "shell:backend_tests"]
     );
