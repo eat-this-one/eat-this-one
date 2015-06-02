@@ -1,4 +1,4 @@
-angular.module('eat-this-one').factory('notifier', ['$mdDialog', function($mdDialog) {
+angular.module('eat-this-one').factory('notifier', ['$mdDialog', '$timeout', function($mdDialog, $timeout) {
     return {
 
         dialog : null,
@@ -62,18 +62,16 @@ angular.module('eat-this-one').factory('notifier', ['$mdDialog', function($mdDia
                 $scope.actionInfo = langInfo;
 
                 // Waiting a bit before showing the tooltip.
-                setTimeout(function() {
+                $timeout(function() {
                     $scope.showTip = true;
-                    $scope.$apply();
                 }, 500);
 
                 // Hidding the tool tip after a while.
-                setTimeout(function() {
+                $timeout(function() {
                     $scope.showTip = false;
-                    $scope.$apply();
                     // Also unset this so it does not appear again when clicked
                     // including timeout to finish the tooltip animation.
-                    setTimeout(function() {
+                    $timeout(function() {
                         $scope.actionInfo = false;
                     }, 300);
                 }, 3000);
