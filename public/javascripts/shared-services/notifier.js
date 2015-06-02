@@ -18,16 +18,31 @@ angular.module('eat-this-one').factory('notifier', ['$mdDialog', function($mdDia
                 .finally(callback);
         },
 
-        showConfirm : function showConfirm(msg, callback, args) {
+        showConfirm : function showConfirm(msg, callback, args, langok, langcancel, cancelCallback, cancelArgs) {
+
+            if (typeof langok === "undefined") {
+                langok = $.eatLang.lang.sure;
+            }
+            if (typeof langcancel === "undefined") {
+                langcancel = $.eatLang.lang.notyet;
+            }
+
+            if (typeof cancelCallback === "undefined") {
+                cancelCallback = function() {};
+            }
 
             dialog = $mdDialog.confirm()
                 .content(msg)
-                .ok($.eatLang.lang.sure)
-                .cancel($.eatLang.lang.notyet)
+                .ok(langok)
+                .cancel(langcancel)
                 .ariaLabel(msg);
-            $mdDialog.show(dialog).then(function() {
-                callback(args);
-            });
+            $mdDialog.show(dialog).then(
+                function() {
+                    callback(args);
+                }, function() {
+                    cancelCallback(cancelArgs);
+                }
+            );
         },
 
         /**
@@ -60,7 +75,7 @@ angular.module('eat-this-one').factory('notifier', ['$mdDialog', function($mdDia
                     // including timeout to finish the tooltip animation.
                     setTimeout(function() {
                         $scope.actionInfo = false;
-                    }, 1000);
+                    }, 300);
                 }, 3000);
                 localStorage.setItem(storageKey, true);
             }

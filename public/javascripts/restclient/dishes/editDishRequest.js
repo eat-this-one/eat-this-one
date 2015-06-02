@@ -41,20 +41,17 @@ angular.module('eat-this-one')
                 localStorage.setItem('disableTips', true);
             }
 
-            var title = '';
             var info = '';
             if (statusCode == 201) {
                 // POST.
                 newLogRequest('created', 'dish', data._id);
 
-                title = $scope.lang.dishadded;
-
                 // The current user will be a member, so more than 1.
                 if (data.nmembers <= 1) {
                     info = $scope.lang.dishaddednomembersinfo + '.';
                 } else if (data.user.dishescount === 1) {
-                    // If it is the first dish the user adds we let him know
-                    // that it will be redirected to invited more people.
+                    // If it is the first dish the user adds we allow them
+                    // to share the dish with people.
                     info = $scope.lang.dishaddedfirstinvites + '.';
                 }
             } else {
@@ -73,23 +70,24 @@ angular.module('eat-this-one')
 
             } else if (statusCode == 201) {
 
-                // Only if there is something to report.
                 if (!info) {
                     redirecter.redirect('index.html');
-                } else {
+                }
+
+                appStatus.completed('editDishRequest');
+
+                // TODO Buff, this looks bad....
+                notifier.showConfirm(info, function() {
+
                     // We set it completed when there is no redirection.
                     var group = JSON.parse(localStorage.getItem('group'));
-                    var msg = $scope.lang.invitejoinmygroup + ' .' + $scope.lang.invitegroupcode +
-                         ': "' + group.code + '". ' + eatConfig.downloadAppUrl;
+                    var msg = $scope.lang.inviteimcooking + ' ' + data.name + '. ' +
+                         $scope.lang.invitejoindetailsbook + '. ' + $scope.lang.invitegroupcode +
+                         ': "' + group.code + '"';
                     shareManager.share(msg);
+                    redirecter.redirect('index.html');
 
-                    // Give some time to share plugin to start as otherwise the user
-                    // may accept the alert before share appears.
-                    setTimeout(function() {
-                        appStatus.completed('editDishRequest');
-                        notifier.show(title, info, redirecter.redirect);
-                    }, 300);
-                }
+                }, undefined, $scope.lang.invitenew, $scope.lang.notnow, redirecter.redirect);
             }
 
         }).error(function(data, errorStatus, errorMsg) {

@@ -81,7 +81,7 @@ angular.module('eat-this-one')
             $scope.showMembers = true;
             $scope.actionIcons = [
                 {
-                    name : $scope.lang.sharegroup,
+                    name : $scope.lang.tipshare,
                     icon : 'glyphicon glyphicon-share-alt',
                     callback : 'shareGroup'
                 }
@@ -118,18 +118,21 @@ angular.module('eat-this-one')
 
     // Opens share plugin.
     $scope.shareGroup = function() {
-        var msg = $scope.lang.invitejoinmygroup + ' .' + $scope.lang.invitegroupcode +
-             ': "' + group.code + '". ' + eatConfig.downloadAppUrl;
+        var msg = $scope.lang.invitejoinmygroup + '. ' + $scope.lang.invitegroupcode + ': "' + group.code + '"';
         shareManager.share(msg);
     };
 
     // Opens a dialog with user info.
     $scope.showMemberInfo = function(membership) {
-        userDialog = $mdDialog.alert()
-            .title(membership.user.name)
-            .content($scope.lang.membersince + ' ' + datesConverter.toLocalDate(membership.created))
-            .ok($scope.lang.close);
-        $mdDialog.show(userDialog);
+        // Just a bit as otherwise the enabled button is still highlighted
+        // when the dialog appears.
+        setTimeout(function() {
+            $mdDialog.show($mdDialog.alert()
+                .title(membership.user.name)
+                .content($scope.lang.membersince + ' ' + datesConverter.toLocalDate(membership.created))
+                .ok($scope.lang.close)
+            );
+        }, 200);
     };
 
     newLogRequest('view', 'group-view', id);
