@@ -51,6 +51,9 @@ angular.module('eat-this-one').controller('IndexController',
                 for (var index in $scope.dishes) {
                     $scope.dishes[index].when = datesConverter.timeToDayString(Date.parse($scope.dishes[index].when));
 
+                    if ($scope.dishes[index].name.length > 25) {
+                        $scope.dishes[index].name = $scope.dishes[index].name.substr(0, 25) + '...';
+                    }
                     imgManager.fillDishSrc($scope.dishes[index]);
 
                     // Let's add state to each dish (my dish, booked...).

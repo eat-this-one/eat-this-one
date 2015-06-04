@@ -43,7 +43,10 @@ angular.module('eat-this-one')
         // Fetching by id we should have just one.
         var groupData = groups[0];
 
-        $scope.pageTitle = $scope.pageTitle + ' - ' + groupData.name;
+        $scope.pageTitle = groupData.name;
+        if ($scope.pageTitle.length > 20) {
+            $scope.pageTitle = $scope.pageTitle.substr(0, 20) + '...';
+        }
 
         // If you can see the members you are one of them.
         if (typeof groupData.members !== "undefined") {
