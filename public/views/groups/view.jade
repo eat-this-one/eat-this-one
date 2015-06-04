@@ -13,8 +13,7 @@ block logic
                 span(class='badge participants') {{member.user.ranking}}
                 div(ng-if='member.user.picture', class='user-thumb-container')
                     img(src='{{member.user.picture}}', class='thumb-photo', aria-hidden='true')
-            div
-                span(class='group-user') {{member.user.name}}
-                span(class='stars')
-                    //- We should change this and avoid using ng-repeat.
-                    span(ng-repeat='star in member.user.stars', class='glyphicon glyphicon-star')
+            p(class='button-text') {{member.user.name}}
+            span(class='stars')
+                //- We should change this and avoid using ng-repeat.
+                span(ng-repeat='star in member.user.stars', class='glyphicon glyphicon-star')
