@@ -146,6 +146,8 @@ ${sedcmd} "s#Apache Cordova Team#$AUTHOR_NAME#" config.xml
 ${sedcmd} "s#A sample Apache Cordova application that responds to the deviceready event.#$DESCRIPTION#" config.xml
 ${sedcmd} 's#<access.*>#\
     <access origin="'$BACKEND_URL'" />\
+    <access origin="http://*.eat-this-one.com" />\
+    <access origin="https://*.eat-this-one.com" />\
     <access origin="http://*.gravatar.com" />\
     <access origin="https://*.gravatar.com" />#' config.xml
 
