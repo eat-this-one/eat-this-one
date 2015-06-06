@@ -31,7 +31,7 @@ footer {
 
 .main-content {
     font-size: 110%;
-    padding: 80px 16px 16px 16px;
+    padding: 70px 16px 16px 16px;
 }
 
 .button-icon {
@@ -84,6 +84,23 @@ footer {
 .dish-useful-info {
     color: red;
     text-align: center;
+}
+
+.dish-photo {
+    display: block;
+    max-height:50vh;
+    overflow: hidden;
+    opacity: 0.6;
+    transition: max-height 1s, opacity 1s;
+}
+
+.zoom-photo {
+    position: absolute;
+    display: block;
+    top: 35%;
+    right: 45%;
+    left: 45%;
+    font-size: 300%;
 }
 
 .button-group .photo-button {

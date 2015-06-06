@@ -12,7 +12,9 @@ block logic
         div(class='dish-useful-info')
             h4 {{dishusefulinfotext}}
         md-card
-            img(ng-if='dish.photo', src='{{dish.photo}}')
+            div(ng-if='dish.photo', ng-click='showFullPhoto()', class='dish-photo')
+                img(src='{{dish.photo}}')
+                span(class='zoom-photo glyphicon glyphicon-zoom-in' aria-hidden='true')
             md-card-content
                 h2(class='md-title') {{dish.name}}
                 div(class='dish-info')

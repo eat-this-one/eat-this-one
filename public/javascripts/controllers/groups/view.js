@@ -44,8 +44,8 @@ angular.module('eat-this-one')
         var groupData = groups[0];
 
         $scope.pageTitle = groupData.name;
-        if ($scope.pageTitle.length > 20) {
-            $scope.pageTitle = $scope.pageTitle.substr(0, 20) + '...';
+        if ($scope.pageTitle.length > 16) {
+            $scope.pageTitle = $scope.pageTitle.substr(0, 16) + '...';
         }
 
         // If you can see the members you are one of them.

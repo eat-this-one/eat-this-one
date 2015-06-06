@@ -126,4 +126,11 @@ angular.module('eat-this-one')
         newLogRequest('click', 'dishes-edit', id);
         redirecter.redirect('dishes/edit.html?id=' + id);
     };
+
+    $scope.showFullPhoto = function() {
+        angular.element('.zoom-photo').remove();
+        angular.element('.dish-photo').css('max-height', '1000px');
+        angular.element('.dish-photo').css('opacity', '1');
+    };
+
 }]);

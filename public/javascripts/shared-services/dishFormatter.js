@@ -69,8 +69,8 @@ angular.module('eat-this-one').factory('dishFormatter', ['notifier', 'datesConve
         // Set the page title.
         $scope.pageTitle = $scope.dish.name;
         // Using this instead of filters as we want.
-        if ($scope.pageTitle.length > 20) {
-            $scope.pageTitle = $scope.pageTitle.substr(0, 20) + '...';
+        if ($scope.pageTitle.length > 16) {
+            $scope.pageTitle = $scope.pageTitle.substr(0, 16) + '...';
         }
     };
 
