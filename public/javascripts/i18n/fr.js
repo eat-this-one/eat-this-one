@@ -43,7 +43,7 @@ $.eatLang.fr = {
     invitegroupcode : 'Le code du groupe est',
     inviteimcooking : 'Salut, je cuisine',
     invitejoindetailsbook : 'Rejois mon groupe sur http://eat-this-one.com pour consulter les détails et réserver une portion',
-    invitejoinmygroup : 'Salut, rejoins mon groupe sur http://eat-this-one.com pour partager des repas',
+    invitejoinmygroup : 'Salut, rejoins mon groupe sur http://eat-this-one.com pour partager des repas au travail ou a l\'université',
     invitenew : 'Invitez',
     invitepeople : 'Invitez des personnes',
     joinedgroupinfo : 'Vous recevrez des notifications lorsque d\'autres membres ajoutent des plats et réservent les vôtres.',
