@@ -14,7 +14,7 @@ block logic
         md-card
             div(ng-if='dish.photo', ng-click='showFullPhoto()', class='dish-photo')
                 img(src='{{dish.photo}}')
-                span(class='zoom-photo glyphicon glyphicon-zoom-in' aria-hidden='true')
+                span(class='hide zoom-photo glyphicon glyphicon-zoom-in' aria-hidden='true')
             md-card-content
                 h2(class='md-title') {{dish.name}}
                 div(class='dish-info')

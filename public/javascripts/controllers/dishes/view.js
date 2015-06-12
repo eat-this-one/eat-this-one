@@ -47,6 +47,24 @@ angular.module('eat-this-one')
     var dishCallback = function(dishData) {
         dishFormatter($scope, dishData);
 
+        // Give some time for the image to be rendered otherwise height is reported
+        // as null.
+        setTimeout(function() {
+            var imageHeight = angular.element('.dish-photo img').height();
+            var divHeight = angular.element('.dish-photo').height();
+
+            // If it is not the same it is because the image is partially hidden.
+            if (imageHeight !== divHeight) {
+                // Show the zoom-in icon then.
+                // For user experience it is better to use show the zoom-in late than to
+                // show it and remove it later.
+                angular.element('.zoom-photo').removeClass('hide');
+            } else {
+                // If the image is completely displayed we can remove the whitening.
+                angular.element('.dish-photo').css('opacity', '1');
+            }
+        }, 300);
+
         // Fill the actions items.
         if ($scope.userCanBook()) {
             $scope.actionIcons = [
