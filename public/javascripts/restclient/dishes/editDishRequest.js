@@ -82,7 +82,8 @@ angular.module('eat-this-one')
                     // We set it completed when there is no redirection.
                     var group = JSON.parse(localStorage.getItem('group'));
                     var msg = $scope.lang.inviteimcooking + ' ' + data.name + '. ' +
-                         $scope.lang.invitejoindetailsbook + '. ' + $scope.lang.invitegroupcode +
+                         $scope.lang.invitejoindetailsbook1 + ' "' + group.name + '" ' +
+                         $scope.lang.invitejoindetailsbook2 + '. ' + $scope.lang.invitegroupcode +
                          ': "' + group.code + '"';
                     shareManager.share(msg);
                     redirecter.redirect('index.html');

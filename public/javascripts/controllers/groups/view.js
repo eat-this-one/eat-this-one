@@ -121,7 +121,9 @@ angular.module('eat-this-one')
 
     // Opens share plugin.
     $scope.shareGroup = function() {
-        var msg = $scope.lang.invitejoinmygroup + '. ' + $scope.lang.invitegroupcode + ': "' + group.code + '"';
+        var msg = $scope.lang.invitejoinmygroup1 + ' "' + group.name + '" ' +
+            $scope.lang.invitejoinmygroup2 +
+            '. ' + $scope.lang.invitegroupcode + ': "' + group.code + '"';
         shareManager.share(msg);
     };
 
