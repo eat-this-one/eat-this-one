@@ -34,7 +34,4 @@ block logic
             md-card-content
                 h2(class='md-title') {{lang.bookedmeals}}
                 md-item-content(ng-repeat='meal in meals')
-                    div
-                        span(class='glyphicon glyphicon-user', aria-hidden='true')
-                    div
-                        h3 {{meal.user.name}}
+                    p {{meal.user.name}}
