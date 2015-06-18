@@ -399,8 +399,13 @@ module.exports = function(grunt) {
             emulator_android : {
                 command: 'cd dist/app ; cordova emulate android'
             },
+            // Runs the mobile app in ios emulator.
             emulator_ios : {
                 command: 'cd dist/app ; cordova emulate ios'
+            },
+            // Builds the current codebase.
+            build_prod_codebase : {
+                command: 'cd dist/app ; cordova build --release'
             },
             // Updates to the specified version and pushes changes to github and eat-this-one.com.
             release : {
@@ -525,6 +530,7 @@ module.exports = function(grunt) {
         }
     );
 
+    // Signs and prepares android app to deploy.
     grunt.registerTask(
         "sign:android",
         "Signs the current build",
@@ -535,6 +541,13 @@ module.exports = function(grunt) {
                 grunt.task.run('shell:sign_android');
             }
         }
+    );
+
+    // Signs current codebase.
+    grunt.registerTask(
+        "sign:ios",
+        "Prepares and signs ios app",
+        [ "build:prod", "shell:build_prod_codebase" ]
     );
 
     grunt.registerTask("default", ["dev"]);
