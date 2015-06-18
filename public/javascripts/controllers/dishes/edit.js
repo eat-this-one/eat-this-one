@@ -31,14 +31,12 @@ angular.module('eat-this-one')
     $scope.name = {
         name: 'name',
         label: $scope.lang.dishname,
-        placeholder: $scope.lang.dishnameexample,
         validation: ['required', 'text'],
         value: ''
     };
     $scope.description = {
         name: 'description',
         label: $scope.lang.dishdescription,
-        placeholder: $scope.lang.dishdescriptionexample,
         validation: ['text'],
         value: ''
     };

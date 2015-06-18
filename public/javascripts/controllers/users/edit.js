@@ -31,14 +31,12 @@ angular.module('eat-this-one')
     $scope.name = {
         name: 'name',
         label: $scope.lang.username,
-        placeholder: $scope.lang.usernameexample,
         validation: ['required', 'text'],
         value: user.name
     };
     $scope.email = {
         name: 'email',
         label: $scope.lang.email,
-        placeholder: $scope.lang.emailexample,
         validation: ['required', 'email'],
         value: user.email
     };

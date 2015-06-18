@@ -38,7 +38,6 @@ angular.module('eat-this-one')
     $scope.joingroup = {
         name: 'joingroup',
         label: $scope.lang.insertgroupcode,
-        placeholder: $scope.lang.joingroupexample,
         infodelay: 2000,
         validation: ['required', 'text'],
         value: ''
@@ -46,7 +45,6 @@ angular.module('eat-this-one')
     $scope.newgroup = {
         name: 'newgroup',
         label: $scope.lang.setgroupname,
-        placeholder: $scope.lang.newgroupexample,
         infodelay: 2000,
         validation: ['required', 'text'],
         value: ''
