@@ -31,6 +31,20 @@ router.post('/', function(req, res) {
 
 });
 
+// DELETE - Delete a group membership.
+router.delete('/:id', function(req, res) {
+
+    var eat = new Eat(req, res);
+    eat.checkValidToken(function(error) {
+        if (error) {
+            return eat.returnCallback(error);
+        }
+        var groupMember = new EatGroupMember(eat);
+        return groupMember.remove();
+    });
+
+});
+
 router.get('/:id', function(req, res) {
     res.send('Not supported');
 });
@@ -40,10 +54,6 @@ router.put('/:id', function(req, res) {
 });
 
 router.post('/:id', function(req, res) {
-    res.send("Not supported.");
-});
-
-router.delete('/:id', function(req, res) {
     res.send("Not supported.");
 });
 

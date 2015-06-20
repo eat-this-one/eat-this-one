@@ -33,7 +33,7 @@ describe('EatGroup & EatGroupMember', function() {
         localDone = null;
     });
 
-    describe('Create a group', function() {
+    describe('Create a group and let users join', function() {
 
         it('should add valid new groups', function(done) {
 
@@ -230,6 +230,27 @@ describe('EatGroup & EatGroupMember', function() {
                 })
                 .expect(400, 'Restricted to one group per user', done);
 
+        });
+
+        it('should allow users to cancel their membership and enrol in another group', function(done) {
+
+            nrequests = 2;
+            localDone = done;
+
+            request('http://localhost:3000')
+                .delete('/api/group-members/' + JSON.parse(nconf.get('user1Group'))._id)
+                .send({
+                    token: nconf.get('user2Token')
+                })
+                .expect(200, requestDone);
+
+            request('http://localhost:3000')
+                .post('/api/group-members')
+                .send({
+                    groupid : JSON.parse(nconf.get('user1Group'))._id,
+                    token: nconf.get('user2Token')
+                })
+                .expect(201, requestDone);
         });
     });
 
