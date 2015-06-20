@@ -5,10 +5,12 @@ angular.module('eat-this-one')
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
     $scope.redirectAction = redirecter.redirectAction;
+    $scope.redirectMenuItem = redirecter.redirectMenuItem;
     $scope.menu = menuManager;
 
     // Define header.
     $scope.pageTitle = $scope.lang.setgroup;
+    $scope.menuItems = menuManager.getDefaultItems();
     $scope.actionIcons = [
         {
             name : $scope.lang.continue,

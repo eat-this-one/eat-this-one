@@ -15,17 +15,27 @@ angular.module('eat-this-one').factory('menuManager', ['$mdSidenav', 'newLogRequ
         },
 
         getDefaultItems : function() {
-            return [
-                this.dishesListItem(),
-                this.groupViewItem(),
-                this.editProfileItem()
-            ];
+
+            var items = [];
+
+            items.push(this.dishesListItem());
+            items.push(this.groupViewItem());
+            items.push(this.editProfileItem());
+
+            return items;
         },
 
         groupViewItem : function() {
 
+            var itemName = this.lang.participants;
+
+            // Only if the user is not member of any group.
+            if (localStorage.getItem('group') === null) {
+                itemName = this.lang.setgroup;
+            }
+
             return {
-                name : this.lang.participants,
+                name : itemName,
                 icon : 'glyphicon glyphicon-home',
                 callback : 'groupViewCallback'
             };
@@ -36,13 +46,14 @@ angular.module('eat-this-one').factory('menuManager', ['$mdSidenav', 'newLogRequ
 
             var group = localStorage.getItem('group');
             if (group === null) {
+                newLogRequest('click', 'groupMembers-edit');
                 url = 'group-members/edit.html';
             } else {
                 group = JSON.parse(group);
+                newLogRequest('click', 'group-view');
                 url = 'groups/view.html?id=' + group._id;
             }
 
-            newLogRequest('click', 'group-view');
             redirecter.redirect(url);
         },
 
@@ -65,7 +76,6 @@ angular.module('eat-this-one').factory('menuManager', ['$mdSidenav', 'newLogRequ
                 icon : 'glyphicon glyphicon-user',
                 callback : 'editProfileCallback'
             };
-
         },
 
         editProfileCallback : function() {

@@ -13,6 +13,7 @@ $.eatLang.fr = {
     close : 'Fermer',
     confirmadddish : 'Vous souhaitez adjouter le repas et notifier les membres du groupe?',
     confirmbook : 'Vous souhaitez réserver le repas? Le chef sera notifié',
+    confirmdeletemember : 'Êtes-vous sûr de vouloir quitter?',
     continue : 'Continuer',
     deleteduser : 'L\'utilisateur n\'existe plus',
     dish : 'Repas',
@@ -27,6 +28,7 @@ $.eatLang.fr = {
     editprofile : 'Modifier le profil',
     email : 'Email',
     error : 'Erreur',
+    exitgroup : 'Sortir du groupe',
     expecteddonation : 'Don souhaité',
     groupcreated : 'Bienvenue',
     groupcreatedinfo : 'Il est temps de partager vos plats ! Invitez des personnes à joindre votre groupe, vous pouvez le faire via Participants (dans le menu) ou après avoir ajouté votre premier plat.',
@@ -95,5 +97,6 @@ $.eatLang.fr = {
     welcome : 'Bienvenue',
     when : 'Quand',
     wrongcode : 'Code incorrect',
-    wrongcodeinfo : 'Le code fourni ne correspond à aucun groupe.'
+    wrongcodeinfo : 'Le code fourni ne correspond à aucun groupe.',
+    youneedgroup : 'Vous devez joindre à un groupe ou en créer un.'
 };

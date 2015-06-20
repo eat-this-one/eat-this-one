@@ -12,6 +12,7 @@ $.eatLang.en = {
     chef : 'Chef',
     close : 'Close',
     confirmadddish : 'Add dish and notify group members?',
+    confirmdeletemember : 'Are you sure you want to exit this group?',
     confirmbook : 'Book dish and notify the chef?',
     continue : 'Continue',
     deleteduser : 'The user does not exist anymore',
@@ -27,6 +28,7 @@ $.eatLang.en = {
     editprofile : 'Edit profile',
     email : 'Email',
     error : 'Error',
+    exitgroup : 'Exit group',
     expecteddonation : 'Expected donation',
     groupcreated : 'Welcome',
     groupcreatedinfo : 'Time to share dishes! Invite colleagues to join your group, you can do it though Participants (link in the menu) or after adding your first dish.',
@@ -94,5 +96,6 @@ $.eatLang.en = {
     welcome : 'Welcome',
     when : 'When',
     wrongcode : 'Wrong code',
-    wrongcodeinfo : 'The provided code does not match any group.'
+    wrongcodeinfo : 'The provided code does not match any group.',
+    youneedgroup : 'Join a group or create a new one to add or to see dishes.'
 };

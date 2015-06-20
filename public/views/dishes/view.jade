@@ -9,7 +9,7 @@ block base
 block logic
 
     div(ng-if='auth.isAuthenticated()')
-        div(class='dish-useful-info')
+        div(class='important-info')
             h4 {{dishusefulinfotext}}
         md-card
             div(ng-if='dish.photo', ng-click='showFullPhoto()', class='dish-photo')

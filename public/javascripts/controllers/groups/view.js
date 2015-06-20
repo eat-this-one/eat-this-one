@@ -1,7 +1,7 @@
 angular.module('eat-this-one')
     .controller('GroupsViewController',
-        ['$scope', '$filter', '$mdDialog', 'authManager', 'redirecter', 'appStatus', 'notifier', 'eatConfig', 'newLogRequest', 'menuManager', 'urlParser', 'groupsRequest', 'userManager', 'datesConverter', 'shareManager', function(
-            $scope, $filter, $mdDialog, authManager, redirecter, appStatus, notifier, eatConfig, newLogRequest, menuManager, urlParser, groupsRequest, userManager, datesConverter, shareManager) {
+        ['$scope', '$filter', '$mdDialog', 'authManager', 'redirecter', 'appStatus', 'notifier', 'eatConfig', 'newLogRequest', 'menuManager', 'urlParser', 'groupsRequest', 'userManager', 'datesConverter', 'shareManager', 'deleteGroupMemberRequest', function(
+            $scope, $filter, $mdDialog, authManager, redirecter, appStatus, notifier, eatConfig, newLogRequest, menuManager, urlParser, groupsRequest, userManager, datesConverter, shareManager, deleteGroupMemberRequest) {
 
     $scope.lang = $.eatLang.lang;
     $scope.auth = authManager;
@@ -84,6 +84,10 @@ angular.module('eat-this-one')
             $scope.showMembers = true;
             $scope.actionIcons = [
                 {
+                    name : $scope.lang.exitgroup,
+                    icon : 'glyphicon glyphicon-trash',
+                    callback : 'removeMembership'
+                }, {
                     name : $scope.lang.tipshare,
                     icon : 'glyphicon glyphicon-share-alt',
                     callback : 'shareGroup'
@@ -125,6 +129,18 @@ angular.module('eat-this-one')
             $scope.lang.invitejoinmygroup2 +
             '. ' + $scope.lang.invitegroupcode + ': "' + group.code + '"';
         shareManager.share(msg);
+    };
+
+    // Removes the current membership
+    $scope.removeMembership = function() {
+        newLogRequest('click', 'groupMember-delete');
+        notifier.showConfirm(
+            $scope.lang.confirmdeletemember,
+            function() {
+                appStatus.waiting('removeGroupMemberRequest');
+                deleteGroupMemberRequest($scope, group._id);
+            }
+        );
     };
 
     // Opens a dialog with user info.

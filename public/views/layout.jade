@@ -47,10 +47,9 @@ html
                         span(flex)
 
                         //- Action buttons. The controller sets them.
-                        div(ng-repeat='actionIcon in actionIcons')
-                            md-button(ng-click='redirectAction(this, actionIcon.callback)', ng-if='showToggleMenu', aria-label='{{actionIcon.name}}', class='md-primary md-fab no-box-shadow md-icon-button', form='id-page-form')
-                                span(class='{{actionIcon.icon}}', aria-hidden='true')
-                                md-tooltip(ng-if='actionInfo', md-visible='showTip', md-direction='bottom') {{actionInfo}}
+                        md-button(ng-repeat='actionIcon in actionIcons', ng-click='redirectAction(this, actionIcon.callback)', ng-if='showToggleMenu', aria-label='{{actionIcon.name}}', class='action md-primary md-fab no-box-shadow md-icon-button md-mini', form='id-page-form')
+                            span(class='{{actionIcon.icon}}', aria-hidden='true')
+                            md-tooltip(ng-if='actionInfo', md-visible='showTip', md-direction='bottom') {{actionInfo}}
 
                 //- Delegated to the specific view logic.
                 div(id='id-contents', class='main-content')

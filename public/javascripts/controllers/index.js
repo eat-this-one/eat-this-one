@@ -31,8 +31,6 @@ angular.module('eat-this-one').controller('IndexController',
 
     $scope.showToggleMenu = false;
     if ($scope.auth.isAuthenticated()) {
-        // Getting the list of dishes.
-        appStatus.waiting('dishesRequest');
 
         $scope.showToggleMenu = true;
 
@@ -73,7 +71,18 @@ angular.module('eat-this-one').controller('IndexController',
             newLogRequest('error', 'dish-index', errorMsg);
             notifier.show($scope.lang.error, $scope.lang.weird);
         };
-        dishesRequest($scope, dishesCallback, errorCallback);
+
+        // We need to be sure that the user is member of a group, otherwise we
+        // redirect them there explaining why.
+        if (localStorage.getItem('group') === null) {
+            notifier.show('', $scope.lang.youneedgroup, function() {
+                redirecter.redirect('group-members/edit.html');
+            });
+        } else {
+            // Getting the list of dishes.
+            appStatus.waiting('dishesRequest');
+            dishesRequest($scope, dishesCallback, errorCallback);
+        }
 
     } else {
 

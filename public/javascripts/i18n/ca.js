@@ -13,6 +13,7 @@ $.eatLang.ca = {
     close : 'Tancar',
     confirmadddish : 'Desem el plat i notifiquem als membres del grup?',
     confirmbook : 'Vols reservar el plat? Es notificarà al chef.',
+    confirmdeletemember : 'Estàs segur que vols sortir d\'aquest grup?',
     continue : 'Continua',
     deleteduser : 'L\'usuari ja no existeix',
     dish : 'Plat',
@@ -27,6 +28,7 @@ $.eatLang.ca = {
     editprofile : 'Editar perfil',
     email : 'Correu electrònic',
     error : 'Error',
+    exitgroup : 'Sortir del grup',
     expecteddonation : 'Donació',
     groupcreated : 'Benvingut',
     groupcreatedinfo : 'És hora de compartir plats! Convida als teus companys a unir-se al teu grup, pots fer-ho a Participants (enllaç al menú) o quan afegeixis el teu primer plat.',
@@ -95,5 +97,6 @@ $.eatLang.ca = {
     welcome : 'Benvingut',
     when : 'Quan',
     wrongcode : 'Codi equivocat',
-    wrongcodeinfo : 'El codi introduït no pertany a cap grup.'
+    wrongcodeinfo : 'El codi introduït no pertany a cap grup.',
+    youneedgroup : 'Uneix-te a un grup o crea\'n un de nou per afegir o veure plats.'
 };
