@@ -5,7 +5,6 @@ var GroupSchema = new Schema({
     user : {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        unique: true,
         ref: 'User'
     },
     name: { type: String, required: true, unique: true},
