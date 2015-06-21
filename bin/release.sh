@@ -8,7 +8,6 @@ HEY YOU! BEFORE RUNNING THIS AGAIN:
 # This script is used to push to production. You don't probably need to use this.
 # Ensure you pulled the latest changes from the repo
 # Run grunt build:test and ensure all is passing
-# Clean the kitchen and commit everthing
 # Copy or increase the version (look the current one in package.json and increment it).
 
 Once done, run 'grunt release:X.Y.Z', where X.Y.Z is the version number (each point accepts 2 digits).
@@ -24,7 +23,16 @@ else
 fi
 
 git remote show | grep dokku > /dev/null || \
-    (echo "Error: This script is used to push to production. If you don't have a dokku remote I doubt you should be running this." ; exit 1)
+    (echo "Error: This script is used to push to production.
+If you don't have a dokku remote I doubt you should be running this." ; exit 1)
+
+# Check that we are in master.
+git branch | grep "* master" > /dev/null || \
+    (echo "Error: Set the current branch to master." ; exit 1)
+
+# Check that everything was commited.
+test "$(git diff HEAD | wc -l)" == "0" || \
+    (echo "Error: Commit everything before a release." ; exit 1)
 
 if [ ! -z $1 ]; then
 
