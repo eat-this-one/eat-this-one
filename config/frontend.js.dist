@@ -1,5 +1,5 @@
 angular.module('eat-this-one').constant('eatConfig', {
-    version: '103',
+    version: '104',
     backendUrl : 'http://localhost:3000/api',
     defaultLang : 'en',
     gcmSenderId : 'GCMSENDERID',
