@@ -4,7 +4,7 @@
 
 This repository includes:
 
-* An ExpressJS REST API backed by MongoDB
+* An NodeJS REST API backed by MongoDB
 * An AngularJS frontend compiled to Android and iOS apps using cordova
 * Grunt tasks for development, testing and deployment.
 
